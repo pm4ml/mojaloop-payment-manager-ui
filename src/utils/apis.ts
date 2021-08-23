@@ -15,21 +15,13 @@ interface Todo {
 const dfsps: Config<Todo, State> = {
   service: services.localNode,
   // eslint-disable-next-line
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsps`,
-};
-
-const environments: Config<Todo, State> = {
-  service: services.localNode,
-  // eslint-disable-next-line
-  url: () => `/environments`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsps`,
 };
 
 const environmentStatus: Config<Todo, State> = {
   service: services.localNode,
   // eslint-disable-next-line
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/status`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/status`,
 };
 
 const monetaryZones: Config<Todo, State> = {
@@ -92,128 +84,110 @@ const weeklyFlows: Config<Todo, State> = {
 
 const dfsp: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/details`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/details`,
 };
 
 const dfspCA: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/ca`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/ca`,
 };
 
 const dfspHubCA: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/ca`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/ca`,
 };
 
 const dfspAutoCA: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/ca`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/ca`,
 };
 
 const dfspServerCerts: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/serverCerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/serverCerts`,
 };
 
 const hubServerCerts: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/serverCerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/serverCerts`,
 };
 
 const dfspJWSCerts: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/jwscerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/jwscerts`,
 };
 
 const otherDfspJWSCerts: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/alljwscerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/alljwscerts`,
 };
 
 const ingressUrls: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/endpoints/ingress/urls`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/endpoints/ingress/urls`,
 };
 
 const ingressIps: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/endpoints/ingress/ips`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/endpoints/ingress/ips`,
 };
 
 const ingressUrl: Config<Todo, State> = {
   service: services.localNode,
   url: (_: State, { urlId, environmentId }: { urlId: string; environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/endpoints/ingress/urls/${urlId}`,
+    `/dfsp/endpoints/ingress/urls/${urlId}`,
 };
 
 const ingressIp: Config<Todo, State> = {
   service: services.localNode,
   url: (_: State, { ipId, environmentId }: { ipId: string; environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/endpoints/ingress/ips/${ipId}`,
+    `/dfsp/endpoints/ingress/ips/${ipId}`,
 };
 
 const egressIps: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/endpoints/egress/ips`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/endpoints/egress/ips`,
 };
 
 const egressIp: Config<Todo, State> = {
   service: services.localNode,
   url: (_: State, { ipId, environmentId }: { ipId: string; environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/endpoints/egress/ips/${ipId}`,
+    `/dfsp/endpoints/egress/ips/${ipId}`,
 };
 
 const ingressHubEndpoints: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/endpoints/ingress`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/endpoints/ingress`,
 };
 
 const egressHubEndpoints: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/endpoints/egress`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/endpoints/egress`,
 };
 
 const inboundEnrollments: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/clientCerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/clientCerts`,
 };
 
 const inboundEnrollmentsCsr: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/dfsp/clientCerts/csr`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/dfsp/clientCerts/csr`,
 };
 
 const outboundEnrollments: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/clientCerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/clientCerts`,
 };
 
 const outboundEnrollmentCertificate: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/clientCerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/clientCerts`,
 };
 
 const outboundEnrollmentAutoCertificate: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { environmentId }: { environmentId: string }) =>
-    `/environments/${environmentId}/hub/clientCerts`,
+  url: (_: State, { environmentId }: { environmentId: string }) => `/hub/clientCerts`,
 };
 
 const metric: Config<Todo, State> = {
@@ -223,7 +197,6 @@ const metric: Config<Todo, State> = {
 
 interface MyMap {
   dfsps: Config<Todo, State>;
-  environments: Config<Todo, State>;
   environmentStatus: Config<Todo, State>;
   monetaryZones: Config<Todo, State>;
   batches: Config<Todo, State>;
@@ -262,7 +235,6 @@ interface MyMap {
 
 const endpoints = {
   dfsps,
-  environments,
   environmentStatus,
   monetaryZones,
   batches,
