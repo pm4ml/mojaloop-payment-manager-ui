@@ -19,7 +19,10 @@ const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
     <div className="side-menu">
       <Menu path="/" pathname={history.location.pathname} onChange={history.push}>
         <MenuSection label="BUSINESS OPS">
-          <MenuItem path="/dashboard" label="Overview (mocked)" />
+          {/*
+            Uncomment to reinstate the business dashboard menu item
+            <MenuItem path="/dashboard" label="Overview (mocked)" />
+          */}
           <MenuItem path="/transfers" label="Transfers" />
           <MenuItem
             path="/test"

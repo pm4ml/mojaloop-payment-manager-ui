@@ -40,7 +40,10 @@ const App: FC<AppProps> = ({
           <Layout.SideMenu />
           <Layout.Page>
             <Switch>
-              <Route path="/dashboard" component={Dashboard} />
+              {/*
+                uncomment when dashboard uses real data and not mock
+                <Route path="/dashboard" component={Dashboard} />
+              */}
               <Route path="/transfers" component={Transfers} />
               <Route path="/connections" component={ConnectionWizard} />
               <Route path="/techdashboard" component={TechnicalDashboard} />
@@ -48,10 +51,10 @@ const App: FC<AppProps> = ({
               {/* process.env.NODE_ENV === 'development' && <Route path="/test" component={Test} /> */}
 
               <Route path="/" exact>
-                <Redirect to="/dashboard" />
+                <Redirect to="/transfers" />
               </Route>
               <Route>
-                <Redirect to="/dashboard" />
+                <Redirect to="/transfers" />
               </Route>
             </Switch>
           </Layout.Page>
