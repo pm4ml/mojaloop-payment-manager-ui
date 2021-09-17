@@ -2,7 +2,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { FC } from 'react';
 import './App.css';
 import Layout from './Layout';
-import Dashboard from './Dashboard';
+// import Dashboard from './Dashboard';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
 import ConnectionWizard from './ConnectionWizard';
