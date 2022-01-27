@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Icon, Tooltip } from 'components';
+import { Icon } from 'components';
 import './Navbar.css';
 
 type Navbar = {
@@ -39,15 +39,10 @@ const Navbar: FC<Navbar> = ({
         <div id="navbar__user__icon">
           <Icon name="user-small" fill="#fff" />
         </div>
-        <div
-          id="navbar__user__name"
-          role="button"
-          tabIndex={0}
-          onClick={clickFunc}
-          onKeyUp={clickFunc}
-        >
-          <Tooltip label="logout">{username || '-'}</Tooltip>
-        </div>
+        <div id="navbar__user__name">{username || ''}</div>
+      </div>
+      <div id="navbar__logout" role="button" tabIndex={0} onClick={clickFunc} onKeyUp={clickFunc}>
+        Logout
       </div>
     </div>
   );
