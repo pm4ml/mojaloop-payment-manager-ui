@@ -9,26 +9,11 @@ import {
   RequestEnvironmentsAction,
   RequestMonetaryZonesAction,
 } from './types';
-import {
-  setEnvironments,
-  setEnvironmentsError,
-  setMonetaryZones,
-  setMonetaryZonesError,
-} from './actions';
+import { setEnvironments, setMonetaryZones, setMonetaryZonesError } from './actions';
 
 function* fetchEnvironments(action: RequestEnvironmentsAction) {
-  try {
-    const response = yield call(apis.environments.read, {});
-    const { data, status } = response;
-
-    if (is200(status)) {
-      yield put(setEnvironments({ data }));
-    } else {
-      yield put(setEnvironmentsError({ error: 'Error Fetching Environments' }));
-    }
-  } catch (e) {
-    yield put(setEnvironmentsError({ error: e.message }));
-  }
+  const data = [{ id: '1', name: 'Environment' }];
+  yield put(setEnvironments({ data }));
 }
 
 export function* requestEnvironmentsSaga() {
