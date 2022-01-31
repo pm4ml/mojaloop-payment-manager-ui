@@ -18,7 +18,10 @@ import {
   TabList,
   TabPanels,
   TabPanel,
+  Button,
 } from 'components';
+import xlsx from 'xlsx';
+import { saveAsWriteFile } from 'utils/fs';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { Transfer, TransferError, TransferFilter, DateRange } from '../../types';
@@ -57,6 +60,23 @@ interface TransferFinderModalProps {
   onModalCloseClick: () => void;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
   onTransferRowClick: (transferError: TransferError) => void;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function downloadTransfersToExcel(transfers: any): Promise<void> {
+  const ws = xlsx.utils.json_to_sheet(transfers);
+  const wscols = [{ wch: 20 }];
+  ws['!cols'] = wscols;
+  const wb = xlsx.utils.book_new();
+  xlsx.utils.book_append_sheet(wb, ws, 'Transfers');
+  const wbBuffer: ArrayBuffer = xlsx.write(wb, { type: 'array', bookType: 'xlsx' });
+  const fileName: string = `Payment_Manager_Transfers_${new Date().toISOString()}.xlsx`;
+
+  try {
+    await saveAsWriteFile(fileName, new Blob([wbBuffer]));
+  } catch (e) {
+    xlsx.writeFile(wb, fileName);
+  }
 }
 
 const TransferFinderModal: FC<TransferFinderModalProps> = ({
@@ -130,6 +150,11 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   } else {
     content = (
       <div className="transfers__transfers__list">
+        <Button
+          label="Download Transfers"
+          noFill
+          onClick={() => downloadTransfersToExcel(transfers)}
+        />
         <DataList columns={transfersColumns} list={transfers} onSelect={onTransferRowClick} />
       </div>
     );
