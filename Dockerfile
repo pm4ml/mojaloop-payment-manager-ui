@@ -21,8 +21,6 @@ ENV REACT_APP_COMMIT=$REACT_APP_COMMIT
 
 RUN yarn run build
 
-
-
 # Second part, copy the build and server the app using a node express server
 
 RUN cp -r /app/build /app/server/

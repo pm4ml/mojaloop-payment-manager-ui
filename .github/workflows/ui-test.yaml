@@ -32,10 +32,10 @@ jobs:
       run: sleep 120s
 
     - name: Populate transfer data with TTK
-      run: docker exec -it mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney.json -e environments/environment.json
+      run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney.json -e environments/environment.json
 
     - name: Populate transfer error data with TTK
-      run: docker exec -it mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney_error.json -e environments/environment.json
+      run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney_error.json -e environments/environment.json
 
     - name: Install test dependencies
       working-directory: ui_test/tests
