@@ -84,8 +84,9 @@
   margin-top: 10px;
 }
 
-.transfers__errors__button {
-  margin-bottom: 10px;
+.transfers__errors__button,
+.transfers__errors__download__button {
+  margin: 10px;
 }
 
 .transfers__errors__list-container {

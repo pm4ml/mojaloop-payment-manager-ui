@@ -1,0 +1,155 @@
+{
+  "name": "Send Money",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "Send Money",
+      "requests": [
+        {
+          "id": 1,
+          "description": "Send Money",
+          "apiVersion": {
+            "minorVersion": 4,
+            "majorVersion": 1,
+            "type": "payment_manager"
+          },
+          "operationPath": "/sendmoney",
+          "path": "/sendmoney",
+          "method": "post",
+          "url": "http://simulator-core-connector:3003",
+          "ignoreCallbacks": true,
+          "body": {
+            "from": {
+              "displayName": "PayerFirst PayerLast",
+              "idType": "MSISDN",
+              "idValue": "{$inputs.payerIdentifier}"
+            },
+            "to": {
+              "idType": "MSISDN",
+              "idValue": "{$inputs.payeeIdentifier}"
+            },
+            "amountType": "SEND",
+            "currency": "{$inputs.currency}",
+            "amount": "1234",
+            "transactionType": "TRANSFER",
+            "note": "test payment",
+            "homeTransactionId": "{$function.generic.generateUUID}"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Current state should be WAITING_FOR_PARTY_ACCEPTANCE",
+                "exec": [
+                  "expect(response.body.currentState).to.equal('WAITING_FOR_PARTY_ACCEPTANCE')"
+                ]
+              },
+              {
+                "id": 3,
+                "description": "Should get incoming parties",
+                "exec": [
+                  "expect(requestVariables.partiesRequest).to.not.equal(null)",
+                  ""
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                "await inboundEvent.addListener('parties1', 'get', '/parties/MSISDN/{$inputs.payeeIdentifier}')",
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                "requestVariables.partiesRequest = await inboundEvent.getMessage('parties1')",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "id": 2,
+          "description": "Confirm Party Error",
+          "apiVersion": {
+            "minorVersion": 4,
+            "majorVersion": 1,
+            "type": "payment_manager"
+          },
+          "operationPath": "/sendmoney/{transferId}",
+          "path": "/sendmoney/{$prev.1.response.body.transferId}",
+          "method": "put",
+          "params": {
+            "transferId": "{$prev.1.response.body.transferId}"
+          },
+          "body": {
+            "acceptParty": true
+          },
+          "url": "http://simulator-core-connector:3003",
+          "ignoreCallbacks": true,
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Response should be an error",
+                "exec": [
+                  "expect(response.body.message).to.equal('This is a mock error description')"
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "scripts": {
+          }
+        },
+        {
+          "id": 3,
+          "description": "Confirm Quote Error",
+          "apiVersion": {
+            "minorVersion": 4,
+            "majorVersion": 1,
+            "type": "payment_manager"
+          },
+          "operationPath": "/sendmoney/{transferId}",
+          "path": "/sendmoney/{$prev.1.response.body.transferId}",
+          "method": "put",
+          "params": {
+            "transferId": "{$prev.1.response.body.transferId}"
+          },
+          "url": "http://simulator-core-connector:3003",
+          "ignoreCallbacks": true,
+          "body": {
+            "acceptQuote": true
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

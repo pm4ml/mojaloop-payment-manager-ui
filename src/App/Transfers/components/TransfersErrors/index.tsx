@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
 import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
+import xlsx from 'xlsx';
 import { TransferError } from '../../types';
 import * as helpers from '../../helpers';
 import TransfersErrorsModal from './TransfersErrorsModal';
@@ -40,6 +41,17 @@ interface TransfersErrorsProps {
   onTransferRowClick: (transferError: TransferError) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function downloadErrorsToExcel(errors: any): Promise<void> {
+  const ws = xlsx.utils.json_to_sheet(errors);
+  const wscols = [{ wch: 20 }];
+  ws['!cols'] = wscols;
+  const wb = xlsx.utils.book_new();
+  xlsx.utils.book_append_sheet(wb, ws, 'Errors');
+  const fileName: string = `Payment_Manager_Errors_${new Date().toDateString()}.xlsx`;
+  xlsx.writeFile(wb, fileName);
+}
+
 const TransfersErrors: FC<TransfersErrorsProps> = ({
   isPending,
   items,
@@ -61,6 +73,14 @@ const TransfersErrors: FC<TransfersErrorsProps> = ({
     content = (
       <>
         <ErrorsList items={items.slice(0, 4)} onTransferRowClick={onTransferRowClick} />
+        <Button
+          label="Download Errors"
+          kind="secondary"
+          size="m"
+          noFill
+          className="transfers__errors__download__button"
+          onClick={() => downloadErrorsToExcel(items)}
+        />
         {items.length > 4 && (
           <Button
             label="View All Errors"
