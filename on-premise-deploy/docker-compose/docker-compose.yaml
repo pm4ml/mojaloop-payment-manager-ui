@@ -13,7 +13,7 @@ version: '3'
 services:
 
   frontend:
-    build: ../
+    build: ../../
     environment:
       - API_BASE_URL=http://localhost:4010
     ports:
