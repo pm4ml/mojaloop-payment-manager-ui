@@ -1,4 +1,4 @@
-FROM node:14.18.1
+FROM node:12.19.0
 # First part, build the app
 WORKDIR /app
 COPY package.json /app/
