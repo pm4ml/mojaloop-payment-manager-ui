@@ -38,11 +38,11 @@ jobs:
       run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney_error.json -e environments/environment.json
 
     - name: Install test dependencies
-      working-directory: ui_test/tests
+      working-directory: ui-tests/tests
       run: |-
         npm ci
 
     - name: Run tests
-      working-directory: ui_test/tests
+      working-directory: ui-tests/tests
       run: |-
         PM4ML_ENDPOINT="http://localhost:8081" npm run test:headless
