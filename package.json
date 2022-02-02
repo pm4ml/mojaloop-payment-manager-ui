@@ -3,7 +3,7 @@
   "version": "1.11.0",
   "private": true,
   "proxy": "http://localhost:10000",
-  "engines" : { "node" : "=14.18" } ,
+  "engines" : { "node" : "=12.19" } ,
   "dependencies": {
     "@modusbox/modusbox-ui-components": "1.19.4",
     "@redux-saga/testing-utils": "^1.1.3",
