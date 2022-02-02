@@ -17,9 +17,8 @@ const stateProps = (state: State) => ({
   reconciliationOverviewBatches: selectors.getReconciliationOverviewBatches(state),
   reconciliationOverviewBatchesError: selectors.getReconciliationOverviewBatchesError(state),
   selectedReconciliationOverviewBatch: selectors.getSelectedReconciliationOverviewBatch(state),
-  isReconciliationOverviewBatchesPending: selectors.getIsReconciliationOverviewBatchesPending(
-    state
-  ),
+  isReconciliationOverviewBatchesPending:
+    selectors.getIsReconciliationOverviewBatchesPending(state),
 
   weeklyPositions: selectors.getWeeklyPositions(state),
   weeklyPositionsError: selectors.getWeeklyPositionsError(state),

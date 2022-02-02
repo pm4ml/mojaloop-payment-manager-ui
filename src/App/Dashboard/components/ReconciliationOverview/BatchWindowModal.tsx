@@ -32,24 +32,21 @@ const stateProps = (state: State) => ({
     state
   ) as ReconciliationOverviewBatch,
   // eslint-disable-next-line max-len
-  reconciliationOverviewBatchTransfers: selectors.getReconciliationOverviewBatchStatusFilteredTransfers(
-    state
-  ),
-  reconciliationOverviewBatchTransfersError: selectors.getReconciliationOverviewBatchTransfersError(
-    state
-  ),
+  reconciliationOverviewBatchTransfers:
+    selectors.getReconciliationOverviewBatchStatusFilteredTransfers(state),
+  reconciliationOverviewBatchTransfersError:
+    selectors.getReconciliationOverviewBatchTransfersError(state),
   // eslint-disable-next-line max-len
-  reconciliationOverviewBatchTransfersStatusFilter: selectors.getReconciliationOverviewBatchTransfersStatusFilter(
-    state
-  ),
+  reconciliationOverviewBatchTransfersStatusFilter:
+    selectors.getReconciliationOverviewBatchTransfersStatusFilter(state),
   // eslint-disable-next-line max-len
-  isReconciliationOverviewBatchTransfersPending: selectors.getIsReconciliationOverviewBatchTransfersPending(
-    state
-  ),
+  isReconciliationOverviewBatchTransfersPending:
+    selectors.getIsReconciliationOverviewBatchTransfersPending(state),
   // eslint-disable-next-line max-len
-  selectedReconciliationOverviewBatchTransfer: selectors.getSelectedReconciliationOverviewBatchTransfer(
-    state
-  ) as ReconciliationOverviewBatchTransfer,
+  selectedReconciliationOverviewBatchTransfer:
+    selectors.getSelectedReconciliationOverviewBatchTransfer(
+      state
+    ) as ReconciliationOverviewBatchTransfer,
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({

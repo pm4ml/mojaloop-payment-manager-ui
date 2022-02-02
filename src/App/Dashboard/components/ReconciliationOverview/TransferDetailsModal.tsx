@@ -9,21 +9,19 @@ import * as helpers from '../../helpers';
 
 const stateProps = (state: State) => ({
   // eslint-disable-next-line max-len
-  selectedReconciliationOverviewBatchTransfer: selectors.getSelectedReconciliationOverviewBatchTransfer(
-    state
-  ) as ReconciliationOverviewBatchTransfer,
+  selectedReconciliationOverviewBatchTransfer:
+    selectors.getSelectedReconciliationOverviewBatchTransfer(
+      state
+    ) as ReconciliationOverviewBatchTransfer,
   // eslint-disable-next-line max-len
-  reconciliationOverviewBatchTransferDetails: selectors.getReconciliationOverviewBatchTransferDetails(
-    state
-  ),
+  reconciliationOverviewBatchTransferDetails:
+    selectors.getReconciliationOverviewBatchTransferDetails(state),
   // eslint-disable-next-line max-len
-  reconciliationOverviewBatchTransferDetailsError: selectors.getReconciliationOverviewBatchTransferDetailsError(
-    state
-  ),
+  reconciliationOverviewBatchTransferDetailsError:
+    selectors.getReconciliationOverviewBatchTransferDetailsError(state),
   // eslint-disable-next-line max-len
-  isReconciliationOverviewBatchTransferDetailsPending: selectors.getIsReconciliationOverviewBatchTransferDetailsPending(
-    state
-  ),
+  isReconciliationOverviewBatchTransferDetailsPending:
+    selectors.getIsReconciliationOverviewBatchTransferDetailsPending(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
