@@ -49,7 +49,7 @@ test.meta({
   STORY: '',
   description: '',
 })('Can download excel spreadsheet of transfers in advanced', async (t) => {
-  const expectedFilePath = `${process.env.HOME}` + '/Downloads/' + `Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
+  const expectedFilePath = `${process.env.HOME}/Downloads/Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
 
   await t.click(TransferDashboardPage.findATransferButton);
   await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
@@ -79,7 +79,7 @@ test.meta({
   STORY: '',
   description: '',
 })('Can download excel spreadsheet of errors', async (t) => {
-    const expectedFilePath = `${process.env.HOME}` + '/Downloads/' + `Payment_Manager_Errors_${new Date().toDateString()}.xlsx`;
+    const expectedFilePath = `${process.env.HOME}/Downloads/Payment_Manager_Errors_${new Date().toDateString()}.xlsx`;
 
     // Adding `.wait` just as a precaution since this downloads a file.
     await t.click(TransferDashboardPage.downloadErrorsButton).wait(2000);
