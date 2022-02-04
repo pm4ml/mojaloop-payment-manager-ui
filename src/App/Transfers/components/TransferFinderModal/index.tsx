@@ -143,11 +143,13 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   } else {
     content = (
       <div className="transfers__transfers__list">
-        <Button
-          label="Download Transfers"
-          noFill
-          onClick={() => downloadTransfersToExcel(transfers)}
-        />
+        {transfers.length > 0 && (
+          <Button
+            label="Download Transfers"
+            noFill
+            onClick={() => downloadTransfersToExcel(transfers)}
+          />
+        )}
         <DataList columns={transfersColumns} list={transfers} onSelect={onTransferRowClick} />
       </div>
     );

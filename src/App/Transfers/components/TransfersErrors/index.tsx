@@ -73,14 +73,16 @@ const TransfersErrors: FC<TransfersErrorsProps> = ({
     content = (
       <>
         <ErrorsList items={items.slice(0, 4)} onTransferRowClick={onTransferRowClick} />
-        <Button
-          label="Download Errors"
-          kind="secondary"
-          size="m"
-          noFill
-          className="transfers__errors__download__button"
-          onClick={() => downloadErrorsToExcel(items)}
-        />
+        {items.length > 0 && (
+          <Button
+            label="Download Errors"
+            kind="secondary"
+            size="m"
+            noFill
+            className="transfers__errors__download__button"
+            onClick={() => downloadErrorsToExcel(items)}
+          />
+        )}
         {items.length > 4 && (
           <Button
             label="View All Errors"
