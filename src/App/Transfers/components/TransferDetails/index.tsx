@@ -289,6 +289,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <FormInput
+                    id="transfer-details-modal__home-transfer-id"
                     disabled={true}
                     label="Home Transfer ID"
                     value={model.technicalDetails.homeTransferId}

@@ -98,3 +98,23 @@ test.meta({
     // Delete file
     fs.unlinkSync(expectedFilePath);
 });
+
+// NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
+//       in the simulator's rules.
+// TODO: Update simulator to TTK so we can run more dynamic rules with templating.
+test.only.meta({
+  ID: '',
+  STORY: '',
+  description: '',
+})('Will display homeTransactionId in Technical Details if given by Payee DFSP', async (t) => {
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  // Check transfer in spreadsheet exists in table
+  const transferRow = await TransferDashboardPage.getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
+
+  // Open Details Modal
+  await t.click(transferRow);
+  await t.click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab);
+  await t.expect(await TransferDashboardPage.homeTransferIdField().value).eql('5105')
+});
