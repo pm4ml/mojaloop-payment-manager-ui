@@ -102,7 +102,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.only.meta({
+test.meta({
   ID: '',
   STORY: '',
   description: '',
