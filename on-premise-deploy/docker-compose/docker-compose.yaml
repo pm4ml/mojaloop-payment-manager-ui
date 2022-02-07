@@ -186,9 +186,9 @@ services:
       - "8085:8081"
 
   mojaloop-connector:
-    # image: pm4ml/mojaloop-connector:14.1.1
-    build:
-      context: https://github.com/pm4ml/mojaloop-connector.git#chore/hometransactionid
+    image: pm4ml/mojaloop-connector:14.1.6
+    #build:
+    #  context: https://github.com/pm4ml/mojaloop-connector.git#branch
     environment:
       - AUTO_ACCEPT_PARTY=false
       - AUTO_ACCEPT_QUOTES=false
