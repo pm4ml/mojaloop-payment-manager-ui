@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:12.19.0
 # First part, build the app
 WORKDIR /app
 COPY package.json /app/
@@ -20,8 +20,6 @@ ARG REACT_APP_COMMIT
 ENV REACT_APP_COMMIT=$REACT_APP_COMMIT
 
 RUN yarn run build
-
-
 
 # Second part, copy the build and server the app using a node express server
 

@@ -18,7 +18,9 @@ import {
   TabList,
   TabPanels,
   TabPanel,
+  Button,
 } from 'components';
+import xlsx from 'xlsx';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { Transfer, TransferError, TransferFilter, DateRange } from '../../types';
@@ -57,6 +59,17 @@ interface TransferFinderModalProps {
   onModalCloseClick: () => void;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
   onTransferRowClick: (transferError: TransferError) => void;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function downloadTransfersToExcel(transfers: any): Promise<void> {
+  const ws = xlsx.utils.json_to_sheet(transfers);
+  const wscols = [{ wch: 20 }];
+  ws['!cols'] = wscols;
+  const wb = xlsx.utils.book_new();
+  xlsx.utils.book_append_sheet(wb, ws, 'Transfers');
+  const fileName: string = `Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
+  xlsx.writeFile(wb, fileName);
 }
 
 const TransferFinderModal: FC<TransferFinderModalProps> = ({
@@ -130,6 +143,13 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   } else {
     content = (
       <div className="transfers__transfers__list">
+        {transfers.length > 0 && (
+          <Button
+            label="Download Transfers"
+            noFill
+            onClick={() => downloadTransfersToExcel(transfers)}
+          />
+        )}
         <DataList columns={transfersColumns} list={transfers} onSelect={onTransferRowClick} />
       </div>
     );
@@ -182,6 +202,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
         <br />
         <br />
         <FormInput
+          id="find-transfer-modal__transfer-id"
           label="Transfer ID"
           type="text"
           value={model.transferId || ''}
@@ -195,6 +216,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
         <DataLabel size="m">Approximate time of transfer</DataLabel>
         <Row align="flex-start">
           <Select
+            id="find-transfer-modal__date"
             placeholder="Date"
             type="select"
             options={dateRanges}
@@ -202,6 +224,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
             onChange={(value: FilterChangeValue) => onFilterChange({ field: 'dates', value })}
           />
           <DatePicker
+            id="find-transfer-modal__from-date"
             placeholder="From"
             withTime
             value={model.from || ''}
@@ -209,6 +232,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
             format="x"
           />
           <DatePicker
+            id="find-transfer-modal__to-date"
             placeholder="To"
             withTime
             value={model.to || ''}
@@ -218,12 +242,14 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
         </Row>
         <br />
         <FormInput
+          id="find-transfer-modal__institution"
           label="Contains Institution"
           type="text"
           value={model.institution || ''}
           onChange={(value: FilterChangeValue) => onFilterChange({ field: 'institution', value })}
         />
         <FormInput
+          id="find-transfer-modal__transfer-status"
           label="Transfer Status"
           type="select"
           options={transferStatuses}

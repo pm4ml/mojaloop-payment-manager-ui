@@ -31,7 +31,9 @@ const App: FC<AppProps> = ({
     <div className="App">
       <Layout.Container>
         <Layout.Navbar
-          username={userInfo ? `${userInfo.givenName} ${userInfo.familyName}` : undefined}
+          username={
+            userInfo ? `${userInfo.givenName || ''} ${userInfo.familyName || ''}`.trim() : ''
+          }
           logoutUrl={userInfo ? userInfo.logoutUrl : undefined}
           activeConnectionName="Modusbox & Mojaloop Labs"
           activeConnectionStatusColor="#12d670"
