@@ -31,11 +31,11 @@ jobs:
       # TODO: Use a script to ascertain docker health instead of flat wait time
       run: sleep 120s
 
-    - name: Populate transfer data with TTK
-      run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney.json -e environments/environment.json
+    - name: Populate payer transfer data with TTK
+      run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/ -e environments/environment.json
 
-    - name: Populate transfer error data with TTK
-      run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payer-tests/sendmoney_error.json -e environments/environment.json
+    - name: Populate payee transfer data with TTK
+      run: docker exec mojaloop-testing-toolkit npm run cli -- outbound -i collections/payee-tests/ -e environments/environment.json
 
     - name: Install test dependencies
       working-directory: ui-tests/tests

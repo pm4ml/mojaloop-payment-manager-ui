@@ -60,6 +60,15 @@ export const TransferDashboardPage = {
   findATransferModalSubmit: Selector('.el-modal__submit'),
   findATransferModalCloseButton: Selector('.input-button__content').withText('Close'),
 
+
+  transferDetailsModalBasicInformationTab: Selector('.el-tabs__tab-item').withText('Basic Information'),
+  transferDetailsModalTechnicalDetailsTab: Selector('.el-tabs__tab-item').withText('Technical Details'),
+  homeTransferIdField: Selector('#transfer-details-modal__home-transfer-id'),
+
+  async getTransferRowById(innerText: string): Promise<Selector> {
+    return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText);
+  },
+
   async getFindATransferRows(): Promise<TransferRow[]> {
     const rows = Selector('.transfers__transfers__list .el-datalist__row');
     const length = await rows.count;

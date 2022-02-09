@@ -149,6 +149,8 @@ services:
 
   sim-backend:
     image: "mojaloop/mojaloop-simulator:v11.3.0"
+    volumes:
+      - "../docker-compose/sim_rules.json:/opt/sim-backend/sim-rules.json"
     environment:
       - CA_CERT_PATH=./secrets/cacert.pem
       - DFSP_ID=dfsp1
@@ -159,7 +161,7 @@ services:
       - MUTUAL_TLS_ENABLED=false
       - OUTBOUND_ENDPOINT=http://simulator-core-connector:4001
       - REPORT_API_LISTEN_PORT=3002
-      # - RULES_FILE=../rules/rules.json
+      - RULES_FILE=/opt/sim-backend/sim-rules.json
       - SERVER_CERT_PATH=./secrets/servercert.pem
       - SERVER_KEY_PATH=./secrets/serverkey.pem
       - SIMULATOR_API_LISTEN_PORT=3000
@@ -175,8 +177,18 @@ services:
       - REDIS_REPLICATION_MODE=master
       - REDIS_TLS_ENABLED=no
 
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8085:8081"
+
   mojaloop-connector:
-    image: pm4ml/mojaloop-connector:14.1.1
+    image: pm4ml/mojaloop-connector:14.1.6
+    #build:
+    #  context: https://github.com/pm4ml/mojaloop-connector.git#branch
     environment:
       - AUTO_ACCEPT_PARTY=false
       - AUTO_ACCEPT_QUOTES=false
