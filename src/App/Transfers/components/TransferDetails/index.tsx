@@ -346,7 +346,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       tooltip={
                         !(
                           model.technicalDetails.getPartiesResponse &&
-                          model.technicalDetails.getPartiesResponse
+                          model.technicalDetails.getPartiesResponse.body
                         ) &&
                         'This option is only available when a GET /parties response can be found for the transfer'
                       }
@@ -372,7 +372,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       tooltip={
                         !(
                             model.technicalDetails.quoteRequest &&
-                            model.technicalDetails.quoteRequest
+                            model.technicalDetails.quoteRequest.body
                         ) &&
                         'This option is only available when a POST /quotes request can be found for the transfer'
                       }
@@ -396,7 +396,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       tooltip={
                         !(
                             model.technicalDetails.quoteResponse &&
-                            model.technicalDetails.quoteResponse
+                            model.technicalDetails.quoteResponse.body
                         ) &&
                         'This option is only available when a POST /quotes response can be found for the transfer'
                       }
@@ -420,7 +420,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       tooltip={
                         !(
                             model.technicalDetails.transferPrepare &&
-                            model.technicalDetails.transferPrepare
+                            model.technicalDetails.transferPrepare.body
                         ) &&
                         'This option is only available when a POST /transfers response can be found for the transfer'
                       }
@@ -444,7 +444,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       tooltip={
                         !(
                             model.technicalDetails.transferFulfilment &&
-                            model.technicalDetails.transferFulfilment
+                            model.technicalDetails.transferFulfilment.body
                         ) &&
                         'This option is only available when a POST /transfers response can be found for the transfer'
                       }
