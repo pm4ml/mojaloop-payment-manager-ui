@@ -363,6 +363,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <Button
                       kind="secondary"
                       style={{ width: '100%' }}
+                      disabled={
+                        !(
+                            model.technicalDetails.quoteRequest &&
+                            model.technicalDetails.quoteRequest.body
+                        )
+                      }
+                      tooltip={
+                        !(
+                            model.technicalDetails.quoteRequest &&
+                            model.technicalDetails.quoteRequest
+                        ) &&
+                        'This option is only available when a POST /quotes request can be found for the transfer'
+                      }
                       noFill={true}
                       label="Quote Request"
                       onClick={() => showQuoteRequest(model.technicalDetails.quoteRequest)}
@@ -374,6 +387,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <Button
                       kind="secondary"
                       style={{ width: '100%' }}
+                      disabled={
+                        !(
+                            model.technicalDetails.quoteResponse &&
+                            model.technicalDetails.quoteResponse.body
+                        )
+                      }
+                      tooltip={
+                        !(
+                            model.technicalDetails.quoteResponse &&
+                            model.technicalDetails.quoteResponse
+                        ) &&
+                        'This option is only available when a POST /quotes response can be found for the transfer'
+                      }
                       noFill={true}
                       label="Quote Response"
                       onClick={() => showQuoteResponse(model.technicalDetails.quoteResponse)}
@@ -385,6 +411,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <Button
                       kind="secondary"
                       style={{ width: '100%' }}
+                      disabled={
+                        !(
+                            model.technicalDetails.transferPrepare &&
+                            model.technicalDetails.transferPrepare.body
+                        )
+                      }
+                      tooltip={
+                        !(
+                            model.technicalDetails.transferPrepare &&
+                            model.technicalDetails.transferPrepare
+                        ) &&
+                        'This option is only available when a POST /transfers response can be found for the transfer'
+                      }
                       noFill={true}
                       label="Transfer Prepare"
                       onClick={() => showTransferPrepare(model.technicalDetails.transferPrepare)}
@@ -396,6 +435,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <Button
                       kind="secondary"
                       style={{ width: '100%' }}
+                      disabled={
+                        !(
+                            model.technicalDetails.transferFulfilment &&
+                            model.technicalDetails.transferFulfilment.body
+                        )
+                      }
+                      tooltip={
+                        !(
+                            model.technicalDetails.transferFulfilment &&
+                            model.technicalDetails.transferFulfilment
+                        ) &&
+                        'This option is only available when a POST /transfers response can be found for the transfer'
+                      }
                       noFill={true}
                       label="Transfer Fulfil"
                       onClick={() => showTransferFulfil(model.technicalDetails.transferFulfilment)}
