@@ -365,14 +365,14 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                            model.technicalDetails.quoteRequest &&
-                            model.technicalDetails.quoteRequest.body
+                          model.technicalDetails.quoteRequest &&
+                          model.technicalDetails.quoteRequest.body
                         )
                       }
                       tooltip={
                         !(
-                            model.technicalDetails.quoteRequest &&
-                            model.technicalDetails.quoteRequest.body
+                          model.technicalDetails.quoteRequest &&
+                          model.technicalDetails.quoteRequest.body
                         ) &&
                         'This option is only available when a POST /quotes request can be found for the transfer'
                       }
@@ -389,14 +389,14 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                            model.technicalDetails.quoteResponse &&
-                            model.technicalDetails.quoteResponse.body
+                          model.technicalDetails.quoteResponse &&
+                          model.technicalDetails.quoteResponse.body
                         )
                       }
                       tooltip={
                         !(
-                            model.technicalDetails.quoteResponse &&
-                            model.technicalDetails.quoteResponse.body
+                          model.technicalDetails.quoteResponse &&
+                          model.technicalDetails.quoteResponse.body
                         ) &&
                         'This option is only available when a POST /quotes response can be found for the transfer'
                       }
@@ -413,14 +413,14 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                            model.technicalDetails.transferPrepare &&
-                            model.technicalDetails.transferPrepare.body
+                          model.technicalDetails.transferPrepare &&
+                          model.technicalDetails.transferPrepare.body
                         )
                       }
                       tooltip={
                         !(
-                            model.technicalDetails.transferPrepare &&
-                            model.technicalDetails.transferPrepare.body
+                          model.technicalDetails.transferPrepare &&
+                          model.technicalDetails.transferPrepare.body
                         ) &&
                         'This option is only available when a POST /transfers response can be found for the transfer'
                       }
@@ -437,14 +437,14 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                            model.technicalDetails.transferFulfilment &&
-                            model.technicalDetails.transferFulfilment.body
+                          model.technicalDetails.transferFulfilment &&
+                          model.technicalDetails.transferFulfilment.body
                         )
                       }
                       tooltip={
                         !(
-                            model.technicalDetails.transferFulfilment &&
-                            model.technicalDetails.transferFulfilment.body
+                          model.technicalDetails.transferFulfilment &&
+                          model.technicalDetails.transferFulfilment.body
                         ) &&
                         'This option is only available when a POST /transfers response can be found for the transfer'
                       }
