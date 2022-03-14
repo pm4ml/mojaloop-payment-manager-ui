@@ -234,6 +234,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
             <Row align="flex-start" style={{ marginTop: '5px' }}>
               <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
                 <FormInput
+                  id="transfer-details-basic-modal__recipient"
                   disabled={true}
                   label="Recipient"
                   type="text"
