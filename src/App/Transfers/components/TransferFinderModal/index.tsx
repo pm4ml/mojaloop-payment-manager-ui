@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { State, Dispatch } from 'store/types';
-import { TransferStatus } from 'App/types';
+import { TransferDirection, TransferStatus } from 'App/types';
 import {
   DataLabel,
   DataList,
@@ -185,6 +185,17 @@ const transferStatuses = [
   { label: helpers.toSpacedPascalCase(TransferStatus.Error), value: TransferStatus.Error },
 ];
 
+const transferDirectionOfFunds = [
+  {
+    label: helpers.toSpacedPascalCase(TransferDirection.Inbound),
+    value: TransferDirection.Inbound,
+  },
+  {
+    label: helpers.toSpacedPascalCase(TransferDirection.Outbound),
+    value: TransferDirection.Outbound,
+  },
+];
+
 interface TransferFiltersProps {
   model: TransferFilter;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
@@ -238,6 +249,21 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
             value={model.to || ''}
             onSelect={(value: FilterChangeValue) => onFilterChange({ field: 'to', value })}
             format="x"
+          />
+          <FormInput
+            id="find-transfer-modal__payeeAlias"
+            label="Payee Alias"
+            type="text"
+            value={model.payeeAlias || ''}
+            onChange={(value: FilterChangeValue) => onFilterChange({ field: 'payeeAlias', value })}
+          />
+          <FormInput
+            id="find-transfer-modal__directionOfFunds"
+            label="Direction of Funds"
+            type="select"
+            options={transferDirectionOfFunds}
+            value={model.fundsDir || ''}
+            onChange={(value: FilterChangeValue) => onFilterChange({ field: 'fundsDir', value })}
           />
         </Row>
         <br />
