@@ -185,11 +185,11 @@ services:
       - REDIS_TLS_ENABLED=no
 
   mojaloop-connector:
-    image: pm4ml/mojaloop-connector:14.1.1
+    image: pm4ml/mojaloop-connector:14.1.6
     # image: mojaloop-connector:local
     environment:
-      - AUTO_ACCEPT_PARTY=true
-      - AUTO_ACCEPT_QUOTES=true
+      - AUTO_ACCEPT_PARTY=false
+      - AUTO_ACCEPT_QUOTES=false
       - BACKEND_ENDPOINT=simulator-core-connector:3003
       - CACHE_HOST=redis
       - CACHE_PORT=6379
