@@ -28,6 +28,7 @@ services:
       - KEYCLOAK_PASSWORD=admin
       - KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
       - KEYCLOAK_IMPORT=/tmp/pm4ml-realm.json
+      - DB_VENDOR=h2
 #      - DB_VENDOR=postgres
 #      - DB_ADDR=keycloak-postgresql
 #      - DB_PORT=5432
@@ -45,7 +46,7 @@ services:
 #    image: bitnami/postgresql:11.12.0-debian-10-r23
 
   experience-api:
-    image: pm4ml/mojaloop-payment-manager-experience-api:2.0.2
+    image: pm4ml/mojaloop-payment-manager-experience-api:2.0.3
     ports:
       - "4010:3000"
     environment:
@@ -71,7 +72,7 @@ services:
       - redis
 
   management-api:
-    image: pm4ml/mojaloop-payment-manager-management-api:3.0.10
+    image: pm4ml/mojaloop-payment-manager-management-api:3.0.33
     environment:
       - AUTH_ENABLED=false
       - AUTH_PASS=pm4mltest123
