@@ -51,8 +51,8 @@ function getTransferFinderFilterInitialState() {
     dates: DateRange.Today,
     from: getFromDateBySelection(DateRange.Today),
     to: getToDateBySelection(DateRange.Today),
-    payeeAlias: undefined,
-    fundsDir: undefined,
+    recipient: undefined,
+    direction: undefined,
     institution: undefined,
     status: undefined,
   };

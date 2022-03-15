@@ -194,6 +194,10 @@ const transferDirectionOfFunds = [
     label: helpers.toSpacedPascalCase(TransferDirection.Outbound),
     value: TransferDirection.Outbound,
   },
+  {
+    label: helpers.toSpacedPascalCase(TransferDirection.All),
+    value: TransferDirection.All,
+  },
 ];
 
 interface TransferFiltersProps {
@@ -250,22 +254,23 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
             onSelect={(value: FilterChangeValue) => onFilterChange({ field: 'to', value })}
             format="x"
           />
-          <FormInput
-            id="find-transfer-modal__payeeAlias"
-            label="Payee Alias"
-            type="text"
-            value={model.payeeAlias || ''}
-            onChange={(value: FilterChangeValue) => onFilterChange({ field: 'payeeAlias', value })}
-          />
-          <FormInput
-            id="find-transfer-modal__directionOfFunds"
-            label="Direction of Funds"
-            type="select"
-            options={transferDirectionOfFunds}
-            value={model.fundsDir || ''}
-            onChange={(value: FilterChangeValue) => onFilterChange({ field: 'fundsDir', value })}
-          />
         </Row>
+        <br />
+        <FormInput
+          id="find-transfer-modal__payeeAlias"
+          label="Payee Alias"
+          type="text"
+          value={model.recipient || ''}
+          onChange={(value: FilterChangeValue) => onFilterChange({ field: 'recipient', value })}
+        />
+        <FormInput
+          id="find-transfer-modal__directionOfFunds"
+          label="Direction of Funds"
+          type="select"
+          options={transferDirectionOfFunds}
+          value={model.direction || ''}
+          onChange={(value: FilterChangeValue) => onFilterChange({ field: 'direction', value })}
+        />
         <br />
         <FormInput
           id="find-transfer-modal__institution"

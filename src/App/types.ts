@@ -112,6 +112,7 @@ export type ErrorMessage = string | null;
 export enum TransferDirection {
   Inbound = 'INBOUND',
   Outbound = 'OUTBOUND',
+  All = 'ALL',
 }
 
 export enum TransferType {
