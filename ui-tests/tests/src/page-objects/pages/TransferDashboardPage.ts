@@ -64,6 +64,7 @@ export const TransferDashboardPage = {
   transferDetailsModalBasicInformationTab: Selector('.el-tabs__tab-item').withText('Basic Information'),
   transferDetailsModalTechnicalDetailsTab: Selector('.el-tabs__tab-item').withText('Technical Details'),
   homeTransferIdField: Selector('#transfer-details-modal__home-transfer-id'),
+  recipientField: Selector('#transfer-details-basic-modal__recipient'),
 
   async getTransferRowById(innerText: string): Promise<Selector> {
     return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText);

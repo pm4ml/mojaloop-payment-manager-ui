@@ -118,3 +118,68 @@ test.meta({
   await t.click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab);
   await t.expect(await TransferDashboardPage.homeTransferIdField().value).eql('5105')
 });
+
+test.meta({
+  ID: '',
+  STORY: 'MMD-2093',
+  description: 'Recipient Name should not have "undefined"',
+})('Recipient Name should NOT have undefined when first name is not provided', async (t) => {
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  // Check transfer in spreadsheet exists in table
+  const transferRow = await TransferDashboardPage.getTransferRowById('aeac1d9f-2b60-4013-a6e0-a5cfa316a4f6');
+
+  // Open Details Modal
+  await t.click(transferRow);
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeMiddle PayeeLast')
+});
+
+test.meta({
+  ID: '',
+  STORY: 'MMD-2093',
+  description: 'Recipient Name should not have "undefined"',
+})('Recipient Name should NOT have undefined when middle name is not provided', async (t) => {
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  // Check transfer in spreadsheet exists in table
+  const transferRow = await TransferDashboardPage.getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd4b');
+
+  // Open Details Modal
+  await t.click(transferRow);
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeFirst PayeeLast')
+});
+
+
+test.meta({
+  ID: '',
+  STORY: 'MMD-2093',
+  description: 'Recipient Name should not have "undefined"',
+})('Recipient Name should NOT have undefined when last name is not provided', async (t) => {
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  // Check transfer in spreadsheet exists in table
+  const transferRow = await TransferDashboardPage.getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd5f');
+
+  // Open Details Modal
+  await t.click(transferRow);
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeFirst PayeeMiddle')
+});
+
+test.meta({
+  ID: '',
+  STORY: 'MMD-2093',
+  description: 'Recipient Name should not have "undefined"',
+})('Recipient Name should NOT have undefined when first and middle name is not provided', async (t) => {
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  // Check transfer in spreadsheet exists in table
+  const transferRow = await TransferDashboardPage.getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
+
+  // Open Details Modal
+  await t.click(transferRow);
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeLast')
+});
