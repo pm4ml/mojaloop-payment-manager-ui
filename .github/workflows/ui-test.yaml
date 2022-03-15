@@ -42,6 +42,11 @@ jobs:
       run: |-
         npm ci
 
+    - name: Upgrade browserlist
+      working-directory: ui-tests/tests
+      run: |-
+        npx browserslist@latest --update-db
+
     - name: Run tests
       working-directory: ui-tests/tests
       run: |-
