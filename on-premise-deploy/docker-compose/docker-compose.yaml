@@ -142,7 +142,7 @@ services:
     depends_on:
       - mojaloop-connector
       - sim-backend
-      
+
 #   core-connector:
 #     image: pm4ml/dgto-pm4ml-core-connector:0.0.20
 #     environment:
