@@ -260,8 +260,8 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
           id="find-transfer-modal__payeeAlias"
           label="Payee Alias"
           type="text"
-          value={model.recipient || ''}
-          onChange={(value: FilterChangeValue) => onFilterChange({ field: 'recipient', value })}
+          value={model.payeeAlias || ''}
+          onChange={(value: FilterChangeValue) => onFilterChange({ field: 'payeeAlias', value })}
         />
         <FormInput
           id="find-transfer-modal__directionOfFunds"

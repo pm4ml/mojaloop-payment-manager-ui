@@ -72,7 +72,7 @@ export interface TransferFilter {
   dates: string | number | undefined;
   from: string | number | undefined;
   to: string | number | undefined;
-  recipient: string | number | undefined;
+  payeeAlias: string | undefined;
   direction: string | number | undefined;
   institution: string | number | undefined;
   status: string | number | undefined;

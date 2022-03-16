@@ -63,7 +63,9 @@ function* fetchTransfers(action: RequestTransfersAction) {
       params = {
         startTimestamp: new Date(action.filters.from as number).toISOString(),
         endTimestamp: new Date(action.filters.to as number).toISOString(),
-        recipient: action.filters.recipient,
+        recipientIdType: action.filters.payeeAlias?.split('/')[1],
+        recipientIdValue: action.filters.payeeAlias?.split('/')[2],
+        recipientIdSubValue: action.filters.payeeAlias?.split('/')[3],
         direction: action.filters.direction,
         institution: action.filters.institution,
         status: action.filters.status,
