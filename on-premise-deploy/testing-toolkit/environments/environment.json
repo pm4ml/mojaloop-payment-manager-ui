@@ -40,6 +40,10 @@
     "toFspId": "payeefsp",
     "toIdType": "MSISDN",
     "toIdValue": "27713803912",
+    "toDOB": "1970-01-01",
+    "toFirstName": "PayeeFirst",
+    "toMiddleName": "PayeeMiddle",
+    "toLastName": "PayeeLast",
     "validCondition": "GRzLaTP7DJ9t4P-a_BA0WA9wzzlsugf00-Tn6kESAfM",
     "validFulfillment": "UNlJ98hZTY_dsw0cAqw4i_UN3v4utt7CZFB4yfLbVFA"
   }
