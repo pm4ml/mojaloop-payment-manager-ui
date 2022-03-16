@@ -133,22 +133,18 @@ path "secrets/*"
 {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
-
 path "kv/*"
 {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
-
 path "pki/*"
 {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
-
 path "pki_int/*"
 {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
-
 EOF
 
 vault policy write test-policy policy.hcl

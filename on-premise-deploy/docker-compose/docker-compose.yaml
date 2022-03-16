@@ -13,7 +13,7 @@ version: '3'
 services:
 
   frontend:
-    build: ../../
+    image: pm4ml/mojaloop-payment-manager-ui:1.10.1
     environment:
       - API_BASE_URL=http://localhost:4010
     ports:
@@ -72,7 +72,8 @@ services:
       - redis
 
   management-api:
-    image: pm4ml/mojaloop-payment-manager-management-api:3.0.33
+    image: pm4ml/mojaloop-payment-manager-management-api:2.0.4
+    # image: mojaloop-payment-manager-management-api:local
     environment:
       - AUTH_ENABLED=false
       - AUTH_PASS=pm4mltest123
@@ -158,8 +159,6 @@ services:
 
   sim-backend:
     image: "mojaloop/mojaloop-simulator:v11.3.0"
-    volumes:
-      - "../docker-compose/sim_rules.json:/opt/sim-backend/sim-rules.json"
     environment:
       - CA_CERT_PATH=./secrets/cacert.pem
       - DFSP_ID=dfsp1
@@ -170,7 +169,7 @@ services:
       - MUTUAL_TLS_ENABLED=false
       - OUTBOUND_ENDPOINT=http://simulator-core-connector:4001
       - REPORT_API_LISTEN_PORT=3002
-      - RULES_FILE=/opt/sim-backend/sim-rules.json
+      # - RULES_FILE=../rules/rules.json
       - SERVER_CERT_PATH=./secrets/servercert.pem
       - SERVER_KEY_PATH=./secrets/serverkey.pem
       - SIMULATOR_API_LISTEN_PORT=3000
@@ -186,20 +185,12 @@ services:
       - REDIS_REPLICATION_MODE=master
       - REDIS_TLS_ENABLED=no
 
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    restart: always
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-    ports:
-      - "8085:8081"
-
   mojaloop-connector:
-    image: pm4ml/mojaloop-connector:14.1.6
+    image: pm4ml/mojaloop-connector:14.1.1
     # image: mojaloop-connector:local
     environment:
-      - AUTO_ACCEPT_PARTY=false
-      - AUTO_ACCEPT_QUOTES=false
+      - AUTO_ACCEPT_PARTY=true
+      - AUTO_ACCEPT_QUOTES=true
       - BACKEND_ENDPOINT=simulator-core-connector:3003
       - CACHE_HOST=redis
       - CACHE_PORT=6379
@@ -233,7 +224,7 @@ services:
       # - OAUTH_CLIENT_SECRET={{ CHANGE BEFORE INSTALL e.g. UvMTwwj7am2agjkAfvmElNte4ewa }}
       - VALIDATE_INBOUND_JWS=false
       - RESERVE_NOTIFICATION=false
-      # - RESOURCE_VERSIONS="transfers=1.1"
+#      - RESOURCE_VERSIONS="transfers=1.1"
     ports:
       - "4000:4000"
     volumes:
@@ -247,8 +238,7 @@ services:
       - redis
 
   mojaloop-testing-toolkit:
-    container_name: mojaloop-testing-toolkit
-    image: mojaloop/ml-testing-toolkit:v14.0.2
+    image: mojaloop/ml-testing-toolkit:v13.5.2
     volumes:
       - "../testing-toolkit/docker-compose/as-a-switch/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
       - "../testing-toolkit/collections:/opt/mojaloop-testing-toolkit/collections"
@@ -260,7 +250,6 @@ services:
       - sh
       - -c
       - "npm start"
-
   mojaloop-testing-toolkit-ui:
     image: mojaloop/ml-testing-toolkit-ui:v13.5.3
     ports:
