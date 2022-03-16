@@ -1,14 +1,14 @@
 version: '3'
 #
 #  Component arrangement is as below:
-#  
+#
 #  ┌────────────┐    ┌────────────┐   ┌─────────────┐    ┌──────────┐
 #  │            │    │            │   │             │    │          │
 #  │ Simulator  ├───►│ Simulator  ├──►│  Mojaloop   ├───►│  Switch  │
 #  │ Backend    │    │   Core     │   │  Connector  │    │          │
 #  │            │◄───┤ Connector  │◄──┤             │◄───┤          │
 #  └────────────┘    └────────────┘   └─────────────┘    └──────────┘
-#  
+#
 
 services:
 

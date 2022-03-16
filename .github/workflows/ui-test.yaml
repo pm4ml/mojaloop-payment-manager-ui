@@ -19,10 +19,6 @@ jobs:
     - name: Install dependencies
       run: nix-env -if ui-tests/default.nix
 
-    # - name: Start Vault
-    #   working-directory: on-premise-deploy/docker-compose/
-    #   run: . run-vault.sh
-
     - name: Start Docker Compose
       working-directory: on-premise-deploy/docker-compose/
       run: docker-compose up -d
