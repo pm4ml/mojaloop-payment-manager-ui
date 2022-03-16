@@ -233,7 +233,7 @@ services:
       # - OAUTH_CLIENT_SECRET={{ CHANGE BEFORE INSTALL e.g. UvMTwwj7am2agjkAfvmElNte4ewa }}
       - VALIDATE_INBOUND_JWS=false
       - RESERVE_NOTIFICATION=false
-#      - RESOURCE_VERSIONS="transfers=1.1"
+      # - RESOURCE_VERSIONS="transfers=1.1"
     ports:
       - "4000:4000"
     volumes:
