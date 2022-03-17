@@ -26,10 +26,10 @@ export type Transfer = {
   batchId: string,
   institution: string,
   date: string,
-  payerIdType: string,
-  payerIdValue: string,
-  payeeIdType: string,
-  payeeIdValue: string,
+  senderIdType: string,
+  senderIdValue: string,
+  recipientIdType: string,
+  recipientIdValue: string,
   homeTransferId: string  
 }
 
