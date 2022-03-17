@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { State, Dispatch } from 'store/types';
-import { TransferStatus } from 'App/types';
+import { AliasType, TransferDirection, TransferStatus } from 'App/types';
 import {
   DataLabel,
   DataList,
@@ -11,6 +11,7 @@ import {
   Modal,
   FormInput,
   Row,
+  Column,
   Select,
   Spinner,
   Tabs,
@@ -185,6 +186,33 @@ const transferStatuses = [
   { label: helpers.toSpacedPascalCase(TransferStatus.Error), value: TransferStatus.Error },
 ];
 
+const aliasType = [
+  { label: 'All', value: null },
+  { label: helpers.toSpacedPascalCase(AliasType.MSISDN), value: AliasType.MSISDN },
+  { label: helpers.toSpacedPascalCase(AliasType.Account), value: AliasType.Account },
+  { label: helpers.toSpacedPascalCase(AliasType.Email), value: AliasType.Email },
+  { label: helpers.toSpacedPascalCase(AliasType.Personal), value: AliasType.Personal },
+  { label: helpers.toSpacedPascalCase(AliasType.Business), value: AliasType.Business },
+  { label: helpers.toSpacedPascalCase(AliasType.Device), value: AliasType.Device },
+  { label: helpers.toSpacedPascalCase(AliasType.IBAN), value: AliasType.IBAN },
+  { label: helpers.toSpacedPascalCase(AliasType.Alias), value: AliasType.Alias },
+];
+
+const transferDirectionOfFunds = [
+  {
+    label: helpers.toSpacedPascalCase(TransferDirection.Inbound),
+    value: TransferDirection.Inbound,
+  },
+  {
+    label: helpers.toSpacedPascalCase(TransferDirection.Outbound),
+    value: TransferDirection.Outbound,
+  },
+  {
+    label: helpers.toSpacedPascalCase(TransferDirection.All),
+    value: TransferDirection.All,
+  },
+];
+
 interface TransferFiltersProps {
   model: TransferFilter;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
@@ -213,33 +241,128 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
         <DataLabel size="l">Filter transfers:</DataLabel>
         <br />
         <br />
-        <DataLabel size="m">Approximate time of transfer</DataLabel>
-        <Row align="flex-start">
-          <Select
-            id="find-transfer-modal__date"
-            placeholder="Date"
-            type="select"
-            options={dateRanges}
-            selected={model.dates || ''}
-            onChange={(value: FilterChangeValue) => onFilterChange({ field: 'dates', value })}
-          />
-          <DatePicker
-            id="find-transfer-modal__from-date"
-            placeholder="From"
-            withTime
-            value={model.from || ''}
-            onSelect={(value: FilterChangeValue) => onFilterChange({ field: 'from', value })}
-            format="x"
-          />
-          <DatePicker
-            id="find-transfer-modal__to-date"
-            placeholder="To"
-            withTime
-            value={model.to || ''}
-            onSelect={(value: FilterChangeValue) => onFilterChange({ field: 'to', value })}
-            format="x"
-          />
+        <Row>
+          <Column>
+            <DataLabel size="m">Approximate time of transfer</DataLabel>
+            <Row>
+              <Column>
+                <Select
+                  id="find-transfer-modal__date"
+                  placeholder="Date"
+                  type="select"
+                  style={{ width: '200px' }}
+                  options={dateRanges}
+                  selected={model.dates || ''}
+                  onChange={(value: FilterChangeValue) => onFilterChange({ field: 'dates', value })}
+                />
+              </Column>
+              <Column>
+                <DatePicker
+                  id="find-transfer-modal__from-date"
+                  placeholder="From"
+                  style={{ width: '250px' }}
+                  withTime
+                  value={model.from || ''}
+                  onSelect={(value: FilterChangeValue) => onFilterChange({ field: 'from', value })}
+                  format="x"
+                />
+              </Column>
+              <Column>
+                <DatePicker
+                  id="find-transfer-modal__to-date"
+                  placeholder="To"
+                  style={{ width: '250px' }}
+                  withTime
+                  value={model.to || ''}
+                  onSelect={(value: FilterChangeValue) => onFilterChange({ field: 'to', value })}
+                  format="x"
+                />
+              </Column>
+            </Row>
+          </Column>
+          <Column style={{ paddingLeft: '20px' }}>
+            <FormInput
+              id="find-transfer-modal__directionOfFunds"
+              label="Direction of Funds"
+              style={{ width: '250px' }}
+              type="select"
+              options={transferDirectionOfFunds}
+              value={model.direction || TransferDirection.All}
+              onChange={(value: FilterChangeValue) => onFilterChange({ field: 'direction', value })}
+            />
+          </Column>
         </Row>
+        <br />
+        <Row>
+          <Column>
+            <FormInput
+              id="find-transfer-modal__aliasType"
+              label="Payee Alias Type"
+              type="select"
+              style={{ width: '200px' }}
+              options={aliasType}
+              value={model.aliasType || null}
+              onChange={(value: FilterChangeValue) => onFilterChange({ field: 'aliasType', value })}
+            />
+          </Column>
+          <Column>
+            <FormInput
+              id="find-transfer-modal__payeeAlias"
+              label="Payee Alias"
+              type="text"
+              style={{ width: '250px' }}
+              value={model.payeeAlias || ''}
+              onChange={(value: FilterChangeValue) => {
+                onFilterChange({ field: 'payeeAlias', value });
+              }}
+            />
+          </Column>
+          <Column>
+            <FormInput
+              id="find-transfer-modal__aliasSubValue"
+              label="Payee Alias Sub Value"
+              type="text"
+              style={{ width: '250px' }}
+              value={model.aliasSubValue || ''}
+              onChange={(value: FilterChangeValue) => {
+                onFilterChange({ field: 'aliasSubValue', value });
+              }}
+            />
+          </Column>
+          <Column style={{ paddingLeft: '20px' }}>
+            <span style={{ width: '250px' }}>&nbsp;</span>
+          </Column>
+        </Row>
+        {/* <Row>
+          <Column>
+            <FormInput
+              id="find-transfer-modal__aliasType"
+              label="Payee Alias Type"
+              type="select"
+              options={aliasType}
+              value={model.aliasType || null}
+              onChange={(value: FilterChangeValue) => onFilterChange({ field: 'aliasType', value })}
+            />
+          </Column>
+          <Column style={{ marginLeft: '10px' }}>
+            <FormInput
+              id="find-transfer-modal__payeeAlias"
+              label="Payee Alias"
+              type="text"
+              value={model.payeeAlias || ''}
+              onChange={(value: FilterChangeValue) => onFilterChange({ field: 'payeeAlias', value })}
+            />
+          </Column>
+          <Column style={{ marginLeft: '10px' }}>
+            <FormInput
+              id="find-transfer-modal__aliasSubValue"
+              label="Payee Alias Sub Value"
+              type="text"
+              value={model.aliasSubValue || ''}
+              onChange={(value: FilterChangeValue) => onFilterChange({ field: 'aliasSubValue', value })}
+            />
+          </Column>
+        </Row> */}
         <br />
         <FormInput
           id="find-transfer-modal__institution"
