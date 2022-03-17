@@ -38,11 +38,13 @@ test.meta({
   const rows = await TransferDashboardPage.getFindATransferRows()
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
-  await t.expect(transfers[0].senderIdType).eql('MSISDN');
-  await t.expect(transfers[0].senderIdValue).eql('22507008181');
-  await t.expect(transfers[0].recipientIdType).eql('MSISDN');
-  await t.expect(transfers[0].recipientIdValue).eql('22556999125');
-  await t.expect(transfers[0].homeTransferId).eql('ba597e0e-c005-4e83-a015-18d8f314451f');
+
+  const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  await t.expect(expectedTransfer?.senderIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.senderIdValue).eql('44123456789');
+  await t.expect(expectedTransfer?.recipientIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.recipientIdValue).eql('27713803912');
+  await t.expect(expectedTransfer?.homeTransferId).eql('5105');
 
   // Delete file
   fs.unlinkSync(expectedFilePath);
@@ -73,11 +75,13 @@ test.meta({
   const rows = await TransferDashboardPage.getFindATransferRows();
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
-  await t.expect(transfers[0].senderIdType).eql('MSISDN');
-  await t.expect(transfers[0].senderIdValue).eql('22507008181');
-  await t.expect(transfers[0].recipientIdType).eql('MSISDN');
-  await t.expect(transfers[0].recipientIdValue).eql('22556999125');
-  await t.expect(transfers[0].homeTransferId).eql('ba597e0e-c005-4e83-a015-18d8f314451f');
+
+  const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  await t.expect(expectedTransfer?.senderIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.senderIdValue).eql('44123456789');
+  await t.expect(expectedTransfer?.recipientIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.recipientIdValue).eql('27713803912');
+  await t.expect(expectedTransfer?.homeTransferId).eql('5105');
 
   // Delete file
   fs.unlinkSync(expectedFilePath);

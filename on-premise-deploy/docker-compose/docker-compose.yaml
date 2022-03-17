@@ -12,14 +12,14 @@ version: '3'
 
 services:
 
-  # frontend:
-  #   build: ../../
-  #   environment:
-  #     - API_BASE_URL=http://localhost:4010
-  #   ports:
-  #      - "8081:8080"
-  #   depends_on:
-  #     - experience-api
+  frontend:
+    build: ../../
+    environment:
+      - API_BASE_URL=http://localhost:4010
+    ports:
+       - "8081:8080"
+    depends_on:
+      - experience-api
 
   keycloak:
     image: jboss/keycloak:12.0.4
