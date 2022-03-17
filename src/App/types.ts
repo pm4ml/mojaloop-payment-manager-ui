@@ -119,6 +119,17 @@ export enum TransferType {
   P2P = 'P2P',
 }
 
+export enum AliasType {
+  MSISDN = 'MSISDN',
+  Account = 'ACCOUNT_ID',
+  Email = 'EMAIL',
+  Personal = 'PERSONAL_ID',
+  Business = 'BUSINESS',
+  Device = 'DEVICE',
+  IBAN = 'IBAN',
+  Alias = 'ALIAS',
+}
+
 export enum TransferStatus {
   Success = 'SUCCESS',
   Pending = 'PENDING',

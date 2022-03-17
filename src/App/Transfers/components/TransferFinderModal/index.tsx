@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { State, Dispatch } from 'store/types';
-import { TransferDirection, TransferStatus } from 'App/types';
+import { AliasType, TransferDirection, TransferStatus } from 'App/types';
 import {
   DataLabel,
   DataList,
@@ -185,6 +185,17 @@ const transferStatuses = [
   { label: helpers.toSpacedPascalCase(TransferStatus.Error), value: TransferStatus.Error },
 ];
 
+const aliasType = [
+  { label: helpers.toSpacedPascalCase(AliasType.MSISDN), value: AliasType.MSISDN },
+  { label: helpers.toSpacedPascalCase(AliasType.Account), value: AliasType.Account },
+  { label: helpers.toSpacedPascalCase(AliasType.Email), value: AliasType.Email },
+  { label: helpers.toSpacedPascalCase(AliasType.Personal), value: AliasType.Personal },
+  { label: helpers.toSpacedPascalCase(AliasType.Business), value: AliasType.Business },
+  { label: helpers.toSpacedPascalCase(AliasType.Device), value: AliasType.Device },
+  { label: helpers.toSpacedPascalCase(AliasType.IBAN), value: AliasType.IBAN },
+  { label: helpers.toSpacedPascalCase(AliasType.Alias), value: AliasType.Alias },
+];
+
 const transferDirectionOfFunds = [
   {
     label: helpers.toSpacedPascalCase(TransferDirection.Inbound),
@@ -257,11 +268,26 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
         </Row>
         <br />
         <FormInput
+          id="find-transfer-modal__aliasType"
+          label="Alias Type"
+          type="select"
+          options={aliasType}
+          value={model.aliasType || ''}
+          onChange={(value: FilterChangeValue) => onFilterChange({ field: 'aliasType', value })}
+        />
+        <FormInput
           id="find-transfer-modal__payeeAlias"
           label="Payee Alias"
           type="text"
           value={model.payeeAlias || ''}
           onChange={(value: FilterChangeValue) => onFilterChange({ field: 'payeeAlias', value })}
+        />
+        <FormInput
+          id="find-transfer-modal__aliasSubValue"
+          label="Alias Sub Value"
+          type="text"
+          value={model.aliasSubValue || ''}
+          onChange={(value: FilterChangeValue) => onFilterChange({ field: 'aliasSubValue', value })}
         />
         <FormInput
           id="find-transfer-modal__directionOfFunds"
