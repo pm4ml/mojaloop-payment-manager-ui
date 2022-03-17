@@ -46,7 +46,7 @@ services:
 #    image: bitnami/postgresql:11.12.0-debian-10-r23
 
   experience-api:
-    image: pm4ml/mojaloop-payment-manager-experience-api:2.0.3
+    image: pm4ml/mojaloop-payment-manager-experience-api:2.0.4
     ports:
       - "4010:3000"
     environment:
@@ -72,7 +72,7 @@ services:
       - redis
 
   management-api:
-    image: pm4ml/mojaloop-payment-manager-management-api:3.0.33
+    image: pm4ml/mojaloop-payment-manager-management-api:3.0.36
     environment:
       - AUTH_ENABLED=false
       - AUTH_PASS=pm4mltest123

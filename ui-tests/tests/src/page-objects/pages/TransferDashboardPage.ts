@@ -26,6 +26,11 @@ export type Transfer = {
   batchId: string,
   institution: string,
   date: string,
+  senderIdType: string,
+  senderIdValue: string,
+  recipientIdType: string,
+  recipientIdValue: string,
+  homeTransferId: string  
 }
 
 export type TransferRow = {
