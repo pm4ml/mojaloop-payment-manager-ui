@@ -26,6 +26,11 @@ export type Transfer = {
   batchId: string,
   institution: string,
   date: string,
+  payerIdType: string,
+  payerIdValue: string,
+  payeeIdType: string,
+  payeeIdValue: string,
+  homeTransferId: string  
 }
 
 export type TransferRow = {

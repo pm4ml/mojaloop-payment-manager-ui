@@ -38,6 +38,11 @@ test.meta({
   const rows = await TransferDashboardPage.getFindATransferRows()
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
+  await t.expect(transfers[0].payerIdType).eql('MSISDN');
+  await t.expect(transfers[0].payerIdValue).eql('22507008181');
+  await t.expect(transfers[0].payeeIdType).eql('MSISDN');
+  await t.expect(transfers[0].payeeIdValue).eql('22556999125');
+  await t.expect(transfers[0].homeTransferId).eql('ba597e0e-c005-4e83-a015-18d8f314451f');
 
   // Delete file
   fs.unlinkSync(expectedFilePath);
@@ -68,6 +73,11 @@ test.meta({
   const rows = await TransferDashboardPage.getFindATransferRows();
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
+  await t.expect(transfers[0].payerIdType).eql('MSISDN');
+  await t.expect(transfers[0].payerIdValue).eql('22507008181');
+  await t.expect(transfers[0].payeeIdType).eql('MSISDN');
+  await t.expect(transfers[0].payeeIdValue).eql('22556999125');
+  await t.expect(transfers[0].homeTransferId).eql('ba597e0e-c005-4e83-a015-18d8f314451f');
 
   // Delete file
   fs.unlinkSync(expectedFilePath);
