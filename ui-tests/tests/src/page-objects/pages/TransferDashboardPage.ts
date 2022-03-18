@@ -39,9 +39,36 @@ export type TransferRow = {
 }
 
 export const TransferDashboardPage = {
+  
+  //Transfers Overview
+  transfersOverview: Selector('span').withText('Successful Transfers'),
+  successfulTransfers:  Selector('span').withText('Successful Transfers'),
+  averageTransferTime: Selector('span').withText('Average Transfer Time (E2E)'),
+  successfulChart: Selector('#apexchartstransferxsuccessxpercxchart'),
+  averageTransferTimeChart: Selector('#apexchartstransferxavgxtimexchart'),
+  viewAllErrorsButton: Selector('span.input-button__label').withText('View All Errors'),
+  idFilterLabel: Selector('div').withText('ID'),
+  directionFilterLabel: Selector('div').withText('Direction'),
+  typeFilterLabel: Selector('div').withText('Type'),
+  valueFilterLabel: Selector('div').withText('Value'),
+  errorTypeFilterLabel: Selector('div').withText('Error Type'),
+  DateFilterLabel: Selector('div').withText('Date'),
+
+  //Transfer Status count
+  successfulCount: Selector('span.el-pill__label').nth(0),
+  pendingCount: Selector('span.el-pill__label').nth(1),
+  failedCount: Selector('span.el-pill__label').nth(2),
+  totalErrorsCount: Selector('span').withText('Total Errors').nextSibling(0),
+  totalTransferStatuses: Selector('span').withText('Total Transfer Statuses'),
+
   findATransferButton: Selector('.mb-input').withText('Find a Transfer'),
   downloadErrorsButton: Selector('.transfers__errors__download__button'),
-  viewAllErrorsButton: Selector('.transfers__errors__button'),
+  // viewAllErrorsButton: Selector('.transfers__errors__button'),
+
+  //Find a Transfer Popup window Page Objects
+  ftTitle: Selector('div.el-modal__header-title'),
+  ftClosesmall: Selector('#close-small'),
+  transferIDTextBox: Selector('div.input-textfield__value__tokens').child(0),
 
   findATransferModal: () => Selector('.el-modal__header-title')
     .withText(`Find a Transfer`)
@@ -49,7 +76,8 @@ export const TransferDashboardPage = {
 
   findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-item').withText('Basic Find a Transfer'),
   findATransferModalAdvancedFiltering: Selector('.el-tabs__tab-item').withText('Advanced Filtering'),
-
+  backtoFilteringSubmitButton: Selector('span.input-button__label').withText('Back to filtering'),
+  ftPopupCloseButton: Selector('span.input-button__label').nth(3),
   findATransferModalTransferDownloadTransfersButton: Selector('.mb-input').withText('Download Transfers'),
   findATransferModalTransferIdField: Selector('.find-transfer-modal__transfer-id input'),
   findATransferModalDateField: Selector('.find-transfer-modal__date input'),
@@ -60,7 +88,8 @@ export const TransferDashboardPage = {
   findATransferModalSubmit: Selector('.el-modal__submit'),
   findATransferModalCloseButton: Selector('.input-button__content').withText('Close'),
 
-
+  //Find a Transfer results Page objects
+  noresults: Selector('span').withText('No items'),
   transferDetailsModalBasicInformationTab: Selector('.el-tabs__tab-item').withText('Basic Information'),
   transferDetailsModalTechnicalDetailsTab: Selector('.el-tabs__tab-item').withText('Technical Details'),
   homeTransferIdField: Selector('#transfer-details-modal__home-transfer-id'),

@@ -16,6 +16,60 @@ fixture `Transfer Dashboard Feature`
     }
   });
 
+test
+  .meta({
+      ID: 'MP-T287',
+      STORY: 'MP-2610'
+  })
+  ('Click_Transfers_validate_Total_Transfer_Statuses_label_Record_counts_transfers_Overview_and_other_labels', async t => {
+    
+      await t
+          .expect(TransferDashboardPage.transfersOverview.exists).ok()
+          .expect(TransferDashboardPage.successfulTransfers.exists).ok()
+          .expect(TransferDashboardPage.averageTransferTime.exists).ok()
+          .expect(TransferDashboardPage.totalTransferStatuses.exists).ok()
+          .expect(TransferDashboardPage.successfulChart.exists).ok()
+          .expect(TransferDashboardPage.averageTransferTimeChart.exists).ok()
+          .expect(TransferDashboardPage.successfulCount.exists).ok()
+          .expect(TransferDashboardPage.pendingCount.exists).ok()
+          .expect(TransferDashboardPage.failedCount.exists).ok()
+          .expect(TransferDashboardPage.totalErrorsCount.exists).ok()
+  });
+
+test
+  .meta({
+      ID: 'MP-T288',
+      STORY: 'MP-2512'
+  })
+  ('Click_Transfers_Find_a_Trans_Adv_Filtering_Basic_Transfer_submit_back_to_filter_then_close', async t => {
+
+      await t
+          .click(TransferDashboardPage.findATransferButton)
+          .expect(TransferDashboardPage.ftTitle.exists).ok()
+          .click(TransferDashboardPage.findATransferModalAdvancedFiltering)
+          .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
+          .click(TransferDashboardPage.findATransferModalSubmit)
+          .click(TransferDashboardPage.backtoFilteringSubmitButton)
+          .click(TransferDashboardPage.ftPopupCloseButton)
+          .click(TransferDashboardPage.findATransferButton)
+          .click(TransferDashboardPage.ftClosesmall)
+  });
+  
+test
+  .meta({
+      ID: 'MP-T291',
+      STORY: 'MP-2512'
+  })
+  ('Click_Transfers_Find_a_Transfer_with_invalid_transfer_id_no_item_expected', async t => {
+      await t
+          .click(TransferDashboardPage.findATransferButton)
+          .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
+          .typeText(TransferDashboardPage.transferIDTextBox,'abc123',{replace:true})
+          .click(TransferDashboardPage.findATransferModalSubmit)
+          .expect(TransferDashboardPage.noresults).ok()
+          .click(TransferDashboardPage.ftPopupCloseButton)
+  }); 
+
 test.meta({
   ID: '',
   STORY: '',
