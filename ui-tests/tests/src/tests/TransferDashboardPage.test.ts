@@ -39,6 +39,13 @@ test.meta({
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
 
+  const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  await t.expect(expectedTransfer?.senderIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.senderIdValue).eql('44123456789');
+  await t.expect(expectedTransfer?.recipientIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.recipientIdValue).eql('27713803912');
+  await t.expect(expectedTransfer?.homeTransferId).eql('5105');
+
   // Delete file
   fs.unlinkSync(expectedFilePath);
 });
@@ -68,6 +75,13 @@ test.meta({
   const rows = await TransferDashboardPage.getFindATransferRows();
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
+
+  const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  await t.expect(expectedTransfer?.senderIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.senderIdValue).eql('44123456789');
+  await t.expect(expectedTransfer?.recipientIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.recipientIdValue).eql('27713803912');
+  await t.expect(expectedTransfer?.homeTransferId).eql('5105');
 
   // Delete file
   fs.unlinkSync(expectedFilePath);
