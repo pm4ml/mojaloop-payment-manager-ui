@@ -60,6 +60,12 @@ export const TransferDashboardPage = {
   findATransferModalDateField: Selector('.find-transfer-modal__date input'),
   findATransferModalFromDateField: Selector('.find-transfer-modal__from-date input'),
   findATransferModalToDateField: Selector('.find-transfer-modal__to-date input'),
+  findATransferModalDirectionOfFundsField: Selector('.find-transfer-modal__directionOfFunds input'),
+  findATransferModalDirectionOfFundsOption: Selector('.find-transfer-modal__directionOfFunds input').find('option'),
+  findATransferModalAliasTypeField: Selector('.find-transfer-modal__aliasType input'),
+  findATransferModalAliasTypeOption: Selector('.find-transfer-modal__aliasType input').find('option'),
+  findATransferModalPayeeAliasField: Selector('.find-transfer-modal__payeeAlias input'),
+  findATransferModalAliasSubValueField: Selector('.find-transfer-modal__aliasSubValue input'),
   findATransferModalInstitutionField: Selector('.find-transfer-modal__institution input'),
   findATransferModalTransferStatusField: Selector('.find-transfer-modal__transfer-status input'),
   findATransferModalSubmit: Selector('.el-modal__submit'),
@@ -70,6 +76,8 @@ export const TransferDashboardPage = {
   transferDetailsModalTechnicalDetailsTab: Selector('.el-tabs__tab-item').withText('Technical Details'),
   homeTransferIdField: Selector('#transfer-details-modal__home-transfer-id'),
   recipientField: Selector('#transfer-details-basic-modal__recipient'),
+  transferDetailsModalTechnicalDetailsRecipientDetailsField: Selector('#transfer-details-basic-modal__recipient-details'),
+  transferDetailsModalTechnicalDetailsDirection: Selector('#transfer-details-basic-modal__direction'),
 
   async getTransferRowById(innerText: string): Promise<Selector> {
     return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText);

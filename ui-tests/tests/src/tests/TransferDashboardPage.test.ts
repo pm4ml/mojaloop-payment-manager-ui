@@ -197,3 +197,32 @@ test.meta({
   await t.click(transferRow);
   await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeLast')
 });
+
+test.meta({
+  ID: '',
+  STORY: 'MMD-1463',
+  description: 'Improved filtering of transactions in advanced filtering screen',
+})('Advanced Filtering by direction of funds and payee alias', async (t) => {
+
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
+
+  // Set direction of funds and payee alias
+  await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, '27713803912');
+  await t.click(TransferDashboardPage.findATransferModalAliasTypeField).click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('MSISDN'));
+  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField).click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('OUTBOUND'));
+
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  // '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  // recipientIdType = 'MSISDN'
+  // recipientIdValue = '27713803912'
+
+  const transferRow = await TransferDashboardPage.getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
+
+  // Open Details Modal
+  await t.click(transferRow);
+  await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField().value).eql('MSISDN 27713803912');
+  await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value).eql('OUTBOUND');
+
+});
