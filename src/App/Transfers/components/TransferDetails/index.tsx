@@ -261,7 +261,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 />
               </div>
               <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
-                <FormInput id="transfer-details-basic-modal__direction" disabled={true} label="Direction" type="text" value={model.direction} />
+                <FormInput
+                  id="transfer-details-basic-modal__direction"
+                  disabled={true}
+                  label="Direction"
+                  type="text"
+                  value={model.direction}
+                />
               </div>
             </Row>
           </TabPanel>
