@@ -205,7 +205,7 @@ test.meta({
 })('Advanced Filtering by direction of funds and payee alias', async (t) => {
 
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
+  await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering).wait(5000);
 
   // Set direction of funds and payee alias
   await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, '27713803912');
