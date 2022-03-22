@@ -64,7 +64,7 @@ export const TransferDashboardPage = {
   findATransferModalDirectionOfFundsOption: Selector('.find-transfer-modal__directionOfFunds input').find('option'),
   findATransferModalAliasTypeField: Selector('.find-transfer-modal__aliasType input'),
   findATransferModalAliasTypeOption: Selector('.find-transfer-modal__aliasType input').find('option'),
-  findATransferModalPayeeAliasField: Selector('.find-transfer-modal__payeeAlias input'),
+  findATransferModalPayeeAliasField: Selector('#find-transfer-modal__payeeAlias input'),
   findATransferModalAliasSubValueField: Selector('.find-transfer-modal__aliasSubValue input'),
   findATransferModalInstitutionField: Selector('.find-transfer-modal__institution input'),
   findATransferModalTransferStatusField: Selector('.find-transfer-modal__transfer-status input'),
