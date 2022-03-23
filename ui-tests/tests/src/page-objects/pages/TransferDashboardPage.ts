@@ -1,4 +1,4 @@
-import { Selector, t } from "testcafe";
+import { Selector } from "testcafe";
 
 export type Error = {
   id: string,
@@ -61,11 +61,9 @@ export const TransferDashboardPage = {
   findATransferModalFromDateField: Selector('.find-transfer-modal__from-date input'),
   findATransferModalToDateField: Selector('.find-transfer-modal__to-date input'),
   findATransferModalDirectionOfFundsField: Selector('.find-transfer-modal__directionOfFunds input'),
-  // findATransferModalDirectionOfFundsOption: Selector('.find-transfer-modal__directionOfFunds input').find('option'),
-  findATransferModalDirectionOfFundsOption: (directionOfFunds: string) => t.click(Selector('.rc-select__option__label').withText(directionOfFunds).parent()).wait(1000),
+  findATransferModalDirectionOfFundsOption: Selector('.rc-select__option__label'),
   findATransferModalAliasTypeField: Selector('.find-transfer-modal__aliasType input'),
-  // findATransferModalAliasTypeOption: Selector('.find-transfer-modal__aliasType input').find('option'),
-  findATransferModalAliasTypeOption: (aliasType: string) => t.click(Selector('.rc-select__option__label').withText(aliasType).parent()).wait(1000),
+  findATransferModalAliasTypeOption: Selector('.rc-select__option__label'),
   findATransferModalPayeeAliasField: Selector('#find-transfer-modal__payeeAlias input'),
   findATransferModalAliasSubValueField: Selector('.find-transfer-modal__aliasSubValue input'),
   findATransferModalInstitutionField: Selector('.find-transfer-modal__institution input'),
