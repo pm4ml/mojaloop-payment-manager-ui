@@ -4,6 +4,7 @@ import { LoginPage } from '../page-objects/pages/LoginPage';
 import { ErrorRow, Transfer, TransferDashboardPage, TransferRow, Error } from '../page-objects/pages/TransferDashboardPage';
 import fs from 'fs';
 import xlsx from 'xlsx';
+const  apiHelper =  require('../helpers/api-helper');
 
 fixture `Transfer Dashboard Feature`
   .page`${config.pm4mlEndpoint}/transfer`
@@ -68,6 +69,53 @@ test
           .click(TransferDashboardPage.findATransferModalSubmit)
           .expect(TransferDashboardPage.noresults).ok()
           .click(TransferDashboardPage.ftPopupCloseButton)
+  }); 
+
+test
+  .meta({
+      ID: 'MP-T290',
+      STORY: 'MP-2512'
+  })
+  ('Click_Transfers_Find_a_Transfer_with_valid_transfer_ID', async t => {
+      
+    var transferRequest = {
+      from: {
+        displayName: 'PayerFirst PayerLast',
+        idType: 'MSISDN',
+        idValue: 22507008181,
+        extensionList: 
+          [
+            { key: 4, 
+              value: 2 }
+          ]
+      },
+      to: {
+        displayName: 'PartyFirst PartyLast',
+        idType: 'MSISDN',
+        idValue: '22556999125'
+      },
+      amountType: 'SEND',
+      currency: 'USD',
+      amount: 10.123,
+      transactionType: 'TRANSFER',
+      note: 'test payment - Success transfer initiated by Automation',
+      homeTransactionId: '7e93f76c-5721-4f9e-93aa-4a2dac630a1c'
+    }
+      var payloadHeaders = {'Content-Type': 'application/json'};
+      var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`,JSON.stringify(transferRequest),payloadHeaders);
+      console.log('transferResponse: ', transferResponse);
+      let transfer_id = transferResponse.transferId
+
+      await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`,JSON.stringify({acceptParty:true}),payloadHeaders);
+
+      await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`,JSON.stringify({acceptQuote:true}),payloadHeaders);
+
+      await t
+        .click(TransferDashboardPage.findATransferButton)
+        .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
+        .typeText(TransferDashboardPage.transferIDTextBox,transfer_id,{replace:true})
+        .click(TransferDashboardPage.findATransferModalSubmit)
+        .click(TransferDashboardPage.ftPopupCloseButton)
   }); 
 
 test.meta({
