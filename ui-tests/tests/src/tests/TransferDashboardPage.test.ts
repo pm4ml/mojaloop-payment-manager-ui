@@ -209,8 +209,10 @@ test.meta({
 
   // Set direction of funds and payee alias
   await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, '27713803912');
-  await t.click(TransferDashboardPage.findATransferModalAliasTypeField).click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('MSISDN'));
-  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField).click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('OUTBOUND'));
+  await TransferDashboardPage.findATransferModalAliasTypeOption('MSISDN');
+  // await t.click(TransferDashboardPage.findATransferModalAliasTypeField).click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('MSISDN'));
+      await TransferDashboardPage.findATransferModalDirectionOfFundsOption('OUTBOUND');
+  // await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField).click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('OUTBOUND'));
 
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
