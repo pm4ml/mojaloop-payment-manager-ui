@@ -205,26 +205,25 @@ test.meta({
 })('Advanced Filtering by direction of funds and payee alias', async (t) => {
 
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering).wait(5000);
+  await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
 
   // Set direction of funds and payee alias
-  await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, '27713803912');
-  await t.click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('MSISDN').parent()).wait(1000);
-  // await t.click(TransferDashboardPage.findATransferModalAliasTypeField).click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('MSISDN'));
-  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('OUTBOUND').parent()).wait(1000);
-  // await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField).click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('OUTBOUND'));
+  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField);
+  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('Outbound').parent());
+  await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, '22556999125');
+  await t.click(TransferDashboardPage.findATransferModalAliasTypeField);
+  await t.click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('Msisdn').parent());
 
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
-  // '61797537-a05a-469f-b2f3-059a9cd5bd8d');
-  // recipientIdType = 'MSISDN'
-  // recipientIdValue = '27713803912'
-
-  const transferRow = await TransferDashboardPage.getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
+  const transferRows: TransferRow[] = await TransferDashboardPage.getFindATransferRows();
 
   // Open Details Modal
-  await t.click(transferRow);
-  await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField().value).eql('MSISDN 27713803912');
-  await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value).eql('OUTBOUND');
+  for (let i = 0 ; i < transferRows.length; i++) {
+    await t.click(transferRows[i].transferId);
+    await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField().value).eql('MSISDN 22556999125');
+    await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value).eql('OUTBOUND');
+    await t.click(TransferDashboardPage.findATransferModalCloseButton);
+  }
 
 });
