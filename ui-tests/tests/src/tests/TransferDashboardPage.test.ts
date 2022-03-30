@@ -43,7 +43,8 @@ test
     ID: 'MP-T288',
     STORY: 'MP-2512'
   })
-  ('Click Transfers, Find a Transfer, Advanced Filtering, Basic Transfer submit back to filter then close', async t => {
+  ('test1', async t => {
+  // ('Click Transfers, Find a Transfer, Advanced Filtering, Basic Transfer submit back to filter then close', async t => {
 
     await t
       .click(TransferDashboardPage.findATransferButton)
@@ -52,7 +53,7 @@ test
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.backtoFilteringSubmitButton)
-      .click(TransferDashboardPage.ftPopupCloseButton)
+      .click(TransferDashboardPage.findATransferModalCloseButton)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.ftClosesmall)
   });
@@ -69,7 +70,7 @@ test
       .typeText(TransferDashboardPage.transferIDTextBox, 'abc123', { replace: true })
       .click(TransferDashboardPage.findATransferModalSubmit)
       .expect(TransferDashboardPage.noresults).ok()
-      .click(TransferDashboardPage.ftPopupCloseButton)
+      .click(TransferDashboardPage.findATransferModalCloseButton)
   });
 
 test
@@ -118,7 +119,7 @@ test
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .typeText(TransferDashboardPage.transferIDTextBox, transfer_id, { replace: true })
       .click(TransferDashboardPage.findATransferModalSubmit)
-      .click(TransferDashboardPage.ftPopupCloseButton)
+      .click(TransferDashboardPage.findATransferModalCloseButton)
   });
 
 test
@@ -448,8 +449,7 @@ test
     ID: 'MP-T310',
     STORY: 'MP-2667'
   })
-  ('test1', async t => {
-    // ('Click Transfers, with Valid transfer, validate view msg details with Transfer Prepare and Transfer fulfil', async t => {
+  ('Click Transfers, with Valid transfer, validate view msg details with Transfer Prepare and Transfer fulfil', async t => {
 
     var homeTransactionId = uuidv4();
     var transferRequest = {
