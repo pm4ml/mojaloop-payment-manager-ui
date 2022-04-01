@@ -531,6 +531,13 @@ test.meta({
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
 
+  const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  await t.expect(expectedTransfer?.senderIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.senderIdValue).eql('44123456789');
+  await t.expect(expectedTransfer?.recipientIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.recipientIdValue).eql('27713803912');
+  await t.expect(expectedTransfer?.homeTransferId).eql('5105');
+
   // Delete file
   fs.unlinkSync(expectedFilePath);
 });
@@ -560,6 +567,13 @@ test.meta({
   const rows = await TransferDashboardPage.getFindATransferRows();
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
+
+  const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  await t.expect(expectedTransfer?.senderIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.senderIdValue).eql('44123456789');
+  await t.expect(expectedTransfer?.recipientIdType).eql('MSISDN');
+  await t.expect(expectedTransfer?.recipientIdValue).eql('27713803912');
+  await t.expect(expectedTransfer?.homeTransferId).eql('5105');
 
   // Delete file
   fs.unlinkSync(expectedFilePath);
@@ -674,4 +688,34 @@ test.meta({
   // Open Details Modal
   await t.click(transferRow);
   await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeLast')
+});
+
+test.meta({
+  ID: '',
+  STORY: 'MMD-1463',
+  description: 'Improved filtering of transactions in advanced filtering screen',
+})('Advanced Filtering by direction of funds and payee alias', async (t) => {
+
+  await t.click(TransferDashboardPage.findATransferButton);
+  await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
+
+  // Set direction of funds and payee alias
+  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField);
+  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('Outbound').parent());
+  await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, '22556999125');
+  await t.click(TransferDashboardPage.findATransferModalAliasTypeField);
+  await t.click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('Msisdn').parent());
+
+  await t.click(TransferDashboardPage.findATransferModalSubmit);
+
+  const transferRows: TransferRow[] = await TransferDashboardPage.getFindATransferRows();
+
+  // Open Details Modal
+  for (let i = 0 ; i < transferRows.length; i++) {
+    await t.click(transferRows[i].transferId);
+    await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField().value).eql('MSISDN 22556999125');
+    await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value).eql('OUTBOUND');
+    await t.click(TransferDashboardPage.findATransferModalCloseButton);
+  }
+
 });

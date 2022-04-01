@@ -26,6 +26,11 @@ export type Transfer = {
   batchId: string,
   institution: string,
   date: string,
+  senderIdType: string,
+  senderIdValue: string,
+  recipientIdType: string,
+  recipientIdValue: string,
+  homeTransferId: string  
 }
 
 export type TransferRow = {
@@ -76,6 +81,12 @@ export const TransferDashboardPage = {
   findATransferModalDateField: Selector('.find-transfer-modal__date input'),
   findATransferModalFromDateField: Selector('.find-transfer-modal__from-date input'),
   findATransferModalToDateField: Selector('.find-transfer-modal__to-date input'),
+  findATransferModalDirectionOfFundsField: Selector('#find-transfer-modal__directionOfFunds'),
+  findATransferModalDirectionOfFundsOption: Selector('.input-select__options-item__label'),
+  findATransferModalAliasTypeField: Selector('#find-transfer-modal__aliasType'),
+  findATransferModalAliasTypeOption: Selector('.input-select__options-item__label'),
+  findATransferModalPayeeAliasField: Selector('input#find-transfer-modal__payeeAlias'),
+  findATransferModalAliasSubValueField: Selector('.find-transfer-modal__aliasSubValue input'),
   findATransferModalInstitutionField: Selector('.find-transfer-modal__institution input'),
   findATransferModalTransferStatusField: Selector('.find-transfer-modal__transfer-status input'),
   findATransferModalSubmit: Selector('.el-modal__submit'),
@@ -262,6 +273,8 @@ export const TransferDashboardPage = {
   failedCount : Selector('span.el-pill__label').nth(2),
   totalErrorsCount : Selector('span').withText('Total Errors').nextSibling(0),
   totalTransferStatuses : Selector('span').withText('Total Transfer Statuses'),
+  transferDetailsModalTechnicalDetailsRecipientDetailsField: Selector('#transfer-details-basic-modal__recipient-details'),
+  transferDetailsModalTechnicalDetailsDirection: Selector('#transfer-details-basic-modal__direction'),
 
   async getTransferRowById(innerText: string): Promise<Selector> {
     return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText);
