@@ -43,8 +43,7 @@ test
     ID: 'MP-T288',
     STORY: 'MP-2512'
   })
-  ('test1', async t => {
-  // ('Click Transfers, Find a Transfer, Advanced Filtering, Basic Transfer submit back to filter then close', async t => {
+  ('Click Transfers, Find a Transfer, Advanced Filtering, Basic Transfer submit back to filter then close', async t => {
 
     await t
       .click(TransferDashboardPage.findATransferButton)
@@ -164,7 +163,7 @@ test
     await t
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false })
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
       .expect(TransferDashboardPage.transferStateLabel.exists).ok()
