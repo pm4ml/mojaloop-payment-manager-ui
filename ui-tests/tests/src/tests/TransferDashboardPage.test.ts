@@ -106,7 +106,6 @@ test
     }
     var payloadHeaders = { 'Content-Type': 'application/json' };
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    console.log('transferResponse: ', transferResponse);
     let transfer_id = transferResponse.transferId;
 
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
@@ -126,7 +125,7 @@ test
     ID: 'MP-T292',
     STORY: 'MP-2512'
   })
-  ('Click_Transfers_with_Valid_transfer_validate_all_labels_and_textboxes_in_Basic_information', async t => {
+  ('Click Transfers with Valid transfer, validate all labels and textboxes in Basic information', async t => {
     var transferRequest = {
       from: {
         displayName: 'PayerFirst PayerLast',
@@ -154,8 +153,7 @@ test
     }
     var payloadHeaders = { 'Content-Type': 'application/json' };
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    console.log('transferResponse: ', transferResponse);
-
+    
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
 
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
@@ -227,12 +225,10 @@ test
       homeTransactionId: homeTransactionId
     }
     var payloadHeaders = { 'Content-Type': 'application/json' };
-    console.log('homeTransactionId: ' + homeTransactionId);
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
     transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-    console.log('transferResponse: ' + transferResponse);
-
+    
     await t
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
@@ -252,7 +248,7 @@ test
       .expect(TransferDashboardPage.techQuoteID.value).contains(transferResponse.quoteId)
       .expect(TransferDashboardPage.techTransactionID.value).contains(transferResponse.transferId)
       .expect(TransferDashboardPage.techTransferState.value).eql('succeeded')
-      .click(TransferDashboardPage.closeTechnicalDetailsButton)
+      .click(TransferDashboardPage.closeTransferDetailsButton)
       .click(TransferDashboardPage.ftPopupCloseButton)
   });
 
@@ -317,15 +313,17 @@ test
       .expect(TransferDashboardPage.partyIdType.value).contains(transferResponse.from.idType)
       .expect(TransferDashboardPage.partyIdValue.value).contains(transferResponse.from.idValue)
       .expect(TransferDashboardPage.partyDisplayName.value).contains(transferResponse.from.displayName)
-      .click(TransferDashboardPage.partyExtensionListButton)
-      .expect(TransferDashboardPage.partyExtLstTitle.exists).ok()
-      .expect(TransferDashboardPage.keyLabelInExtLst.exists).ok()
-      .expect(TransferDashboardPage.valueLabelInExtLst.exists).ok()
-      .expect(TransferDashboardPage.keyTextInExtLst.innerText).contains(transferResponse.from.extensionList[0].key)
-      .expect(TransferDashboardPage.valueTextInExtLst.innerText).contains(transferResponse.from.extensionList[0].value)
-      .click(TransferDashboardPage.closePartyExtensionPopupButton)
+      // .click(TransferDashboardPage.partyExtensionListButton)
+      // .expect(TransferDashboardPage.partyExtLstTitle.exists).ok()
+      // .expect(TransferDashboardPage.keyLabelInExtLst.exists).ok()
+      // .expect(TransferDashboardPage.valueLabelInExtLst.exists).ok()
+      // .expect(TransferDashboardPage.keyTextInExtLst.innerText).contains(transferResponse.from.extensionList[0].key)
+      // .expect(TransferDashboardPage.valueTextInExtLst.innerText).contains(transferResponse.from.extensionList[0].value)
+      // .click(TransferDashboardPage.closePartyExtensionPopupButton)
       .click(TransferDashboardPage.closePartyWithExtensionList)
+      
       //Checking Payee Details
+      // This is failing. Need to double check the logic for finding payee details
       .click(TransferDashboardPage.payeeInfoButton)
       .expect(TransferDashboardPage.partyIDTypeLabel.exists).ok()
       .expect(TransferDashboardPage.partyValueLabel.exists).ok()
@@ -345,7 +343,8 @@ test
       .expect(TransferDashboardPage.partyDOB.value).contains(transferResponse.to.dateOfBirth)
       .expect(TransferDashboardPage.partyFSPId.value).contains(transferResponse.to.fspId)
       .click(TransferDashboardPage.closePartyWithExtensionList)
-      .click(TransferDashboardPage.closeTechnicalDetailsButton)
+      
+      .click(TransferDashboardPage.closeTransferDetailsButton)
       .click(TransferDashboardPage.ftPopupCloseButton)
   });
 
@@ -439,7 +438,7 @@ test
       .expect(TransferDashboardPage.condition.exists).ok()
       .expect(TransferDashboardPage.conditionValue.innerText).contains(transferResponse.quoteResponse.body.condition)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
-      .click(TransferDashboardPage.closeTechnicalDetailsButton)
+      .click(TransferDashboardPage.closeTransferDetailsButton)
       .click(TransferDashboardPage.ftPopupCloseButton)
   });
 
@@ -448,6 +447,7 @@ test
     ID: 'MP-T310',
     STORY: 'MP-2667'
   })
+  // ('test1', async t => {
   ('Click Transfers, with Valid transfer, validate view msg details with Transfer Prepare and Transfer fulfil', async t => {
 
     var homeTransactionId = uuidv4();
@@ -504,7 +504,7 @@ test
       .expect(TransferDashboardPage.tffulfilment.exists).ok()
       .expect(TransferDashboardPage.tffulfilmentValue.innerText).contains(transferResponse.fulfil.body.fulfilment)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
-      .click(TransferDashboardPage.closeTechnicalDetailsButton)
+      .click(TransferDashboardPage.closeTransferDetailsButton)
       .click(TransferDashboardPage.ftPopupCloseButton)
   });
 
@@ -512,7 +512,8 @@ test.meta({
   ID: '',
   STORY: '',
   description: '',
-})('Can download excel spreadsheet of transfers in basic search', async (t) => {
+})
+  ('Can download excel spreadsheet of transfers in basic search', async (t) => {
   const expectedFilePath = `${process.env.HOME}` + '/Downloads/' + `Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
 
   await t.click(TransferDashboardPage.findATransferButton);
@@ -523,7 +524,6 @@ test.meta({
   const wb = xlsx.readFile(expectedFilePath);
 
   const transfers = xlsx.utils.sheet_to_json(wb.Sheets['Transfers']) as Transfer[];
-  console.log(transfers);
   await t.expect(transfers.length).gt(0)
 
   // Check transfer in spreadsheet exists in table
@@ -560,7 +560,6 @@ test.meta({
   const wb = xlsx.readFile(expectedFilePath);
 
   const transfers = xlsx.utils.sheet_to_json(wb.Sheets['Transfers']) as Transfer[];
-  console.log(transfers);
   await t.expect(transfers.length).gt(0);
 
   // Check transfer in spreadsheet exists in table
@@ -593,7 +592,6 @@ test.meta({
   const wb = xlsx.readFile(expectedFilePath);
 
   const errors = xlsx.utils.sheet_to_json(wb.Sheets['Errors']) as Error[];
-  console.log(errors);
   await t.expect(errors.length).gt(0)
 
   // Check error in spreadsheet exists in table
@@ -629,7 +627,8 @@ test.meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
-})('Recipient Name should NOT have undefined when first name is not provided', async (t) => {
+})
+('Recipient Name should NOT have undefined when first name is not provided', async (t) => {
   await t.click(TransferDashboardPage.findATransferButton);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 

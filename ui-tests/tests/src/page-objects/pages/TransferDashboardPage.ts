@@ -136,7 +136,8 @@ export const TransferDashboardPage = {
   transferInstitution : Selector('div.input-textfield__value__tokens').nth(10).child(0),
   transferDirection : Selector('div.input-textfield__value__tokens').nth(11).child(0),
 
-  closeTransferDetailsButton : Selector('span.input-button__label').nth(4),
+  // closeTransferDetailsButton : Selector('span.input-button__label').nth(4),
+  closeTransferDetailsButton : Selector('#transferDetails span.input-button__label').withText('Close'),
 
   //Technical Details Page Objects - Labels
   techSchemeTransferIDLabel : Selector('div').withText('Scheme Transfer ID'),
@@ -168,7 +169,8 @@ export const TransferDashboardPage = {
 
   //This page object closes the Transfer Details when technical details is open
   closeTechnicalDetailsButton : Selector('span.input-button__label').nth(11),
-  closeTechDetailsButtonPopupButton : Selector('span.input-button__label').nth(12),
+  // closeTechDetailsButtonPopupButton : Selector('span.input-button__label').nth(12),
+  closeTechDetailsButtonPopupButton : Selector('#transferRequestDetailsModal span.input-button__label').withText('Close'),
 
   //Extension List Objects
   partyExtensionListButton : Selector('span.input-button__label').withText('View Extension List'),
@@ -183,9 +185,9 @@ export const TransferDashboardPage = {
 
 
   //This Page object can be used for any Close Button which pops from Party Information or View Message Details
-  closePartyWithExtensionList : Selector('span.input-button__label').nth(13),
+  // closePartyWithExtensionList : Selector('span.input-button__label').nth(13),
+  closePartyWithExtensionList : Selector('#partydetailsmodal span.input-button__label').withText('Close'),
   
-
   //Party objects - the Labels are common between Payee and Payer information
   partyIDTypeLabel : Selector('div').withText('Id Type'),
   partyValueLabel : Selector('div').withText('Id Value'),
@@ -224,9 +226,9 @@ export const TransferDashboardPage = {
   tftransferStateValue : Selector('span').withText('"transferState"').nextSibling(0),
   tffulfilment : Selector('span').withText('"fulfilment"'),
   tffulfilmentValue : Selector('span').withText('"fulfilment"').nextSibling(0),
-
+  
   //Quote Request Objects
-  qrquoteId : Selector('span').withText('"quoteId"'),
+  qrquoteId : Selector('#transferRequestDetailsModal span').withText('"quoteId"'),
   qrquoteIdValue : Selector('span').withText('"quoteId"').nextSibling(0),
   qrpayerpartyIdType : Selector('span').withText('"partyIdType"'),
   qrpayerpartyIdTypeValue : Selector('span').withText('"partyIdType"').nextSibling(0),
