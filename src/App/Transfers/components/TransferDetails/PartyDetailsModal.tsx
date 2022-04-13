@@ -105,7 +105,12 @@ export const TransferPartyDetailsModal: FC<TransferPartyDetailModalProps> = ({
   }
 
   return (
-    <Modal id="partydetailsmodal" title={title} width="1200px" onClose={onCloseClick} isSubmitEnabled={false}>
+    <Modal 
+      id="partydetailsmodal" 
+      title={title} 
+      width="1200px" 
+      onClose={onCloseClick} 
+      isSubmitEnabled={false}>
       {content}
     </Modal>
   );
