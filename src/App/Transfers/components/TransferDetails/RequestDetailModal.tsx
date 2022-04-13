@@ -14,10 +14,10 @@ export const TransferRequestDetailsModal: FC<TransferRequestDetailModalProps> = 
   onCloseClick,
 }) => {
   return (
-    <Modal 
-      id="transferRequestDetailsModal" 
-      title={title} width="1000px" 
-      onClose={onCloseClick} 
+    <Modal
+      id="transferRequestDetailsModal"
+      title={title} width="1000px"
+      onClose={onCloseClick}
       isSubmitEnabled={false}>
       <div style={{ height: '400px', padding: '20px', display: 'flex' }}>
         <ContentReader data={JSON.stringify(model)} />
