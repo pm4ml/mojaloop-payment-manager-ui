@@ -46,4 +46,4 @@ jobs:
     - name: Run tests
       working-directory: ui-tests/tests
       run: |-
-        PM4ML_ENDPOINT="http://localhost:8081" npm run test:headless
+        PM4ML_ENDPOINT="http://localhost:8081" SIM_CORE_CONNECTOR_ENDPOINT="http://localhost:3003" npm run test:headless
