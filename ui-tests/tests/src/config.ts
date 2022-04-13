@@ -22,6 +22,7 @@ function ensureEnv(e: string): string {
 // TODO: ajv
 export const config = {
   pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
+  simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
   credentials: {
     test: {
       username: 'test',

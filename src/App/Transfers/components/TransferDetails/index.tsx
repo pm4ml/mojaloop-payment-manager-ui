@@ -64,6 +64,7 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
 
   return (
     <Modal
+      id="transferDetails"
       title="Transfer Details"
       width="1000px"
       onClose={onModalCloseClick}

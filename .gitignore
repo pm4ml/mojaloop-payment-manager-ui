@@ -24,3 +24,5 @@ yarn-error.log*
 
 .idea
 .vault/
+on-premise-deploy/docker-compose/vault/tmp/role-id
+on-premise-deploy/docker-compose/vault/tmp/secret-id
