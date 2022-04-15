@@ -1422,10 +1422,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@modusbox/modusbox-ui-components@1.19.4":
-  version "1.19.4"
-  resolved "https://registry.yarnpkg.com/@modusbox/modusbox-ui-components/-/modusbox-ui-components-1.19.4.tgz#aabda9e60a0cb9cc718587c4fa6de5c6ff78bda3"
-  integrity sha512-jbwod27LZZ+eqRHe/AQj+ilEkV+fsHmmIxuaTySkbkozvfAdVOghBGvU4V1/l4vO+BHP2UfGQi9Ybzm4tjDd3g==
+"@modusbox/modusbox-ui-components@^1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@modusbox/modusbox-ui-components/-/modusbox-ui-components-1.23.0.tgz#661dd1aefe0b918cb12b6d83e7284f39fa7f0180"
+  integrity sha512-zJKZH/Vl1JMfHJYRuhpUBiT6CNXU+RivraZovyEFHi+y1lwh6sQlo+lsvw/m9NgZAWIt97riSXymRxJqi7CxkA==
   dependencies:
     "@babel/cli" "^7.0.0"
     "@babel/core" "^7.8.7"
