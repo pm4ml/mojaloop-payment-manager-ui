@@ -47,9 +47,9 @@
           "url": "http://sim-backend:3003",
           "body": {
             "displayName": "Sample Name",
-            "firstName": "First Name",
-            "middleName": "Middle Name",
-            "lastName": "Last Name",
+            "firstName": "First",
+            "middleName": "Middle",
+            "lastName": "Last",
             "dateOfBirth": "1970-01-01",
             "idType": "{$inputs.toIdType}",
             "idValue": "{$inputs.toIdValue}"
