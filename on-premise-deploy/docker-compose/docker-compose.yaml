@@ -195,7 +195,7 @@ services:
       - "8085:8081"
 
   sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v12.2.1"
+    image: "mojaloop/sdk-scheme-adapter:v13.0.4"
     environment:
       - AUTO_ACCEPT_PARTY=false
       - AUTO_ACCEPT_QUOTES=false

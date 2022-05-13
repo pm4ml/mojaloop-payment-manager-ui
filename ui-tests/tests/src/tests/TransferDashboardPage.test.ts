@@ -153,7 +153,7 @@ test
     }
     var payloadHeaders = { 'Content-Type': 'application/json' };
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    
+
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
 
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
@@ -228,7 +228,7 @@ test
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
     transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-    
+
     await t
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
@@ -321,7 +321,7 @@ test
       // .expect(TransferDashboardPage.valueTextInExtLst.innerText).contains(transferResponse.from.extensionList[0].value)
       // .click(TransferDashboardPage.closePartyExtensionPopupButton)
       .click(TransferDashboardPage.closePartyWithExtensionList)
-      
+
       //Checking Payee Details
       // This is failing. Need to double check the logic for finding payee details
       .click(TransferDashboardPage.payeeInfoButton)
@@ -343,7 +343,7 @@ test
       .expect(TransferDashboardPage.partyDOB.value).contains(transferResponse.to.dateOfBirth)
       .expect(TransferDashboardPage.partyFSPId.value).contains(transferResponse.to.fspId)
       .click(TransferDashboardPage.closePartyWithExtensionList)
-      
+
       .click(TransferDashboardPage.closeTransferDetailsButton)
       .click(TransferDashboardPage.ftPopupCloseButton)
   });
@@ -637,7 +637,7 @@ test.meta({
 
   // Open Details Modal
   await t.click(transferRow);
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeMiddle PayeeLast')
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeemiddle Payeelast')
 });
 
 test.meta({
@@ -653,7 +653,7 @@ test.meta({
 
   // Open Details Modal
   await t.click(transferRow);
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeFirst PayeeLast')
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeelast')
 });
 
 
@@ -670,7 +670,7 @@ test.meta({
 
   // Open Details Modal
   await t.click(transferRow);
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeFirst PayeeMiddle')
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeemiddle')
 });
 
 test.meta({
@@ -686,7 +686,7 @@ test.meta({
 
   // Open Details Modal
   await t.click(transferRow);
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('PayeeLast')
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
 
 test.meta({
