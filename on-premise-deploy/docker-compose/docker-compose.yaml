@@ -97,7 +97,7 @@ services:
       - TLS_SERVER_PRIVATE_KEY=/tlsServerPvtKey.key
       - TLS_SERVER_PRIVATE_KEY=a
       - WS_PORT=4003
-      - WS_URL=mojaloop-connector
+      - WS_URL=sdk-scheme-adapter
       - dfspCsrPrivateKeyAlgorithm=rsa
       - dfspCsrPrivateKeyLength=4096
       - p12PassPhrase=SOME_S3C4R3_P@SS
@@ -121,7 +121,7 @@ services:
         condition: service_started
       keycloak:
         condition: service_started
-      mojaloop-connector:
+      sdk-scheme-adapter:
         condition: service_started
       vault-dev:
         condition: service_healthy
@@ -136,24 +136,24 @@ services:
     image: pm4ml/wallet-core-connector:1.0.11
     environment:
       - BACKEND_ENDPOINT=http://sim-backend:3000
-      - MLCONN_OUTBOUND_ENDPOINT=http://mojaloop-connector:4001
+      - MLCONN_OUTBOUND_ENDPOINT=http://sdk-scheme-adapter:4001
     ports:
        - "3003:3003"
     depends_on:
-      - mojaloop-connector
+      - sdk-scheme-adapter
       - sim-backend
 
 #   core-connector:
 #     image: pm4ml/dgto-pm4ml-core-connector:0.0.20
 #     environment:
 #       - BACKEND_ENDPOINT=http://sim-backend:3002
-#       - MLCONN_OUTBOUND_ENDPOINT=http://mojaloop-connector:4001
+#       - MLCONN_OUTBOUND_ENDPOINT=http://sdk-scheme-adapter:4001
 #     ports:
 #        - "3003:3003"
 #     extra_hosts:
 #       - "dgtof-saccos.co.tz:192.168.10.110"
 #     depends_on:
-#       - mojaloop-connector
+#       - sdk-scheme-adapter
 #       - sim-backend
 
   sim-backend:
@@ -194,9 +194,8 @@ services:
     ports:
       - "8085:8081"
 
-  mojaloop-connector:
-    image: pm4ml/mojaloop-connector:14.1.6
-    # image: mojaloop-connector:local
+  sdk-scheme-adapter:
+    image: "mojaloop/sdk-scheme-adapter:v13.0.4"
     environment:
       - AUTO_ACCEPT_PARTY=false
       - AUTO_ACCEPT_QUOTES=false
