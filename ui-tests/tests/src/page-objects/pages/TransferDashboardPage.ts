@@ -1,5 +1,6 @@
 import { Selector } from "testcafe";
 
+
 export type Error = {
   id: string,
   direction: string,
@@ -27,6 +28,7 @@ export type Transfer = {
   institution: string,
   date: string,
   senderIdType: string,
+  senderIdSubValue: string,
   senderIdValue: string,
   recipientIdType: string,
   recipientIdValue: string,
@@ -72,8 +74,8 @@ export const TransferDashboardPage = {
     .withText(`Find a Transfer`)
     .parent().parent('.el-modal__container'),
 
-  findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-item').withText('Basic Find a Transfer'),
-  findATransferModalAdvancedFiltering: Selector('.el-tabs__tab-item').withText('Advanced Filtering'),
+  findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-items').child(0),//.withText('Basic Find a Transfer'),XPathSelector('//input[@type="checkbox"]').nth(1);
+  findATransferModalAdvancedFiltering: Selector('.el-tabs__tab-items').child('div').withText('Advanced Filtering'),
   backtoFilteringSubmitButton: Selector('span.input-button__label').withText('Back to filtering'),
   ftPopupCloseButton: Selector('span.input-button__label').nth(3),
   findATransferModalTransferDownloadTransfersButton: Selector('.mb-input').withText('Download Transfers'),
@@ -89,8 +91,8 @@ export const TransferDashboardPage = {
   findATransferModalAliasSubValueField: Selector('.find-transfer-modal__aliasSubValue input'),
   findATransferModalInstitutionField: Selector('.find-transfer-modal__institution input'),
   findATransferModalTransferStatusField: Selector('.find-transfer-modal__transfer-status input'),
-  findATransferModalSubmit: Selector('.el-modal__submit'),
-  findATransferModalCloseButton: Selector('.input-button__content').withText('Close'),
+  findATransferModalSubmit: Selector('button').withAttribute('label', 'Find Transfers'), //Selector('div.el-modal__footer-right').child(1),Selector('.el-modal__submit'),
+  findATransferModalCloseButton: Selector('.input-button__content').child('span').withText('Close'),
 
   //Find a Transfer results Page objects
   noresults: Selector('span').withText('No items'),
@@ -282,6 +284,13 @@ export const TransferDashboardPage = {
     return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText);
   },
 
+  async getFirstTransferRow(): Promise<Selector> {
+    return Selector('.transfers__transfers__list .el-datalist__row').nth(0);
+  },
+
+  async getTransferByAmount(innerText: string): Promise<Selector> {
+    return Selector('.transfers__transfers__list .el-datalist__item-cell').child("div").withText(innerText);
+  },
   async getFindATransferRows(): Promise<TransferRow[]> {
     const rows = Selector('.transfers__transfers__list .el-datalist__row');
     const length = await rows.count;

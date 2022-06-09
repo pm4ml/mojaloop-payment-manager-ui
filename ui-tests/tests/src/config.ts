@@ -11,7 +11,7 @@
 import * as dotenv from 'dotenv';
 import * as assert from 'assert';
 
-dotenv.config();
+//dotenv.config();
 
 function ensureEnv(e: string): string {
   const result = process.env[e];
@@ -19,10 +19,18 @@ function ensureEnv(e: string): string {
   return result as string;
 }
 
+let config1;
 // TODO: ajv
-export const config = {
-  pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
-  simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
+if (process.env.ENV === "local"){
+ config1 = {
+  //pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
+  //simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
+  pm4mlEndpoint: "http://localhost:8081",
+  simCoreConnectorEndpoint: "http://localhost:3003",
+  senderpartyID:"22507008181" ,
+  receiverpartyID:"22556999125", 
+  simcurrency: "USD",
+
   credentials: {
     test: {
       username: 'test',
@@ -41,5 +49,39 @@ export const config = {
       password: 'test',
     },
   },
-  voodooTimeoutMs: 30000,
+  voodooTimeoutMs: 30000
 };
+
+}else if(process.env.ENV === "other"){
+ config1 = {
+    /*pm4mlEndpoint: "https://portal.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io",
+    simCoreConnectorEndpoint: "http://test.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io/cc-send",*/
+    pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
+    simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
+    senderpartyID:"25644444444" ,
+    receiverpartyID:"25633333333", 
+    simcurrency: "USD",
+    credentials: {
+      test: {
+        username: 'test',
+        password: 'test',
+      },
+      nofirstlastname: {
+        username: 'nofirstlastname',
+        password: 'test',
+      },
+      nofirstname: {
+        username: 'nofirstname',
+        password: 'test',
+      },
+      nolastname: {
+        username: 'nolastname',
+        password: 'test',
+      },
+    },
+    voodooTimeoutMs: 30000
+  };
+ 
+}
+const config = Object.assign({}, config1);
+export { config };
