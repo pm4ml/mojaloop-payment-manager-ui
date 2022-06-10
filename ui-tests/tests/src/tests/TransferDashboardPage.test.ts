@@ -121,7 +121,7 @@ test
       .maximizeWindow()
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(15000)
+      .wait(20000)
       .typeText(TransferDashboardPage.transferIDTextBox, transfer_id, { replace: true })
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.findATransferModalCloseButton)
@@ -709,7 +709,7 @@ test.meta({
  
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(18000);
+  await t.wait(22000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
   
 

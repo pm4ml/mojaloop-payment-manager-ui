@@ -54,8 +54,8 @@ if (process.env.ENV === "local"){
 
 }else if(process.env.ENV === "other"){
  config1 = {
-    /*pm4mlEndpoint: "https://portal.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io",
-    simCoreConnectorEndpoint: "http://test.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io/cc-send",*/
+   // pm4mlEndpoint: "https://portal.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io",
+   // simCoreConnectorEndpoint: "http://test.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io/cc-send",
     pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
     simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
     senderpartyID:"25644444444" ,
