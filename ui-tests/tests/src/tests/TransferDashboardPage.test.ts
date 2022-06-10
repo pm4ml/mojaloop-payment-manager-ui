@@ -849,7 +849,7 @@ test.meta({
 });
 
 
-test.only.meta({
+test.meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
@@ -908,7 +908,7 @@ test.only.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeemiddle')
 });
 
-test.meta({
+test.only.meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
@@ -951,14 +951,17 @@ test.meta({
 
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(30000);
-  await t.click(TransferDashboardPage.findATransferModalSubmit);
+  await t.wait(18000);
+  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
   const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
 
   // Open Details Modal
-  await t.click(transferRow);
+  await t.click(transferRow);*/
+  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .click(TransferDashboardPage.findATransferModalSubmit)
+      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
 
