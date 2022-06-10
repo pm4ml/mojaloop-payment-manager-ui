@@ -717,7 +717,7 @@ test.only.meta({
   console.log(`${transferResponse.transferId}`);
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
   //console.log(transferRow);
   // Open Details Modal
   await t.click(transferRow);
