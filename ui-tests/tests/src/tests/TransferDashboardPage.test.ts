@@ -169,7 +169,7 @@ test
       .maximizeWindow()
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(15000)
+      .wait(18000)
       .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -243,7 +243,7 @@ test
       .maximizeWindow()
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(15000)
+      .wait(20000)
       .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -308,7 +308,7 @@ test
       .maximizeWindow()
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(10000)
+      .wait(18000)
       .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -672,7 +672,8 @@ test.meta({
   STORY: '',
   description: '',
 })('Will display homeTransactionId in Technical Details if given by Payee DFSP', async (t) => {
- 
+  var precision = 100; // 2 decimals
+  var randomnum = Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
   var homeTransactionId = "5105";
   var transferRequest = {
     from: {
@@ -694,7 +695,7 @@ test.meta({
     },
     amountType: 'SEND',
     currency: `${config.simcurrency}`,
-    amount: 10.57,
+    amount: randomnum,
     transactionType: 'TRANSFER',
     note: 'test payment - Success transfer initiated by Automation',
     homeTransactionId: homeTransactionId
@@ -709,12 +710,12 @@ test.meta({
  
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(22000);
+  await t.wait(25000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
   
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount('10.57');//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
   //console.log(transferRow);
   // Open Details Modal
   await t.click(transferRow);
@@ -769,7 +770,7 @@ test.meta({
   
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(20000);
+  await t.wait(25000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
@@ -823,7 +824,7 @@ test.meta({
 
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(20000);
+  await t.wait(25000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
@@ -880,7 +881,7 @@ test.meta({
   
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(20000);
+  await t.wait(25000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
@@ -934,7 +935,7 @@ test.meta({
 
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(20000);
+  await t.wait(25000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
