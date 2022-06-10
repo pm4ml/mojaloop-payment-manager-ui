@@ -711,16 +711,20 @@ test.only.meta({
   await t.maximizeWindow()
   await t.wait(5000);
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(30000);
-  await t.click(TransferDashboardPage.findATransferModalSubmit);
+  await t.wait(18000);
+  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
   await t.wait(3000);
   console.log(`${transferResponse.transferId}`);
+  console.log(randomnum.toString());*/
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  //const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
   //console.log(transferRow);
   // Open Details Modal
-  await t.click(transferRow);
+ // await t.click(transferRow);
+  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .click(TransferDashboardPage.findATransferModalSubmit)
+      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
   await t.click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab);
   await t.expect(await TransferDashboardPage.homeTransferIdField().value).eql('5105')
 });
