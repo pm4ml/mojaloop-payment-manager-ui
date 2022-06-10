@@ -34,7 +34,7 @@
     "compile": "./node_modules/ts4/bin/tsc --noemit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "testcafe ${BROWSER_TCAFE:-chrome}",
+    "test": "testcafe ${BROWSER_TCAFE:-chrome} --fixture 'Transfer Dashboard Feature'",
     "test:headless": "testcafe ${BROWSER_TCAFE:-chrome:headless}"
   },
   "author": "sridevi.miriyala@modusbox.com",

@@ -667,7 +667,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.meta({
+test.only.meta({
   ID: '',
   STORY: '',
   description: '',
@@ -710,12 +710,13 @@ test.meta({
  
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(25000);
+  await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
   
+  console.log(`${transferResponse.transferId}`);
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
+  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
   //console.log(transferRow);
   // Open Details Modal
   await t.click(transferRow);
@@ -770,11 +771,11 @@ test.meta({
   
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(25000);
+  await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById('aeac1d9f-2b60-4013-a6e0-a5cfa316a4f6');
+  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//getTransferByAmount(randomnum.toString());//getTransferRowById('aeac1d9f-2b60-4013-a6e0-a5cfa316a4f6');
 
   // Open Details Modal
   await t.click(transferRow);
@@ -824,11 +825,11 @@ test.meta({
 
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(25000);
+  await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd4b');
+  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//getTransferByAmount(randomnum.toString());//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd4b');
 
   // Open Details Modal
   await t.click(transferRow);
@@ -881,11 +882,11 @@ test.meta({
   
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(25000);
+  await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd5f');
+  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd5f');
 
   // Open Details Modal
   await t.click(transferRow);
@@ -935,11 +936,11 @@ test.meta({
 
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(25000);
+  await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
+  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
 
   // Open Details Modal
   await t.click(transferRow);
