@@ -281,7 +281,7 @@ export const TransferDashboardPage = {
   transferDetailsModalTechnicalDetailsDirection: Selector('#transfer-details-basic-modal__direction'),
 
   async getTransferRowById(innerText: string): Promise<Selector> {
-    return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText);
+    return Selector('.transfers__transfers__list .el-datalist__row').withText(innerText.substring(0, 22));
   },
 
   async getFirstTransferRow(): Promise<Selector> {
