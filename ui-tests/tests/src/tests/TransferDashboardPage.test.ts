@@ -667,7 +667,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.meta({
+test.only.meta({
   ID: '',
   STORY: '',
   description: '',
@@ -709,6 +709,7 @@ test.meta({
  
  
   await t.maximizeWindow()
+  await t.wait(5000);
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
