@@ -639,7 +639,7 @@ test.meta({
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
     transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-    console.log(transferResponse);
+   // console.log(transferResponse);
 
 
   // Adding `.wait` just as a precaution since this downloads a file.
@@ -701,7 +701,7 @@ test.meta({
   }
   var payloadHeaders = { 'Content-Type': 'application/json' };
   var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-  console.log(transferResponse);
+  //console.log(transferResponse);
   await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
   transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
 
@@ -715,7 +715,7 @@ test.meta({
 
   // Check transfer in spreadsheet exists in table
   const transferRow = await TransferDashboardPage.getTransferByAmount('10.57');//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
-  console.log(transferRow);
+  //console.log(transferRow);
   // Open Details Modal
   await t.click(transferRow);
   await t.click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab);
