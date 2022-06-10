@@ -667,7 +667,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.only.meta({
+test.meta({
   ID: '',
   STORY: '',
   description: '',
@@ -712,7 +712,7 @@ test.only.meta({
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(30000);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
-  
+  await t.wait(3000);
   console.log(`${transferResponse.transferId}`);
 
   // Check transfer in spreadsheet exists in table
