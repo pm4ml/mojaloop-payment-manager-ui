@@ -667,7 +667,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.only.meta({
+test.meta({
   ID: '',
   STORY: '',
   description: '',
@@ -729,7 +729,7 @@ test.only.meta({
   await t.expect(await TransferDashboardPage.homeTransferIdField().value).eql('5105')
 });
 
-test.meta({
+test.only.meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
@@ -776,14 +776,18 @@ test.meta({
   
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(30000);
-  await t.click(TransferDashboardPage.findATransferModalSubmit);
+  await t.wait(18000);
+  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   // Check transfer in spreadsheet exists in table
   const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//getTransferByAmount(randomnum.toString());//getTransferRowById('aeac1d9f-2b60-4013-a6e0-a5cfa316a4f6');
 
   // Open Details Modal
-  await t.click(transferRow);
+  await t.click(transferRow);*/
+  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .click(TransferDashboardPage.findATransferModalSubmit)
+      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
+  
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeemiddle Payeelast')
 });
 
