@@ -167,6 +167,7 @@ test
 
     await t
       .maximizeWindow()
+      .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(18000)
@@ -241,6 +242,7 @@ test
 
     await t
       .maximizeWindow()
+      .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(20000)
@@ -306,6 +308,7 @@ test
 
     await t
       .maximizeWindow()
+      .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(18000)
@@ -402,6 +405,7 @@ test
 
     await t
       .maximizeWindow()
+      .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(10000)
@@ -500,6 +504,7 @@ test
 
     await t
       .maximizeWindow()
+      .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(10000)
@@ -965,7 +970,7 @@ test.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
 
-test.only.meta({
+test.meta({
   ID: '',
   STORY: 'MMD-1463',
   description: 'Improved filtering of transactions in advanced filtering screen',
