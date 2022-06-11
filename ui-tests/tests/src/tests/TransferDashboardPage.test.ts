@@ -908,7 +908,7 @@ test.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeemiddle')
 });
 
-test.only.meta({
+test.meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
@@ -965,7 +965,7 @@ test.only.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
 
-test.meta({
+test.only.meta({
   ID: '',
   STORY: 'MMD-1463',
   description: 'Improved filtering of transactions in advanced filtering screen',
