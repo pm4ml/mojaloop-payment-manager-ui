@@ -167,7 +167,7 @@ test
 
     await t
       .maximizeWindow()
-      .wait(5000)
+      .wait(10000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(18000)
@@ -507,7 +507,7 @@ test
       .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(10000)
+      .wait(20000)
       .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -713,7 +713,7 @@ test.meta({
 
  
  
-  await t.maximizeWindow()
+  await t.maximizeWindow();
   await t.wait(5000);
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
