@@ -675,7 +675,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.only.timeouts({ pageLoadTimeout: 45000 }).meta({
+test.timeouts({ pageLoadTimeout: 45000 }).meta({
   ID: '',
   STORY: '',
   description: '',
@@ -972,7 +972,7 @@ test.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
 
-test.meta({
+test.only.meta({
   ID: '',
   STORY: 'MMD-1463',
   description: 'Improved filtering of transactions in advanced filtering screen',
