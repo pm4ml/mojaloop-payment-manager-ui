@@ -23,7 +23,7 @@ fixture`Transfer Dashboard Feature`
     }
   }
     catch(e){
-      console.error(e);
+     // console.error(e);
       var current_url = await t.eval(() => window.location.href);
       await t.navigateTo(current_url);
       await t.wait(6000);

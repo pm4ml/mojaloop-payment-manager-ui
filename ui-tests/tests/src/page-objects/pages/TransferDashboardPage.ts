@@ -62,7 +62,8 @@ export const TransferDashboardPage = {
   DateFilterLabel: Selector('div').withText('Date'),
 
   findATransferButton: Selector('.mb-input').withText('Find a Transfer'),
-  downloadErrorsButton: Selector('.transfers__errors__download__button'),
+  downloadErrorsButton: Selector('div.transfers__errors__section').nth(1).child('button').withAttribute('label','Download Errors'),// Selector('.transfers__errors__download__button'),
+  
   // viewAllErrorsButton: Selector('.transfers__errors__button'),
 
   //Find a Transfer Popup window Page Objects
