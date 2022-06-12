@@ -127,7 +127,7 @@ test
       .click(TransferDashboardPage.findATransferModalCloseButton)
   });
 
-test.timeouts({ pageLoadTimeout: 45000 })
+test.only.timeouts({ pageLoadTimeout: 45000 })
   .meta({
     ID: 'MP-T292',
     STORY: 'MP-2512'
@@ -972,7 +972,7 @@ test.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
 
-test.only.meta({
+test.meta({
   ID: '',
   STORY: 'MMD-1463',
   description: 'Improved filtering of transactions in advanced filtering screen',
