@@ -9,15 +9,29 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
+
 fixture`Transfer Dashboard Feature`
   .page`${config.pm4mlEndpoint}/transfer`
   .beforeEach(async (t) => {
     // Login if not logged in
+    try{
+              
     if (Selector('.login-pf-header')) {
       await t.typeText(LoginPage.usernameField, config.credentials.test.username)
       await t.typeText(LoginPage.passwordField, config.credentials.test.password)
       await t.click(LoginPage.loginButton)
     }
+  }
+    catch(e){
+      console.error(e);
+      var current_url = await t.eval(() => window.location.href);
+      await t.navigateTo(current_url);
+      await t.wait(6000);
+      await t.typeText(LoginPage.usernameField, config.credentials.test.username)
+      await t.typeText(LoginPage.passwordField, config.credentials.test.password)
+      await t.click(LoginPage.loginButton)
+    }
+
   });
 
 test
@@ -716,8 +730,10 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
 
   await t.setTestSpeed(0.5);
   await t.maximizeWindow();
-  await t.wait(10000);
-  await t.click(TransferDashboardPage.findATransferButton);
+  var current_url = await t.eval(() => window.location.href);
+  await t.navigateTo(current_url);
+  await t.wait(6000);
+  await t.click(TransferDashboardPage.findATransferButton).wait(10000);
   await t.wait(18000);
   /*await t.click(TransferDashboardPage.findATransferModalSubmit);
   await t.wait(3000);
