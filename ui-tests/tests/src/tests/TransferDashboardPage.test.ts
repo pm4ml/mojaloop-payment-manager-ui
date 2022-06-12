@@ -127,7 +127,7 @@ test
       .click(TransferDashboardPage.findATransferModalCloseButton)
   });
 
-test
+test.timeouts({ pageLoadTimeout: 45000 })
   .meta({
     ID: 'MP-T292',
     STORY: 'MP-2512'
@@ -164,8 +164,10 @@ test
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
 
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+    
 
     await t
+      .setTestSpeed(0.5)
       .maximizeWindow()
       .wait(10000)
       .click(TransferDashboardPage.findATransferButton)
@@ -673,7 +675,7 @@ test.meta({
 // NOTE: Test harness uses `mojaloop-simulator` so this transaction is hardcoded
 //       in the simulator's rules.
 // TODO: Update simulator to TTK so we can run more dynamic rules with templating.
-test.meta({
+test.only.timeouts({ pageLoadTimeout: 45000 }).meta({
   ID: '',
   STORY: '',
   description: '',
@@ -712,8 +714,7 @@ test.meta({
   await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
   transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
 
- 
- 
+  await t.setTestSpeed(0.5);
   await t.maximizeWindow();
   await t.wait(10000);
   await t.click(TransferDashboardPage.findATransferButton);
@@ -993,10 +994,12 @@ test.meta({
 
   // Open Details Modal
   for (let i = 0 ; i < transferRows.length; i++) {
+    if((transferRows[i].status.value).toString() === "Success" ){
     await t.click(transferRows[i].transferId);
     await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField().value).eql('MSISDN '+`${config.receiverpartyID}`);
     await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value).eql('OUTBOUND');
     await t.click(TransferDashboardPage.findATransferModalCloseButton);
+  }
   }
 
 });
