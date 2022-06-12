@@ -423,8 +423,8 @@ test
       .maximizeWindow()
       .wait(5000)
       .click(TransferDashboardPage.findATransferButton)
+      .wait(15000)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(10000)
       .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -666,11 +666,10 @@ test.meta({
 
   // Adding `.wait` just as a precaution since this downloads a file.
   await t.maximizeWindow();
-  await t.wait(20000);
   var current_url = await t.eval(() => window.location.href);
   await t.navigateTo(current_url);
-
-  await t.click(TransferDashboardPage.downloadErrorsButton).wait(2000);
+  await t.wait(10000);
+  await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
   await t.expect(fs.existsSync(expectedFilePath)).ok();
   const wb = xlsx.readFile(expectedFilePath);
 
