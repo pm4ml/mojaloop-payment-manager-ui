@@ -127,7 +127,7 @@ test
       .click(TransferDashboardPage.findATransferModalCloseButton)
   });
 
-test.only.timeouts({ pageLoadTimeout: 45000 })
+test.timeouts({ pageLoadTimeout: 45000 })
   .meta({
     ID: 'MP-T292',
     STORY: 'MP-2512'
