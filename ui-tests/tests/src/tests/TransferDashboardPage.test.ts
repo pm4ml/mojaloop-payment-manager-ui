@@ -679,10 +679,22 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   await scroll();
   await scroll();
   await scroll();
+  try{
   await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
   await t.expect(fs.existsSync(expectedFilePath)).ok();
-  const wb = xlsx.readFile(expectedFilePath);
+  
+  }
+  catch(e){
+    // console.error(e);
+     var current_url = await t.eval(() => window.location.href);
+     await t.navigateTo(current_url);
+     await t.wait(10000);
+     await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
+     await t.expect(fs.existsSync(expectedFilePath)).ok();
+     
+   }
 
+  const wb = xlsx.readFile(expectedFilePath); 
   const errors = xlsx.utils.sheet_to_json(wb.Sheets['Errors']) as Error[];
   await t.expect(errors.length).gt(0)
 
