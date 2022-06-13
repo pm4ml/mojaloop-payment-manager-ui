@@ -6,12 +6,13 @@ import fs from 'fs';
 import xlsx from 'xlsx';
 const apiHelper = require('../helpers/api-helper');
 const { v4: uuidv4 } = require('uuid');
-
+import { ClientFunction } from 'testcafe';
 
 
 
 fixture`Transfer Dashboard Feature`
   .page`${config.pm4mlEndpoint}/transfer`
+  
   .beforeEach(async (t) => {
     // Login if not logged in
     try{
@@ -33,6 +34,11 @@ fixture`Transfer Dashboard Feature`
     }
 
   });
+
+  const scroll = ClientFunction(function() {
+    window.scrollBy(0,1500);
+});
+  
 
 test
   .meta({
@@ -668,7 +674,10 @@ test.meta({
   await t.maximizeWindow();
   var current_url = await t.eval(() => window.location.href);
   await t.navigateTo(current_url);
-  await t.wait(10000);
+  await t.wait(15000);
+  await scroll();
+  await scroll();
+  await scroll();
   await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
   await t.expect(fs.existsSync(expectedFilePath)).ok();
   const wb = xlsx.readFile(expectedFilePath);
