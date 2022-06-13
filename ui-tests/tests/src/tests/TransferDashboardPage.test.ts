@@ -1009,7 +1009,7 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   await t.click(transferRow);*/
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
-      .wait(2000);
+      .wait(2000)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
