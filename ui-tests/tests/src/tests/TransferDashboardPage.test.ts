@@ -630,7 +630,7 @@ test.meta({
 });
 
 
-test.meta({
+test.timeouts({ pageLoadTimeout: 45000 }).meta({
   ID: '',
   STORY: '',
   description: '',
@@ -672,6 +672,7 @@ test.meta({
 
   // Adding `.wait` just as a precaution since this downloads a file.
   await t.maximizeWindow();
+  await t.setTestSpeed(0.5);
   var current_url = await t.eval(() => window.location.href);
   await t.navigateTo(current_url);
   await t.wait(15000);
