@@ -689,6 +689,9 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
      var current_url = await t.eval(() => window.location.href);
      await t.navigateTo(current_url);
      await t.wait(10000);
+     await scroll();
+     await scroll();
+     await scroll();
      await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
      await t.expect(fs.existsSync(expectedFilePath)).ok();
      
@@ -952,7 +955,7 @@ test.meta({
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeemiddle')
 });
 
-test.meta({
+test.timeouts({ pageLoadTimeout: 45000 }).meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
@@ -993,7 +996,8 @@ test.meta({
   await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
   transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
 
-  await t.maximizeWindow()
+  await t.maximizeWindow();
+  await t.setTestSpeed(0.5);
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
   /*await t.click(TransferDashboardPage.findATransferModalSubmit);
@@ -1005,6 +1009,7 @@ test.meta({
   await t.click(transferRow);*/
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
+      .wait(2000);
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
 });
