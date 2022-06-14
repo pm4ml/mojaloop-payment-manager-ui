@@ -578,7 +578,6 @@ test.meta({
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
 
-  //const expectedTransfer = transfers.find( t => t.id === '61797537-a05a-469f-b2f3-059a9cd5bd8d');
   const expectedTransfer = transfers.find( t => t.id[0]);
   //console.log(expectedTransfer);
   await t.expect(expectedTransfer?.senderIdType).ok();
@@ -586,7 +585,7 @@ test.meta({
   await t.expect(expectedTransfer?.senderIdValue).ok();
   await t.expect(expectedTransfer?.recipientIdType).ok();
   await t.expect(expectedTransfer?.recipientIdValue).ok();
-  //await t.expect(expectedTransfer?.homeTransferId).eql('5105');
+
 
   // Delete file
   fs.unlinkSync(expectedFilePath);
@@ -620,11 +619,11 @@ test.meta({
   const expectedTransfer = transfers.find( t => t.id[0]);
   //console.log(expectedTransfer);
   await t.expect(expectedTransfer?.senderIdType).ok();
-  //await t.expect(expectedTransfer?.senderIdSubValue).ok();
+ 
   await t.expect(expectedTransfer?.senderIdValue).ok();
   await t.expect(expectedTransfer?.recipientIdType).ok();
   await t.expect(expectedTransfer?.recipientIdValue).ok();
-  //await t.expect(expectedTransfer?.homeTransferId).eql('5105');
+
   // Delete file
   fs.unlinkSync(expectedFilePath);
 });
@@ -667,7 +666,7 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
     transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-   // console.log(transferResponse);
+  
 
 
   // Adding `.wait` just as a precaution since this downloads a file.
@@ -759,16 +758,7 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   await t.wait(6000);
   await t.click(TransferDashboardPage.findATransferButton).wait(10000);
   await t.wait(18000);
-  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
-  await t.wait(3000);
-  console.log(`${transferResponse.transferId}`);
-  console.log(randomnum.toString());*/
 
-  // Check transfer in spreadsheet exists in table
-  //const transferRow = await TransferDashboardPage.getTransferByAmount(randomnum.toString());//getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getFirstTransferRow();//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd8d');
-  //console.log(transferRow);
-  // Open Details Modal
- // await t.click(transferRow);
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -824,13 +814,7 @@ test.meta({
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
-  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
 
-  // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//getTransferByAmount(randomnum.toString());//getTransferRowById('aeac1d9f-2b60-4013-a6e0-a5cfa316a4f6');
-
-  // Open Details Modal
-  await t.click(transferRow);*/
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -882,13 +866,7 @@ test.meta({
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
-  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
 
-  // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//getTransferByAmount(randomnum.toString());//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd4b');
-
-  // Open Details Modal
-  await t.click(transferRow);*/
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -942,13 +920,7 @@ test.meta({
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
-  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
 
-  // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getTransferRowById('61797537-a05a-469f-b2f3-059a9cd5bd5f');
-
-  // Open Details Modal
-  await t.click(transferRow);*/
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
@@ -1000,13 +972,7 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   await t.setTestSpeed(0.5);
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
-  /*await t.click(TransferDashboardPage.findATransferModalSubmit);
 
-  // Check transfer in spreadsheet exists in table
-  const transferRow = await TransferDashboardPage.getTransferRowById(`${transferResponse.transferId}`);//.getTransferByAmount(randomnum.toString());//getTransferRowById('dba4255b-bc34-4e1b-9018-7f4c745915b2');
-
-  // Open Details Modal
-  await t.click(transferRow);*/
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .wait(2000)
