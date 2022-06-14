@@ -19,10 +19,10 @@ function ensureEnv(e: string): string {
   return result as string;
 }
 
-let config1;
+let tmpConfig;
 // TODO: ajv
 if (process.env.ENV === "local"){
- config1 = {
+  tmpConfig = {
   //pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
   //simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
   pm4mlEndpoint: "http://localhost:8081",
@@ -53,7 +53,7 @@ if (process.env.ENV === "local"){
 };
 
 }else if(process.env.ENV === "other"){
- config1 = {
+  tmpConfig = {
    // pm4mlEndpoint: "https://portal.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io",
    // simCoreConnectorEndpoint: "http://test.pm4mlsenderfsp.productdevk3s.dev.product.mbox-dev.io/cc-send",
     pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
@@ -83,5 +83,5 @@ if (process.env.ENV === "local"){
   };
  
 }
-const config = Object.assign({}, config1);
+const config = Object.assign({}, tmpConfig);
 export { config };
