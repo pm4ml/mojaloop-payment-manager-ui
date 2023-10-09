@@ -5,7 +5,7 @@ import Layout from './Layout';
 // import Dashboard from './Dashboard';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
-import ConnectionWizard from './ConnectionWizard';
+// import ConnectionWizard from './ConnectionWizard';
 import SuccessToast from './SuccessToast';
 import ErrorModal from './ErrorModal';
 import connectors from './connectors';
