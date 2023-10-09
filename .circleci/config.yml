@@ -10,6 +10,13 @@ orbs:
   docker: circleci/docker@1.5.0
   slack: circleci/slack@3.4.2
 
+  build:
+    docker:
+      - image: circleci/node:16
+
+        docker:
+          - image: node:lts-alpine
+
 ##
 # Executors
 #
@@ -19,7 +26,7 @@ executors:
   default-docker:
     working_directory: /home/circleci/project/git
     docker:
-      - image: node:16.14.2-alpine3.14
+      - image: cimg/node:16.20 # circleci/node:16
 
   default-machine:
     machine:
