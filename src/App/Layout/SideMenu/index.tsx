@@ -33,7 +33,7 @@ const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
         </MenuSection>
         <MenuSection label="TECHNICAL OPS">
           <MenuItem path="/techdashboard" label="Overview" />
-          <MenuItem path="/connections" partial label="Connection Wizard" />
+          {/* <MenuItem path="/connections" partial label="Connection Wizard" /> */}
         </MenuSection>
       </Menu>
     </div>

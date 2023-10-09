@@ -41,7 +41,8 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
             status={status}
             statusColor={statusColor}
             progress={progress}
-            onClick={() => history.push(`/connections/${environment.name}`)}
+            onClick={() => {}}
+            // onClick={() => history.push(`/connections/${environment.name}`)}
           >
             {helpers.environmentPhases.map((phase) => {
               const phaseStatus = helpers.getPhaseStatus(
@@ -50,7 +51,7 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
                 isEnvironmentsStatusesPending
               );
 
-              const onClick = () => history.push(`/connections/${environment.name}/${phase.param}`);
+              // const onClick = () => history.push(`/connections/${environment.name}/${phase.param}`);
 
               return (
                 <AccordionItem
@@ -60,7 +61,7 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
                   status={phaseStatus.status}
                   statusColor={phaseStatus.statusColor}
                   progress={phaseStatus.progress}
-                  onClick={onClick}
+                  onClick={() => {}}
                 />
               );
             })}
