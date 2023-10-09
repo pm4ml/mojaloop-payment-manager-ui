@@ -74,7 +74,7 @@ const EnvironmentPhasesTabs: FC<EnvironmentPhasesTabsProps> = ({
   onPhaseClick,
 }) => {
   const params = useParams<PhaseParams>();
-  const history = useHistory();
+  // const history = useHistory();
 
   function onPhaseTabClick(index: number) {
     onPhaseClick(phases[index]);

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { AnimateFadeIn, Accordion, AccordionItem } from 'components';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import * as helpers from '../helpers';
 import { Environment, EnvironmentStatus } from '../types';
 
@@ -17,7 +17,7 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
   environmentsStatuses,
   environmentsStatusesError,
 }) => {
-  const history = useHistory();
+  // const history = useHistory();
   return (
     <AnimateFadeIn initial={{ y: 10 }} animate={{ y: 0 }}>
       {environments.map((environment) => {
