@@ -126,7 +126,7 @@ const EnvironmentPhasesTabs: FC<EnvironmentPhasesTabsProps> = ({
             href="#null"
             onClick={(e) => {
               e.preventDefault();
-              history.push('/connections');
+              // history.push('/connections');
             }}
           >
             {'<'} Back to overview
