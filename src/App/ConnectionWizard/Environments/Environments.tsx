@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { AnimateFadeIn, Accordion, AccordionItem } from 'components';
-// import { useHistory } from 'react-router-dom';
 import * as helpers from '../helpers';
 import { Environment, EnvironmentStatus } from '../types';
 
@@ -17,7 +16,6 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
   environmentsStatuses,
   environmentsStatusesError,
 }) => {
-  // const history = useHistory();
   return (
     <AnimateFadeIn initial={{ y: 10 }} animate={{ y: 0 }}>
       {environments.map((environment) => {
@@ -42,7 +40,6 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
             statusColor={statusColor}
             progress={progress}
             onClick={() => {}}
-            // onClick={() => history.push(`/connections/${environment.name}`)}
           >
             {helpers.environmentPhases.map((phase) => {
               const phaseStatus = helpers.getPhaseStatus(
@@ -50,8 +47,6 @@ const EnvironmentsOverview: FC<EnvironmentsOverviewProps> = ({
                 phase.identifier,
                 isEnvironmentsStatusesPending
               );
-
-              // const onClick = () => history.push(`/connections/${environment.name}/${phase.param}`);
 
               return (
                 <AccordionItem
