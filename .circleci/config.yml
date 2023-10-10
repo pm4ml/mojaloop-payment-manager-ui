@@ -39,7 +39,7 @@ executors:
   default-docker:
     working_directory: /home/circleci/project # /git
     docker:
-      - image: circleci/node:16.20 # cimg/node:16.20
+      - image: cimg/node:16.20 # circleci/node:16.20
 
   default-machine:
     machine:
@@ -54,6 +54,7 @@ jobs:
   setup:
     executor: default-docker
     steps:
+      - run: node --version
       - run: apk add --update openssh-client git
       - run:
           name: Install general dependencies
