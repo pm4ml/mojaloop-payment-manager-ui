@@ -37,7 +37,7 @@ executors:
   #   docker:
   #     - image: node:lts-alpine # Ref: https://hub.docker.com/_/node?tab=tags&page=1&name=alpine
   default-docker:
-    working_directory: /home/circleci/project/git
+    working_directory: /home/circleci/project # /git
     docker:
       - image: circleci/node:16.20 # cimg/node:16.20
 
@@ -54,6 +54,7 @@ jobs:
   setup:
     executor: default-docker
     steps:
+      - run: apk add --update openssh-client git
       - run:
           name: Install general dependencies
           command: *defaults_docker_Dependencies
