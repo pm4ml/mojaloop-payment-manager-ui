@@ -28,7 +28,7 @@ executors:
   default-docker:
     working_directory: /home/circleci/project/git
     docker:
-      - image: cimg/node:16.20 # circleci/node:16
+      - image: circleci/node:16 # cimg/node:16.20
 
   default-machine:
     machine:
