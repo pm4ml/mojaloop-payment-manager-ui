@@ -9,6 +9,17 @@ version: "2.1"
 orbs:
   docker: circleci/docker@1.5.0
   slack: circleci/slack@3.4.2
+
+
+defaults_docker_Dependencies: &defaults_docker_Dependencies |
+    apk --no-cache add git
+    apk --no-cache add ca-certificates
+    apk --no-cache add curl
+    apk --no-cache add openssh-client
+    apk --no-cache add -t build-dependencies make gcc g++ python3 libtool autoconf automake jq
+    apk --no-cache add bash bash-doc bash-completion
+    npm install -g node-gyp
+
 ##
 # Executors
 #
@@ -43,9 +54,12 @@ jobs:
   setup:
     executor: default-docker
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "13:1a:b0:76:70:0d:b4:a7:fd:1c:c7:35:fd:8b:65:66"
+      - run:
+          name: Install general dependencies
+          command: *defaults_docker_Dependencies
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "13:1a:b0:76:70:0d:b4:a7:fd:1c:c7:35:fd:8b:65:66"
       - checkout
       - run:
           name: Update NPM install (using `yarn install`)
