@@ -57,9 +57,9 @@ jobs:
       - run:
           name: Install general dependencies
           command: *defaults_docker_Dependencies
-      # - add_ssh_keys:
-      #     fingerprints:
-      #       - "13:1a:b0:76:70:0d:b4:a7:fd:1c:c7:35:fd:8b:65:66"
+      - add_ssh_keys:
+          fingerprints:
+            - "ad:c6:bb:2b:79:4e:e7:9a:2f:15:df:f6:15:cb:04:6c"
       - checkout
       - run:
           name: Update NPM install (using `yarn install`)
