@@ -43,6 +43,9 @@ jobs:
   setup:
     executor: default-docker
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "13:1a:b0:76:70:0d:b4:a7:fd:1c:c7:35:fd:8b:65:66"
       - checkout
       - run:
           name: Update NPM install (using `yarn install`)
