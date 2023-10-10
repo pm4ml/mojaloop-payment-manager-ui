@@ -39,7 +39,7 @@ executors:
   default-docker:
     working_directory: /home/circleci/project # /git
     docker:
-      - image: cimg/node:16.20 # circleci/node:16.20
+      - image: cimg/node:16.20
 
   default-machine:
     machine:
@@ -55,13 +55,13 @@ jobs:
     executor: default-docker
     steps:
       - run: node --version
-      - run: apk add --update openssh-client git
+      # - run: apk add --update openssh-client git
       - run:
           name: Install general dependencies
           command: *defaults_docker_Dependencies
-      - add_ssh_keys:
-          fingerprints:
-            - "ad:c6:bb:2b:79:4e:e7:9a:2f:15:df:f6:15:cb:04:6c"
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "ad:c6:bb:2b:79:4e:e7:9a:2f:15:df:f6:15:cb:04:6c"
       - checkout
       - run:
           name: Update NPM install (using `yarn install`)
