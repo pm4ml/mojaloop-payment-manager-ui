@@ -96,10 +96,11 @@ interface ApiMethodMap {
   delete?: object;
 }
 
-function buildApis<T extends ArrayLike<unknown>, State>(
+function buildApis<T, State>(
   endpoints: Endpoints<T>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): { [endpoint: string]: { [method: string]: any } } {
+  // @ts-ignore
   return Object.entries(endpoints).reduce(
     (prev, [endpointName, config]) => ({
       ...prev,
