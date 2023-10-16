@@ -4,6 +4,7 @@ import {
   UrlConfig,
   ApiAction as LocalApiAction,
   BaseObject,
+  BaseEndpointObject,
   ApiState as LocalApiState,
   Config,
   Endpoints,
@@ -96,11 +97,10 @@ interface ApiMethodMap {
   delete?: object;
 }
 
-function buildApis<T, State>(
+function buildApis<T extends BaseEndpointObject, State>(
   endpoints: Endpoints<T>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): { [endpoint: string]: { [method: string]: any } } {
-  // @ts-ignore
   return Object.entries(endpoints).reduce(
     (prev, [endpointName, config]) => ({
       ...prev,

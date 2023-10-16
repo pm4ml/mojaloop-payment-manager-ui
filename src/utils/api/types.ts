@@ -34,8 +34,10 @@ export interface Config<S, State> {
 
 export type Generic<T> = T;
 
-export type Endpoints<T> = {
-  // eslint-disable-next-line
+export type BaseEndpointObject = { // to be able to use in Object.entries()
+  [key: string]: unknown;
+};
+export type Endpoints<T extends BaseEndpointObject> = {
   [K in keyof T]: T;
 }[keyof T];
 
