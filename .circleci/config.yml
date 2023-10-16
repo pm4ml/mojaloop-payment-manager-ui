@@ -95,36 +95,36 @@ jobs:
 # CircleCI Workflow config
 ##
 workflows:
-#  test:
-#    jobs:
-#      - setup:
-#          context: pm4ml-ci
-#          filters:
-#            branches:
-#              ignore:
-#                - /feature*/
-#                - /bugfix*/
-#                - /hotfix*/
-#      - lint:
-#          requires:
-#            - setup
-#          context: pm4ml-ci
-#          filters:
-#            branches:
-#              ignore:
-#                - /feature*/
-#                - /bugfix*/
-#                - /hotfix*/
-#      - test-unit:
-#          requires:
-#            - setup
-#          context: pm4ml-ci
-#          filters:
-#            branches:
-#              ignore:
-#                - /feature*/
-#                - /bugfix*/
-#                - /hotfix*/
+  test:
+    jobs:
+      - setup:
+          context: pm4ml-ci
+          filters:
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
+                - /hotfix*/
+      - lint:
+          requires:
+            - setup
+          context: pm4ml-ci
+          filters:
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
+                - /hotfix*/
+      - test-unit:
+          requires:
+            - setup
+          context: pm4ml-ci
+          filters:
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
+                - /hotfix*/
   deploy:
     jobs:
       - docker/publish:
