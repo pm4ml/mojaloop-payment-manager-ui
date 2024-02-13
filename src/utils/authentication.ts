@@ -1,7 +1,73 @@
 import axios from 'axios';
 
-export default async function getUserInfo(config: { apiBaseUrl: string }) {
+export default async function getUserInfo(config: {
+  apiBaseUrl: string;
+  checkSession: string;
+  loginUrl: string;
+  loginProvider: string;
+}) {
   try {
+    if (config.checkSession && config.loginUrl) {
+      // check for active session
+      const session = await axios({
+        method: 'GET',
+        url: config.checkSession,
+        validateStatus: (code) => {
+          console.log({ code });
+          return (code > 199 && code < 300) || code === 401;
+        },
+        withCredentials: true,
+      });
+
+      if (session.status === 401) {
+        const loginUrl = `${config.loginUrl}?return_to=${window.location.href}`;
+        if (!config.loginProvider) {
+          window.location.assign(loginUrl);
+          return false;
+        }
+        // obtain login flow
+        const flow = await axios({
+          method: 'GET',
+          url: loginUrl,
+          validateStatus: (code) => code > 199 && code < 300,
+        });
+        const {
+          ui: { method, action, nodes },
+          ui,
+        } = flow.data;
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = action;
+        let submit: HTMLInputElement | undefined;
+
+        nodes.forEach(
+          ({
+            attributes: { type, name, node_type, value },
+          }: {
+            attributes: Record<string, string>;
+          }) => {
+            if (name === 'provider' && value !== config.loginProvider) return;
+            const element = document.createElement(node_type) as HTMLInputElement;
+            if (name === 'provider') submit = element;
+            element.type = type;
+            element.value = value;
+            element.name = name;
+            form.appendChild(element);
+          }
+        );
+
+        if (submit) {
+          // submit flow with configured provider
+          document.body.appendChild(form);
+          submit.click();
+        } else {
+          // navigate to login url
+          window.location.assign(loginUrl);
+        }
+        return false;
+      }
+    }
+
     const response = await axios({
       method: 'GET',
       url: `${config.apiBaseUrl}/userInfo`,
