@@ -35,7 +35,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "testcafe ${BROWSER_TCAFE:-chrome}",
-    "test:headless": "testcafe ${BROWSER_TCAFE:-chrome:headless}"
+    "test:headless": "testcafe ${BROWSER_TCAFE:-chrome:headless} --window-size=1920,1080"
   },
   "author": "sridevi.miriyala@modusbox.com",
   "devDependencies": {

@@ -75,7 +75,7 @@ export const TransferDashboardPage = {
     .withText(`Find a Transfer`)
     .parent().parent('.el-modal__container'),
 
-  findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-items').child('div').withText('Basic Find a Transfer'),//.withText('Basic Find a Transfer'),XPathSelector('//input[@type="checkbox"]').nth(1);
+  findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-items').child(0),//.withText('Basic Find a Transfer'),XPathSelector('//input[@type="checkbox"]').nth(1);
   findATransferModalAdvancedFiltering: Selector('.el-tabs__tab-items').child('div').withText('Advanced Filtering'),
   backtoFilteringSubmitButton: Selector('span.input-button__label').withText('Back to filtering'),
   ftPopupCloseButton: Selector('span.input-button__label').nth(3),

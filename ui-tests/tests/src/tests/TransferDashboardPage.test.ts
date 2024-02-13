@@ -69,7 +69,6 @@ test
 
     await t
       .maximizeWindow()
-      .wait(10000)
       .click(TransferDashboardPage.findATransferButton)
       .expect(TransferDashboardPage.ftTitle.exists).ok()
       .click(TransferDashboardPage.findATransferModalAdvancedFiltering)
