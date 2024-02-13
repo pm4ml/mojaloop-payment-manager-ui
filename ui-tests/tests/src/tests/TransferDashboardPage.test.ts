@@ -72,6 +72,7 @@ test
       .click(TransferDashboardPage.findATransferButton)
       .expect(TransferDashboardPage.ftTitle.exists).ok()
       .click(TransferDashboardPage.findATransferModalAdvancedFiltering)
+      .takeScreenshot()
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.backtoFilteringSubmitButton)
