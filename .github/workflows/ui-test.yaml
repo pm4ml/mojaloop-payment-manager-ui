@@ -54,5 +54,5 @@ jobs:
       with:
         name: test-results
         path: |
-          ui-tests/tests/screenshots
-          ui-tests/tests/report
+          ui-tests
+          !**/node_modules/**
