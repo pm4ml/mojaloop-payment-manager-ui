@@ -33,7 +33,6 @@ export default async function getUserInfo(config: {
         });
         const {
           ui: { method, action, nodes },
-          ui,
         } = flow.data;
         const form = document.createElement('form');
         form.method = method;
