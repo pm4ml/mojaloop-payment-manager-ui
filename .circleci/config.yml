@@ -7,7 +7,7 @@ version: "2.1"
 # Orbs used in this pipeline
 ###
 orbs:
-  docker: circleci/docker@1.5.0
+  docker: circleci/docker@2.4.0
   slack: circleci/slack@3.4.2
 
 ##
@@ -19,11 +19,11 @@ executors:
   default-docker:
     working_directory: /home/circleci/project/git
     docker:
-      - image: node:16.14.2-alpine3.14
+      - image: cimg/node:16.20
 
   default-machine:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2204:2023.07.2
 
 ##
 # Jobs
