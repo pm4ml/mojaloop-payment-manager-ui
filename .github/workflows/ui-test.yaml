@@ -47,3 +47,12 @@ jobs:
       working-directory: ui-tests/tests
       run: |-
         ENV="local" PM4ML_ENDPOINT="http://localhost:8081" SIM_CORE_CONNECTOR_ENDPOINT="http://localhost:3003" npm run test:headless
+
+    - name: Output test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: |
+          ui-tests/tests/screenshots
+          ui-tests/tests/report
