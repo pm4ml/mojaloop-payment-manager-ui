@@ -5,7 +5,6 @@ import Layout from './Layout';
 // import Dashboard from './Dashboard';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
-import ConnectionWizard from './ConnectionWizard';
 import SuccessToast from './SuccessToast';
 import ErrorModal from './ErrorModal';
 import connectors from './connectors';
@@ -47,7 +46,6 @@ const App: FC<AppProps> = ({
                 <Route path="/dashboard" component={Dashboard} />
               */}
               <Route path="/transfers" component={Transfers} />
-              <Route path="/connections" component={ConnectionWizard} />
               <Route path="/techdashboard" component={TechnicalDashboard} />
 
               {/* process.env.NODE_ENV === 'development' && <Route path="/test" component={Test} /> */}

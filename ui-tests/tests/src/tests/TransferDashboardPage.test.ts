@@ -12,11 +12,11 @@ import { ClientFunction } from 'testcafe';
 
 fixture`Transfer Dashboard Feature`
   .page`${config.pm4mlEndpoint}/transfer`
-  
+
   .beforeEach(async (t) => {
     // Login if not logged in
     try{
-              
+
     if (Selector('.login-pf-header')) {
       await t.typeText(LoginPage.usernameField, config.credentials.test.username)
       await t.typeText(LoginPage.passwordField, config.credentials.test.password)
@@ -38,7 +38,7 @@ fixture`Transfer Dashboard Feature`
   const scroll = ClientFunction(function() {
     window.scrollBy(0,1500);
 });
-  
+
 
 test
   .meta({
@@ -184,7 +184,7 @@ test.timeouts({ pageLoadTimeout: 45000 })
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
 
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-    
+
 
     await t
       .setTestSpeed(0.5)
@@ -619,7 +619,7 @@ test.meta({
   const expectedTransfer = transfers.find( t => t.id[0]);
   //console.log(expectedTransfer);
   await t.expect(expectedTransfer?.senderIdType).ok();
- 
+
   await t.expect(expectedTransfer?.senderIdValue).ok();
   await t.expect(expectedTransfer?.recipientIdType).ok();
   await t.expect(expectedTransfer?.recipientIdValue).ok();
@@ -666,7 +666,7 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
     var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
     await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
     transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-  
+
 
 
   // Adding `.wait` just as a precaution since this downloads a file.
@@ -681,7 +681,7 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   try{
   await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
   await t.expect(fs.existsSync(expectedFilePath)).ok();
-  
+
   }
   catch(e){
     // console.error(e);
@@ -693,10 +693,10 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
      await scroll();
      await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
      await t.expect(fs.existsSync(expectedFilePath)).ok();
-     
+
    }
 
-  const wb = xlsx.readFile(expectedFilePath); 
+  const wb = xlsx.readFile(expectedFilePath);
   const errors = xlsx.utils.sheet_to_json(wb.Sheets['Errors']) as Error[];
   await t.expect(errors.length).gt(0)
 
@@ -809,8 +809,8 @@ test.meta({
   await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
   transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
 
-  
-  
+
+
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
@@ -818,7 +818,7 @@ test.meta({
   await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
-  
+
   await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeemiddle Payeelast')
 });
 
@@ -915,8 +915,8 @@ test.meta({
   await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
   transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
 
-  
-  
+
+
   await t.maximizeWindow()
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);

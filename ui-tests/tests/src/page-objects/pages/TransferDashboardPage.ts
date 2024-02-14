@@ -32,7 +32,7 @@ export type Transfer = {
   senderIdValue: string,
   recipientIdType: string,
   recipientIdValue: string,
-  homeTransferId: string  
+  homeTransferId: string
 }
 
 export type TransferRow = {
@@ -46,7 +46,7 @@ export type TransferRow = {
 }
 
 export const TransferDashboardPage = {
-  
+
   //Transfers Overview
   transfersOverview: Selector('span').withText('Successful Transfers'),
   successfulTransfers:  Selector('span').withText('Successful Transfers'),
@@ -63,7 +63,7 @@ export const TransferDashboardPage = {
 
   findATransferButton: Selector('.mb-input').withText('Find a Transfer'),
   downloadErrorsButton: Selector('div.transfers__errors__section').nth(1).child('button').withAttribute('label','Download Errors'),// Selector('.transfers__errors__download__button'),
-  
+
   // viewAllErrorsButton: Selector('.transfers__errors__button'),
 
   //Find a Transfer Popup window Page Objects
@@ -109,9 +109,9 @@ export const TransferDashboardPage = {
   //Individual Transfer Details Page objects
   transferDetailTitle : Selector('div.el-modal__header-title').withText('Transfer Details'),
   basicInfomationTab : Selector('div.el-tabs__tab-items').child(0),
-  
 
-  //Basic Information Page Objects - Labels      
+
+  //Basic Information Page Objects - Labels
   transferIDLabel : Selector('div').withText('Transfer ID'),
   transferStateLabel : Selector('div').withText('Transfer State'),
   transferAmountLabel : Selector('div').withText('Amount'),
@@ -190,7 +190,7 @@ export const TransferDashboardPage = {
   //This Page object can be used for any Close Button which pops from Party Information or View Message Details
   // closePartyWithExtensionList : Selector('span.input-button__label').nth(13),
   closePartyWithExtensionList : Selector('#partydetailsmodal span.input-button__label').withText('Close'),
-  
+
   //Party objects - the Labels are common between Payee and Payer information
   partyIDTypeLabel : Selector('div').withText('Id Type'),
   partyValueLabel : Selector('div').withText('Id Value'),
@@ -201,7 +201,7 @@ export const TransferDashboardPage = {
   partyDOBLabel : Selector('div').withText('Date Of Birth'),
   partyMerchantCodeLabel : Selector('div').withText('Merchant Classification Code'),
   partyFSPIdLabel : Selector('div').withText('FSP Id'),
-  
+
 
   //Party Objects Text boxes - use this for both Payye and and Payer information
   partyIdType : Selector('div.input-textfield__value__tokens').nth(5).child(0),
@@ -213,7 +213,7 @@ export const TransferDashboardPage = {
   partyDOB : Selector('div.input-textfield__value__tokens').nth(11).child(0),
   partyMerchantCode : Selector('div.input-textfield__value__tokens').nth(12).child(0),
   partyFSPId : Selector('div.input-textfield__value__tokens').nth(13).child(0),
-  
+
   //Transfer Prepare Objects
   tpilpPacket : Selector('span').withText('"ilpPacket"'),
   tpilpPacketValue : Selector('span').withText('"ilpPacket"').nextSibling(0),
@@ -229,7 +229,7 @@ export const TransferDashboardPage = {
   tftransferStateValue : Selector('span').withText('"transferState"').nextSibling(0),
   tffulfilment : Selector('span').withText('"fulfilment"'),
   tffulfilmentValue : Selector('span').withText('"fulfilment"').nextSibling(0),
-  
+
   //Quote Request Objects
   qrquoteId : Selector('#transferRequestDetailsModal span').withText('"quoteId"'),
   qrquoteIdValue : Selector('span').withText('"quoteId"').nextSibling(0),

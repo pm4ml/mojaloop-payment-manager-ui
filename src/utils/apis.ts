@@ -195,44 +195,6 @@ const metric: Config<Todo, State> = {
   url: (_: State, { metricName }: { metricName: string }) => `/metrics/${metricName}`,
 };
 
-interface MyMap {
-  dfsps: Config<Todo, State>;
-  environmentStatus: Config<Todo, State>;
-  monetaryZones: Config<Todo, State>;
-  batches: Config<Todo, State>;
-  batchTransfers: Config<Todo, State>;
-  dfsp: Config<Todo, State>;
-  dfspCA: Config<Todo, State>;
-  dfspAutoCA: Config<Todo, State>;
-  dfspHubCA: Config<Todo, State>;
-  dfspServerCerts: Config<Todo, State>;
-  hubServerCerts: Config<Todo, State>;
-  dfspJWSCerts: Config<Todo, State>;
-  otherDfspJWSCerts: Config<Todo, State>;
-  transfersErrors: Config<Todo, State>;
-  transfers: Config<Todo, State>;
-  transfersStatuses: Config<Todo, State>;
-  transfersSuccessPerc: Config<Todo, State>;
-  transfersAvgTime: Config<Todo, State>;
-  transferDetails: Config<Todo, State>;
-  weeklyFlows: Config<Todo, State>;
-  weeklyPositions: Config<Todo, State>;
-  ingressUrls: Config<Todo, State>;
-  ingressIps: Config<Todo, State>;
-  ingressUrl: Config<Todo, State>;
-  ingressIp: Config<Todo, State>;
-  egressIps: Config<Todo, State>;
-  egressIp: Config<Todo, State>;
-  ingressHubEndpoints: Config<Todo, State>;
-  egressHubEndpoints: Config<Todo, State>;
-  inboundEnrollments: Config<Todo, State>;
-  inboundEnrollmentsCsr: Config<Todo, State>;
-  outboundEnrollments: Config<Todo, State>;
-  outboundEnrollmentCertificate: Config<Todo, State>;
-  outboundEnrollmentAutoCertificate: Config<Todo, State>;
-  metric: Config<Todo, State>;
-}
-
 const endpoints = {
   dfsps,
   environmentStatus,
@@ -270,5 +232,12 @@ const endpoints = {
   outboundEnrollmentAutoCertificate,
   metric,
 };
+
+type MyMap = typeof endpoints;
+/* or, maybe:
+type MyMap = {
+  [key: string]: Config<Todo, State>;
+}
+*/
 
 export default buildApis<MyMap, State>(endpoints);

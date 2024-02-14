@@ -74,7 +74,6 @@ const EnvironmentPhasesTabs: FC<EnvironmentPhasesTabsProps> = ({
   onPhaseClick,
 }) => {
   const params = useParams<PhaseParams>();
-  const history = useHistory();
 
   function onPhaseTabClick(index: number) {
     onPhaseClick(phases[index]);
@@ -126,7 +125,6 @@ const EnvironmentPhasesTabs: FC<EnvironmentPhasesTabsProps> = ({
             href="#null"
             onClick={(e) => {
               e.preventDefault();
-              history.push('/connections');
             }}
           >
             {'<'} Back to overview

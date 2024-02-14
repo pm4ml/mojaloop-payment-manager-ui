@@ -1,9 +1,10 @@
 import { put, select } from 'redux-saga/effects';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import {
   UrlConfig,
   ApiAction as LocalApiAction,
   BaseObject,
+  BaseEndpointObject,
   ApiState as LocalApiState,
   Config,
   Endpoints,
@@ -49,7 +50,7 @@ function unsetRequestPending(endpoint: string, name: string): LocalApiAction {
 function run<State>(endpointName: string, methodName: MethodName, config: Config<string, State>) {
   return function* dispatcher(data: BaseObject) {
     try {
-      const state = yield select();
+      const state: State = yield select();
 
       const { url: rurl, transformResponse } = config;
       const method = methodMaps[methodName];
@@ -58,7 +59,7 @@ function run<State>(endpointName: string, methodName: MethodName, config: Config
 
       yield put(setRequestPending(endpointName, methodName));
 
-      const response = yield axios({
+      const response: AxiosResponse = yield axios({
         method,
         url,
         params: data.params,
@@ -68,20 +69,20 @@ function run<State>(endpointName: string, methodName: MethodName, config: Config
         withCredentials: true,
       });
 
-      const transformedReponse = transformResponse
+      const transformedResponse = transformResponse
         ? transformResponse(response.data)
         : response.data;
 
       yield put(unsetRequestPending(endpointName, methodName));
 
       // if we get an unauthorised response status then redirect the browser to our backend login resource
-      if (response.status === 401) {
+      if ([401, 403].includes(response.status)) {
         const redirectRurl = `/login?redirect=${window.location.href}`;
         const redirectUrl = getUrl<State>(config.service.baseUrl, state, {}, redirectRurl);
         window.location.href = redirectUrl;
       }
 
-      return { status: response.status, data: transformedReponse };
+      return { status: response.status, data: transformedResponse };
     } catch (e) {
       yield put(unsetRequestPending(endpointName, methodName));
       throw e;
@@ -96,10 +97,9 @@ interface ApiMethodMap {
   delete?: object;
 }
 
-// eslint-disable-next-line
-function buildApis<T, State>(
+function buildApis<T extends BaseEndpointObject, State>(
   endpoints: Endpoints<T>
-  // eslint-disable-next-line
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): { [endpoint: string]: { [method: string]: any } } {
   return Object.entries(endpoints).reduce(
     (prev, [endpointName, config]) => ({
@@ -107,7 +107,11 @@ function buildApis<T, State>(
       [endpointName]: Object.entries(methodMaps).reduce(
         (all: object, [methodName, method]: MethodMap): ApiMethodMap => ({
           ...all,
-          [methodName]: run<State>(endpointName, methodName as MethodName, config),
+          [methodName]: run<State>(
+            endpointName,
+            methodName as MethodName,
+            config as Config<string, State>
+          ),
         }),
         {}
       ),

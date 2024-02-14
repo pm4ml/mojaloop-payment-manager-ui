@@ -1,11 +1,9 @@
 FROM node:16.14.2-alpine3.14
 # First part, build the app
 WORKDIR /app
-COPY package.json /app/
-COPY yarn.lock /app/
+COPY package.json yarn.lock ./
 RUN yarn install
-
-COPY ./ /app/
+COPY ./ ./
 
 # Specifies the api base URL
 ARG API_BASE_URL
