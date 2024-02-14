@@ -20,7 +20,7 @@ executors:
   default-docker:
     working_directory: /home/circleci/project # /git
     docker:
-      - image: cimg/node:16.20
+      - image: node:16.14.2-alpine3.14
 
   default-machine:
     machine:
