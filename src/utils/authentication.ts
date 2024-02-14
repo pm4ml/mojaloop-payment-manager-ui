@@ -12,10 +12,7 @@ export default async function getUserInfo(config: {
       const session = await axios({
         method: 'GET',
         url: config.checkSession,
-        validateStatus: (code) => {
-          console.log({ code });
-          return (code > 199 && code < 300) || code === 401;
-        },
+        validateStatus: (code) => (code > 199 && code < 300) || code === 401,
         withCredentials: true,
       });
 
