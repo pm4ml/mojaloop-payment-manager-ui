@@ -127,6 +127,7 @@ workflows:
   deploy:
     jobs:
       - docker/publish:
+          executor: default-machine
           context: pm4ml-ci
           filters:
             tags:
