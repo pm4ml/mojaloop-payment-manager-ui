@@ -62,6 +62,15 @@ export default async function getUserInfo(config: {
         }
         return false;
       }
+
+      return (
+        session?.data && {
+          preferred_username: '',
+          given_name: session.data.identity?.name,
+          family_name: '',
+          email: session.data.identity?.email,
+        }
+      );
     }
 
     const response = await axios({
