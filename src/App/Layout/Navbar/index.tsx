@@ -27,7 +27,7 @@ const Navbar: FC<Navbar> = ({
         })
           .then((response) => response.json())
           .then(({ logout_url }) => {
-            window.location.assign(logout_url);
+            if (logout_url) window.location.assign(logout_url);
           });
       } else window.location.href = logoutUrl;
     }

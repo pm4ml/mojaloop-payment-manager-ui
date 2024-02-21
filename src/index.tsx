@@ -43,7 +43,7 @@ async function bootstrap() {
       familyName: userInfo.family_name,
       email: userInfo.email,
       kratos: userInfo.kratos,
-      logoutUrl: 'logout' in userInfo ? userInfo.logout : `${config.apiBaseUrl}/logout`,
+      logoutUrl: 'logoutUrl' in userInfo ? userInfo.logoutUrl : `${config.apiBaseUrl}/logout`,
     };
 
     // only render if we got user info i.e. we are authenticated
