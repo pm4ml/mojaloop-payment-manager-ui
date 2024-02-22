@@ -34,6 +34,7 @@ const App: FC<AppProps> = ({
             userInfo ? `${userInfo.givenName || ''} ${userInfo.familyName || ''}`.trim() : ''
           }
           logoutUrl={userInfo ? userInfo.logoutUrl : undefined}
+          kratos={userInfo?.kratos}
           activeConnectionName="Modusbox & Mojaloop Labs"
           activeConnectionStatusColor="#12d670"
         />

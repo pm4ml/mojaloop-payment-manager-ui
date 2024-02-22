@@ -10,6 +10,7 @@ app.get('/config', function (req, res) {
     CHECK_SESSION_URL: process.env.CHECK_SESSION_URL,
     LOGIN_URL: process.env.LOGIN_URL,
     LOGIN_PROVIDER: process.env.LOGIN_PROVIDER,
+    LOGOUT_URL: process.env.LOGOUT_URL,
   });
 });
 

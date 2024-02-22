@@ -195,4 +195,5 @@ export interface User {
   familyName: string;
   email: string;
   logoutUrl: string;
+  kratos: boolean;
 }

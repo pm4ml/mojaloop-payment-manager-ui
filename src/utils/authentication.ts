@@ -5,6 +5,7 @@ export default async function getUserInfo(config: {
   checkSession: string;
   loginUrl: string;
   loginProvider: string;
+  logoutUrl: string;
 }) {
   try {
     if (config.checkSession && config.loginUrl) {
@@ -69,6 +70,8 @@ export default async function getUserInfo(config: {
           given_name: session.data.identity?.name,
           family_name: '',
           email: session.data.identity?.email,
+          logoutUrl: config.logoutUrl,
+          kratos: true,
         }
       );
     }

@@ -7,6 +7,7 @@ type Navbar = {
   logoutUrl?: string;
   activeConnectionName: string;
   activeConnectionStatusColor: string;
+  kratos?: boolean;
 };
 
 const Navbar: FC<Navbar> = ({
@@ -14,10 +15,21 @@ const Navbar: FC<Navbar> = ({
   activeConnectionName,
   activeConnectionStatusColor,
   logoutUrl,
+  kratos,
 }) => {
   const clickFunc = () => {
     if (logoutUrl) {
-      window.location.href = logoutUrl;
+      if (kratos) {
+        fetch(`${logoutUrl}?return_to=${window.location.href}`, {
+          headers: {
+            accept: 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then(({ logout_url }) => {
+            if (logout_url) window.location.assign(logout_url);
+          });
+      } else window.location.href = logoutUrl;
     }
   };
 
