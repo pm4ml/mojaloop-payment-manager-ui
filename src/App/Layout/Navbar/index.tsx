@@ -20,7 +20,7 @@ const Navbar: FC<Navbar> = ({
   const clickFunc = () => {
     if (logoutUrl) {
       if (kratos) {
-        fetch(`${logoutUrl}?return_to=${window.location.href}`, {
+        fetch(`${logoutUrl}`, {
           headers: {
             accept: 'application/json',
           },
