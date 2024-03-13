@@ -83,7 +83,9 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --color --fix",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}'",
-    "proxy": "npm start --prefix proxy"
+    "proxy": "npm start --prefix proxy",
+    "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
+    "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -101,7 +103,8 @@
     ]
   },
   "devDependencies": {
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "standard-version": "^9.5.0"
   },
   "husky": {
     "hooks": {
