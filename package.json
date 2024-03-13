@@ -1,6 +1,6 @@
 {
   "name": "mojaloop-payment-manager-ui",
-  "version": "1.17.4",
+  "version": "1.17.5-snapshot.0",
   "private": true,
   "proxy": "http://localhost:10000",
   "engines": {
