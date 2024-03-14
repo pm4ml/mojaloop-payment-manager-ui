@@ -76,7 +76,7 @@ function run<State>(endpointName: string, methodName: MethodName, config: Config
       yield put(unsetRequestPending(endpointName, methodName));
 
       // if we get an unauthorised response status then redirect the browser to our backend login resource
-      if ([401, 403].includes(response.status)) {
+      if (response.status === 401) {
         const redirectRurl = `/login?redirect=${window.location.href}`;
         const redirectUrl = getUrl<State>(config.service.baseUrl, state, {}, redirectRurl);
         window.location.href = redirectUrl;
