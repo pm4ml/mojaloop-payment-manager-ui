@@ -175,16 +175,26 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     <div>
       <Tabs>
         <TabList>
-          <Tab>Basic Information</Tab>
+          <Tab>Transfer Details</Tab>
           <Tab>Technical Details</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
-                <FormInput disabled={true} label="Transfer ID" type="text" value={model.id} />
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer ID"
+                  type="text"
+                  value={model.id}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                />
               </div>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Transfer State"
@@ -192,12 +202,33 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.technicalDetails.transferState}
                 />
               </div>
-            </Row>
-            <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
-                <FormInput disabled={true} label="Batch" type="text" value="N/A" />
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  id="transfer-details-basic-modal__direction"
+                  disabled={true}
+                  label="Direction"
+                  type="text"
+                  value={model.direction}
+                />
               </div>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Transaction Type" type="text" value="N/A" />
+              </div>
+            </Row>
+
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Send Amount" type="text" value={model.amount} />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Send Currency"
+                  type="text"
+                  value={model.currency}
+                />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Date Submitted"
@@ -205,25 +236,36 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.initiatedTimestamp}
                 />
               </div>
-            </Row>
-            <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
-                <FormInput disabled={true} label="Amount" type="text" value={model.amount} />
-              </div>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
-                <FormInput disabled={true} label="Currency" type="text" value={model.currency} />
-              </div>
-            </Row>
-            <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
-                  label="Sender"
+                  label="Transfer Settlement Batch"
                   type="text"
-                  value={model.technicalDetails.payerParty.displayName}
+                  value="N/A"
                 />
               </div>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Receive Amount" type="text" value="N/A" />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Receive Currency" type="text" value="N/A" />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Conversion Submitted" type="text" value="N/A" />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Conversion Settlement Batch"
+                  type="text"
+                  value="N/A"
+                />
+              </div>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Sender Details"
@@ -231,18 +273,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={`${model.technicalDetails.payerParty.idType} ${model.technicalDetails.payerParty.idValue}`}
                 />
               </div>
-            </Row>
-            <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
-                <FormInput
-                  id="transfer-details-basic-modal__recipient"
-                  disabled={true}
-                  label="Recipient"
-                  type="text"
-                  value={model.technicalDetails.payeeParty.displayName}
-                />
-              </div>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   id="transfer-details-basic-modal__recipient-details"
                   disabled={true}
@@ -251,24 +282,32 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={`${model.technicalDetails.payeeParty.idType} ${model.technicalDetails.payeeParty.idValue}`}
                 />
               </div>
-            </Row>
-            <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Recipient Currencies" type="text" value="N/A" />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
-                  label="Institution"
+                  label="Recipient Institution"
                   type="text"
                   value={model.institution}
                 />
               </div>
-              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Conversion Type" type="text" value="N/A" />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
-                  id="transfer-details-basic-modal__direction"
                   disabled={true}
-                  label="Direction"
+                  label="Conversion Institution"
                   type="text"
-                  value={model.direction}
+                  value={model.institution}
                 />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput disabled={true} label="Conversion State" type="text" value="N/A" />
               </div>
             </Row>
           </TabPanel>

@@ -5,7 +5,7 @@
 .transfers__transfers__loader,
 .transfers__statuses__loader {
   height: 100px;
-  width: 100%;
+  width: 50%;
   display: flex;
   justify-content: center;
   flex-direction: row;
