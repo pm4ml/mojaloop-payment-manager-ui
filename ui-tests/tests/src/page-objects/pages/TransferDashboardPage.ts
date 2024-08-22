@@ -57,7 +57,10 @@ export const TransferDashboardPage = {
   idFilterLabel: Selector('div').withText('ID'),
   directionFilterLabel: Selector('div').withText('Direction'),
   typeFilterLabel: Selector('div').withText('Type'),
-  valueFilterLabel: Selector('div').withText('Value'),
+  valueFilterLabel: Selector('div').withText('Send Value'),
+  currencyFilterLabel: Selector('div').withText('Send Currency'),
+  receiveValueFilterLabel: Selector('div').withText('Receive Value'),
+  receiveCurrencyFilterLabel: Selector('div').withText('Receive Currency'),
   errorTypeFilterLabel: Selector('div').withText('Error Type'),
   DateFilterLabel: Selector('div').withText('Date'),
 

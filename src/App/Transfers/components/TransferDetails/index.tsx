@@ -177,6 +177,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
         <TabList>
           <Tab>Basic Information</Tab>
           <Tab>Technical Details</Tab>
+          <Tab>Transfer Parties</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -465,6 +466,192 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 </Row>
               </div>
             </Row>
+          </TabPanel>
+          <TabPanel>
+            {/* <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput disabled={true} label="Transfer ID" type="text" value={model.id} />
+              </div>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer State"
+                  type="text"
+                  value={model.technicalDetails.transferState}
+                />
+              </div>
+            </Row> */}
+            <Row align="flex-start stretch">
+              <div
+                style={{
+                  flex: '0 0 50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  <label style={{ padding: '5px' }}>Transfer Terms</label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ padding: '5px', marginRight: '5px' }}>Transfer Terms</label>
+                  <FormInput
+                    disabled
+                    value={model.amount}
+                    style={{ maxWidth: '100px', marginRight: '5px' }}
+                  />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ padding: '5px', marginRight: '5px' }}>Payee Receive Amount</label>
+                  <FormInput
+                    disabled
+                    value={model.amount}
+                    style={{ maxWidth: '100px', marginRight: '5px' }}
+                  />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ padding: '5px', marginRight: '5px' }}>Payee DFSP Fee</label>
+                  <FormInput
+                    disabled
+                    value={model.amount}
+                    style={{ maxWidth: '100px', marginRight: '5px' }}
+                  />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ padding: '5px', marginRight: '5px' }}>
+                    Payee DFSP Commission
+                  </label>
+                  <FormInput
+                    disabled
+                    value={model.amount}
+                    style={{ maxWidth: '100px', marginRight: '5px' }}
+                  />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ padding: '5px', marginRight: '5px' }}>Expiry Date Time</label>
+                  <FormInput
+                    disabled
+                    value={model.amount}
+                    style={{ maxWidth: '100px', marginRight: '5px' }}
+                  />
+                </Row>
+              </div>
+              <div
+                style={{
+                  flex: '0 0 50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  <label style={{ paddingTop: '5px', paddingBottom: '5px' }}>
+                    Conversion Terms
+                  </label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <FormInput disabled={true} value={model.amount} />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <FormInput disabled={true} value={model.amount} />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <FormInput disabled={true} value={model.amount} />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <FormInput
+                    id="transfer-details-modal__home-transfer-id"
+                    disabled={true}
+                    value={model.amount}
+                  />
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <FormInput disabled={true} value={model.amount} />
+                </Row>
+              </div>
+            </Row>
+            {/* <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput disabled={true} label="Batch" type="text" value="N/A" />
+              </div>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  disabled={true}
+                  label="Date Submitted"
+                  type="text"
+                  value={model.initiatedTimestamp}
+                />
+              </div>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput disabled={true} label="Amount" type="text" value={model.amount} />
+              </div>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput disabled={true} label="Currency" type="text" value={model.currency} />
+              </div>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  disabled={true}
+                  label="Sender"
+                  type="text"
+                  value={model.technicalDetails.payerParty.displayName}
+                />
+              </div>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  disabled={true}
+                  label="Sender Details"
+                  type="text"
+                  value={`${model.technicalDetails.payerParty.idType} ${model.technicalDetails.payerParty.idValue}`}
+                />
+              </div>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  id="transfer-details-basic-modal__recipient"
+                  disabled={true}
+                  label="Recipient"
+                  type="text"
+                  value={model.technicalDetails.payeeParty.displayName}
+                />
+              </div>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  id="transfer-details-basic-modal__recipient-details"
+                  disabled={true}
+                  label="Recipient Details"
+                  type="text"
+                  value={`${model.technicalDetails.payeeParty.idType} ${model.technicalDetails.payeeParty.idValue}`}
+                />
+              </div>
+            </Row>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  disabled={true}
+                  label="Institution"
+                  type="text"
+                  value={model.institution}
+                />
+              </div>
+              <div style={{ flex: '0 0 50%', marginRight: '5px' }}>
+                <FormInput
+                  id="transfer-details-basic-modal__direction"
+                  disabled={true}
+                  label="Direction"
+                  type="text"
+                  value={model.direction}
+                />
+              </div>
+            </Row> */}
           </TabPanel>
         </TabPanels>
       </Tabs>

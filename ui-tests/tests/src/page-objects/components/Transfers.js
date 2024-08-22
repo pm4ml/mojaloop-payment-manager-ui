@@ -239,7 +239,10 @@ class Transfers {
         this.idFilterLabel = Selector('div').withText('ID')
         this.directionFilterLabel = Selector('div').withText('Direction')
         this.typeFilterLabel = Selector('div').withText('Type')
-        this.valueFilterLabel = Selector('div').withText('Value')
+        this.valueFilterLabel = Selector('div').withText('Send Value')
+        this.currencyFilterLabel = Selector('div').withText('Send Currency')
+        this.receiveValueFilterLabel = Selector('div').withText('Receive Value')
+        this.receiveCurrencyFilterLabel = Selector('div').withText('Receive Currency')
         this.errorTypeFilterLabel = Selector('div').withText('Error Type')
         this.DateFilterLabel = Selector('div').withText('Date')
     };
