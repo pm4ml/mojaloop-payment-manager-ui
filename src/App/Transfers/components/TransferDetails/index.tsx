@@ -468,218 +468,189 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
             </Row>
           </TabPanel>
           <TabPanel>
-          <Row align="flex-start" style={{ marginTop: '5px' }}>
-            <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-              <FormInput
-                disabled={true}
-                label="Transfer ID"
-                type="text"
-                value={model.id}
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer ID"
+                  type="text"
+                  value={model.id}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer State"
+                  type="text"
+                  value={model.technicalDetails.transferState}
+                />
+              </div>
+              <div style={{ flex: '0 0 12%', marginRight: '0', maxWidth: '15%' }}>
+                <FormInput disabled={true} label="Quote Amount" type="text" value={model.amount} />
+              </div>
+              <div style={{ flex: '0 0 1%', marginRight: '5px', maxWidth: '10%' }}>
+                <FormInput disabled={true} label=" " type="text" value={model.currency} />
+              </div>
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Quote Amount Type"
+                  type="text"
+                  value={model.technicalDetails}
+                />
+              </div>
+            </Row>
+            <Row align="flex-start stretch">
+              <div
                 style={{
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
+                  width: '50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
                 }}
-              />
-            </div>
-            <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%'}}>
-              <FormInput
-                disabled={true}
-                label="Transfer State"
-                type="text"
-                value={model.technicalDetails.transferState}
-              />
-            </div>
-            <div style={{ flex: '0 0 12%', marginRight: '0', maxWidth: '15%'}}>
-              <FormInput
-                disabled={true}
-                label="Quote Amount"
-                type="text"
-                value={model.amount}
-              />
-            </div>
-            <div style={{ flex: '0 0 1%', marginRight: '5px', maxWidth: '10%'}}>
-              <FormInput
-                disabled={true}
-                label=" "
-                type="text"
-                value={model.currency}
-              />
-            </div>
-            <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
-              <FormInput
-                disabled={true}
-                label="Quote Amount Type"
-                type="text"
-                value={model.technicalDetails}
-              />
-            </div>
-          </Row>
-          <Row align="flex-start stretch">
-            <div style={{width: '50%', marginRight: '10px', marginTop: '10px', border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
+              >
                 <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
-                  <label style={{ padding: '5px'}}>Transfer Terms</label>
-                </Row>
-                <Row align="flex-start" style={{ marginTop: '5px'}}>
-                <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%'}}>Transfer Amount</label>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px' }}>Transfer Terms</label>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Payee Receive Amount</label>
-                  <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Transfer Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Payee DFSP Fee</label>
-                  <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Payee Receive Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Payee DFSP Commission</label>
-                  <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Payee DFSP Fee
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Expiry Date Time</label>
-                  <div style={{ marginRight: '0', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.initiatedTimestamp}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Payee DFSP Commission
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
-            </div>
-            <div style={{ width: '50%', marginRight: '10px', marginTop: '10px', border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
-              <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
-                  <label style={{ paddingTop: '5px', paddingBottom: '5px'}}>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Expiry Date Time
+                  </label>
+                  <div style={{ marginRight: '0', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.initiatedTimestamp} />
+                  </div>
+                </Row>
+              </div>
+              <div
+                style={{
+                  width: '50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ paddingTop: '5px', paddingBottom: '5px' }}>
                     Conversion Terms
                   </label>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Transfer Amount</label>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Transfer Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Charges</label>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Charges
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Charges</label>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
-                <div style={{marginRight: '5px', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.currency}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Charges
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.currency} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Exchange Rate</label>
-                <div style={{marginRight: '0', maxWidth: '35%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.amount}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Exchange Rate
+                  </label>
+                  <div style={{ marginRight: '0', maxWidth: '35%' }}>
+                    <FormInput disabled={true} type="text" value={model.amount} />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>Expiry Date Time</label>
-                  <div style={{ marginRight: '0', minWidth: '15%'}}>
-                  <FormInput
-                    disabled={true}
-                    type="text"
-                    value={model.initiatedTimestamp}
-                  />
-                </div>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '20%' }}>
+                    Expiry Date Time
+                  </label>
+                  <div style={{ marginRight: '0', minWidth: '15%' }}>
+                    <FormInput disabled={true} type="text" value={model.initiatedTimestamp} />
+                  </div>
                 </Row>
-            </div>
-          </Row>
+              </div>
+            </Row>
           </TabPanel>
-
         </TabPanels>
       </Tabs>
       {isRequestDetailsVisible && (
