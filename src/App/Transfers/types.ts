@@ -95,7 +95,6 @@ export interface ExtensionListItem {
   key: string;
   value: string;
 }
-
 export interface TransferParty {
   type: string;
   idType: string;
@@ -124,11 +123,17 @@ export interface MojaloopErrorInformation {
 export interface TransferDetailsError {
   httpStatusCode: number;
   mojaloopError?: MojaloopError;
+  originalRequest: {
+    body?: string;
+  }
 }
 
 export interface TransferTechnicalDetailsApiMessage {
   headers?: object;
   body?: object;
+  fxQuoteResponse:{
+    body?: string;
+  }
 }
 
 export interface TransferTechnicalDetails {
@@ -146,6 +151,16 @@ export interface TransferTechnicalDetails {
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
+  
+  // fx
+  conversionId: string;
+  conversionState?: TransferTechnicalDetailsApiMessage;
+  conversionQuoteId: string;
+  fxQuoteRequest?: TransferTechnicalDetailsApiMessage;
+  fxQuoteResponse?: TransferTechnicalDetailsApiMessage;
+  fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
+  fxTransferFulfilment?: TransferTechnicalDetailsApiMessage;
+
 }
 
 export interface TransferDetails {
@@ -174,6 +189,11 @@ export interface TransfersStatus {
   status: TransferStatus;
   count: number;
 }
+// conversion status
+export interface ConversionStatus{
+  status: ConversionStatus;
+  count: number;
+}
 
 export interface SuccessPerc extends LinesConfig {}
 export interface SuccessPercApi {
@@ -197,7 +217,9 @@ export interface TransfersState {
   isTransfersRequested: boolean;
   transfers: Transfer[];
   transfersError: ErrorMessage;
+  //conversionError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
+  //conversionStatuses: ConversionStatus[];
   transfersStatusesError: ErrorMessage;
   transfersSuccessPerc?: SuccessPerc;
   transfersSuccessPercError: ErrorMessage;
