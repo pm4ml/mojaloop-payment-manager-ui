@@ -108,6 +108,7 @@ export interface TransferParty {
   dateOfBirth?: string;
   merchantClassificationCode?: string;
   fspId: string;
+  supportedCurrencies: string[];
   extensionList?: ExtensionListItem[];
 }
 
@@ -128,7 +129,31 @@ export interface TransferDetailsError {
 
 export interface TransferTechnicalDetailsApiMessage {
   headers?: object;
-  body?: object;
+  body?: {
+    payeeReceiveAmount?: {
+      currency: string;
+      amount: string;
+    };
+    transactionType?: {
+      scenario: string;
+    };
+    completedTimestamp: string;
+    transferState: string;
+  };
+}
+
+export interface FXResponses {
+  body: {
+    conversionTerms: {
+      conversionId: string;
+      expiration: string;
+    };
+  };
+}
+
+export interface FxTransferResponses {
+  conversionState: string;
+  completedTimestamp: string;
 }
 
 export interface TransferTechnicalDetails {
@@ -143,11 +168,16 @@ export interface TransferTechnicalDetails {
   getPartiesResponse?: TransferTechnicalDetailsApiMessage;
   quoteRequest?: TransferTechnicalDetailsApiMessage;
   quoteResponse?: TransferTechnicalDetailsApiMessage;
+  fxQuotesResponse?: FXResponses;
+  fxQuotesResponseSource?: FXResponses;
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
+  fxProviders: string[];
+  fxTransferResponse?: FxTransferResponses;
 }
 
+// Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
   id: string;
   confirmationNumber: number;
@@ -161,6 +191,9 @@ export interface TransferDetails {
   status: string;
   initiatedTimestamp: string;
   technicalDetails: TransferTechnicalDetails;
+  transactionType: string;
+  currentState: string;
+  type: string;
 }
 
 export enum DateRange {

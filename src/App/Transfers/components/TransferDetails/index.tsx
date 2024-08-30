@@ -212,7 +212,12 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Transaction Type" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Transaction Type"
+                  type="text"
+                  value={model.type}
+                />
               </div>
             </Row>
 
@@ -247,13 +252,28 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
             </Row>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Receive Amount" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Receive Amount"
+                  type="text"
+                  value={model.technicalDetails.quoteResponse?.body?.payeeReceiveAmount?.amount}
+                />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Receive Currency" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Receive Currency"
+                  type="text"
+                  value={model.technicalDetails.quoteResponse?.body?.payeeReceiveAmount?.currency}
+                />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Conversion Submitted" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Conversion Submitted"
+                  type="text"
+                  value={model.technicalDetails.fxQuotesResponse?.body.conversionTerms.expiration}
+                />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
@@ -283,14 +303,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Recipient Currencies" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Recipient Currencies"
+                  type="text"
+                  value={model.technicalDetails.quoteResponse?.body?.payeeReceiveAmount?.currency}
+                />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Recipient Institution"
                   type="text"
-                  value={model.institution}
+                  value={model.technicalDetails.payeeParty.fspId}
                 />
               </div>
             </Row>
@@ -303,11 +328,16 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Institution"
                   type="text"
-                  value={model.institution}
+                  value={model.technicalDetails.fxProviders}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Conversion State" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Conversion State"
+                  type="text"
+                  value={model.technicalDetails.fxTransferResponse?.conversionState}
+                />
               </div>
             </Row>
           </TabPanel>
