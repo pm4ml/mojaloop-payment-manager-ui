@@ -1,22 +1,22 @@
 {
-    "transferId": "string",
+    "transferId": "1234567890",
     "transferState": "succeeded",
     "direction": "INBOUND",
     "transactionType": "TRANSFER",
     "confirmationNumber": 0,
-    "sendAmount": "string",
+    "sendAmount": "8",
     "sendCurrency": "AED",
     "dateSubmitted": "2024-08-28T09:43:39.199Z",
     "receiveAmount": "7.99",
     "receiveCurrency": "AED",
     "conversionSubmitted": "2023-12-25T14:17:09.663+01:00",
     "senderDetails": {
-        "idType": "MSISDN",
-        "idValue": "string"
+      "idType": "MSISDN",
+      "idValue": "98765432"
     },
     "recipientDetails": {
-        "idType": "MSISDN",
-        "idValue": "string"
+      "idType": "MSISDN",
+      "idValue": "12345678"
     },
     "recipientCurrencies": "AED",
     "recipientInstitution": "dfsp2",
@@ -24,189 +24,337 @@
     "conversionState": "succeeded",
     "initiatedTimestamp": "2024-08-28T09:43:39.199Z",
     "transferTerms": {
-        "transferId": "string",
-        "quoteAmount": {
-            "amount": "string",
-            "currency": "AED"
-        },
-        "quoteAmountType": "SEND",
+      "transferId": "1234567890",
+      "quoteAmount": {
+        "amount": "8",
+        "currency": "AED"
+      },
+      "quoteAmountType": "SEND",
+      "transferAmount": {
+        "amount": "8",
+        "currency": "AED"
+      },
+      "payeeReceiveAmount": {
+        "amount": "7.9",
+        "currency": "AED"
+      },
+      "payeeDfspFee": {
+        "amount": "2.0",
+        "currency": "AED"
+      },
+      "payeeDfspCommision": {
+        "amount": "0.2",
+        "currency": "AED"
+      },
+      "expiryDate": "2024-08-28T09:43:39.199Z",
+      "conversionTerms": {
         "transferAmount": {
-            "amount": "string",
-            "currency": "AED"
+          "amount": "8",
+          "currency": "AED"
         },
-        "payeeReceiveAmount": {
-            "amount": "string",
-            "currency": "AED"
-        },
-        "payeeDfspFee": {
-            "amount": "string",
-            "currency": "AED"
-        },
-        "payeeDfspCommision": {
-            "amount": "string",
-            "currency": "AED"
-        },
-        "expiryDate": "2024-08-28T09:43:39.199Z",
-        "conversionTerms": {
-            "transferAmount": {
-                "amount": "string",
-                "currency": "AED"
-            },
-            "charges": [
-                {}
-            ],
-            "exchangeRate": "string",
-            "expiryDate": "2024-08-28T09:43:39.199Z"
-        }
+        "charges": [
+          {}
+        ],
+        "exchangeRate": "1.2",
+        "expiryDate": "2024-08-28T09:43:39.199Z"
+      }
     },
     "transferParties": {
-        "transferId": "string",
-        "transferState": "ERROR_OCCURRED",
-        "transferType": "Payment",
-        "payerParty": {
-            "type": "CONSUMER",
-            "idType": "MSISDN",
-            "idValue": "string",
-            "idSubValue": "string",
-            "displayName": "string",
-            "firstName": "string",
-            "middleName": "string",
-            "lastName": "string",
-            "dateOfBirth": "string",
-            "merchantClassificationCode": "string",
-            "fspId": "string",
-            "extensionList": [
-                {
-                    "key": "string",
-                    "value": "string"
-                }
-            ]
-        },
-        "payeeParty": {
-            "type": "CONSUMER",
-            "idType": "MSISDN",
-            "idValue": "string",
-            "idSubValue": "string",
-            "displayName": "string",
-            "firstName": "string",
-            "middleName": "string",
-            "lastName": "string",
-            "dateOfBirth": "string",
-            "merchantClassificationCode": "string",
-            "fspId": "string",
-            "extensionList": [
-                {
-                    "key": "string",
-                    "value": "string"
-                }
-            ]
-        }
+      "transferId": "1234567890",
+      "transferState": "succeeded",
+      "transferType": "Payment",
+      "payerParty": {
+        "type": "CONSUMER",
+        "idType": "MSISDN",
+        "idValue": "98765432",
+        "idSubValue": "7654",
+        "displayName": "Naph",
+        "firstName": "Naphtali",
+        "middleName": "Kayoka",
+        "lastName": "Phiri",
+        "dateOfBirth": "23/02/1999",
+        "merchantClassificationCode": "01",
+        "fspId": "Airtel",
+        "extensionList": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ]
+      },
+      "payeeParty": {
+        "type": "CONSUMER",
+        "idType": "MSISDN",
+        "idValue": "123456789",
+        "idSubValue": "1234",
+        "displayName": "Madara",
+        "firstName": "Niza",
+        "middleName": "Madara",
+        "lastName": "Kayoka",
+        "dateOfBirth": "10/02/1888",
+        "merchantClassificationCode": "02",
+        "fspId": "MTN",
+        "extensionList": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ]
+      }
     },
     "technicalDetails": {
-        "schemeTransferId": "string",
-        "transactionId": "string",
-        "quoteId": "string",
-        "homeTransferId": "string",
-        "payerParty": {
-            "type": "CONSUMER",
-            "idType": "MSISDN",
-            "idValue": "string",
-            "idSubValue": "string",
-            "displayName": "string",
-            "firstName": "string",
-            "middleName": "string",
-            "lastName": "string",
-            "dateOfBirth": "string",
-            "merchantClassificationCode": "string",
-            "fspId": "string",
-            "extensionList": [
-                {
-                    "key": "string",
-                    "value": "string"
-                }
+      "schemeTransferId": "1234567890",
+      "transactionId": "1234567890",
+      "quoteId": "123456",
+      "homeTransferId": "09876543",
+      "payerParty": {
+        "type": "CONSUMER",
+        "idType": "MSISDN",
+        "idValue": "98765432",
+        "idSubValue": "7654",
+        "displayName": "Naph",
+        "firstName": "Naphtali",
+        "middleName": "Kayoka",
+        "lastName": "Phiri",
+        "dateOfBirth": "23/02/1999",
+        "merchantClassificationCode": "01",
+        "fspId": "Airtel",
+        "extensionList": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ]
+      },
+      "payeeParty": {
+        "type": "CONSUMER",
+        "idType": "MSISDN",
+        "idValue": "123456789",
+        "idSubValue": "1234",
+        "displayName": "Madara",
+        "firstName": "Niza",
+        "middleName": "Madara",
+        "lastName": "Kayoka",
+        "dateOfBirth": "10/02/1888",
+        "merchantClassificationCode": "02",
+        "fspId": "MTN",
+        "extensionList": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ]
+      },
+      "transferState": "succeeded",
+      "getPartiesRequest": {
+        "headers": {},
+        "body": {}
+      },
+      "getPartiesResponse": {
+        "body": {
+          "party": {
+            "partyIdInfo": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "16135551002",
+              "fspId": "testingtoolkitdfsp",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "ad dolore off",
+                    "value": "nostrud deserunt laborum adipisicing pariatur"
+                  },
+                  {
+                    "key": "sit",
+                    "value": "Duis"
+                  }
+                ]
+              }
+            },
+            "name": "k Clt-Pc_L in'rLMgMLrgPgJJdk}'MPo{{gp",
+            "merchantClassificationCode": "7",
+            "personalInfo": {
+              "complexName": {
+                "firstName": "Chris",
+                "lastName": "Lee",
+                "middleName": "P"
+              },
+              "dateOfBirth": "1922-12-26"
+            },
+            "supportedCurrencies": [
+              "TZS"
             ]
+          }
         },
-        "payeeParty": {
-            "type": "CONSUMER",
-            "idType": "MSISDN",
-            "idValue": "string",
-            "idSubValue": "string",
-            "displayName": "string",
-            "firstName": "string",
-            "middleName": "string",
-            "lastName": "string",
-            "dateOfBirth": "string",
-            "merchantClassificationCode": "string",
-            "fspId": "string",
-            "extensionList": [
-                {
-                    "key": "string",
-                    "value": "string"
-                }
-            ]
-        },
-        "transferState": "ERROR_OCCURRED",
-        "getPartiesRequest": {
-            "headers": {},
-            "body": {}
-        },
-        "getPartiesResponse": {
-            "headers": {},
-            "body": {}
-        },
-        "quoteRequest": {
-            "headers": {},
-            "body": {}
-        },
-        "quoteResponse": {
-            "headers": {},
-            "body": {}
-        },
-        "fxQuoteRequest": {
-            "headers": {},
-            "body": {}
-        },
-        "fxQuoteResponse": {
-            "conversionId": "string",
-            "conversionQuoteId": "string",
-            "initiatingFsp": "PayerFSP",
-            "counterPartyFsp": "testfxp1",
-            "amountType": "SEND",
-            "sourceAmount": {},
-            "targetAmount": {},
-            "conversionSubmitted": "2023-12-25T14:17:09.663+01:00",
-            "conversionState": "ERROR_OCCURRED",
-            "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-            "expiration": "2023-12-25T14:17:09.663+01:00",
-            "charges": [
-                {}
-            ]
-        },
-        "fxTransferPrepare": {
-            "headers": {},
-            "body": {}
-        },
-        "fxTransferFulfilment": {
-            "transferState": "COMMITTED",
-            "fulfilment": "kDOgQH81DGGZ7nZaExSCAB9Y2e74Po564CStclCoukI",
-            "completedTimestamp": "2024-08-27T06:44:46.180Z"
-        },
-        "lastError": {
-            "httpStatusCode": 0,
-            "mojaloopError": {
-                "errorInformation": {
-                    "errorCode": "string",
-                    "errorDescription": "string",
-                    "extensionList": {
-                        "extension": [
-                            {
-                                "key": "string",
-                                "value": "string"
-                            }
-                        ]
-                    }
-                }
-            }
+        "headers": {
+          "content-type": "application/vnd.interoperability.parties+json;version=1.0",
+          "date": "Tue, 27 Aug 2024 06:44:42 GMT",
+          "x-forwarded-for": "ut est",
+          "fspiop-source": "testingtoolkitdfsp",
+          "fspiop-destination": "dfsp1",
+          "fspiop-encryption": "consectetur eiusmod proident",
+          "fspiop-signature": "id commodo adipisicing non aliqua",
+          "fspiop-uri": "nisi ea veniam in sit",
+          "fspiop-http-method": "adipisicing cillum Excepteur mollit",
+          "traceparent": "00-ccdd97ef44f66398e1fc146e438189-0123456789abcdef0-00",
+          "user-agent": "axios/0.27.2",
+          "content-length": 476,
+          "host": "sdk-scheme-adapter:4000",
+          "connection": "keep-alive"
         }
+      },
+      "quoteRequest": {
+        "headers": {
+          "content-type": "application/vnd.interoperability.quotes+json;version=1.0",
+          "date": "Mon, 26 Aug 2024 14:25:14 GMT",
+          "fspiop-source": "dfsp1",
+          "fspiop-destination": "testingtoolkitdfsp",
+          "accept": "application/vnd.interoperability.quotes+json;version=1",
+          "content-length": 968
+        },
+        "body": {
+          "quoteId": "959f979b-5732-4ebc-bdc2-0324e1eb0f3c",
+          "transactionId": "d9a3baf3-7270-4f11-b4a1-435866278ab9",
+          "amountType": "SEND",
+          "amount": {
+            "currency": "TZS",
+            "amount": "500"
+          },
+          "expiration": "2024-08-26T14:26:14.797Z",
+          "payer": {
+            "partyIdInfo": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "16135551001",
+              "fspId": "dfsp1"
+            },
+            "personalInfo": {
+              "complexName": {
+                "firstName": "Henrik",
+                "middleName": "Johannes",
+                "lastName": "Karlsson"
+              },
+              "dateOfBirth": "1966-06-16"
+            },
+            "name": "string"
+          },
+          "payee": {
+            "partyIdInfo": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "16135551002",
+              "fspId": "testingtoolkitdfsp",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "est sint",
+                    "value": "eiusmod Ut dolore cillum ut"
+                  },
+                  {
+                    "key": "Lorem dolore",
+                    "value": "ut deserunt enim"
+                  }
+                ]
+              }
+            },
+            "personalInfo": {
+              "complexName": {
+                "firstName": "Paul",
+                "middleName": "P",
+                "lastName": "Williams"
+              },
+              "dateOfBirth": "1956-06-18"
+            },
+            "merchantClassificationCode": "123"
+          },
+          "transactionType": {
+            "scenario": "TRANSFER",
+            "initiator": "PAYER",
+            "initiatorType": "CONSUMER"
+          },
+          "note": "Note sent to Payee."
+        }
+      },
+      "quoteResponse": {
+        "headers": {
+          "content-type": "application/vnd.interoperability.quotes+json;version=1.1",
+          "date": "Mon, 26 Aug 2024 14:25:14 GMT",
+          "x-forwarded-for": "veniam voluptate",
+          "fspiop-source": "testingtoolkitdfsp",
+          "fspiop-destination": "dfsp1",
+          "fspiop-encryption": "mollit tempor",
+          "fspiop-signature": "id dolore",
+          "fspiop-uri": "dolore dolore consectetur cillum sunt",
+          "fspiop-http-method": "mollit",
+          "traceparent": "00-ccddb228d3c584eb0146cf3d3213bc-0123456789abcdef0-00",
+          "user-agent": "axios/0.27.2",
+          "content-length": 2014,
+          "host": "sdk-scheme-adapter:4000",
+          "connection": "keep-alive"
+        },
+        "body": {
+          "transferAmount": {
+            "currency": "TZS",
+            "amount": "500"
+          },
+          "expiration": "2024-08-27T14:25:14.808Z",
+          "ilpPacket": "AYIEyAAAAAAAAMNQJ2cudGVzdGluZ3Rvb2xraXRkZnNwLm1zaXNkbi4xNjEzNTU1MTAwMoIElGV5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVpEbGhNMkpoWmpNdE56STNNQzAwWmpFeExXSTBZVEV0TkRNMU9EWTJNamM0WVdJNUlpd2ljWFZ2ZEdWSlpDSTZJamsxT1dZNU56bGlMVFUzTXpJdE5HVmlZeTFpWkdNeUxUQXpNalJsTVdWaU1HWXpZeUlzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU1UWXhNelUxTlRFd01ESWlMQ0ptYzNCSlpDSTZJblJsYzNScGJtZDBiMjlzYTJsMFpHWnpjQ0lzSW1WNGRHVnVjMmx2Ymt4cGMzUWlPbnNpWlhoMFpXNXphVzl1SWpwYmV5SnJaWGtpT2lKbGMzUWdjMmx1ZENJc0luWmhiSFZsSWpvaVpXbDFjMjF2WkNCVmRDQmtiMnh2Y21VZ1kybHNiSFZ0SUhWMEluMHNleUpyWlhraU9pSk1iM0psYlNCa2IyeHZjbVVpTENKMllXeDFaU0k2SW5WMElHUmxjMlZ5ZFc1MElHVnVhVzBpZlYxOWZTd2ljR1Z5YzI5dVlXeEpibVp2SWpwN0ltTnZiWEJzWlhoT1lXMWxJanA3SW1acGNuTjBUbUZ0WlNJNklsQmhkV3dpTENKdGFXUmtiR1ZPWVcxbElqb2lVQ0lzSW14aGMzUk9ZVzFsSWpvaVYybHNiR2xoYlhNaWZTd2laR0YwWlU5bVFtbHlkR2dpT2lJeE9UVTJMVEEyTFRFNEluMHNJbTFsY21Ob1lXNTBRMnhoYzNOcFptbGpZWFJwYjI1RGIyUmxJam9pTVRJekluMHNJbkJoZVdWeUlqcDdJbkJoY25SNVNXUkpibVp2SWpwN0luQmhjblI1U1dSVWVYQmxJam9pVFZOSlUwUk9JaXdpY0dGeWRIbEpaR1Z1ZEdsbWFXVnlJam9pTVRZeE16VTFOVEV3TURFaUxDSm1jM0JKWkNJNkltUm1jM0F4SW4wc0luQmxjbk52Ym1Gc1NXNW1ieUk2ZXlKamIyMXdiR1Y0VG1GdFpTSTZleUptYVhKemRFNWhiV1VpT2lKSVpXNXlhV3NpTENKdGFXUmtiR1ZPWVcxbElqb2lTbTlvWVc1dVpYTWlMQ0pzWVhOMFRtRnRaU0k2SWt0aGNteHpjMjl1SW4wc0ltUmhkR1ZQWmtKcGNuUm9Jam9pTVRrMk5pMHdOaTB4TmlKOUxDSnVZVzFsSWpvaWMzUnlhVzVuSW4wc0ltRnRiM1Z1ZENJNmV5SmpkWEp5Wlc1amVTSTZJbFJhVXlJc0ltRnRiM1Z1ZENJNklqVXdNQ0o5TENKMGNtRnVjMkZqZEdsdmJsUjVjR1VpT25zaWMyTmxibUZ5YVc4aU9pSlVVa0ZPVTBaRlVpSXNJbWx1YVhScFlYUnZjaUk2SWxCQldVVlNJaXdpYVc1cGRHbGhkRzl5Vkhsd1pTSTZJa05QVGxOVlRVVlNJbjE5AA",
+          "condition": "soUKcM_2mUybmHgLd8rLLcrfprX0Sf4xMgdZPrHulRk",
+          "payeeFspFee": {
+            "currency": "TZS",
+            "amount": "0.2"
+          },
+          "geoCode": {
+            "latitude": "+68.1",
+            "longitude": "180.000"
+          },
+          "payeeReceiveAmount": {
+            "currency": "TZS",
+            "amount": "500"
+          },
+          "payeeFspCommission": {
+            "currency": "TZS",
+            "amount": "0.3"
+          }
+        }
+      },
+      "fxQuoteRequest": {
+        "method": "POST",
+        "host": "mojaloop-testing-toolkit",
+        "port": "4040",
+        "path": "/fxQuotes",
+        "headers": {
+          "content-type": "application/vnd.interoperability.fxQuotes+json;version=2.0",
+          "date": "Tue, 27 Aug 2024 06:44:43 GMT",
+          "fspiop-source": "dfsp1",
+          "fspiop-destination": "testfxp1",
+          "accept": "application/vnd.interoperability.fxQuotes+json;version=2",
+          "content-length": 331
+        },
+        "agent": "[REDACTED]",
+        "body": "{\"conversionRequestId\":\"c74bccab-29e7-471c-95f8-59591169f33f\",\"conversionTerms\":{\"conversionId\":\"08ae7b6d-e909-4957-a145-8d7233e3ba6a\",\"initiatingFsp\":\"dfsp1\",\"counterPartyFsp\":\"testfxp1\",\"amountType\":\"SEND\",\"sourceAmount\":{\"currency\":\"EUR\",\"amount\":\"10\"},\"targetAmount\":{\"currency\":\"TZS\"},\"expiration\":\"2024-08-27T06:45:43.923Z\"}}"
+      },
+      "fxQuoteResponse": {
+        "conversionId": "1234fdgh67523",
+        "conversionQuoteId": "124gdhju7564tgdfb",
+        "initiatingFsp": "PayerFSP",
+        "counterPartyFsp": "testfxp1",
+        "amountType": "SEND",
+        "sourceAmount": {},
+        "targetAmount": {},
+        "conversionSubmitted": "2023-12-25T14:17:09.663+01:00",
+        "conversionState": "ERROR_OCCURRED",
+        "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+        "expiration": "2023-12-25T14:17:09.663+01:00",
+        "charges": [
+          {}
+        ]
+      },
+      "fxTransferPrepare": {
+        "headers": {},
+        "body": {}
+      },
+      "fxTransferFulfilment": {
+        "transferState": "COMMITTED",
+        "fulfilment": "kDOgQH81DGGZ7nZaExSCAB9Y2e74Po564CStclCoukI",
+        "completedTimestamp": "2024-08-27T06:44:46.180Z"
+      }
     }
-}
+  }

@@ -202,7 +202,24 @@ export interface TransferTechnicalDetails {
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
-  fxProviders: string[];
+  conversionId: FxQuoteResponse;
+  conversionState?: FxQuoteResponse;
+  conversionQuoteId: FxQuoteResponse;
+  fxQuoteRequest?: TransferTechnicalDetailsApiMessage;
+  fxQuoteResponse?: FxQuoteResponse;
+  fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
+  fxTransferFulfilment?: FxTransferFulfilment;
+}
+
+export interface FxQuoteResponse {
+  // body: {};
+  conversionId: string;
+  conversionQuoteId: string;
+  conversionState: string;
+}
+
+export interface FxTransferFulfilment {
+  body: {};
 }
 
 export interface TransferTerms {

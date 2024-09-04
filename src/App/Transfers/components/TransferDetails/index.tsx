@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
@@ -145,6 +146,41 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showFxQuoteRequest = (aModel: any) => {
+    setRequestModel(aModel);
+    setRequestModalTitle('Fx Quote Request');
+    setIsRequestDetailsVisible(!isRequestDetailsVisible);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showFxQuoteResponse = (aModel: any) => {
+    setRequestModel(aModel);
+    setRequestModalTitle('Fx Quote Response');
+    setIsRequestDetailsVisible(!isRequestDetailsVisible);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showFxTransferPrepare = (aModel: any) => {
+    setRequestModel(aModel);
+    setRequestModalTitle('Fx Transfer Prepare');
+    setIsRequestDetailsVisible(!isRequestDetailsVisible);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showFxTransferFulfil = (aModel: any) => {
+    setRequestModel(aModel);
+    setRequestModalTitle('Fx Transfer Fulfil');
+    setIsRequestDetailsVisible(!isRequestDetailsVisible);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showConversionError = (aModel: any) => {
+    setRequestModel(aModel);
+    setRequestModalTitle('Conversion Error');
+    setIsRequestDetailsVisible(!isRequestDetailsVisible);
+  };
+
   let transferStateInput = (
     <FormInput
       disabled={true}
@@ -164,6 +200,32 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
             label="Transfer State"
             value={model.technicalDetails.transferState}
             onButtonClick={() => showTransferError(model.technicalDetails.lastError)}
+            buttonText="View Error"
+            buttonKind="secondary"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  let conversionStateInput = (
+    <FormInput
+      disabled={true}
+      label="Conversion State"
+      value={model.technicalDetails.fxQuoteResponse?.conversionState}
+    />
+  );
+
+  if (model.technicalDetails.lastError) {
+    conversionStateInput = (
+      <div className="forminput__row">
+        <div className="forminput-input">
+          <label>Conversion State</label>
+          <TextField
+            disabled={false}
+            label="Conversion State"
+            value={model.technicalDetails.fxQuoteResponse?.conversionState}
+            onButtonClick={() => showConversionError(model.technicalDetails.lastError)}
             buttonText="View Error"
             buttonKind="secondary"
           />
@@ -785,6 +847,28 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {transferStateInput}
                 </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <FormInput
+                    id="transfer-details-modal__conversion-id"
+                    disabled={true}
+                    label="Conversion ID"
+                    value={model.technicalDetails.fxQuoteResponse?.conversionId}
+                  />
+                </Row>
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                  <FormInput
+                    id="transfer-details-modal__home-transfer-id"
+                    disabled={true}
+                    label="Conversion Quote ID"
+                    value={model.technicalDetails.fxQuoteResponse?.conversionQuoteId}
+                    style={{ flex: 1 }}
+                  />
+                </div>
+
+                {/* Conversion State */}
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {conversionStateInput}
+                </Row>
               </div>
               <div style={{ alignItems: 'flex-start', flex: '0 0 50%', marginRight: '5px' }}>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
@@ -938,6 +1022,126 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       noFill={true}
                       label="Transfer Fulfil"
                       onClick={() => showTransferFulfil(model.technicalDetails.transferFulfilment)}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <div style={{ width: '100%' }}>
+                    <Button
+                      kind="secondary"
+                      style={{ width: '100%' }}
+                      disabled={
+                        !(
+                          model.technicalDetails.fxQuoteRequest &&
+                          model.technicalDetails.fxQuoteRequest.body
+                        )
+                      }
+                      tooltip={
+                        !(
+                          model.technicalDetails.fxQuoteRequest &&
+                          model.technicalDetails.fxQuoteRequest.body
+                        ) &&
+                        'This option is only available when an Fx POST /quote request can be found for the transfer'
+                      }
+                      noFill={true}
+                      label={
+                        <span>
+                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
+                          <span> Quote Request</span>
+                        </span>
+                      }
+                      onClick={() => showFxQuoteRequest(model.technicalDetails.fxQuoteRequest)}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <div style={{ width: '100%' }}>
+                    <Button
+                      kind="secondary"
+                      style={{ width: '100%' }}
+                      disabled={
+                        !(
+                          model.technicalDetails.fxQuoteResponse &&
+                          model.technicalDetails.fxQuoteResponse
+                        )
+                      }
+                      tooltip={
+                        !(
+                          model.technicalDetails.fxQuoteResponse &&
+                          model.technicalDetails.fxQuoteResponse
+                        ) &&
+                        'This option is only available when an fx POST /fxquote response can be found for the transfer'
+                      }
+                      noFill={true}
+                      label={
+                        <span>
+                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
+                          <span> Quote Response</span>
+                        </span>
+                      }
+                      onClick={() => showFxQuoteResponse(model.technicalDetails.fxQuoteResponse)}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <div style={{ width: '100%' }}>
+                    <Button
+                      kind="secondary"
+                      style={{ width: '100%' }}
+                      disabled={
+                        !(
+                          model.technicalDetails.fxTransferPrepare &&
+                          model.technicalDetails.fxTransferPrepare.body
+                        )
+                      }
+                      tooltip={
+                        !(
+                          model.technicalDetails.fxTransferPrepare &&
+                          model.technicalDetails.fxTransferPrepare.body
+                        ) &&
+                        'This option is only available when an fx POST /transfers prepare can be found for the transfer'
+                      }
+                      noFill={true}
+                      label={
+                        <span>
+                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
+                          <span> Transfer Prepare</span>
+                        </span>
+                      }
+                      onClick={() =>
+                        showFxTransferPrepare(model.technicalDetails.fxTransferPrepare)
+                      }
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <div style={{ width: '100%' }}>
+                    <Button
+                      kind="secondary"
+                      style={{ width: '100%' }}
+                      disabled={
+                        !(
+                          model.technicalDetails.fxTransferFulfilment &&
+                          model.technicalDetails.fxTransferFulfilment
+                        )
+                      }
+                      tooltip={
+                        !(
+                          model.technicalDetails.fxTransferFulfilment &&
+                          model.technicalDetails.fxTransferFulfilment
+                        ) &&
+                        'This option is only available when a POST /transfers fulfilment can be found for the transfer'
+                      }
+                      noFill={true}
+                      label={
+                        <span>
+                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
+                          <span> Transfer Fulfil</span>
+                        </span>
+                      }
+                      onClick={() =>
+                        showFxTransferFulfil(model.technicalDetails.fxTransferFulfilment)
+                      }
                     />
                   </div>
                 </Row>
