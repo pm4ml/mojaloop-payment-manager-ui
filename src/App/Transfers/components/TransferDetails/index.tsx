@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { State, Dispatch } from 'store/types';
@@ -176,6 +177,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
       <Tabs>
         <TabList>
           <Tab>Transfer Details</Tab>
+          <Tab>Transfer Terms</Tab>
+          <Tab>Transfer Parties</Tab>
           <Tab>Technical Details</Tab>
         </TabList>
         <TabPanels>
@@ -186,7 +189,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Transfer ID"
                   type="text"
-                  value={model.id}
+                  value={model.transferId}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -199,7 +202,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Transfer State"
                   type="text"
-                  value={model.technicalDetails.transferState}
+                  value={model.transferState}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -216,21 +219,26 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Transaction Type"
                   type="text"
-                  value={model.type}
+                  value={model.transactionType}
                 />
               </div>
             </Row>
 
             <Row align="flex-start" style={{ marginTop: '5px' }}>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Send Amount" type="text" value={model.amount} />
+                <FormInput
+                  disabled={true}
+                  label="Send Amount"
+                  type="text"
+                  value={model.sendAmount}
+                />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Send Currency"
                   type="text"
-                  value={model.currency}
+                  value={model.sendCurrency}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -238,7 +246,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Date Submitted"
                   type="text"
-                  value={model.initiatedTimestamp}
+                  value={model.dateSubmitted}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -256,7 +264,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Receive Amount"
                   type="text"
-                  value={model.technicalDetails.quoteResponse?.body?.payeeReceiveAmount?.amount}
+                  value={model.receiveAmount}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -264,7 +272,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Receive Currency"
                   type="text"
-                  value={model.technicalDetails.quoteResponse?.body?.payeeReceiveAmount?.currency}
+                  value={model.receiveCurrency}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -272,7 +280,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Submitted"
                   type="text"
-                  value={model.technicalDetails.fxQuotesResponse?.body.conversionTerms.expiration}
+                  value={model.conversionSubmitted}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -290,7 +298,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Sender Details"
                   type="text"
-                  value={`${model.technicalDetails.payerParty.idType} ${model.technicalDetails.payerParty.idValue}`}
+                  value={`${model.senderDetails.idType} ${model.senderDetails.idValue}`}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -299,7 +307,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Recipient Details"
                   type="text"
-                  value={`${model.technicalDetails.payeeParty.idType} ${model.technicalDetails.payeeParty.idValue}`}
+                  value={`${model.recipientDetails.idType} ${model.recipientDetails.idValue}`}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -307,7 +315,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Recipient Currencies"
                   type="text"
-                  value={model.technicalDetails.quoteResponse?.body?.payeeReceiveAmount?.currency}
+                  value={model.recipientCurrencies}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -315,20 +323,25 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Recipient Institution"
                   type="text"
-                  value={model.technicalDetails.payeeParty.fspId}
+                  value={model.recipientInstitution}
                 />
               </div>
             </Row>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput disabled={true} label="Conversion Type" type="text" value="N/A" />
+                <FormInput
+                  disabled={true}
+                  label="Conversion Type"
+                  type="text"
+                  value="Payer DFSP Conversion"
+                />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Conversion Institution"
                   type="text"
-                  value={model.technicalDetails.fxProviders}
+                  value={model.conversionInstitution}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -336,8 +349,404 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion State"
                   type="text"
-                  value={model.technicalDetails.fxTransferResponse?.conversionState}
+                  value={model.conversionState}
                 />
+              </div>
+            </Row>
+          </TabPanel>
+          <TabPanel>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer ID"
+                  type="text"
+                  value={model.transferTerms.transferId}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                />
+              </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer State"
+                  type="text"
+                  value={model.transferState}
+                />
+              </div>
+              <div style={{ flex: '0 0 12%', marginRight: '0', maxWidth: '15%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Quote Amount"
+                  type="text"
+                  value={model.transferTerms.quoteAmount.amount}
+                />
+              </div>
+              <div style={{ flex: '0 0 1%', marginRight: '5px', maxWidth: '10%' }}>
+                <FormInput
+                  disabled={true}
+                  label=" "
+                  type="text"
+                  value={model.transferTerms.quoteAmount.currency}
+                />
+              </div>
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '20%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Quote Amount Type"
+                  type="text"
+                  value={model.transferTerms.quoteAmountType}
+                />
+              </div>
+            </Row>
+            <Row align="flex-start stretch">
+              <div
+                style={{
+                  width: '50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px' }}>Transfer Terms</label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Transfer Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.transferAmount.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.transferAmount.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Payee Receive Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.payeeReceiveAmount.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.payeeReceiveAmount.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Payee DFSP Fee
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.payeeDfspFee.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.payeeDfspFee.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Payee DFSP Commission
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.payeeDfspCommision.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.payeeDfspCommision.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Expiry Date Time
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '60%' }}>
+                    <FormInput disabled={true} type="text" value={model.transferTerms.expiryDate} />
+                  </div>
+                </Row>
+              </div>
+              <div
+                style={{
+                  width: '50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ paddingTop: '5px', paddingBottom: '5px' }}>
+                    Conversion Terms
+                  </label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Transfer Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.transferAmount.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.transferAmount.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Charges
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.charges?.sourceAmount?.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.charges?.sourceAmount?.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Charges
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.charges?.targetAmount?.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.charges?.targetAmount?.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Exchange Rate
+                  </label>
+                  <div style={{ marginRight: '0', maxWidth: '30%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.exchangeRate}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Expiry Date Time
+                  </label>
+                  <div style={{ marginRight: '0', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.expiryDate}
+                    />
+                  </div>
+                </Row>
+              </div>
+            </Row>
+          </TabPanel>
+          <TabPanel>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer ID"
+                  type="text"
+                  value={model.transferParties.transferId}
+                />
+              </div>
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer State"
+                  type="text"
+                  value={model.transferParties.transferState}
+                />
+              </div>
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Transfer Type"
+                  type="text"
+                  value={model.transferParties.transferType}
+                />
+              </div>
+            </Row>
+            <Row align="flex-start stretch">
+              <div
+                style={{
+                  width: '50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  <label style={{ padding: '5px' }}>Payer Details</label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>Payee Identifier</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferParties.payerParty.idValue}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>
+                    Payee Identifier Type
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput disabled={true} value={model.transferParties.payerParty.idType} />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>First Name</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput disabled={true} value={model.transferParties.payerParty.firstName} />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>Middle Name</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput
+                      id="transfer-details-modal__home-transfer-id"
+                      disabled={true}
+                      value={model.transferParties.payerParty.middleName}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>Last Name</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput disabled={true} value={model.transferParties.payerParty.lastName} />
+                  </div>
+                </Row>
+              </div>
+              <div
+                style={{
+                  width: '50%',
+                  marginRight: '10px',
+                  marginTop: '10px',
+                  border: '1px solid #ccc',
+                  padding: '10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                  <label style={{ paddingTop: '5px', paddingBottom: '5px' }}>Payee Details</label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>Payee Identifier</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferParties.payeeParty.idValue}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>
+                    Payee Identifier Type
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput disabled={true} value={model.transferParties.payeeParty.idType} />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>First Name</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput disabled={true} value={model.transferParties.payeeParty.firstName} />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>Middle Name</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput
+                      id="transfer-details-modal__home-transfer-id"
+                      disabled={true}
+                      value={model.transferParties.payeeParty.middleName}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  <label style={{ marginRight: '5px', minWidth: '40%' }}>Last Name</label>
+                  <div style={{ marginRight: '5px', minWidth: '50%' }}>
+                    <FormInput disabled={true} value={model.transferParties.payeeParty.lastName} />
+                  </div>
+                </Row>
               </div>
             </Row>
           </TabPanel>

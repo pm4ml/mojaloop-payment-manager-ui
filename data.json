@@ -1,0 +1,212 @@
+{
+    "transferId": "string",
+    "transferState": "succeeded",
+    "direction": "INBOUND",
+    "transactionType": "TRANSFER",
+    "confirmationNumber": 0,
+    "sendAmount": "string",
+    "sendCurrency": "AED",
+    "dateSubmitted": "2024-08-28T09:43:39.199Z",
+    "receiveAmount": "7.99",
+    "receiveCurrency": "AED",
+    "conversionSubmitted": "2023-12-25T14:17:09.663+01:00",
+    "senderDetails": {
+        "idType": "MSISDN",
+        "idValue": "string"
+    },
+    "recipientDetails": {
+        "idType": "MSISDN",
+        "idValue": "string"
+    },
+    "recipientCurrencies": "AED",
+    "recipientInstitution": "dfsp2",
+    "conversionInstitution": "Global-FXP",
+    "conversionState": "succeeded",
+    "initiatedTimestamp": "2024-08-28T09:43:39.199Z",
+    "transferTerms": {
+        "transferId": "string",
+        "quoteAmount": {
+            "amount": "string",
+            "currency": "AED"
+        },
+        "quoteAmountType": "SEND",
+        "transferAmount": {
+            "amount": "string",
+            "currency": "AED"
+        },
+        "payeeReceiveAmount": {
+            "amount": "string",
+            "currency": "AED"
+        },
+        "payeeDfspFee": {
+            "amount": "string",
+            "currency": "AED"
+        },
+        "payeeDfspCommision": {
+            "amount": "string",
+            "currency": "AED"
+        },
+        "expiryDate": "2024-08-28T09:43:39.199Z",
+        "conversionTerms": {
+            "transferAmount": {
+                "amount": "string",
+                "currency": "AED"
+            },
+            "charges": [
+                {}
+            ],
+            "exchangeRate": "string",
+            "expiryDate": "2024-08-28T09:43:39.199Z"
+        }
+    },
+    "transferParties": {
+        "transferId": "string",
+        "transferState": "ERROR_OCCURRED",
+        "transferType": "Payment",
+        "payerParty": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "string",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "string",
+            "middleName": "string",
+            "lastName": "string",
+            "dateOfBirth": "string",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "extensionList": [
+                {
+                    "key": "string",
+                    "value": "string"
+                }
+            ]
+        },
+        "payeeParty": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "string",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "string",
+            "middleName": "string",
+            "lastName": "string",
+            "dateOfBirth": "string",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "extensionList": [
+                {
+                    "key": "string",
+                    "value": "string"
+                }
+            ]
+        }
+    },
+    "technicalDetails": {
+        "schemeTransferId": "string",
+        "transactionId": "string",
+        "quoteId": "string",
+        "homeTransferId": "string",
+        "payerParty": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "string",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "string",
+            "middleName": "string",
+            "lastName": "string",
+            "dateOfBirth": "string",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "extensionList": [
+                {
+                    "key": "string",
+                    "value": "string"
+                }
+            ]
+        },
+        "payeeParty": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "string",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "string",
+            "middleName": "string",
+            "lastName": "string",
+            "dateOfBirth": "string",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "extensionList": [
+                {
+                    "key": "string",
+                    "value": "string"
+                }
+            ]
+        },
+        "transferState": "ERROR_OCCURRED",
+        "getPartiesRequest": {
+            "headers": {},
+            "body": {}
+        },
+        "getPartiesResponse": {
+            "headers": {},
+            "body": {}
+        },
+        "quoteRequest": {
+            "headers": {},
+            "body": {}
+        },
+        "quoteResponse": {
+            "headers": {},
+            "body": {}
+        },
+        "fxQuoteRequest": {
+            "headers": {},
+            "body": {}
+        },
+        "fxQuoteResponse": {
+            "conversionId": "string",
+            "conversionQuoteId": "string",
+            "initiatingFsp": "PayerFSP",
+            "counterPartyFsp": "testfxp1",
+            "amountType": "SEND",
+            "sourceAmount": {},
+            "targetAmount": {},
+            "conversionSubmitted": "2023-12-25T14:17:09.663+01:00",
+            "conversionState": "ERROR_OCCURRED",
+            "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "expiration": "2023-12-25T14:17:09.663+01:00",
+            "charges": [
+                {}
+            ]
+        },
+        "fxTransferPrepare": {
+            "headers": {},
+            "body": {}
+        },
+        "fxTransferFulfilment": {
+            "transferState": "COMMITTED",
+            "fulfilment": "kDOgQH81DGGZ7nZaExSCAB9Y2e74Po564CStclCoukI",
+            "completedTimestamp": "2024-08-27T06:44:46.180Z"
+        },
+        "lastError": {
+            "httpStatusCode": 0,
+            "mojaloopError": {
+                "errorInformation": {
+                    "errorCode": "string",
+                    "errorDescription": "string",
+                    "extensionList": {
+                        "extension": [
+                            {
+                                "key": "string",
+                                "value": "string"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

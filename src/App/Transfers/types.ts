@@ -129,31 +129,62 @@ export interface TransferDetailsError {
 
 export interface TransferTechnicalDetailsApiMessage {
   headers?: object;
-  body?: {
-    payeeReceiveAmount?: {
-      currency: string;
+  body?: object;
+}
+
+export interface SenderDetails {
+  idType: string;
+  idValue: string;
+}
+
+export interface RecipientDetails {
+  idType: string;
+  idValue: string;
+}
+
+export interface QuoteAmount {
+  amount: string;
+  currency: string;
+}
+
+export interface TransferAmount {
+  amount: string;
+  currency: string;
+}
+
+export interface PayeeReceiveAmount {
+  amount: string;
+  currency: string;
+}
+
+export interface PayeeDfspFee {
+  amount: string;
+  currency: string;
+}
+
+export interface PayeeDfspCommision {
+  amount: string;
+  currency: string;
+}
+
+export interface ConversionTerms {
+  transferAmount: {
+    amount: string;
+    currency: string;
+  };
+  charges?: {
+    chargeType: string;
+    sourceAmount?: {
       amount: string;
+      currency: string;
     };
-    transactionType?: {
-      scenario: string;
-    };
-    completedTimestamp: string;
-    transferState: string;
-  };
-}
-
-export interface FXResponses {
-  body: {
-    conversionTerms: {
-      conversionId: string;
-      expiration: string;
+    targetAmount?: {
+      amount: string;
+      currency: string;
     };
   };
-}
-
-export interface FxTransferResponses {
-  conversionState: string;
-  completedTimestamp: string;
+  exchangeRate: string;
+  expiryDate: string;
 }
 
 export interface TransferTechnicalDetails {
@@ -168,32 +199,64 @@ export interface TransferTechnicalDetails {
   getPartiesResponse?: TransferTechnicalDetailsApiMessage;
   quoteRequest?: TransferTechnicalDetailsApiMessage;
   quoteResponse?: TransferTechnicalDetailsApiMessage;
-  fxQuotesResponse?: FXResponses;
-  fxQuotesResponseSource?: FXResponses;
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
   fxProviders: string[];
-  fxTransferResponse?: FxTransferResponses;
 }
 
+export interface TransferTerms {
+  transferId: string;
+  homeTransferId: string;
+  quoteAmount: QuoteAmount;
+  quoteAmountType: string;
+  transferAmount: TransferAmount;
+  payeeReceiveAmount: PayeeReceiveAmount;
+  payeeDfspFee: PayeeDfspFee;
+  payeeDfspCommision: PayeeDfspCommision;
+  expiryDate: string;
+  conversionTerms: ConversionTerms;
+}
+
+export interface TransferParties {
+  transferId: string;
+  transferState: string;
+  transferType: string;
+  payerParty: TransferParty;
+  payeeParty: TransferParty;
+  quoteId: string;
+  getPartiesRequest?: TransferTechnicalDetailsApiMessage;
+  getPartiesResponse?: TransferTechnicalDetailsApiMessage;
+  quoteRequest?: TransferTechnicalDetailsApiMessage;
+  quoteResponse?: TransferTechnicalDetailsApiMessage;
+  transferPrepare?: TransferTechnicalDetailsApiMessage;
+  transferFulfilment?: TransferTechnicalDetailsApiMessage;
+  lastError?: TransferDetailsError;
+  fxProviders: string[];
+}
 // Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
-  id: string;
+  transferId: string;
+  transferState: string;
   confirmationNumber: number;
-  amount: string;
-  currency: string;
-  institution: string;
-  direction: string;
-  sender: string;
-  recipient: string;
-  details: string;
-  status: string;
-  initiatedTimestamp: string;
-  technicalDetails: TransferTechnicalDetails;
   transactionType: string;
-  currentState: string;
-  type: string;
+  sendAmount: string;
+  sendCurrency: string;
+  conversionSubmitted: string;
+  conversionInstitution: string;
+  conversionState: string;
+  direction: string;
+  receiveAmount: string;
+  receiveCurrency: string;
+  recipientCurrencies: string;
+  senderDetails: SenderDetails;
+  recipientDetails: RecipientDetails;
+  recipientInstitution: string;
+  initiatedTimestamp: string;
+  dateSubmitted: string;
+  technicalDetails: TransferTechnicalDetails;
+  transferParties: TransferParties;
+  transferTerms: TransferTerms;
 }
 
 export enum DateRange {
