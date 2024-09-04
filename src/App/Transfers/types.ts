@@ -125,15 +125,12 @@ export interface TransferDetailsError {
   mojaloopError?: MojaloopError;
   originalRequest: {
     body?: string;
-  }
+  };
 }
 
 export interface TransferTechnicalDetailsApiMessage {
   headers?: object;
   body?: object;
-  fxQuoteResponse:{
-    body?: string;
-  }
 }
 
 export interface TransferTechnicalDetails {
@@ -151,16 +148,23 @@ export interface TransferTechnicalDetails {
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
-  
-  // fx
-  conversionId: string;
-  conversionState?: TransferTechnicalDetailsApiMessage;
-  conversionQuoteId: string;
+  conversionId: FxQuoteResponse;
+  conversionState?: FxQuoteResponse;
+  conversionQuoteId: FxQuoteResponse;
   fxQuoteRequest?: TransferTechnicalDetailsApiMessage;
-  fxQuoteResponse?: TransferTechnicalDetailsApiMessage;
+  fxQuoteResponse?: FxQuoteResponse;
   fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
-  fxTransferFulfilment?: TransferTechnicalDetailsApiMessage;
+  fxTransferFulfilment?: FxTransferFulfilment;
+}
 
+export interface FxQuoteResponse {
+  conversionId: string;
+  conversionQuoteId: string;
+  conversionState: string;
+}
+
+export interface FxTransferFulfilment {
+  body: {};
 }
 
 export interface TransferDetails {
@@ -189,8 +193,8 @@ export interface TransfersStatus {
   status: TransferStatus;
   count: number;
 }
-// conversion status
-export interface ConversionStatus{
+
+export interface ConversionStatus {
   status: ConversionStatus;
   count: number;
 }
@@ -217,9 +221,7 @@ export interface TransfersState {
   isTransfersRequested: boolean;
   transfers: Transfer[];
   transfersError: ErrorMessage;
-  //conversionError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
-  //conversionStatuses: ConversionStatus[];
   transfersStatusesError: ErrorMessage;
   transfersSuccessPerc?: SuccessPerc;
   transfersSuccessPercError: ErrorMessage;

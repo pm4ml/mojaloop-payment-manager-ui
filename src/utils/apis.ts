@@ -8,6 +8,12 @@ const services = {
   },
 };
 
+const mockServices = {
+  localNode: {
+    baseUrl: 'http://localhost:4040/exp',
+  },
+};
+
 interface Todo {
   title: string;
 }
@@ -43,7 +49,7 @@ const batchTransfers: Config<Todo, State> = {
 };
 
 const transferDetails: Config<Todo, State> = {
-  service: services.localNode,
+  service: mockServices.localNode,
   url: (_: State, { transferId }: { transferId: string }) => `/transfers/${transferId}/details`,
 };
 

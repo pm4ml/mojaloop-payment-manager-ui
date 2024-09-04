@@ -61,7 +61,6 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
       </div>
     );
   }
-  
 
   return (
     <Modal
@@ -88,7 +87,6 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   const [isRequestPartyDetailsVisible, setIsRequestPartyDetailsVisible] = useState(false);
   const [partyModel, setPartyModel] = useState(null);
   const [partyModalTitle, setPartyModalTitle] = useState('');
-  let conversionId = 'N/A';
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const showPayeeParty = (aModel: any) => {
@@ -132,13 +130,12 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   const showFxQuoteResponse = (aModel: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showFxQuoteResponse = (aModel: any) => {
     setRequestModel(aModel);
     setRequestModalTitle('Fx Quote Response');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
-
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const showTransferPrepare = (aModel: any) => {
@@ -181,7 +178,6 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
-
   let transferStateInput = (
     <FormInput
       disabled={true}
@@ -212,8 +208,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     <FormInput
       disabled={true}
       label="Conversion State"
-      //value={model.technicalDetails.conversionState}
-      value={model.technicalDetails.fxQuoteResponse?.body}
+      value={model.technicalDetails.fxQuoteResponse?.conversionState}
     />
   );
 
@@ -226,7 +221,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
           <TextField
             disabled={false}
             label="Conversion State"
-            value={model.technicalDetails.fxQuoteResponse?.body}
+            value={model.technicalDetails.fxQuoteResponse?.conversionState}
             onButtonClick={() => showConversionError(model.technicalDetails.lastError)}
             buttonText="View Error"
             buttonKind="secondary"
@@ -236,22 +231,6 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     );
   }
 
-  if (model.technicalDetails.lastError?.originalRequest?.body) {
-    try {
-      const parsedBody = JSON.parse(model.technicalDetails.lastError.originalRequest.body);
-      conversionId = parsedBody.conversionTerms?.conversionId ||'N/A';
-    } catch (error) {
-      console.error('Failed to parse the body:', error);
-      conversionId = 'Error Parsing JSON';
-    }
-  }
-  //  else if(model.technicalDetails.fxQuoteResponse?.body){
-  //   try {conversionId = model.technicalDetails.fxQuoteResponse.body?conversionTerms?.conversionId || 'N/A';
-  //   } catch (error) {
-  //     console.error('Failed to parse fxQuoteResponse body:', error);
-  //     conversionId = 'Error Parsing JSON';
-  //   }
-  // }
   return (
     <div>
       <Tabs>
@@ -389,30 +368,28 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   {transferStateInput}
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                <FormInput
-                  id="transfer-details-modal__conversion-id"
-                  disabled={true}
-                  label="Conversion ID"
-                  value ={conversionId}
-                />
-               </Row>
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                   <FormInput
-                  id="transfer-details-modal__home-transfer-id"
-                  disabled={true}
-                  label="Conversion Quote ID"
-                  value={model.technicalDetails.conversionQuoteId}
-                  style={{ flex: 1 }}                  
+                    id="transfer-details-modal__conversion-id"
+                    disabled={true}
+                    label="Conversion ID"
+                    value={model.technicalDetails.fxQuoteResponse?.conversionId}
                   />
-              </div>
+                </Row>
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                  <FormInput
+                    id="transfer-details-modal__home-transfer-id"
+                    disabled={true}
+                    label="Conversion Quote ID"
+                    value={model.technicalDetails.fxQuoteResponse?.conversionQuoteId}
+                    style={{ flex: 1 }}
+                  />
+                </div>
 
-
-               {/* Conversion State */}
-               <Row align="flex-start" style={{ marginTop: '5px' }}>
+                {/* Conversion State */}
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {conversionStateInput}
                 </Row>
-
-              </div>  
+              </div>
               <div style={{ alignItems: 'flex-start', flex: '0 0 50%', marginRight: '5px' }}>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -593,7 +570,6 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                           <span> Quote Request</span>
                         </span>
                       }
-
                       onClick={() => showFxQuoteRequest(model.technicalDetails.fxQuoteRequest)}
                     />
                   </div>
@@ -606,13 +582,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={
                         !(
                           model.technicalDetails.fxQuoteResponse &&
-                          model.technicalDetails.fxQuoteResponse.body
+                          model.technicalDetails.fxQuoteResponse
                         )
                       }
                       tooltip={
                         !(
                           model.technicalDetails.fxQuoteResponse &&
-                          model.technicalDetails.fxQuoteResponse.body
+                          model.technicalDetails.fxQuoteResponse
                         ) &&
                         'This option is only available when an fx POST /fxquote response can be found for the transfer'
                       }
@@ -652,7 +628,9 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                           <span> Transfer Prepare</span>
                         </span>
                       }
-                      onClick={() => showFxTransferPrepare(model.technicalDetails.fxTransferPrepare)}
+                      onClick={() =>
+                        showFxTransferPrepare(model.technicalDetails.fxTransferPrepare)
+                      }
                     />
                   </div>
                 </Row>
@@ -664,13 +642,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={
                         !(
                           model.technicalDetails.fxTransferFulfilment &&
-                          model.technicalDetails.fxTransferFulfilment.body
+                          model.technicalDetails.fxTransferFulfilment
                         )
                       }
                       tooltip={
                         !(
                           model.technicalDetails.fxTransferFulfilment &&
-                          model.technicalDetails.fxTransferFulfilment.body
+                          model.technicalDetails.fxTransferFulfilment
                         ) &&
                         'This option is only available when a POST /transfers fulfilment can be found for the transfer'
                       }
@@ -681,7 +659,9 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                           <span> Transfer Fulfil</span>
                         </span>
                       }
-                      onClick={() => showFxTransferFulfil(model.technicalDetails.fxTransferFulfilment)}
+                      onClick={() =>
+                        showFxTransferFulfil(model.technicalDetails.fxTransferFulfilment)
+                      }
                     />
                   </div>
                 </Row>
