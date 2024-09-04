@@ -36,22 +36,18 @@ const transfersErrorsColumns = [
   {
     label: 'Send Value',
     key: 'amount',
-    func: (amount: string, item: TransferError) => `${item.currency} ${amount}`,
   },
   {
     label: 'Send Currency',
-    key: 'amount',
-    func: (amount: string, item: TransferError) => `${item.currency} ${amount}`,
+    key: 'currency',
   },
   {
     label: 'Receive Value',
-    key: 'amount',
-    func: (amount: string, item: TransferError) => `${item.currency} ${amount}`,
+    key: 'receiveAmount',
   },
   {
     label: 'Receive Currency',
-    key: 'amount',
-    func: (amount: string, item: TransferError) => `${item.currency} ${amount}`,
+    key: 'receiveCurrency',
   },
   { label: 'Error Type', key: 'errorType', func: helpers.toSpacedPascalCase },
   {

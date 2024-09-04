@@ -43,6 +43,8 @@ export interface TransferError {
   value: string;
   errorType: ErrorType;
   committedDate: string;
+  receiveAmount?: string;
+  receiveCurrency?: string;
 }
 
 export enum ErrorDirection {
@@ -172,17 +174,19 @@ export interface ConversionTerms {
     amount: string;
     currency: string;
   };
-  charges?: {
-    chargeType: string;
-    sourceAmount?: {
-      amount: string;
-      currency: string;
-    };
-    targetAmount?: {
-      amount: string;
-      currency: string;
-    };
-  };
+  charges?: [
+    {
+      chargeType: string;
+      sourceAmount?: {
+        amount: string;
+        currency: string;
+      };
+      targetAmount?: {
+        amount: string;
+        currency: string;
+      };
+    }
+  ];
   exchangeRate: string;
   expiryDate: string;
 }

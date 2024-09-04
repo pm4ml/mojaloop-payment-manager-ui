@@ -614,14 +614,16 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.sourceAmount?.amount}
+                      value={model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.sourceAmount?.currency}
+                      value={
+                        model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.currency
+                      }
                     />
                   </div>
                 </Row>
@@ -634,14 +636,16 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.targetAmount?.amount}
+                      value={model.transferTerms.conversionTerms.charges?.[0].targetAmount?.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.targetAmount?.currency}
+                      value={
+                        model.transferTerms.conversionTerms.charges?.[0].targetAmount?.currency
+                      }
                     />
                   </div>
                 </Row>
