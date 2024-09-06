@@ -1050,8 +1050,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       noFill={true}
                       label={
                         <span>
-                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
-                          <span> Quote Request</span>
+                          <span> FX Quote Request</span>
                         </span>
                       }
                       onClick={() => showFxQuoteRequest(model.technicalDetails.fxQuoteRequest)}
@@ -1079,8 +1078,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       noFill={true}
                       label={
                         <span>
-                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
-                          <span> Quote Response</span>
+                          <span> FX Quote Response</span>
                         </span>
                       }
                       onClick={() => showFxQuoteResponse(model.technicalDetails.fxQuoteResponse)}
@@ -1108,8 +1106,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       noFill={true}
                       label={
                         <span>
-                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
-                          <span> Transfer Prepare</span>
+                          <span> FX Transfer Prepare</span>
                         </span>
                       }
                       onClick={() =>
@@ -1139,8 +1136,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       noFill={true}
                       label={
                         <span>
-                          <span style={{ color: 'black', fontSize: '12px' }}>Fx</span>
-                          <span> Transfer Fulfil</span>
+                          <span> FX Transfer Fulfil</span>
                         </span>
                       }
                       onClick={() =>
