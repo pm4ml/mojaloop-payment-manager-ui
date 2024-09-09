@@ -206,9 +206,9 @@ export interface TransferTechnicalDetails {
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
-  conversionId: FxQuoteResponse;
-  conversionState?: FxQuoteResponse;
-  conversionQuoteId: FxQuoteResponse;
+  conversionId: string;
+  conversionState?: string;
+  conversionQuoteId: string;
   fxQuoteRequest?: TransferTechnicalDetailsApiMessage;
   fxQuoteResponse?: FxQuoteResponse;
   fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
@@ -216,10 +216,8 @@ export interface TransferTechnicalDetails {
 }
 
 export interface FxQuoteResponse {
-  // body: {};
-  conversionId: string;
-  conversionQuoteId: string;
-  conversionState: string;
+  condition: {};
+  conversionTerms: {};
 }
 
 export interface FxTransferFulfilment {
@@ -265,7 +263,6 @@ export interface TransferDetails {
   sendCurrency: string;
   conversionSubmitted: string;
   conversionInstitution: string;
-  conversionState: string;
   direction: string;
   receiveAmount: string;
   receiveCurrency: string;

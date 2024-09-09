@@ -212,7 +212,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     <FormInput
       disabled={true}
       label="Conversion State"
-      value={model.technicalDetails.fxQuoteResponse?.conversionState}
+      value={model.technicalDetails.conversionState}
     />
   );
 
@@ -224,7 +224,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
           <TextField
             disabled={false}
             label="Conversion State"
-            value={model.technicalDetails.fxQuoteResponse?.conversionState}
+            value={model.technicalDetails.conversionState}
             onButtonClick={() => showConversionError(model.technicalDetails.lastError)}
             buttonText="View Error"
             buttonKind="secondary"
@@ -411,7 +411,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion State"
                   type="text"
-                  value={model.conversionState}
+                  value={model.technicalDetails.conversionState}
                 />
               </div>
             </Row>
@@ -856,7 +856,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     id="transfer-details-modal__conversion-id"
                     disabled={true}
                     label="Conversion ID"
-                    value={model.technicalDetails.fxQuoteResponse?.conversionId}
+                    value={model.technicalDetails.conversionId}
                   />
                 </Row>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -864,7 +864,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     id="transfer-details-modal__home-transfer-id"
                     disabled={true}
                     label="Conversion Quote ID"
-                    value={model.technicalDetails.fxQuoteResponse?.conversionQuoteId}
+                    value={model.technicalDetails.conversionQuoteId}
                     style={{ flex: 1 }}
                   />
                 </div>
