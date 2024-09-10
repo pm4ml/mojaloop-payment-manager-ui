@@ -615,7 +615,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       type="text"
                       value={
-                        model.transferTerms.conversionTerms.charges && model.transferTerms.conversionTerms.charges.length > 0
+                        model.transferTerms.conversionTerms.charges &&
+                        model.transferTerms.conversionTerms.charges.length > 0
                           ? model.transferTerms.conversionTerms.charges[0].sourceAmount?.amount
                           : ''
                       }
@@ -626,7 +627,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       type="text"
                       value={
-                        model.transferTerms.conversionTerms.charges && model.transferTerms.conversionTerms.charges.length > 0
+                        model.transferTerms.conversionTerms.charges &&
+                        model.transferTerms.conversionTerms.charges.length > 0
                           ? model.transferTerms.conversionTerms.charges[0].sourceAmount?.currency
                           : ''
                       }
@@ -643,7 +645,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       type="text"
                       value={
-                        model.transferTerms.conversionTerms.charges && model.transferTerms.conversionTerms.charges.length > 0
+                        model.transferTerms.conversionTerms.charges &&
+                        model.transferTerms.conversionTerms.charges.length > 0
                           ? model.transferTerms.conversionTerms.charges[0].targetAmount?.amount
                           : ''
                       }
@@ -654,7 +657,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       type="text"
                       value={
-                        model.transferTerms.conversionTerms.charges && model.transferTerms.conversionTerms.charges.length > 0
+                        model.transferTerms.conversionTerms.charges &&
+                        model.transferTerms.conversionTerms.charges.length > 0
                           ? model.transferTerms.conversionTerms.charges[0].targetAmount?.currency
                           : ''
                       }
@@ -700,7 +704,9 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.transferParties.transferId}
                 />
               </div>
-              <div style={{ flex: '0 0 20%', marginLeft: '50px', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{ flex: '0 0 20%', marginLeft: '50px', marginRight: '5px', maxWidth: '25%' }}
+              >
                 <FormInput
                   disabled={true}
                   label="Transfer State"
@@ -1160,28 +1166,28 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               </div>
             </Row>
           </TabPanel>
-          </TabPanels>
-        </Tabs>        
-        {isRequestDetailsVisible && (
-          <TransferRequestDetailsModal
-            model={requestModel}
-            title={requestModalTitle}
-            onCloseClick={() => {
-              setIsRequestDetailsVisible(!isRequestDetailsVisible);
-            }}
-          />
-        )}
-        {isRequestPartyDetailsVisible && (
-          <TransferPartyDetailsModal
-            model={partyModel}
-            title={partyModalTitle}
-            onCloseClick={() => {
-              setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
-            }}
-          />
-        )}
-      </div>
-    );
-  };
+        </TabPanels>
+      </Tabs>
+      {isRequestDetailsVisible && (
+        <TransferRequestDetailsModal
+          model={requestModel}
+          title={requestModalTitle}
+          onCloseClick={() => {
+            setIsRequestDetailsVisible(!isRequestDetailsVisible);
+          }}
+        />
+      )}
+      {isRequestPartyDetailsVisible && (
+        <TransferPartyDetailsModal
+          model={partyModel}
+          title={partyModalTitle}
+          onCloseClick={() => {
+            setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
+          }}
+        />
+      )}
+    </div>
+  );
+};
 
-  export default connect(stateProps, dispatchProps)(TransferDetailsModal);
+export default connect(stateProps, dispatchProps)(TransferDetailsModal);
