@@ -11,14 +11,12 @@ const stateProps = (state: State) => ({
 
 type SideMenuProps = {
   pathname: string;
-  userRoles: string[];
 };
 
-const SideMenu: FC<SideMenuProps> = ({ pathname, userRoles }) => {
+const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
   const history = useHistory();
   return (
     <div className="side-menu">
-      
       <Menu path="/" pathname={history.location.pathname} onChange={history.push}>
         <MenuSection label="BUSINESS OPS">
           {/*

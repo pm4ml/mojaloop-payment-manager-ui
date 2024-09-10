@@ -244,8 +244,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Row align="flex-start" 
-            style={{ marginTop: '5px' }}>
+            <Row align="flex-start" style={{ marginTop: '5px' }}>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
@@ -405,7 +404,6 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               </div>
             </Row>
             <Row align="flex-start stretch">
-                
               <div
                 style={{
                   width: '50%',
@@ -525,7 +523,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     value={model.transferParties.transferId}
                   />
                 </Row>
-                
+
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <FormInput
                     id="transfer-details-modal__conversion-id"
@@ -556,7 +554,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     View Message Details
                   </label>
                 </Row>
-                
+
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <div style={{ width: '100%' }}>
                     <Button

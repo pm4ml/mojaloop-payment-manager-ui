@@ -58,11 +58,11 @@
 
 /* .toggle-icon.open {
   transform: rotate(0); /* Show < when open */
-/* } */ 
+/* } */
 
 /* .toggle-icon.closed {
   transform: rotate(180deg); /* Show > when closed */
-/* } */ 
+/* } */
 
 /* Add hover effects for the button */
 /* .toggle-button:hover {
