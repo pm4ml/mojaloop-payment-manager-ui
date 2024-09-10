@@ -436,7 +436,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.currency}
+                      // value={model.transferTerms.conversionTerms.transferAmount.currency}
                     />
                   </div>
                 </Row>
@@ -449,16 +449,16 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.amount}
+                      // value={model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={
-                        model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.currency
-                      }
+                      // value={
+                      //   model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.currency
+                      // }
                     />
                   </div>
                 </Row>
@@ -471,16 +471,16 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.[0].targetAmount?.amount}
+                      // value={model.transferTerms.conversionTerms.charges?.[0].targetAmount?.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={
-                        model.transferTerms.conversionTerms.charges?.[0].targetAmount?.currency
-                      }
+                      // value={
+                      //   model.transferTerms.conversionTerms.charges?.[0].targetAmount?.currency
+                      // }
                     />
                   </div>
                 </Row>
