@@ -2,13 +2,14 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { FC } from 'react';
 import './App.css';
 import Layout from './Layout';
-// import Dashboard from './Dashboard';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
 import SuccessToast from './SuccessToast';
 import ErrorModal from './ErrorModal';
 import connectors from './connectors';
 import { User } from './types';
+import FxpTechnicalDashboard from './FxpTechnicalDashboard';
+import FxpTransfers from './FxpTransfers';
 
 interface AppProps {
   isSuccessToastVisible: boolean;
@@ -47,7 +48,9 @@ const App: FC<AppProps> = ({
                 <Route path="/dashboard" component={Dashboard} />
               */}
               <Route path="/transfers" component={Transfers} />
+              <Route path="/fxptransfers" component={FxpTransfers} />
               <Route path="/techdashboard" component={TechnicalDashboard} />
+              <Route path="/fxptechdashboard" component={FxpTechnicalDashboard} />
 
               {/* process.env.NODE_ENV === 'development' && <Route path="/test" component={Test} /> */}
 

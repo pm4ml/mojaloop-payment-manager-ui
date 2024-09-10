@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { Menu, MenuItem, MenuSection } from 'components';
 import { useHistory } from 'react-router-dom';
@@ -11,12 +11,14 @@ const stateProps = (state: State) => ({
 
 type SideMenuProps = {
   pathname: string;
+  userRoles: string[];
 };
 
-const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
+const SideMenu: FC<SideMenuProps> = ({ pathname, userRoles }) => {
   const history = useHistory();
   return (
     <div className="side-menu">
+      
       <Menu path="/" pathname={history.location.pathname} onChange={history.push}>
         <MenuSection label="BUSINESS OPS">
           {/*
@@ -24,6 +26,7 @@ const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
             <MenuItem path="/dashboard" label="Overview (mocked)" />
           */}
           <MenuItem path="/transfers" label="Transfers" />
+          <MenuItem path="/fxptransfers" label="FXP Transfers" />
           <MenuItem
             path="/test"
             partial
@@ -33,6 +36,7 @@ const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
         </MenuSection>
         <MenuSection label="TECHNICAL OPS">
           <MenuItem path="/techdashboard" label="Overview" />
+          <MenuItem path="/fxptechdashboard" label="FXP Overview" />
         </MenuSection>
       </Menu>
     </div>
