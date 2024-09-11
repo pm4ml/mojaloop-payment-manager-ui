@@ -342,7 +342,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Submitted"
                   type="text"
-                  value={model.conversionSubmitted}
+                  value={model.conversionAcceptedDate}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -594,44 +594,14 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.amount}
+                      value={model.transferTerms.conversionTerms.transferAmount.sourceAmount.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.currency}
-                    />
-                  </div>
-                </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
-                  </label>
-                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
-                    <FormInput
-                      disabled={true}
-                      type="text"
-                      value={
-                        model.transferTerms.conversionTerms.charges &&
-                        model.transferTerms.conversionTerms.charges.length > 0
-                          ? model.transferTerms.conversionTerms.charges[0].sourceAmount?.amount
-                          : ''
-                      }
-                    />
-                  </div>
-                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
-                    <FormInput
-                      disabled={true}
-                      type="text"
-                      value={
-                        model.transferTerms.conversionTerms.charges &&
-                        model.transferTerms.conversionTerms.charges.length > 0
-                          ? model.transferTerms.conversionTerms.charges[0].sourceAmount?.currency
-                          : ''
-                      }
+                      value={model.transferTerms.conversionTerms.transferAmount.sourceAmount.currency}
                     />
                   </div>
                 </Row>
@@ -644,24 +614,34 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={
-                        model.transferTerms.conversionTerms.charges &&
-                        model.transferTerms.conversionTerms.charges.length > 0
-                          ? model.transferTerms.conversionTerms.charges[0].targetAmount?.amount
-                          : ''
-                      }
+                      value={model.transferTerms.conversionTerms.charges.totalSourceCurrencyCharges.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={
-                        model.transferTerms.conversionTerms.charges &&
-                        model.transferTerms.conversionTerms.charges.length > 0
-                          ? model.transferTerms.conversionTerms.charges[0].targetAmount?.currency
-                          : ''
-                      }
+                      value={model.transferTerms.conversionTerms.charges.totalSourceCurrencyCharges.currency}
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Charges
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.charges.totalTargetCurrencyCharges.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.charges.totalTargetCurrencyCharges.currency}
                     />
                   </div>
                 </Row>
@@ -1166,28 +1146,28 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               </div>
             </Row>
           </TabPanel>
-        </TabPanels>
-      </Tabs>
-      {isRequestDetailsVisible && (
-        <TransferRequestDetailsModal
-          model={requestModel}
-          title={requestModalTitle}
-          onCloseClick={() => {
-            setIsRequestDetailsVisible(!isRequestDetailsVisible);
-          }}
-        />
-      )}
-      {isRequestPartyDetailsVisible && (
-        <TransferPartyDetailsModal
-          model={partyModel}
-          title={partyModalTitle}
-          onCloseClick={() => {
-            setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
-          }}
-        />
-      )}
-    </div>
-  );
-};
+          </TabPanels>
+        </Tabs>
+        {isRequestDetailsVisible && (
+          <TransferRequestDetailsModal
+            model={requestModel}
+            title={requestModalTitle}
+            onCloseClick={() => {
+              setIsRequestDetailsVisible(!isRequestDetailsVisible);
+            }}
+          />
+        )}
+        {isRequestPartyDetailsVisible && (
+          <TransferPartyDetailsModal
+            model={partyModel}
+            title={partyModalTitle}
+            onCloseClick={() => {
+              setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
+            }}
+          />
+        )}
+      </div>
+    );
+  };
 
-export default connect(stateProps, dispatchProps)(TransferDetailsModal);
+  export default connect(stateProps, dispatchProps)(TransferDetailsModal);
