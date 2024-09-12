@@ -9,7 +9,7 @@ import ErrorModal from './ErrorModal';
 import connectors from './connectors';
 import { User } from './types';
 import FxpTechnicalDashboard from './FxpTechnicalDashboard';
-import FxpTransfers from './FxpTransfers';
+import FxpTransfers from './FxpConversions';
 
 interface AppProps {
   isSuccessToastVisible: boolean;

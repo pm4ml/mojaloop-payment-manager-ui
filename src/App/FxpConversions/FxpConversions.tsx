@@ -7,14 +7,14 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import { TransfersStatus, TransferError } from './types';
 import { XYCoordinate } from '../types';
-import TransferFinderModal from './components/TransferFinderModal';
-import TransferDetailsModal from './components/TransferDetails';
-import TransfersErrors from './components/TransfersErrors';
-import TransfersErrorsChart from './components/TransfersErrorsChart';
-import TransfersSuccessPerc from './components/TransfersSuccessPerc';
-import TransfersAvgTime from './components/TransfersAvgTime';
-import TransfersStatuses from './components/TransfersStatuses';
-import './FxpTransfers.css';
+import TransferFinderModal from './components/FxpConversionFinderModal';
+import TransferDetailsModal from './components/FxpConversionDetails';
+import TransfersErrors from './components/FxpConversionErrors';
+import TransfersErrorsChart from './components/FxpConversionErrorsChart';
+import TransfersSuccessPerc from './components/FxpConversionSuccessPerc';
+import TransfersAvgTime from './components/FxpConversionAvgTime';
+import TransfersStatuses from './components/FxpConversionStatuses';
+import './FxpConversions.css';
 
 const stateProps = (state: State) => ({
   transfersErrors: selectors.getTransfersErrors(state),
@@ -86,7 +86,7 @@ const FxpTransfers: FC<FxpTransfersProps> = ({
 }) => {
   return (
     <div className="fxptransfers">
-      <Heading size="3">FXP Transfers Overview</Heading>
+      <Heading size="3">FXP Conversions Overview</Heading>
       <Row style={{ marginBottom: '20px' }}>
         <Button onClick={onTransferFinderButtonClick} label="Find a Transfer" kind="secondary" />
       </Row>
