@@ -22,6 +22,7 @@ import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { TransferDetails } from '../../types';
+import { NONAME } from 'dns';
 
 const stateProps = (state: State) => ({
   model: selectors.getTransferDetails(state),
@@ -339,7 +340,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
-                  disabled={true}
+                  disabled={!model.conversionAcceptedDate}
                   label="Conversion Submitted"
                   type="text"
                   value={model.conversionAcceptedDate}
@@ -400,7 +401,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
-                  disabled={true}
+                  disabled={!(model.conversionInstitution)}
                   label="Conversion Institution"
                   type="text"
                   value={model.conversionInstitution}
@@ -482,7 +483,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Transfer Amount
+                    Source Transfer Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -576,8 +577,12 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   marginTop: '10px',
                   border: '1px solid #ccc',
                   padding: '10px',
-                  borderRadius: '5px',
+                  borderRadius: '5px', opacity: model.conversionAcceptedDate ? 1 : 0,
+                  borderBlockColor: model.conversionAcceptedDate ? '#ccc' : 'gray',
+
+
                 }}
+
               >
                 <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -585,30 +590,31 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     Conversion Terms
                   </label>
                 </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                <Row align="flex-start" style={{ marginTop: '5px' }} >
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Transfer Amount
+                    Target Transfer Amount
                   </label>
-                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }} >
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.sourceAmount.amount}
+                      value={model.transferTerms.conversionTerms.transferAmount.targetAmount.amount}
+
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.sourceAmount.currency}
+                      value={model.transferTerms.conversionTerms.transferAmount.targetAmount.currency}
                     />
                   </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
+                    Source Charges
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -628,7 +634,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
+                   Target Charges
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -849,6 +855,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {transferStateInput}
                 </Row>
+                {/* <Row align="flex-start" style={{ marginTop: '5px' }}> */}
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <FormInput
                     id="transfer-details-modal__conversion-id"
@@ -1146,28 +1153,28 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               </div>
             </Row>
           </TabPanel>
-          </TabPanels>
-        </Tabs>
-        {isRequestDetailsVisible && (
-          <TransferRequestDetailsModal
-            model={requestModel}
-            title={requestModalTitle}
-            onCloseClick={() => {
-              setIsRequestDetailsVisible(!isRequestDetailsVisible);
-            }}
-          />
-        )}
-        {isRequestPartyDetailsVisible && (
-          <TransferPartyDetailsModal
-            model={partyModel}
-            title={partyModalTitle}
-            onCloseClick={() => {
-              setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
-            }}
-          />
-        )}
-      </div>
-    );
-  };
+        </TabPanels>
+      </Tabs>
+      {isRequestDetailsVisible && (
+        <TransferRequestDetailsModal
+          model={requestModel}
+          title={requestModalTitle}
+          onCloseClick={() => {
+            setIsRequestDetailsVisible(!isRequestDetailsVisible);
+          }}
+        />
+      )}
+      {isRequestPartyDetailsVisible && (
+        <TransferPartyDetailsModal
+          model={partyModel}
+          title={partyModalTitle}
+          onCloseClick={() => {
+            setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
+          }}
+        />
+      )}
+    </div>
+  );
+};
 
-  export default connect(stateProps, dispatchProps)(TransferDetailsModal);
+export default connect(stateProps, dispatchProps)(TransferDetailsModal);
