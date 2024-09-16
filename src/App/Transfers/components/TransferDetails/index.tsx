@@ -338,7 +338,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.receiveCurrency}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%', color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)' }}
+                title={!model.conversionAcceptedDate ? 'This Option is only available when FX conversions are present' : ''}>
                 <FormInput
                   disabled={!model.conversionAcceptedDate}
                   label="Conversion Submitted"
@@ -399,20 +400,24 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value="Payer DFSP Conversion"
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%', color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)' }}
+                title={!model.conversionAcceptedDate ? 'This Option is only available when FX conversions are present' : ''}>
                 <FormInput
-                  disabled={!(model.conversionInstitution)}
+                  disabled={true}
                   label="Conversion Institution"
                   type="text"
                   value={model.conversionInstitution}
                 />
+
               </div>
+
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Conversion State"
                   type="text"
                   value={model.technicalDetails.conversionState}
+
                 />
               </div>
             </Row>
@@ -570,6 +575,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   </div>
                 </Row>
               </div>
+              {/* { model.needFX === false && ( */}
               <div
                 style={{
                   width: '50%',
@@ -579,12 +585,9 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   padding: '10px',
                   borderRadius: '5px', opacity: model.conversionAcceptedDate ? 1 : 0,
                   borderBlockColor: model.conversionAcceptedDate ? '#ccc' : 'gray',
-
-
                 }}
-
               >
-                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
+                <Row align="center" style={{ marginTop: '5px', justifyContent: 'center', }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ paddingTop: '5px', paddingBottom: '5px' }}>
                     Conversion Terms
@@ -634,7 +637,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                   Target Charges
+                    Target Charges
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -856,7 +859,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   {transferStateInput}
                 </Row>
                 {/* <Row align="flex-start" style={{ marginTop: '5px' }}> */}
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                <Row align="flex-start" style={{ marginTop: '5px', color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)' }}
+                  title={!model.conversionAcceptedDate ? 'This option is only available when FX conversions are present' : ''}>
                   <FormInput
                     id="transfer-details-modal__conversion-id"
                     disabled={true}
@@ -864,7 +868,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     value={model.technicalDetails.conversionId}
                   />
                 </Row>
-                <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%', color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)' }}
+                  title={!model.conversionAcceptedDate ? 'This option is only available when FX conversions are present' : ''}>
                   <FormInput
                     id="transfer-details-modal__home-transfer-id"
                     disabled={true}

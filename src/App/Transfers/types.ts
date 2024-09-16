@@ -270,6 +270,7 @@ export interface TransferParties {
 }
 // Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
+  needFX: boolean;
   transferId: string;
   transferState: string;
   confirmationNumber: number;

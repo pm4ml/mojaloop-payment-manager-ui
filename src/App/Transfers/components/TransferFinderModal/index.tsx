@@ -333,7 +333,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
             <span style={{ width: '250px' }}>&nbsp;</span>
           </Column>
         </Row>
-        {/* <Row>
+         <Row>
           <Column>
             <FormInput
               id="find-transfer-modal__aliasType"
@@ -362,7 +362,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
               onChange={(value: FilterChangeValue) => onFilterChange({ field: 'aliasSubValue', value })}
             />
           </Column>
-        </Row> */}
+        </Row> 
         <br />
         <FormInput
           id="find-transfer-modal__institution"
