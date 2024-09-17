@@ -338,10 +338,10 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.receiveCurrency}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%', color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)' }}
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%', color: model.needFX === true ? 'initial' : 'rgba(128, 128, 128, 0.5)' }}
                 title={!model.conversionAcceptedDate ? 'This Option is only available when FX conversions are present' : ''}>
                 <FormInput
-                  disabled={!model.conversionAcceptedDate}
+                  disabled={!model.needFX}
                   label="Conversion Submitted"
                   type="text"
                   value={model.conversionAcceptedDate}

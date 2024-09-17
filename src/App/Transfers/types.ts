@@ -253,6 +253,7 @@ export interface FxTransferFulfilment {
 }
 
 export interface TransferParties {
+  needFX: boolean;
   transferId: string;
   transferState: string;
   transferType: string;
