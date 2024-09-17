@@ -88,7 +88,7 @@ const FxpTransfers: FC<FxpTransfersProps> = ({
     <div className="fxptransfers">
       <Heading size="3">FXP Conversions Overview</Heading>
       <Row style={{ marginBottom: '20px' }}>
-        <Button onClick={onTransferFinderButtonClick} label="Find a Transfer" kind="secondary" />
+        <Button onClick={onTransferFinderButtonClick} label="Find a Conversion" kind="secondary" />
       </Row>
       <TransfersSuccessPerc
         data={transfersSuccessPerc}

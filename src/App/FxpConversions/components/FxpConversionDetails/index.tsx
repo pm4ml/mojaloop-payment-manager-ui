@@ -67,7 +67,7 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
   return (
     <Modal
       id="transferDetails"
-      title="Transfer Details"
+      title="Conversion Details"
       width="1000px"
       onClose={onModalCloseClick}
       isSubmitEnabled={false}
@@ -443,7 +443,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
+                    Source Charges
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -465,7 +465,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
+                    Target Charges
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
