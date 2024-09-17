@@ -254,7 +254,7 @@ export interface TransferParties {
   fxProviders: string[];
 }
 // Includes the type property to the TransferDetails Interface.
-export interface TransferDetails {
+export interface ConversionDetails {
   transferId: string;
   transferState: string;
   confirmationNumber: number;
@@ -317,7 +317,7 @@ export interface TransfersState {
   transfersSuccessPercError: ErrorMessage;
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
-  transferDetails?: TransferDetails;
+  transferDetails?: ConversionDetails;
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -427,7 +427,7 @@ export interface RequestTransferDetailsAction {
 
 export interface SetTransferDetailsAction {
   type: typeof SET_TRANSFER_DETAILS;
-  data: TransferDetails;
+  data: ConversionDetails;
 }
 
 export interface ToggleTransferDetailsModalAction {

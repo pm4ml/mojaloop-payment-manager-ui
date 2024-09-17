@@ -21,7 +21,7 @@ import { TransferRequestDetailsModal } from './RequestDetailModal';
 import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
-import { TransferDetails } from '../../types';
+import { ConversionDetails } from '../../types';
 
 const stateProps = (state: State) => ({
   model: selectors.getTransferDetails(state),
@@ -34,7 +34,7 @@ const dispatchProps = (dispatch: Dispatch) => ({
 });
 
 interface TransferDetailsModalProps {
-  model?: TransferDetails;
+  model?: ConversionDetails;
   transferDetailsError: string | null;
   isTransferDetailsPending: boolean;
   onModalCloseClick: () => void;
@@ -78,7 +78,7 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
 };
 
 interface TransferDetailsProps {
-  model: TransferDetails;
+  model: ConversionDetails;
 }
 
 const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {

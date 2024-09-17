@@ -43,7 +43,7 @@ import {
   SetTransfersAvgTimeErrorAction,
   TransferError,
   Transfer,
-  TransferDetails,
+  ConversionDetails,
   TransferFilter,
   TransfersStatus,
   SuccessPerc,
@@ -193,7 +193,7 @@ export function requestTransferDetails({
   };
 }
 
-export function setTransferDetails({ data }: { data: TransferDetails }): SetTransferDetailsAction {
+export function setTransferDetails({ data }: { data: ConversionDetails }): SetTransferDetailsAction {
   return {
     type: SET_TRANSFER_DETAILS,
     data,
