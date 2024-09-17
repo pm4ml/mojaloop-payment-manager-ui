@@ -8,6 +8,7 @@ import { WizardState } from 'App/ConnectionWizard/types';
 import { ApiState } from 'utils/api';
 
 export interface State {
+  user: any;
   router: RouterState;
   app: AppState;
   dashboard: DashboardState;
