@@ -33,14 +33,14 @@ const dispatchProps = (dispatch: Dispatch) => ({
   onModalCloseClick: () => dispatch(actions.toggleTransferDetailsModal()),
 });
 
-interface TransferDetailsModalProps {
+interface ConversionDetailsModalProps {
   model?: ConversionDetails;
   transferDetailsError: string | null;
   isTransferDetailsPending: boolean;
   onModalCloseClick: () => void;
 }
 
-const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
+const ConversionDetailsModal: FC<ConversionDetailsModalProps> = ({
   model,
   transferDetailsError,
   isTransferDetailsPending,
@@ -66,7 +66,7 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
 
   return (
     <Modal
-      id="transferDetails"
+      id="ConversionDetails"
       title="Conversion Details"
       width="1000px"
       onClose={onModalCloseClick}
@@ -77,11 +77,11 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
   );
 };
 
-interface TransferDetailsProps {
+interface ConversionDetailsProps {
   model: ConversionDetails;
 }
 
-const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
+const TransferDetailsView: FC<ConversionDetailsProps> = ({ model }) => {
   const [isRequestDetailsVisible, setIsRequestDetailsVisible] = useState(false);
   const [requestModel, setRequestModel] = useState(null);
   const [requestModalTitle, setRequestModalTitle] = useState('');
@@ -698,4 +698,4 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   );
 };
 
-export default connect(stateProps, dispatchProps)(TransferDetailsModal);
+export default connect(stateProps, dispatchProps)(ConversionDetailsModal);
