@@ -132,9 +132,9 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   if (!isTransfersRequested) {
     content = <TransferFilters model={model} onFilterChange={onFilterChange} />;
     onSubmit = () => onFiltersSubmitClick(model);
-    submitLabel = 'Find Transfers';
+    submitLabel = 'Find Conversions';
   } else if (transfersError) {
-    content = <ErrorBox>Transfer: Unable to load transfers</ErrorBox>;
+    content = <ErrorBox>Transfer: Unable to load Conversions</ErrorBox>;
   } else if (isTransfersPending) {
     content = (
       <div className="transfers__transfers__loader">
@@ -159,7 +159,7 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   }
   return (
     <Modal
-      title="Find a Transfer"
+      title="Find a Conversion"
       width="1200px"
       onClose={onModalCloseClick}
       onSubmit={onSubmit}
@@ -221,29 +221,29 @@ interface TransferFiltersProps {
 const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) => (
   <Tabs>
     <TabList>
-      <Tab>Basic Find a Transfer</Tab>
+      <Tab>Basic Find a Conversion</Tab>
       <Tab>Advanced Filtering</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>
-        <DataLabel size="l">Find an exact transfer by entering the ID:</DataLabel>
+        <DataLabel size="l">Find an exact Conversion by entering the ID:</DataLabel>
         <br />
         <br />
         <FormInput
           id="find-transfer-modal__transfer-id"
-          label="Transfer ID"
+          label="Conversion ID"
           type="text"
           value={model.transferId || ''}
           onChange={(value: FilterChangeValue) => onFilterChange({ field: 'transferId', value })}
         />
       </TabPanel>
       <TabPanel>
-        <DataLabel size="l">Filter transfers:</DataLabel>
+        <DataLabel size="l">Filter Conversions:</DataLabel>
         <br />
         <br />
         <Row>
           <Column>
-            <DataLabel size="m">Approximate time of transfer</DataLabel>
+            <DataLabel size="m">Approximate time of Conversion</DataLabel>
             <Row>
               <Column>
                 <Select
@@ -373,7 +373,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
         />
         <FormInput
           id="find-transfer-modal__transfer-status"
-          label="Transfer Status"
+          label="Conversion Status"
           type="select"
           options={transferStatuses}
           value={model.status || ''}
