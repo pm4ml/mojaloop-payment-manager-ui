@@ -19,7 +19,7 @@ import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { ReconciliationOverviewBatch, ReconciliationOverviewBatchTransfer } from '../../types';
 import * as helpers from '../../helpers';
-import TransferDetailsModal from './ConversionDetailsModal';
+import TransferDetailsModal from './TransferDetailsModal';
 
 const transferStatuses = [
   { label: helpers.toSpacedPascalCase(TransferStatus.Success), value: TransferStatus.Success },
