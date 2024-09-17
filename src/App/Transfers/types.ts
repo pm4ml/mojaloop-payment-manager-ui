@@ -169,26 +169,54 @@ export interface PayeeDfspCommision {
   currency: string;
 }
 
-export interface ConversionTerms {
-  transferAmount: {
+export interface Charge {
+  chargeType: string;
+  sourceAmount?: {
     amount: string;
     currency: string;
   };
-  charges?: [
-    {
-      chargeType: string;
-      sourceAmount?: {
-        amount: string;
-        currency: string;
-      };
-      targetAmount?: {
-        amount: string;
-        currency: string;
-      };
+  targetAmount?: {
+    amount: string;
+    currency: string;
+  };
+}
+
+export interface ConversionTerms {
+  transferAmount: {
+    sourceAmount: {
+      amount: string;
+      currency: string;
     }
-  ];
+    targetAmount: {
+      amount: string;
+      currency: string;
+    }
+  };
+  charges: {
+    totalSourceCurrencyCharges: {
+      amount: string;
+      currency: string;
+    }
+    totalTargetCurrencyCharges: {
+      amount: string;
+      currency: string;
+    }
+  }; // Define charges as an array of Charge objects
   exchangeRate: string;
   expiryDate: string;
+}
+
+export interface TransferTerms {
+  transferId: string;
+  homeTransferId: string;
+  quoteAmount: QuoteAmount;
+  quoteAmountType: string;
+  transferAmount: TransferAmount;
+  payeeReceiveAmount: PayeeReceiveAmount;
+  payeeDfspFee: PayeeDfspFee;
+  payeeDfspCommision: PayeeDfspCommision;
+  expiryDate: string;
+  conversionTerms: ConversionTerms;
 }
 
 export interface TransferTechnicalDetails {
@@ -224,20 +252,8 @@ export interface FxTransferFulfilment {
   body: {};
 }
 
-export interface TransferTerms {
-  transferId: string;
-  homeTransferId: string;
-  quoteAmount: QuoteAmount;
-  quoteAmountType: string;
-  transferAmount: TransferAmount;
-  payeeReceiveAmount: PayeeReceiveAmount;
-  payeeDfspFee: PayeeDfspFee;
-  payeeDfspCommision: PayeeDfspCommision;
-  expiryDate: string;
-  conversionTerms: ConversionTerms;
-}
-
 export interface TransferParties {
+  needFX: boolean;
   transferId: string;
   transferState: string;
   transferType: string;
@@ -255,6 +271,7 @@ export interface TransferParties {
 }
 // Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
+  needFX: boolean;
   transferId: string;
   transferState: string;
   confirmationNumber: number;
@@ -263,6 +280,7 @@ export interface TransferDetails {
   sendCurrency: string;
   conversionSubmitted: string;
   conversionInstitution: string;
+  conversionAcceptedDate: string;
   direction: string;
   receiveAmount: string;
   receiveCurrency: string;
