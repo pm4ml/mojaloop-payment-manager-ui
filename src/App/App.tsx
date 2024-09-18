@@ -10,6 +10,7 @@ import connectors from './connectors';
 import { User } from './types';
 import FxpTechnicalDashboard from './FxpTechnicalDashboard';
 import FxpTransfers from './FxpConversions';
+import FxpConversions from './FxpConversions';
 
 interface AppProps {
   isSuccessToastVisible: boolean;
@@ -48,7 +49,7 @@ const App: FC<AppProps> = ({
                 <Route path="/dashboard" component={Dashboard} />
               */}
               <Route path="/transfers" component={Transfers} />
-              <Route path="/fxptransfers" component={FxpTransfers} />
+              <Route path="/fxpConversions" component={FxpConversions} />
               <Route path="/techdashboard" component={TechnicalDashboard} />
               <Route path="/fxptechdashboard" component={FxpTechnicalDashboard} />
 

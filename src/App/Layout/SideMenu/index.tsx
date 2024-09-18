@@ -24,7 +24,7 @@ const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
             <MenuItem path="/dashboard" label="Overview (mocked)" />
           */}
           <MenuItem path="/transfers" label="Transfers" />
-          <MenuItem path="/fxptransfers" label="FXP Transfers" />
+          <MenuItem path="/fxpConversions" label="FXP Conversions" />
           <MenuItem
             path="/test"
             partial
