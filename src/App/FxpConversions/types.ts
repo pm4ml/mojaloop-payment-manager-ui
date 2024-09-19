@@ -17,7 +17,7 @@ export const SET_TRANSFER_FINDER_FILTER = 'Transfers / Set Transfer Finder Filte
 export const REQUEST_TRANSFERS = 'Transfers / Request Transfers';
 export const UNREQUEST_TRANSFERS = 'Transfers / Unrequest Transfers';
 export const SET_TRANSFERS = 'Transfers / Set Transfers';
-export const SET_FXPCONVERSIONS = 'FxpConversion / Set FxpConversion'
+export const SET_FXPCONVERSIONS = 'FxpConversion / Set FxpConversion';
 export const SET_TRANSFERS_ERROR = 'Transfers / Set Transfers Error';
 export const REQUEST_TRANSFERS_STATUSES = 'Transfers / Request Transfers Statuses';
 export const SET_TRANSFERS_STATUSES = 'Transfers / Set Transfers Statuses';
@@ -283,7 +283,7 @@ export interface TransfersDetails {
 }
 
 // Includes the type property to the fxpConversionDetails Interface.
-export interface fxpConversionDetails {
+export interface FxpConversionDetails {
   determiningTransferId: string;
   conversionId: string;
   conversionState: string;
@@ -294,9 +294,11 @@ export interface fxpConversionDetails {
   conversionAcceptedDate: string;
   conversionSettlementBatch: string;
   dfspInstitution: string;
+  FxpConversionTerms: FxpConversionTerms;
+  FxpTechnicalDetails: FxpTechnicalDetails;
 }
 
-export interface fxpConversionTerms {
+export interface FxpConversionTerms {
   determiningTransferId: string;
   conversionState: string;
   quoteAmount: number;
@@ -305,22 +307,22 @@ export interface fxpConversionTerms {
   totalSourceCharges: {
     amount: String;
     currency: string;
-  }
+  };
   totalTargetCharges: {
     amount: String;
     currency: string;
-  }
+  };
   exchangeRate: number;
   expiryDateTime: string;
 }
 
-export interface fxpTechnicalDetails {
+export interface FxpTechnicalDetails {
   determiningTransferId: string;
   conversionId: string;
   conversionQuoteId: string;
   conversionState: string;
-  fxQuoteRequest: TransferTechnicalDetailsApiMessage
-  fxQuoteResponse: FxQuoteResponse
+  fxQuoteRequest: TransferTechnicalDetailsApiMessage;
+  fxQuoteResponse: FxQuoteResponse;
   fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
   fxTransferFulfil: {
     transferState: string;
@@ -329,7 +331,6 @@ export interface fxpTechnicalDetails {
   };
   lastError?: TransferDetailsError;
 }
-
 
 export enum DateRange {
   Today = 'TODAY',
@@ -372,7 +373,7 @@ export interface TransfersState {
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
   transferDetails?: TransfersDetails;
-  fxpConversionDetails?: fxpConversionDetails;
+  fxpConversionDetails?: FxpConversionDetails;
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -393,7 +394,7 @@ export interface FxpConversionsState {
   transfersSuccessPercError: ErrorMessage;
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
-  fxpConversionDetails?: fxpConversionDetails;
+  fxpConversionDetails?: FxpConversionDetails;
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -519,7 +520,7 @@ export interface RequestFxpConversionDetailsAction {
 //fxp
 export interface SetFxpConversionDetailsAction {
   type: typeof SET_FXPCONVERSION_DETAILS;
-  data: fxpConversionDetails;
+  data: FxpConversionDetails;
 }
 
 export interface ToggleTransferDetailsModalAction {

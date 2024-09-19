@@ -19,7 +19,6 @@ import {
   RequestTransferDetailsAction,
   SuccessPercApi,
   AvgTimeApi,
-  
 } from './types';
 import {
   setTransfers,
@@ -34,8 +33,7 @@ import {
   setTransfersAvgTimeError,
   setTransferDetailsError,
   setTransferDetails,
-  setFxpConversionDetails
-  
+  setFxpConversionDetails,
 } from './actions';
 
 export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
@@ -206,7 +204,9 @@ export default function* rootSaga() {
 function* fetchFxpConversionDetails(action: RequestTransferDetailsAction) {
   try {
     // eslint-disable-next-line
-    const response = yield call(apis.Details.fxpConversionDetails, { conversionId: action.conversionId });
+    const response = yield call(apis.Details.fxpConversionDetails, {
+      conversionId: action.conversionId,
+    });
 
     if (is20x(response.status)) {
       yield put(setFxpConversionDetails({ data: response.data }));

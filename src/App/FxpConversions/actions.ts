@@ -207,8 +207,6 @@ export function setTransferDetails({
   };
 }
 
-
-
 export function setTransferDetailsError({
   error,
 }: {
@@ -277,7 +275,6 @@ export function setTransfersAvgTimeError({
     error,
   };
 }
-
 
 // fxp actions
 export function setFxpConversionDetails({

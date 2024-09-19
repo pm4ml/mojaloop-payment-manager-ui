@@ -54,7 +54,8 @@ const transferDetails: Config<Todo, State> = {
 
 const fxpConversionDetails: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { conversionId }: { conversionId: string }) => `/fxpConversions/${conversionId}/details`,
+  url: (_: State, { conversionId }: { conversionId: string }) =>
+    `/fxpConversions/${conversionId}/details`,
 };
 
 const transfersErrors: Config<Todo, State> = {

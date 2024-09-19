@@ -172,7 +172,7 @@ export default function fxpConversionsReducer(
         ...state,
         transfers: action.data,
       };
-      
+
     case SET_TRANSFERS_ERROR:
       return {
         ...state,
@@ -211,7 +211,7 @@ export default function fxpConversionsReducer(
     case SET_FXPCONVERSION_DETAILS:
       return {
         ...state,
-         fxpConversionDetails: action.data,
+        fxpConversionDetails: action.data,
         isTransferDetailsModalVisible: true,
       };
     default:
