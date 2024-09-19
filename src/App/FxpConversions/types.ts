@@ -277,6 +277,55 @@ export interface ConversionDetails {
   transferTerms: TransferTerms;
 }
 
+// Includes the type property to the fxpConversionDetails Interface.
+export interface fxpConversionDetails {
+  determiningTransferId: string;
+  conversionId: string;
+  conversionState: string;
+  sourceAmount: number;
+  sourceCurrency: string;
+  targetAmount: string;
+  sendCurrency: string;
+  conversionAcceptedDate: string;
+  conversionSettlementBatch: string;
+  dfspInstitution: string;
+}
+
+export interface fxpConversionTerms {
+  determiningTransferId: string;
+  conversionState: string;
+  quoteAmount: number;
+  quoteAmountType: string;
+  transferAmount: TransferAmount;
+  totalSourceCharges: {
+    amount: String;
+    currency: string;
+  }
+  totalTargetCharges: {
+    amount: String;
+    currency: string;
+  }
+  exchangeRate: number;
+  expiryDateTime: string;
+}
+
+export interface fxpTechnicalDetails {
+  determiningTransferId: string;
+  conversionId: string;
+  conversionQuoteId: string;
+  conversionState: string;
+  fxQuoteRequest: TransferTechnicalDetailsApiMessage
+  fxQuoteResponse: FxQuoteResponse
+  fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
+  fxTransferFulfil: {
+    transferState: string;
+    fulfilment: string;
+    completedTimeStamp: string;
+  };
+  lastError?: TransferDetailsError;
+}
+
+
 export enum DateRange {
   Today = 'TODAY',
   Past48Hours = 'PAST_48_HOURS',

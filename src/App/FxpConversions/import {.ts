@@ -186,21 +186,21 @@ export interface ConversionTerms {
     sourceAmount: {
       amount: string;
       currency: string;
-    }
+    };
     targetAmount: {
       amount: string;
       currency: string;
-    }
+    };
   };
   charges: {
     totalSourceCurrencyCharges: {
       amount: string;
       currency: string;
-    }
+    };
     totalTargetCurrencyCharges: {
       amount: string;
       currency: string;
-    }
+    };
   }; // Define charges as an array of Charge objects
   exchangeRate: string;
   expiryDate: string;

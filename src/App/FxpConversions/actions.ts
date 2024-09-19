@@ -193,7 +193,11 @@ export function requestTransferDetails({
   };
 }
 
-export function setTransferDetails({ data }: { data: ConversionDetails }): SetTransferDetailsAction {
+export function setTransferDetails({
+  data,
+}: {
+  data: ConversionDetails;
+}): SetTransferDetailsAction {
   return {
     type: SET_TRANSFER_DETAILS,
     data,
