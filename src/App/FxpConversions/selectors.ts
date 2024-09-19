@@ -120,6 +120,7 @@ export const getIsTransferDetailsModalVisible = (state: State) =>
   state.transfers.isTransferDetailsModalVisible;
 
 export const getTransferDetails = (state: State) => state.transfers.transferDetails;
+export const getFxpConversionDetails = (state: State) => state.fxpConversions.fxpConversionDetails;
 export const getTransferDetailsError = (state: State) => state.transfers.transferDetailsError;
 export const getIsTransferDetailsPending = createSelector(
   (state: State) => state.api,

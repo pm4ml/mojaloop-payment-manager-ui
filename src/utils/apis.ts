@@ -52,9 +52,24 @@ const transferDetails: Config<Todo, State> = {
   url: (_: State, { transferId }: { transferId: string }) => `/transfers/${transferId}/details`,
 };
 
+const fxpConversionDetails: Config<Todo, State> = {
+  service: services.localNode,
+  url: (_: State, { conversionId }: { conversionId: string }) => `/fxpConversions/${conversionId}/details`,
+};
+
 const transfersErrors: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/errors',
+};
+
+const fxpErrors: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/fxperrors',
+};
+
+const fxpConversions: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/fxpConversions',
 };
 
 const transfers: Config<Todo, State> = {

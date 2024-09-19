@@ -9,6 +9,7 @@ import {
   REQUEST_TRANSFERS,
   UNREQUEST_TRANSFERS,
   SET_TRANSFERS,
+  SET_FXPCONVERSIONS,
   SET_TRANSFERS_ERROR,
   SET_TRANSFERS_STATUSES,
   SET_TRANSFERS_STATUSES_ERROR,
@@ -17,9 +18,9 @@ import {
   SET_TRANSFERS_AVG_TIME,
   SET_TRANSFERS_AVG_TIME_ERROR,
   TransfersActionTypes,
-  TransfersState,
+  FxpConversionsState,
   DateRange,
-  SET_TRANSFER_DETAILS,
+  SET_FXPCONVERSION_DETAILS,
   TOGGLE_TRANSFER_DETAILS_MODAL,
 } from './types';
 
@@ -60,7 +61,7 @@ function getTransferFinderFilterInitialState() {
   };
 }
 
-export const initialState: TransfersState = {
+export const initialState: FxpConversionsState = {
   transfersErrors: [],
   transfersErrorsError: null,
   isTransfersErrorsViewAllActive: false,
@@ -78,10 +79,10 @@ export const initialState: TransfersState = {
   transferDetailsError: null,
 };
 
-export default function transfersReducer(
+export default function fxpConversionsReducer(
   state = initialState,
   action: TransfersActionTypes
-): TransfersState {
+): FxpConversionsState {
   switch (action.type) {
     case SET_TRANSFERS_ERRORS:
       return {
@@ -165,6 +166,13 @@ export default function transfersReducer(
         ...state,
         transfers: action.data,
       };
+
+    case SET_FXPCONVERSIONS:
+      return {
+        ...state,
+        transfers: action.data,
+      };
+      
     case SET_TRANSFERS_ERROR:
       return {
         ...state,
@@ -200,10 +208,10 @@ export default function transfersReducer(
         ...state,
         transfersAvgTimeError: action.error,
       };
-    case SET_TRANSFER_DETAILS:
+    case SET_FXPCONVERSION_DETAILS:
       return {
         ...state,
-        transferDetails: action.data,
+         fxpConversionDetails: action.data,
         isTransferDetailsModalVisible: true,
       };
     default:

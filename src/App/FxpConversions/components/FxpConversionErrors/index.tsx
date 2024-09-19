@@ -3,7 +3,7 @@ import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
 import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
 import xlsx from 'xlsx';
-import { ConversionDetails, TransferError } from '../../types';
+import { FxpConversionDetails, TransferError } from '../../types';
 import * as helpers from '../../helpers';
 import TransfersErrorsModal from './TransfersErrorsModal';
 

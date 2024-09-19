@@ -7,6 +7,8 @@ import {
   TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
   SET_TRANSFERS_ERRORS_TYPE_FILTER,
   RequestTransfersErrorsAction,
+  RequestFxpConversionDetailsAction, //fxp
+  REQUEST_FXPCONVERSION_DETAILS,
   SetTransfersErrorsAction,
   SetTransfersErrorsErrorAction,
   ToggleTransfersErrorsViewAllAction,
@@ -43,15 +45,16 @@ import {
   SetTransfersAvgTimeErrorAction,
   TransferError,
   Transfer,
-  ConversionDetails,
+  FxpConversionDetails,
   TransferFilter,
   TransfersStatus,
   SuccessPerc,
   AvgTime,
   REQUEST_TRANSFER_DETAILS,
-  SET_TRANSFER_DETAILS,
+  SET_FXPCONVERSION_DETAILS,
   RequestTransferDetailsAction,
-  SetTransferDetailsAction,
+  // SetTransferDetailsAction,
+  SetFxpConversionDetailsAction,
   ToggleTransferDetailsModalAction,
   TOGGLE_TRANSFER_DETAILS_MODAL,
   SetTransferDetailsErrorAction,
@@ -193,12 +196,18 @@ export function requestTransferDetails({
   };
 }
 
-export function setTransferDetails({ data }: { data: ConversionDetails }): SetTransferDetailsAction {
+export function setTransferDetails({
+  data,
+}: {
+  data: FxpConversionDetails;
+}): SetFxpConversionDetailsAction {
   return {
-    type: SET_TRANSFER_DETAILS,
+    type: SET_FXPCONVERSION_DETAILS,
     data,
   };
 }
+
+
 
 export function setTransferDetailsError({
   error,
@@ -266,5 +275,29 @@ export function setTransfersAvgTimeError({
   return {
     type: SET_TRANSFERS_AVG_TIME_ERROR,
     error,
+  };
+}
+
+
+// fxp actions
+export function setFxpConversionDetails({
+  data,
+}: {
+  data: FxpConversionDetails;
+}): SetFxpConversionDetailsAction {
+  return {
+    type: SET_FXPCONVERSION_DETAILS,
+    data,
+  };
+}
+
+export function requestFxpConversionDetails({
+  conversionId,
+}: {
+  conversionId: string;
+}): RequestFxpConversionDetailsAction {
+  return {
+    type: REQUEST_FXPCONVERSION_DETAILS,
+    conversionId,
   };
 }

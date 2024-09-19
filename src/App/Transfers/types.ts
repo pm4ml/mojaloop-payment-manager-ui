@@ -171,22 +171,25 @@ export interface PayeeDfspCommision {
 
 export interface ConversionTerms {
   transferAmount: {
-    amount: string;
-    currency: string;
+    sourceAmount: {
+      amount: string;
+      currency: string;
+    };
+    targetAmount: {
+      amount: string;
+      currency: string;
+    };
   };
-  charges?: [
-    {
-      chargeType: string;
-      sourceAmount?: {
-        amount: string;
-        currency: string;
-      };
-      targetAmount?: {
-        amount: string;
-        currency: string;
-      };
-    }
-  ];
+  charges: {
+    totalSourceCurrencyCharges: {
+      amount: string;
+      currency: string;
+    };
+    totalTargetCurrencyCharges: {
+      amount: string;
+      currency: string;
+    };
+  }; // Define charges as an array of Charge objects
   exchangeRate: string;
   expiryDate: string;
 }
@@ -255,6 +258,7 @@ export interface TransferParties {
 }
 // Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
+  conversionAcceptedDate: string;
   transferId: string;
   transferState: string;
   confirmationNumber: number;
@@ -277,6 +281,29 @@ export interface TransferDetails {
   transferTerms: TransferTerms;
 }
 
+export interface FxpConversionDetails {
+  conversionAcceptedDate: string;
+  transferId: string;
+  transferState: string;
+  confirmationNumber: number;
+  transactionType: string;
+  sendAmount: string;
+  sendCurrency: string;
+  conversionSubmitted: string;
+  conversionInstitution: string;
+  direction: string;
+  receiveAmount: string;
+  receiveCurrency: string;
+  recipientCurrencies: string;
+  senderDetails: SenderDetails;
+  recipientDetails: RecipientDetails;
+  recipientInstitution: string;
+  initiatedTimestamp: string;
+  dateSubmitted: string;
+  technicalDetails: TransferTechnicalDetails;
+  transferParties: TransferParties;
+  transferTerms: TransferTerms;
+}
 export enum DateRange {
   Today = 'TODAY',
   Past48Hours = 'PAST_48_HOURS',
@@ -318,6 +345,27 @@ export interface TransfersState {
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
   transferDetails?: TransferDetails;
+  isTransferDetailsModalVisible: boolean;
+  transferDetailsError: ErrorMessage;
+}
+
+export interface FxpConversionsState {
+  transfersErrors: TransferError[];
+  transfersErrorsError: ErrorMessage;
+  isTransfersErrorsViewAllActive: boolean;
+  transfersErrorsTypeFilter?: string;
+  isTransferFinderModalVisible: boolean;
+  transferFinderFilter: TransferFilter;
+  isTransfersRequested: boolean;
+  transfers: Transfer[];
+  transfersError: ErrorMessage;
+  transfersStatuses: TransfersStatus[];
+  transfersStatusesError: ErrorMessage;
+  transfersSuccessPerc?: SuccessPerc;
+  transfersSuccessPercError: ErrorMessage;
+  transfersAvgTime?: AvgTime;
+  transfersAvgTimeError: ErrorMessage;
+  fxpConversionDetails?: FxpConversionDetails;
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
