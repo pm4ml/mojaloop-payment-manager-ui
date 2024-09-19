@@ -6,6 +6,7 @@ import { TechnicalDashboardState } from 'App/TechnicalDashboard/types';
 import { TransfersState } from 'App/Transfers/types';
 import { WizardState } from 'App/ConnectionWizard/types';
 import { ApiState } from 'utils/api';
+import { FxpConversionsState } from 'App/FxpConversions/types';
 
 export interface State {
   user: any;
@@ -16,6 +17,7 @@ export interface State {
   transfers: TransfersState;
   wizard: WizardState;
   api: ApiState;
+  fxpConversions: FxpConversionsState;
 }
 
 export interface Dispatch extends ReduxDispatch {}

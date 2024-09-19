@@ -17,6 +17,7 @@ export const SET_TRANSFER_FINDER_FILTER = 'Transfers / Set Transfer Finder Filte
 export const REQUEST_TRANSFERS = 'Transfers / Request Transfers';
 export const UNREQUEST_TRANSFERS = 'Transfers / Unrequest Transfers';
 export const SET_TRANSFERS = 'Transfers / Set Transfers';
+export const SET_FXPCONVERSIONS = 'FxpConversion / Set FxpConversion'
 export const SET_TRANSFERS_ERROR = 'Transfers / Set Transfers Error';
 export const REQUEST_TRANSFERS_STATUSES = 'Transfers / Request Transfers Statuses';
 export const SET_TRANSFERS_STATUSES = 'Transfers / Set Transfers Statuses';
@@ -30,9 +31,13 @@ export const SET_TRANSFERS_AVG_TIME = 'Transfers / Set Transfers Average Time';
 export const SET_TRANSFERS_AVG_TIME_ERROR = 'Transfers / Set Transfers Average Time Error';
 
 export const REQUEST_TRANSFER_DETAILS = 'Transfers / Request Transfer Details';
-export const SET_TRANSFER_DETAILS = 'Transfers / Set Transfer Details';
+//export const SET_TRANSFER_DETAILS = 'Transfers / Set Transfer Details';
 export const TOGGLE_TRANSFER_DETAILS_MODAL = 'Transfers / Select Transfers Detail View';
 export const SET_TRANSFER_DETAILS_ERROR = 'Transfers / Set Transfer Details Error';
+
+//FXp Types
+export const SET_FXPCONVERSION_DETAILS = 'FxpConversion / Set FxpConversion Details';
+export const REQUEST_FXPCONVERSION_DETAILS = 'FxpConversion / Request FxpConversion Details';
 
 export interface TransferError {
   id: string;
@@ -254,7 +259,7 @@ export interface TransferParties {
   fxProviders: string[];
 }
 // Includes the type property to the TransferDetails Interface.
-export interface ConversionDetails {
+export interface TransfersDetails {
   transferId: string;
   transferState: string;
   confirmationNumber: number;
@@ -366,7 +371,29 @@ export interface TransfersState {
   transfersSuccessPercError: ErrorMessage;
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
-  transferDetails?: ConversionDetails;
+  transferDetails?: TransfersDetails;
+  fxpConversionDetails?: fxpConversionDetails;
+  isTransferDetailsModalVisible: boolean;
+  transferDetailsError: ErrorMessage;
+}
+
+export interface FxpConversionsState {
+  transfersErrors: TransferError[];
+  transfersErrorsError: ErrorMessage;
+  isTransfersErrorsViewAllActive: boolean;
+  transfersErrorsTypeFilter?: string;
+  isTransferFinderModalVisible: boolean;
+  transferFinderFilter: TransferFilter;
+  isTransfersRequested: boolean;
+  transfers: Transfer[];
+  transfersError: ErrorMessage;
+  transfersStatuses: TransfersStatus[];
+  transfersStatusesError: ErrorMessage;
+  transfersSuccessPerc?: SuccessPerc;
+  transfersSuccessPercError: ErrorMessage;
+  transfersAvgTime?: AvgTime;
+  transfersAvgTimeError: ErrorMessage;
+  fxpConversionDetails?: fxpConversionDetails;
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -422,6 +449,11 @@ export interface SetTransfersAction {
   data: Transfer[];
 }
 
+export interface SetFxpConversionsAction {
+  type: typeof SET_FXPCONVERSIONS;
+  data: Transfer[];
+}
+
 export interface SetTransfersErrorAction {
   type: typeof SET_TRANSFERS_ERROR;
   error: string;
@@ -473,10 +505,21 @@ export interface RequestTransferDetailsAction {
   type: typeof REQUEST_TRANSFER_DETAILS;
   transferId: string;
 }
+// fxp
+export interface RequestFxpConversionDetailsAction {
+  type: typeof REQUEST_FXPCONVERSION_DETAILS;
+  conversionId: string;
+}
 
-export interface SetTransferDetailsAction {
-  type: typeof SET_TRANSFER_DETAILS;
-  data: ConversionDetails;
+// export interface SetTransferDetailsAction {
+//   type: typeof SET_TRANSFER_DETAILS;
+//   data: FxpConversionDetails;
+// }
+
+//fxp
+export interface SetFxpConversionDetailsAction {
+  type: typeof SET_FXPCONVERSION_DETAILS;
+  data: fxpConversionDetails;
 }
 
 export interface ToggleTransferDetailsModalAction {
@@ -511,5 +554,6 @@ export type TransfersActionTypes =
   | SetTransfersAvgTimeAction
   | SetTransfersAvgTimeErrorAction
   | RequestTransferDetailsAction
-  | SetTransferDetailsAction
+  | SetFxpConversionDetailsAction
+  | SetFxpConversionsAction
   | ToggleTransferDetailsModalAction;

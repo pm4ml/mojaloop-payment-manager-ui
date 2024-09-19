@@ -22,6 +22,7 @@ import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { TransferDetails } from '../../types';
+import { NONAME } from 'dns';
 
 const stateProps = (state: State) => ({
   model: selectors.getTransferDetails(state),
@@ -337,12 +338,24 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.receiveCurrency}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)',
+                }}
+                title={
+                  !model.conversionAcceptedDate
+                    ? 'This Option is only available when FX conversions are present'
+                    : ''
+                }
+              >
                 <FormInput
-                  disabled={true}
+                  disabled={!model.conversionAcceptedDate}
                   label="Conversion Submitted"
                   type="text"
-                  value={model.conversionSubmitted}
+                  value={model.conversionAcceptedDate}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -398,7 +411,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value="Payer DFSP Conversion"
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)',
+                }}
+                title={
+                  !model.conversionAcceptedDate
+                    ? 'This Option is only available when FX conversions are present'
+                    : ''
+                }
+              >
                 <FormInput
                   disabled={true}
                   label="Conversion Institution"
@@ -406,6 +431,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.conversionInstitution}
                 />
               </div>
+
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
@@ -482,7 +508,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Transfer Amount
+                    Source Transfer Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -569,6 +595,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   </div>
                 </Row>
               </div>
+              {/* { model.needFX === false && ( */}
               <div
                 style={{
                   width: '50%',
@@ -577,6 +604,8 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   border: '1px solid #ccc',
                   padding: '10px',
                   borderRadius: '5px',
+                  opacity: model.conversionAcceptedDate ? 1 : 0,
+                  borderBlockColor: model.conversionAcceptedDate ? '#ccc' : 'gray',
                 }}
               >
                 <Row align="center" style={{ marginTop: '5px', justifyContent: 'center' }}>
@@ -588,33 +617,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Transfer Amount
+                    Target Transfer Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.amount}
-                    />
-                  </div>
-                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
-                    <FormInput
-                      disabled={true}
-                      type="text"
-                      value={model.transferTerms.conversionTerms.transferAmount.currency}
-                    />
-                  </div>
-                </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
-                  </label>
-                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
-                    <FormInput
-                      disabled={true}
-                      type="text"
-                      value={model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.amount}
+                      value={model.transferTerms.conversionTerms.transferAmount.targetAmount.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
@@ -622,7 +631,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       type="text"
                       value={
-                        model.transferTerms.conversionTerms.charges?.[0].sourceAmount?.currency
+                        model.transferTerms.conversionTerms.transferAmount.targetAmount.currency
                       }
                     />
                   </div>
@@ -630,13 +639,16 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Charges
+                    Source Charges
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.transferTerms.conversionTerms.charges?.[0].targetAmount?.amount}
+                      value={
+                        model.transferTerms.conversionTerms.charges.totalSourceCurrencyCharges
+                          .amount
+                      }
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
@@ -644,7 +656,34 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       type="text"
                       value={
-                        model.transferTerms.conversionTerms.charges?.[0].targetAmount?.currency
+                        model.transferTerms.conversionTerms.charges.totalSourceCurrencyCharges
+                          .currency
+                      }
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Target Charges
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={
+                        model.transferTerms.conversionTerms.charges.totalTargetCurrencyCharges
+                          .amount
+                      }
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={
+                        model.transferTerms.conversionTerms.charges.totalTargetCurrencyCharges
+                          .currency
                       }
                     />
                   </div>
@@ -688,7 +727,9 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.transferParties.transferId}
                 />
               </div>
-              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{ flex: '0 0 20%', marginLeft: '50px', marginRight: '5px', maxWidth: '25%' }}
+              >
                 <FormInput
                   disabled={true}
                   label="Transfer State"
@@ -701,7 +742,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Transfer Type"
                   type="text"
-                  value={model.transferParties.transferType}
+                  value={model.transactionType}
                 />
               </div>
             </Row>
@@ -851,7 +892,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {transferStateInput}
                 </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                {/* <Row align="flex-start" style={{ marginTop: '5px' }}> */}
+                <Row
+                  align="flex-start"
+                  style={{
+                    marginTop: '5px',
+                    color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)',
+                  }}
+                  title={
+                    !model.conversionAcceptedDate
+                      ? 'This option is only available when FX conversions are present'
+                      : ''
+                  }
+                >
                   <FormInput
                     id="transfer-details-modal__conversion-id"
                     disabled={true}
@@ -859,7 +912,19 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     value={model.technicalDetails.conversionId}
                   />
                 </Row>
-                <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    color: model.conversionAcceptedDate ? 'initial' : 'rgba(128, 128, 128, 0.5)',
+                  }}
+                  title={
+                    !model.conversionAcceptedDate
+                      ? 'This option is only available when FX conversions are present'
+                      : ''
+                  }
+                >
                   <FormInput
                     id="transfer-details-modal__home-transfer-id"
                     disabled={true}

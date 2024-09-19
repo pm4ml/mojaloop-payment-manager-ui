@@ -21,10 +21,10 @@ import { TransferRequestDetailsModal } from './RequestDetailModal';
 import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
-import { ConversionDetails } from '../../types';
+import { FxpConversionDetails } from '../../types';
 
 const stateProps = (state: State) => ({
-  model: selectors.getTransferDetails(state),
+  model: selectors.getFxpConversionDetails(state),
   transferDetailsError: selectors.getTransferDetailsError(state),
   isTransferDetailsPending: selectors.getIsTransferDetailsPending(state),
 });
@@ -33,14 +33,14 @@ const dispatchProps = (dispatch: Dispatch) => ({
   onModalCloseClick: () => dispatch(actions.toggleTransferDetailsModal()),
 });
 
-interface ConversionDetailsModalProps {
-  model?: ConversionDetails;
+interface FxpConversionDetailsModalProps {
+  model?: FxpConversionDetails;
   transferDetailsError: string | null;
   isTransferDetailsPending: boolean;
   onModalCloseClick: () => void;
 }
 
-const ConversionDetailsModal: FC<ConversionDetailsModalProps> = ({
+const FxpConversionDetailsModal: FC<FxpConversionDetailsModalProps> = ({
   model,
   transferDetailsError,
   isTransferDetailsPending,
@@ -77,11 +77,11 @@ const ConversionDetailsModal: FC<ConversionDetailsModalProps> = ({
   );
 };
 
-interface ConversionDetailsProps {
-  model: ConversionDetails;
+interface FxpConversionDetailsProps {
+  model: FxpConversionDetails;
 }
 
-const TransferDetailsView: FC<ConversionDetailsProps> = ({ model }) => {
+const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   const [isRequestDetailsVisible, setIsRequestDetailsVisible] = useState(false);
   const [requestModel, setRequestModel] = useState(null);
   const [requestModalTitle, setRequestModalTitle] = useState('');
@@ -698,4 +698,4 @@ const TransferDetailsView: FC<ConversionDetailsProps> = ({ model }) => {
   );
 };
 
-export default connect(stateProps, dispatchProps)(ConversionDetailsModal);
+export default connect(stateProps, dispatchProps)(FxpConversionDetailsModal);

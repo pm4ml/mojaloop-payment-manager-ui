@@ -10,6 +10,7 @@ import {
   REQUEST_TRANSFERS_SUCCESS_PERC,
   REQUEST_TRANSFERS_AVG_TIME,
   REQUEST_TRANSFER_DETAILS,
+  REQUEST_FXPCONVERSION_DETAILS, //fxp
   RequestTransfersAction,
   RequestTransfersErrorsAction,
   RequestTransfersStatusesAction,
@@ -18,6 +19,7 @@ import {
   RequestTransferDetailsAction,
   SuccessPercApi,
   AvgTimeApi,
+  
 } from './types';
 import {
   setTransfers,
@@ -32,6 +34,8 @@ import {
   setTransfersAvgTimeError,
   setTransferDetailsError,
   setTransferDetails,
+  setFxpConversionDetails
+  
 } from './actions';
 
 export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
@@ -195,5 +199,34 @@ export default function* rootSaga() {
     transfersSuccessPercSaga(),
     transfersAvgTimeSaga(),
     transferDetailsSaga(),
+  ]);
+}
+
+//Fxp Functions
+function* fetchFxpConversionDetails(action: RequestTransferDetailsAction) {
+  try {
+    // eslint-disable-next-line
+    const response = yield call(apis.Details.fxpConversionDetails, { conversionId: action.conversionId });
+
+    if (is20x(response.status)) {
+      yield put(setFxpConversionDetails({ data: response.data }));
+    } else {
+      yield put(setFxpConversionDetailsError({ error: response.status }));
+    }
+  } catch (e) {
+    yield put(setFxpConversionDetailsError({ error: e.message }));
+  }
+}
+
+export function* FxpConversionDetailsSaga() {
+  yield takeEvery([REQUEST_FXPCONVERSION_DETAILS], fetchFxpConversionDetails);
+}
+
+function* fetchTransfersAllData(action: Action) {
+  yield all([
+    call(fetchTransfersErrors, action),
+    call(fetchTransfersStatuses, action),
+    call(fetchTransfersSuccessPerc, action),
+    call(fetchTransfersAvgTime, action),
   ]);
 }
