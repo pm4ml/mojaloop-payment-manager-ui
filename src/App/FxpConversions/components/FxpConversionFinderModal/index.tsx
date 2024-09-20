@@ -45,7 +45,7 @@ const dispatchProps = (dispatch: Dispatch) => ({
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) =>
     dispatch(actions.setTransferFinderFilter({ field, value })),
   onTransferRowClick: (transferError: TransferError) => {
-    dispatch(actions.requestFxpConversionDetails({ conversionId: transferError.id }));
+    dispatch(actions.requestTransferDetails({ transferId: transferError.id }));
   },
 });
 

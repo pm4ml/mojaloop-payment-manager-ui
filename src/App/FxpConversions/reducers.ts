@@ -22,6 +22,8 @@ import {
   DateRange,
   SET_FXPCONVERSION_DETAILS,
   TOGGLE_TRANSFER_DETAILS_MODAL,
+  REQUEST_FXPCONVERSION,
+  UNREQUEST_FXPCONVERSION,
 } from './types';
 
 const dateRanges = {
@@ -166,13 +168,6 @@ export default function fxpConversionsReducer(
         ...state,
         transfers: action.data,
       };
-
-    case SET_FXPCONVERSIONS:
-      return {
-        ...state,
-        transfers: action.data,
-      };
-
     case SET_TRANSFERS_ERROR:
       return {
         ...state,
@@ -207,6 +202,22 @@ export default function fxpConversionsReducer(
       return {
         ...state,
         transfersAvgTimeError: action.error,
+      };
+      // FXP
+    case SET_FXPCONVERSIONS:
+      return {
+        ...state,
+        transfers: action.data,
+      };
+    // case REQUEST_FXPCONVERSION:
+    //   return {
+    //     ...state,
+    //     isTransfersRequested: true,
+    //   };
+    case UNREQUEST_FXPCONVERSION:
+      return {
+        ...state,
+        isTransfersRequested: false,
       };
     case SET_FXPCONVERSION_DETAILS:
       return {

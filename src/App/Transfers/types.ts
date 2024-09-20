@@ -357,7 +357,6 @@ export interface FxpConversionsState {
   isTransferFinderModalVisible: boolean;
   transferFinderFilter: TransferFilter;
   isTransfersRequested: boolean;
-  transfers: Transfer[];
   transfersError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
   transfersStatusesError: ErrorMessage;

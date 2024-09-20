@@ -20,6 +20,8 @@ import {
   RequestTransferDetailsAction,
   SuccessPercApi,
   AvgTimeApi,
+  RequestFxpConversionsAction,
+  REQUEST_FXPCONVERSION,
 } from './types';
 import {
   setTransfers,
@@ -54,42 +56,6 @@ export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
 
 export function* transfersErrorsSaga() {
   yield takeLatest([REQUEST_TRANSFERS_ERRORS], fetchTransfersErrors);
-}
-
-function* fetchTransfers(action: RequestTransfersAction) {
-  try {
-    let params;
-    if (action.filters.transferId) {
-      params = {
-        id: action.filters.transferId,
-      };
-    } else {
-      params = {
-        startTimestamp: new Date(action.filters.from as number).toISOString(),
-        endTimestamp: new Date(action.filters.to as number).toISOString(),
-        recipientIdType: action.filters.aliasType,
-        recipientIdValue: action.filters.payeeAlias,
-        recipientIdSubValue: action.filters.aliasSubValue,
-        direction: action.filters.direction,
-        institution: action.filters.institution,
-        status: action.filters.status,
-      };
-    }
-    // eslint-disable-next-line
-    const response = yield call(apis.transfers.read, { params });
-    console.log(response);
-    if (is20x(response.status)) {
-      yield put(setTransfers({ data: response.data.slice(0, 50) }));
-    } else {
-      yield put(setTransfersError({ error: response.status }));
-    }
-  } catch (e) {
-    yield put(setTransfersError({ error: e.message }));
-  }
-}
-
-export function* transfersSaga() {
-  yield takeLatest([REQUEST_TRANSFERS], fetchTransfers);
 }
 
 function* fetchTransfersStatuses(action: RequestTransfersStatusesAction) {
@@ -197,7 +163,7 @@ export default function* rootSaga() {
   yield all([
     transfersPageSaga(),
     transfersErrorsSaga(),
-    transfersSaga(),
+    fxpConversionsSaga(),
     transfersStatusesSaga(),
     transfersSuccessPercSaga(),
     transfersAvgTimeSaga(),
@@ -227,11 +193,37 @@ export function* FxpConversionDetailsSaga() {
   yield takeEvery([REQUEST_FXPCONVERSION_DETAILS], fetchFxpConversionDetails);
 }
 
-// function* fetchTransfersAllData(action: Action) {
-//   yield all([
-//     call(fetchTransfersErrors, action),
-//     call(fetchTransfersStatuses, action),
-//     call(fetchTransfersSuccessPerc, action),
-//     call(fetchTransfersAvgTime, action),
-//   ]);
-// }
+function* fetchTransfers(action: RequestFxpConversionsAction) {
+  try {
+    let params;
+    if (action.filters.conversionId) {
+      params = {
+        id: action.filters.conversionId,
+      };
+    } else {
+      params = {
+        startTimestamp: new Date(action.filters.from as number).toISOString(),
+        endTimestamp: new Date(action.filters.to as number).toISOString(),
+        recipientIdType: action.filters.aliasType,
+        recipientIdValue: action.filters.payeeAlias,
+        recipientIdSubValue: action.filters.aliasSubValue,
+        direction: action.filters.direction,
+        institution: action.filters.institution,
+        status: action.filters.status,
+      };
+    }
+    // eslint-disable-next-line
+    const response = yield call(apis.fxpConversions.read, { params });
+    console.log(response);
+    if (is20x(response.status)) {
+      yield put(setTransfers({ data: response.data.slice(0, 50) }));
+    } else {
+      yield put(setTransfersError({ error: response.status }));
+    }
+  } catch (e) {
+    yield put(setTransfersError({ error: e.message }));
+  }
+}
+export function* fxpConversionsSaga() {
+  yield takeLatest([REQUEST_FXPCONVERSION], fetchTransfers);
+}
