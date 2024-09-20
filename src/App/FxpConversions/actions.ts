@@ -45,7 +45,7 @@ import {
   SetTransfersAvgTimeErrorAction,
   TransferError,
   Transfer,
-  fxpConversionDetails,
+  FxpConversionDetails,
   TransferFilter,
   TransfersStatus,
   SuccessPerc,
@@ -55,6 +55,7 @@ import {
   RequestTransferDetailsAction,
   // SetTransferDetailsAction,
   SetFxpConversionDetailsAction,
+  SetFxpConversionDetailsErrorAction,
   ToggleTransferDetailsModalAction,
   TOGGLE_TRANSFER_DETAILS_MODAL,
   SetTransferDetailsErrorAction,
@@ -199,7 +200,7 @@ export function requestTransferDetails({
 export function setTransferDetails({
   data,
 }: {
-  data: fxpConversionDetails;
+  data: FxpConversionDetails;
 }): SetFxpConversionDetailsAction {
   return {
     type: SET_FXPCONVERSION_DETAILS,
@@ -280,7 +281,7 @@ export function setTransfersAvgTimeError({
 export function setFxpConversionDetails({
   data,
 }: {
-  data: fxpConversionDetails;
+  data: FxpConversionDetails;
 }): SetFxpConversionDetailsAction {
   return {
     type: SET_FXPCONVERSION_DETAILS,
@@ -296,5 +297,16 @@ export function requestFxpConversionDetails({
   return {
     type: REQUEST_FXPCONVERSION_DETAILS,
     conversionId,
+  };
+}
+
+export function setFxpConversionDetailsError({
+  error,
+}: {
+  error: string;
+}): SetFxpConversionDetailsErrorAction {
+  return {
+    type: SET_TRANSFER_DETAILS_ERROR,
+    error,
   };
 }

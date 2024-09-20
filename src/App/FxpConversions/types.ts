@@ -378,6 +378,28 @@ export interface TransfersState {
   transferDetailsError: ErrorMessage;
 }
 
+export interface TransfersState {
+  transfersErrors: TransferError[];
+  transfersErrorsError: ErrorMessage;
+  isTransfersErrorsViewAllActive: boolean;
+  transfersErrorsTypeFilter?: string;
+  isTransferFinderModalVisible: boolean;
+  transferFinderFilter: TransferFilter;
+  isTransfersRequested: boolean;
+  transfers: Transfer[];
+  transfersError: ErrorMessage;
+  transfersStatuses: TransfersStatus[];
+  transfersStatusesError: ErrorMessage;
+  transfersSuccessPerc?: SuccessPerc;
+  transfersSuccessPercError: ErrorMessage;
+  transfersAvgTime?: AvgTime;
+  transfersAvgTimeError: ErrorMessage;
+  transferDetails?: TransfersDetails;
+  fxpConversionDetails?: FxpConversionDetails;
+  isTransferDetailsModalVisible: boolean;
+  transferDetailsError: ErrorMessage;
+}
+
 export interface FxpConversionsState {
   transfersErrors: TransferError[];
   transfersErrorsError: ErrorMessage;
@@ -395,6 +417,7 @@ export interface FxpConversionsState {
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
   fxpConversionDetails?: FxpConversionDetails;
+  
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -532,6 +555,11 @@ export interface SetTransferDetailsErrorAction {
   error: string;
 }
 
+export interface SetFxpConversionDetailsErrorAction { //fxp
+  type: typeof SET_TRANSFER_DETAILS_ERROR;
+  error: string;
+}
+
 export type TransfersActionTypes =
   | RequestTransfersPageDataAction
   | RequestTransfersErrorsAction
@@ -557,4 +585,5 @@ export type TransfersActionTypes =
   | RequestTransferDetailsAction
   | SetFxpConversionDetailsAction
   | SetFxpConversionsAction
+  | SetFxpConversionDetailsErrorAction
   | ToggleTransferDetailsModalAction;

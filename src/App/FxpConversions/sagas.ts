@@ -11,6 +11,7 @@ import {
   REQUEST_TRANSFERS_AVG_TIME,
   REQUEST_TRANSFER_DETAILS,
   REQUEST_FXPCONVERSION_DETAILS, //fxp
+  RequestFxpConversionDetailsAction, //fxp
   RequestTransfersAction,
   RequestTransfersErrorsAction,
   RequestTransfersStatusesAction,
@@ -34,6 +35,7 @@ import {
   setTransferDetailsError,
   setTransferDetails,
   setFxpConversionDetails,
+  setFxpConversionDetailsError, //fxp
 } from './actions';
 
 export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
@@ -75,6 +77,7 @@ function* fetchTransfers(action: RequestTransfersAction) {
     }
     // eslint-disable-next-line
     const response = yield call(apis.transfers.read, { params });
+    console.log(response);
     if (is20x(response.status)) {
       yield put(setTransfers({ data: response.data.slice(0, 50) }));
     } else {
@@ -160,6 +163,8 @@ function* fetchTransferDetails(action: RequestTransferDetailsAction) {
   try {
     // eslint-disable-next-line
     const response = yield call(apis.transferDetails.read, { transferId: action.transferId });
+    
+    console.log("callingfetchTransferDetails");
 
     if (is20x(response.status)) {
       yield put(setTransferDetails({ data: response.data }));
@@ -201,13 +206,13 @@ export default function* rootSaga() {
 }
 
 //Fxp Functions
-function* fetchFxpConversionDetails(action: RequestTransferDetailsAction) {
+function* fetchFxpConversionDetails(action: RequestFxpConversionDetailsAction) {
   try {
     // eslint-disable-next-line
     const response = yield call(apis.Details.fxpConversionDetails, {
       conversionId: action.conversionId,
     });
-
+    console.log(response);
     if (is20x(response.status)) {
       yield put(setFxpConversionDetails({ data: response.data }));
     } else {
@@ -222,11 +227,11 @@ export function* FxpConversionDetailsSaga() {
   yield takeEvery([REQUEST_FXPCONVERSION_DETAILS], fetchFxpConversionDetails);
 }
 
-function* fetchTransfersAllData(action: Action) {
-  yield all([
-    call(fetchTransfersErrors, action),
-    call(fetchTransfersStatuses, action),
-    call(fetchTransfersSuccessPerc, action),
-    call(fetchTransfersAvgTime, action),
-  ]);
-}
+// function* fetchTransfersAllData(action: Action) {
+//   yield all([
+//     call(fetchTransfersErrors, action),
+//     call(fetchTransfersStatuses, action),
+//     call(fetchTransfersSuccessPerc, action),
+//     call(fetchTransfersAvgTime, action),
+//   ]);
+// }

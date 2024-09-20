@@ -181,32 +181,32 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
-  let transferStateInput = (
-    <FormInput
-      disabled={true}
-      label="Transfer State"
-      value={model.FxpTechnicalDetails.conversionState}
-    />
-  );
+  // let conversionStateInput = (
+  //   <FormInput
+  //     disabled={true}
+  //     label="Transfer State"
+  //     value={model.FxpTechnicalDetails.conversionState}
+  //   />
+  // );
 
-  if (model.FxpTechnicalDetails.lastError) {
-    transferStateInput = (
-      <div className="forminput__row">
-        <div className="forminput-input">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>Transfer State</label>
-          <TextField
-            disabled={false}
-            label="Transfer State"
-            value={model.FxpTechnicalDetails.conversionState}
-            onButtonClick={() => showTransferError(model.FxpTechnicalDetails.lastError)}
-            buttonText="View Error"
-            buttonKind="secondary"
-          />
-        </div>
-      </div>
-    );
-  }
+  // if (model.FxpTechnicalDetails.lastError) {
+  //   conversionStateInput = (
+  //     <div className="forminput__row">
+  //       <div className="forminput-input">
+  //         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+  //         <label>Conversion State</label>
+  //         <TextField
+  //           disabled={false}
+  //           label="Transfer State"
+  //           value={model.FxpTechnicalDetails.conversionState}
+  //           onButtonClick={() => showTransferError(model.FxpTechnicalDetails.lastError)}
+  //           buttonText="View Error"
+  //           buttonKind="secondary"
+  //         />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   let conversionStateInput = (
     <FormInput

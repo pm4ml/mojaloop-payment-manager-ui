@@ -253,6 +253,9 @@ const endpoints = {
   outboundEnrollmentCertificate,
   outboundEnrollmentAutoCertificate,
   metric,
+  fxpConversionDetails,
+  fxpErrors,
+  fxpConversions,
 };
 
 type MyMap = typeof endpoints;
