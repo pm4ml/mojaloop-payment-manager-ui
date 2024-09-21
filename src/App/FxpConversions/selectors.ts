@@ -16,6 +16,8 @@ export const getTransfersErrorsTypeFilter = (state: State) =>
 export const getIsTransferFinderModalVisible = (state: State) =>
   state.transfers.isTransferFinderModalVisible;
 export const getTransferFinderFilter = (state: State) => state.transfers.transferFinderFilter;
+export const getFxpConversionFinderFilter = (state: State) =>
+  state.fxpConversions.fxpConversionFinderFilter;
 
 export const getFilteredByStatusTransfersErrors = createSelector(
   getTransfersErrors,
@@ -30,6 +32,7 @@ export const getFilteredByStatusTransfersErrors = createSelector(
 
 export const getIsTransfersRequested = (state: State) => state.transfers.isTransfersRequested;
 export const getTransfers = (state: State) => state.transfers.transfers;
+export const getFxpConversions = (state: State) => state.fxpConversions.fxpConversions;
 export const getTransfersError = (state: State) => state.transfers.transfersError;
 export const getIsTransfersPending = createSelector(
   (state: State) => state.api,

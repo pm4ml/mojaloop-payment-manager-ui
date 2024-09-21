@@ -61,6 +61,21 @@ function getTransferFinderFilterInitialState() {
   };
 }
 
+function getFxpConversionFinderFilterInitialState() {
+  return {
+    conversionId: undefined,
+    dates: DateRange.Today,
+    from: getFromDateBySelection(DateRange.Today),
+    to: getToDateBySelection(DateRange.Today),
+    aliasType: undefined,
+    payeeAlias: undefined,
+    aliasSubValue: undefined,
+    direction: undefined,
+    institution: undefined,
+    status: undefined,
+  };
+}
+
 export const initialState: FxpConversionsState = {
   transfersErrors: [],
   transfersErrorsError: null,
@@ -69,7 +84,7 @@ export const initialState: FxpConversionsState = {
   isTransferFinderModalVisible: false,
   transferFinderFilter: getTransferFinderFilterInitialState(),
   isTransfersRequested: false,
-  transfers: [],
+  fxpConversions: [],
   transfersError: null,
   transfersStatuses: [],
   transfersStatusesError: null,
@@ -77,6 +92,7 @@ export const initialState: FxpConversionsState = {
   transfersAvgTimeError: null,
   isTransferDetailsModalVisible: false,
   transferDetailsError: null,
+  fxpConversionFinderFilter: getFxpConversionFinderFilterInitialState(),
 };
 
 export default function fxpConversionsReducer(
@@ -151,26 +167,26 @@ export default function fxpConversionsReducer(
         },
       };
     }
-    case REQUEST_TRANSFERS:
-      return {
-        ...state,
-        isTransfersRequested: true,
-      };
+    // case REQUEST_TRANSFERS:
+    //   return {
+    //     ...state,
+    //     isTransfersRequested: true,
+    //   };
     case UNREQUEST_TRANSFERS:
       return {
         ...state,
         isTransfersRequested: false,
       };
-    case SET_TRANSFERS:
-      return {
-        ...state,
-        transfers: action.data,
-      };
+    // case SET_TRANSFERS:
+    //   return {
+    //     ...state,
+    //     transfers: action.data,
+    //   };
 
     case SET_FXPCONVERSIONS:
       return {
         ...state,
-        transfers: action.data,
+        fxpConversions: action.data,
       };
 
     case SET_TRANSFERS_ERROR:

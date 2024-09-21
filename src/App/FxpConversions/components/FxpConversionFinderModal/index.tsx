@@ -24,14 +24,15 @@ import {
 import xlsx from 'xlsx';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
-import { Transfer, TransferError, TransferFilter, DateRange } from '../../types';
+import { TransferError, FxpConversionFilter, DateRange, FxpConversion } from '../../types';
 import * as helpers from '../../helpers';
 
 type FilterChangeValue = string | number;
 
 const stateProps = (state: State) => ({
-  model: selectors.getTransferFinderFilter(state),
+  model: selectors.getFxpConversionFinderFilter(state),
   transfers: selectors.getTransfers(state),
+  fxpConversions: selectors.getFxpConversions(state),
   transfersError: selectors.getTransfersError(state),
   isTransfersPending: selectors.getIsTransfersPending(state),
   isTransfersRequested: selectors.getIsTransfersRequested(state),
@@ -39,8 +40,8 @@ const stateProps = (state: State) => ({
 
 const dispatchProps = (dispatch: Dispatch) => ({
   onModalCloseClick: () => dispatch(actions.toggleTransferFinderModal()),
-  onFiltersSubmitClick: (filters: TransferFilter) =>
-    dispatch(actions.requestTransfers({ filters })),
+  onFiltersSubmitClick: (filters: FxpConversionFilter) =>
+    dispatch(actions.requestFxpConversions({ filters })),
   onTransfersSubmitClick: () => dispatch(actions.unrequestTransfers()),
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) =>
     dispatch(actions.setTransferFinderFilter({ field, value })),
@@ -50,12 +51,12 @@ const dispatchProps = (dispatch: Dispatch) => ({
 });
 
 interface TransferFinderModalProps {
-  model: TransferFilter;
-  transfers: Transfer[];
+  model: FxpConversionFilter;
+  fxpConversions: FxpConversion[];
   transfersError: string | null;
   isTransfersPending: boolean;
   isTransfersRequested: boolean;
-  onFiltersSubmitClick: (filters: TransferFilter) => void;
+  onFiltersSubmitClick: (filters: FxpConversionFilter) => void;
   onTransfersSubmitClick: () => void;
   onModalCloseClick: () => void;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
@@ -75,7 +76,8 @@ async function downloadTransfersToExcel(transfers: any): Promise<void> {
 
 const TransferFinderModal: FC<TransferFinderModalProps> = ({
   model,
-  transfers,
+  // transfers,
+  fxpConversions,
   transfersError,
   isTransfersPending,
   isTransfersRequested,
@@ -93,7 +95,7 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
     {
       label: 'Transfer ID',
       key: 'id',
-      func: (value: string, item: Transfer) => (
+      func: (value: string, item: FxpConversion) => (
         <Link>
           <span style={{ textDecoration: 'underline' }}>{item.id}</span>
         </Link>
@@ -102,7 +104,7 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
     {
       label: 'Amount',
       key: 'amount',
-      func: (value: string, item: Transfer) => `${item.currency} ${item.amount}`,
+      func: (value: string, item: FxpConversion) => `${item.currency} ${item.amount}`,
     },
     {
       label: 'Direction',
@@ -130,7 +132,7 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   ];
 
   if (!isTransfersRequested) {
-    content = <TransferFilters model={model} onFilterChange={onFilterChange} />;
+    content = <FxpConversionFilters model={model} onFilterChange={onFilterChange} />;
     onSubmit = () => onFiltersSubmitClick(model);
     submitLabel = 'Find Conversions';
   } else if (transfersError) {
@@ -144,14 +146,14 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
   } else {
     content = (
       <div className="transfers__transfers__list">
-        {transfers.length > 0 && (
+        {fxpConversions.length > 0 && (
           <Button
             label="Download Transfers"
             noFill
-            onClick={() => downloadTransfersToExcel(transfers)}
+            onClick={() => downloadTransfersToExcel(fxpConversions)}
           />
         )}
-        <DataList columns={transfersColumns} list={transfers} onSelect={onTransferRowClick} />
+        <DataList columns={transfersColumns} list={fxpConversions} onSelect={onTransferRowClick} />
       </div>
     );
     onSubmit = onTransfersSubmitClick;
@@ -213,12 +215,12 @@ const transferDirectionOfFunds = [
   },
 ];
 
-interface TransferFiltersProps {
-  model: TransferFilter;
+interface FxpConversionFiltersProps {
+  model: FxpConversionFilter;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
 }
 
-const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) => (
+const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterChange }) => (
   <Tabs>
     <TabList>
       <Tab>Basic Find a Conversion</Tab>
@@ -233,7 +235,7 @@ const TransferFilters: FC<TransferFiltersProps> = ({ model, onFilterChange }) =>
           id="find-transfer-modal__transfer-id"
           label="Conversion ID"
           type="text"
-          value={model.transferId || ''}
+          value={model.conversionId || ''}
           onChange={(value: FilterChangeValue) => onFilterChange({ field: 'transferId', value })}
         />
       </TabPanel>

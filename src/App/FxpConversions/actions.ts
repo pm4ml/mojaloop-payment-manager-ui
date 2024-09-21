@@ -7,7 +7,7 @@ import {
   TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
   SET_TRANSFERS_ERRORS_TYPE_FILTER,
   RequestTransfersErrorsAction,
-  RequestFxpConversionDetailsAction, //fxp
+  RequestFxpConversionDetailsAction,
   REQUEST_FXPCONVERSION_DETAILS,
   SetTransfersErrorsAction,
   SetTransfersErrorsErrorAction,
@@ -21,9 +21,9 @@ import {
   UNREQUEST_TRANSFERS,
   SET_TRANSFERS,
   SET_TRANSFERS_ERROR,
-  RequestTransfersAction,
+  RequestFxpConversionsAction,
   UnrequestTransfersAction,
-  SetTransfersAction,
+  SetFxpConversionsAction,
   SetTransfersErrorAction,
   REQUEST_TRANSFERS_STATUSES,
   SET_TRANSFERS_STATUSES,
@@ -44,9 +44,9 @@ import {
   SetTransfersAvgTimeAction,
   SetTransfersAvgTimeErrorAction,
   TransferError,
-  Transfer,
+  // Transfer,
   FxpConversionDetails,
-  TransferFilter,
+  // TransferFilter,
   TransfersStatus,
   SuccessPerc,
   AvgTime,
@@ -60,6 +60,10 @@ import {
   TOGGLE_TRANSFER_DETAILS_MODAL,
   SetTransferDetailsErrorAction,
   SET_TRANSFER_DETAILS_ERROR,
+  FxpConversionFilter,
+  REQUEST_FXPCONVERSION,
+  FxpConversion,
+  SET_FXPCONVERSIONS,
 } from './types';
 
 export function requestTransfersPageData(): RequestTransfersPageDataAction {
@@ -131,9 +135,9 @@ export function setTransferFinderFilter({
   };
 }
 
-export function setTransfers({ data }: { data: Transfer[] }): SetTransfersAction {
+export function setTransfers({ data }: { data: FxpConversion[] }): SetFxpConversionsAction {
   return {
-    type: SET_TRANSFERS,
+    type: SET_FXPCONVERSIONS,
     data,
   };
 }
@@ -145,9 +149,24 @@ export function setTransfersError({ error }: { error: string }): SetTransfersErr
   };
 }
 
-export function requestTransfers({ filters }: { filters: TransferFilter }): RequestTransfersAction {
+export function requestTransfers({
+  filters,
+}: {
+  filters: FxpConversionFilter;
+}): RequestFxpConversionsAction {
   return {
-    type: REQUEST_TRANSFERS,
+    type: REQUEST_FXPCONVERSION,
+    filters,
+  };
+}
+
+export function requestFxpConversions({
+  filters,
+}: {
+  filters: FxpConversionFilter;
+}): RequestFxpConversionsAction {
+  return {
+    type: REQUEST_FXPCONVERSION,
     filters,
   };
 }

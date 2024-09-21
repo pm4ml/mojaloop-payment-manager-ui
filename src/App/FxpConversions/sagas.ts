@@ -2,6 +2,7 @@ import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { Action } from 'redux';
 import apis from 'utils/apis';
 import { is20x } from 'utils/http';
+import { transfersSaga } from 'App/Transfers/sagas';
 import {
   REQUEST_TRANSFERS_PAGE_DATA,
   REQUEST_TRANSFERS_ERRORS,
@@ -10,9 +11,8 @@ import {
   REQUEST_TRANSFERS_SUCCESS_PERC,
   REQUEST_TRANSFERS_AVG_TIME,
   REQUEST_TRANSFER_DETAILS,
-  REQUEST_FXPCONVERSION_DETAILS, //fxp
-  RequestFxpConversionDetailsAction, //fxp
-  RequestTransfersAction,
+  REQUEST_FXPCONVERSION_DETAILS, // fxp
+  RequestFxpConversionDetailsAction, // fxp
   RequestTransfersErrorsAction,
   RequestTransfersStatusesAction,
   RequestTransfersSuccessPercAction,
@@ -20,6 +20,8 @@ import {
   RequestTransferDetailsAction,
   SuccessPercApi,
   AvgTimeApi,
+  REQUEST_FXPCONVERSION,
+  RequestFxpConversionsAction,
 } from './types';
 import {
   setTransfers,
@@ -35,7 +37,7 @@ import {
   setTransferDetailsError,
   setTransferDetails,
   setFxpConversionDetails,
-  setFxpConversionDetailsError, //fxp
+  setFxpConversionDetailsError, // fxp
 } from './actions';
 
 export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
@@ -56,12 +58,12 @@ export function* transfersErrorsSaga() {
   yield takeLatest([REQUEST_TRANSFERS_ERRORS], fetchTransfersErrors);
 }
 
-function* fetchTransfers(action: RequestTransfersAction) {
+function* fetchFxpConversions(action: RequestFxpConversionsAction) {
   try {
     let params;
-    if (action.filters.transferId) {
+    if (action.filters.conversionId) {
       params = {
-        id: action.filters.transferId,
+        id: action.filters.conversionId,
       };
     } else {
       params = {
@@ -87,9 +89,8 @@ function* fetchTransfers(action: RequestTransfersAction) {
     yield put(setTransfersError({ error: e.message }));
   }
 }
-
-export function* transfersSaga() {
-  yield takeLatest([REQUEST_TRANSFERS], fetchTransfers);
+export function* fxpConversionsSaga() {
+  yield takeLatest([REQUEST_FXPCONVERSION], fetchFxpConversions);
 }
 
 function* fetchTransfersStatuses(action: RequestTransfersStatusesAction) {
@@ -205,7 +206,7 @@ export default function* rootSaga() {
   ]);
 }
 
-//Fxp Functions
+// Fxp Functions
 function* fetchFxpConversionDetails(action: RequestFxpConversionDetailsAction) {
   try {
     // eslint-disable-next-line
