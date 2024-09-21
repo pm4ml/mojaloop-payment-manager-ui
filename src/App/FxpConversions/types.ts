@@ -417,7 +417,7 @@ export interface FxpConversionsState {
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
   fxpConversionDetails?: FxpConversionDetails;
-  
+
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -555,7 +555,8 @@ export interface SetTransferDetailsErrorAction {
   error: string;
 }
 
-export interface SetFxpConversionDetailsErrorAction { //fxp
+export interface SetFxpConversionDetailsErrorAction {
+  //fxp
   type: typeof SET_TRANSFER_DETAILS_ERROR;
   error: string;
 }

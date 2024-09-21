@@ -163,8 +163,8 @@ function* fetchTransferDetails(action: RequestTransferDetailsAction) {
   try {
     // eslint-disable-next-line
     const response = yield call(apis.transferDetails.read, { transferId: action.transferId });
-    
-    console.log("callingfetchTransferDetails");
+
+    console.log('callingfetchTransferDetails');
 
     if (is20x(response.status)) {
       yield put(setTransferDetails({ data: response.data }));
