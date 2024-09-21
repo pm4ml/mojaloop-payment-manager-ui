@@ -76,7 +76,7 @@ function* fetchTransfers(action: RequestTransfersAction) {
       };
     }
     // eslint-disable-next-line
-    const response = yield call(apis.transfers.read, { params });
+    const response = yield call(apis.fxpConversions.read, { params });
     console.log(response);
     if (is20x(response.status)) {
       yield put(setTransfers({ data: response.data.slice(0, 50) }));

@@ -132,7 +132,7 @@ export function* transfersSuccessPercSaga() {
 
 function* fetchTransfersAvgTime(action: RequestTransfersAvgTimeAction) {
   try {
-    // eslint-disable-next-line
+    // eslint-disable-next-lineg
     const response = yield call(apis.transfersAvgTime.read, { params: { minutePrevious: 1440 } });
 
     yield put(
