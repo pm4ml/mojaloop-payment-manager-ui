@@ -24,14 +24,20 @@ import {
 import xlsx from 'xlsx';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
-import {FxpConversion, TransferError, DateRange, FxpConversionFilter, Transfer } from '../../types';
+import {
+  FxpConversion,
+  TransferError,
+  DateRange,
+  FxpConversionFilter,
+  Transfer,
+} from '../../types';
 import * as helpers from '../../helpers';
 
 type FilterChangeValue = string | number;
 
 const stateProps = (state: State) => ({
   model: selectors.getFxpConversionFinderFilter(state),
-  //transfers: selectors.getTransfers(state),
+  // transfers: selectors.getTransfers(state),
   fxpConversions: selectors.getFxpConversions(state),
   transfersError: selectors.getTransfersError(state),
   isTransfersPending: selectors.getIsTransfersPending(state),
@@ -96,14 +102,14 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
       key: 'id',
       func: (value: string, item: FxpConversion) => (
         <Link>
-          <span style={{ textDecoration: 'underline' }}>{item.id}</span>
+          <span style={{ textDecoration: 'underline' }}>{item.conversionId}</span>
         </Link>
       ),
     },
     {
       label: 'Amount',
       key: 'amount',
-      func: (value: string, item: FxpConversion) => `${item.currency} ${item.amount}`,
+      func: (value: string, item: FxpConversion) => `${item.current} ${item.amount}`,
     },
     {
       label: 'Direction',

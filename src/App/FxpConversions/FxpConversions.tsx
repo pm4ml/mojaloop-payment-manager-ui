@@ -7,7 +7,7 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import { TransfersStatus, TransferError } from './types';
 import { XYCoordinate } from '../types';
-import FxpConversionFinderModal from './components/FxpConversionFinderModal';  
+import FxpConversionFinderModal from './components/FxpConversionFinderModal';
 import TransferDetailsModal from './components/FxpConversionDetails';
 import TransfersErrors from './components/FxpConversionErrors';
 import TransfersErrorsChart from './components/FxpConversionErrorsChart';

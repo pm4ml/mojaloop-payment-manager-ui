@@ -16,7 +16,8 @@ export const getTransfersErrorsTypeFilter = (state: State) =>
 export const getIsTransferFinderModalVisible = (state: State) =>
   state.transfers.isTransferFinderModalVisible;
 export const getTransferFinderFilter = (state: State) => state.transfers.transferFinderFilter;
-export const getFxpConversionFinderFilter = (state: State) => state.fxpConversions.fxpConversionFinderFilter;
+export const getFxpConversionFinderFilter = (state: State) =>
+  state.fxpConversions.fxpConversionFinderFilter;
 export const getFilteredByStatusTransfersErrors = createSelector(
   getTransfersErrors,
   getTransfersErrorsTypeFilter,

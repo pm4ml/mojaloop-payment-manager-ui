@@ -7,7 +7,7 @@ import {
   TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
   SET_TRANSFERS_ERRORS_TYPE_FILTER,
   RequestTransfersErrorsAction,
-  RequestFxpConversionDetailsAction, //fxp
+  RequestFxpConversionDetailsAction, // fxp
   REQUEST_FXPCONVERSION_DETAILS,
   SetTransfersErrorsAction,
   SetTransfersErrorsErrorAction,
@@ -135,7 +135,6 @@ export function toggleFxpConversionFinderModalAction(): ToggleFxpConversionFinde
   };
 }
 
-
 export function setTransferFinderFilter({
   field,
   value,
@@ -163,7 +162,6 @@ export function setFxpConversionFinderFilter({
     value,
   };
 }
-
 
 export function setTransfers({ data }: { data: Transfer[] }): SetTransfersAction {
   return {
@@ -193,7 +191,11 @@ export function requestTransfers({ filters }: { filters: TransferFilter }): Requ
 }
 
 // fxp
-export function requestFxpConversions({ filters }: { filters: FxpConversionFilter }): RequestFxpConversionsAction {
+export function requestFxpConversions({
+  filters,
+}: {
+  filters: FxpConversionFilter;
+}): RequestFxpConversionsAction {
   return {
     type: REQUEST_FXPCONVERSION,
     filters,

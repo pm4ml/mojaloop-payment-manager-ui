@@ -32,11 +32,11 @@ export const SET_TRANSFERS_AVG_TIME = 'Transfers / Set Transfers Average Time';
 export const SET_TRANSFERS_AVG_TIME_ERROR = 'Transfers / Set Transfers Average Time Error';
 
 export const REQUEST_TRANSFER_DETAILS = 'Transfers / Request Transfer Details';
-//export const SET_TRANSFER_DETAILS = 'Transfers / Set Transfer Details';
+// export const SET_TRANSFER_DETAILS = 'Transfers / Set Transfer Details';
 export const TOGGLE_TRANSFER_DETAILS_MODAL = 'Transfers / Select Transfers Detail View';
 export const SET_TRANSFER_DETAILS_ERROR = 'Transfers / Set Transfer Details Error';
 
-//FXp Types
+// FXp Types
 export const SET_FXPCONVERSION_DETAILS = 'FxpConversion / Set FxpConversion Details';
 export const REQUEST_FXPCONVERSION_DETAILS = 'FxpConversion / Request FxpConversion Details';
 
@@ -117,11 +117,11 @@ export interface Transfer {
 }
 
 export interface FxpConversion {
-  id: string;
+  conversionId: string;
   institution: string;
   direction: TransferDirection;
   type: TransferType;
-  currency: string;
+  current: string;
   amount: string;
   status: TransferStatus;
   initiatedTimestamp: string;
@@ -408,7 +408,7 @@ export interface TransfersState {
 }
 
 export interface FxpConversionsState {
-  //fxpConversionFinderFilter: any;
+  // fxpConversionFinderFilter: any;
   transfersErrors: TransferError[];
   transfersErrorsError: ErrorMessage;
   isTransfersErrorsViewAllActive: boolean;
@@ -418,7 +418,7 @@ export interface FxpConversionsState {
   fxpConversionFinderFilter: FxpConversionFilter;
   isTransfersRequested: boolean;
   transfers: Transfer[];
-  fxpConversions: FxpConversion [];
+  fxpConversions: FxpConversion[];
   transfersError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
   transfersStatusesError: ErrorMessage;
@@ -427,7 +427,7 @@ export interface FxpConversionsState {
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
   fxpConversionDetails?: FxpConversionDetails;
-  
+
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }
@@ -478,7 +478,6 @@ export interface SetFxpConversionFinderFilterAction {
   value: string | number;
   field: string;
 }
-
 
 export interface RequestTransfersAction {
   type: typeof REQUEST_TRANSFERS;
@@ -556,7 +555,7 @@ export interface RequestFxpConversionDetailsAction {
 //   data: FxpConversionDetails;
 // }
 
-//fxp
+// fxp
 export interface SetFxpConversionDetailsAction {
   type: typeof SET_FXPCONVERSION_DETAILS;
   data: FxpConversionDetails;
@@ -571,7 +570,8 @@ export interface SetTransferDetailsErrorAction {
   error: string;
 }
 
-export interface SetFxpConversionDetailsErrorAction { //fxp
+export interface SetFxpConversionDetailsErrorAction {
+  // fxp
   type: typeof SET_TRANSFER_DETAILS_ERROR;
   error: string;
 }

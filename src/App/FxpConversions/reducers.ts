@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from 'moment';
 import {
   SET_TRANSFERS_ERRORS,
@@ -240,7 +241,7 @@ export default function fxpConversionsReducer(
         ...state,
         transfersAvgTimeError: (action as SetTransfersAvgTimeErrorAction).error,
       };
-      // FXP
+    // FXP
     case SET_FXPCONVERSIONS:
       return {
         ...state,
