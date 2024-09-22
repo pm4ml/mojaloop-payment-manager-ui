@@ -15,6 +15,7 @@ import {
   SetTransfersErrorsTypeFilterAction,
   TOGGLE_TRANSFER_FINDER_MODAL,
   ToggleTransferFinderModalAction,
+  ToggleFxpConversionFinderModalAction,
   SET_TRANSFER_FINDER_FILTER,
   SetTransferFinderFilterAction,
   REQUEST_TRANSFERS,
@@ -37,6 +38,7 @@ import {
   REQUEST_TRANSFERS_AVG_TIME,
   SET_TRANSFERS_AVG_TIME,
   SET_TRANSFERS_AVG_TIME_ERROR,
+  TOGGLE_FXPCONVERSION_FINDER_MODAL,
   RequestTransfersSuccessPercAction,
   SetTransfersSuccessPercAction,
   SetTransfersSuccessPercErrorAction,
@@ -55,11 +57,21 @@ import {
   RequestTransferDetailsAction,
   // SetTransferDetailsAction,
   SetFxpConversionDetailsAction,
+  SetFxpConversionsAction,
+  SET_FXPCONVERSION_FINDER_FILTER,
+  SetFxpConversionFinderFilterAction,
   SetFxpConversionDetailsErrorAction,
   ToggleTransferDetailsModalAction,
   TOGGLE_TRANSFER_DETAILS_MODAL,
   SetTransferDetailsErrorAction,
   SET_TRANSFER_DETAILS_ERROR,
+  REQUEST_FXPCONVERSION,
+  RequestFxpConversionsAction,
+  FxpConversionFilter,
+  UnrequestFxpConversionsAction,
+  UNREQUEST_FXPCONVERSION,
+  FxpConversion,
+  SET_FXPCONVERSIONS,
 } from './types';
 
 export function requestTransfersPageData(): RequestTransfersPageDataAction {
@@ -117,6 +129,13 @@ export function toggleTransferFinderModal(): ToggleTransferFinderModalAction {
   };
 }
 
+export function toggleFxpConversionFinderModalAction(): ToggleFxpConversionFinderModalAction {
+  return {
+    type: TOGGLE_FXPCONVERSION_FINDER_MODAL,
+  };
+}
+
+
 export function setTransferFinderFilter({
   field,
   value,
@@ -131,6 +150,21 @@ export function setTransferFinderFilter({
   };
 }
 
+export function setFxpConversionFinderFilter({
+  field,
+  value,
+}: {
+  field: string;
+  value: string | number;
+}): SetFxpConversionFinderFilterAction {
+  return {
+    type: SET_FXPCONVERSION_FINDER_FILTER,
+    field,
+    value,
+  };
+}
+
+
 export function setTransfers({ data }: { data: Transfer[] }): SetTransfersAction {
   return {
     type: SET_TRANSFERS,
@@ -138,6 +172,12 @@ export function setTransfers({ data }: { data: Transfer[] }): SetTransfersAction
   };
 }
 
+export function setFxpConversions({ data }: { data: FxpConversion[] }): SetFxpConversionsAction {
+  return {
+    type: SET_FXPCONVERSIONS,
+    data,
+  };
+}
 export function setTransfersError({ error }: { error: string }): SetTransfersErrorAction {
   return {
     type: SET_TRANSFERS_ERROR,
@@ -152,9 +192,24 @@ export function requestTransfers({ filters }: { filters: TransferFilter }): Requ
   };
 }
 
+// fxp
+export function requestFxpConversions({ filters }: { filters: FxpConversionFilter }): RequestFxpConversionsAction {
+  return {
+    type: REQUEST_FXPCONVERSION,
+    filters,
+  };
+}
+
 export function unrequestTransfers(): UnrequestTransfersAction {
   return {
     type: UNREQUEST_TRANSFERS,
+  };
+}
+
+// fxp
+export function UnrequestFxpConversions(): UnrequestFxpConversionsAction {
+  return {
+    type: UNREQUEST_FXPCONVERSION,
   };
 }
 

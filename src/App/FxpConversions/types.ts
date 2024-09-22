@@ -13,6 +13,7 @@ export const SET_TRANSFERS_ERRORS_ERROR = 'Transfers / Set Transfers Errors Erro
 export const TOGGLE_TRANSFERS_ERRORS_VIEW_ALL = 'Transfers / Select Transfers Errors View All';
 export const SET_TRANSFERS_ERRORS_TYPE_FILTER = 'Transfers / Set Transfers Errors Type Filter';
 export const TOGGLE_TRANSFER_FINDER_MODAL = 'Transfers / Open Transfer Finder Modal';
+export const TOGGLE_FXPCONVERSION_FINDER_MODAL = 'FxpConversions / Open FxpConversion Finder Modal';
 export const SET_TRANSFER_FINDER_FILTER = 'Transfers / Set Transfer Finder Filter';
 export const REQUEST_TRANSFERS = 'Transfers / Request Transfers';
 export const UNREQUEST_TRANSFERS = 'Transfers / Unrequest Transfers';
@@ -38,8 +39,10 @@ export const SET_TRANSFER_DETAILS_ERROR = 'Transfers / Set Transfer Details Erro
 //FXp Types
 export const SET_FXPCONVERSION_DETAILS = 'FxpConversion / Set FxpConversion Details';
 export const REQUEST_FXPCONVERSION_DETAILS = 'FxpConversion / Request FxpConversion Details';
+
 export const REQUEST_FXPCONVERSION = 'FxpConversion / Request FxpConversion';
 export const UNREQUEST_FXPCONVERSION = 'FxpConversion / UnRequest FxpConversion';
+export const SET_FXPCONVERSION_FINDER_FILTER = 'FxpConversion / Set FxpConversion Finder Filter';
 
 export interface TransferError {
   id: string;
@@ -89,7 +92,7 @@ export interface TransferFilter {
   status: string | number | undefined;
 }
 
-export interface FxpConversionFilter {                   //fxp
+export interface FxpConversionFilter {
   conversionId: string | number | undefined;
   dates: string | number | undefined;
   from: string | number | undefined;
@@ -405,14 +408,17 @@ export interface TransfersState {
 }
 
 export interface FxpConversionsState {
+  //fxpConversionFinderFilter: any;
   transfersErrors: TransferError[];
   transfersErrorsError: ErrorMessage;
   isTransfersErrorsViewAllActive: boolean;
   transfersErrorsTypeFilter?: string;
   isTransferFinderModalVisible: boolean;
   transferFinderFilter: TransferFilter;
+  fxpConversionFinderFilter: FxpConversionFilter;
   isTransfersRequested: boolean;
   transfers: Transfer[];
+  fxpConversions: FxpConversion [];
   transfersError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
   transfersStatusesError: ErrorMessage;
@@ -457,11 +463,22 @@ export interface ToggleTransferFinderModalAction {
   type: typeof TOGGLE_TRANSFER_FINDER_MODAL;
 }
 
+export interface ToggleFxpConversionFinderModalAction {
+  type: typeof TOGGLE_FXPCONVERSION_FINDER_MODAL;
+}
+
 export interface SetTransferFinderFilterAction {
   type: typeof SET_TRANSFER_FINDER_FILTER;
   value: string | number;
   field: string;
 }
+
+export interface SetFxpConversionFinderFilterAction {
+  type: typeof SET_FXPCONVERSION_FINDER_FILTER;
+  value: string | number;
+  field: string;
+}
+
 
 export interface RequestTransfersAction {
   type: typeof REQUEST_TRANSFERS;
@@ -561,7 +578,7 @@ export interface SetFxpConversionDetailsErrorAction { //fxp
 
 export interface SetFxpConversionsAction {
   type: typeof SET_FXPCONVERSIONS;
-  data: Transfer[];
+  data: FxpConversion[];
 }
 
 export interface RequestFxpConversionsAction {
@@ -571,7 +588,6 @@ export interface RequestFxpConversionsAction {
 
 export interface UnrequestFxpConversionsAction {
   type: typeof UNREQUEST_FXPCONVERSION;
-  filters: TransferFilter;
 }
 
 export type TransfersActionTypes =
@@ -582,6 +598,7 @@ export type TransfersActionTypes =
   | ToggleTransfersErrorsViewAllAction
   | SetTransfersErrorsTypeFilterAction
   | ToggleTransferFinderModalAction
+  | ToggleFxpConversionFinderModalAction
   | SetTransferFinderFilterAction
   | RequestTransfersAction
   | UnrequestTransfersAction
@@ -601,4 +618,7 @@ export type TransfersActionTypes =
   | SetFxpConversionsAction
   | SetFxpConversionDetailsErrorAction
   | UnrequestFxpConversionsAction
+  | RequestFxpConversionsAction
+  | FxpConversionFilter
+  | SetFxpConversionsAction
   | ToggleTransferDetailsModalAction;

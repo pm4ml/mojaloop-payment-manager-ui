@@ -24,6 +24,17 @@ import {
   TOGGLE_TRANSFER_DETAILS_MODAL,
   REQUEST_FXPCONVERSION,
   UNREQUEST_FXPCONVERSION,
+  FxpConversionFilter,
+  SetTransfersAction,
+  SetTransfersErrorAction,
+  SetTransfersStatusesAction,
+  SetTransfersStatusesErrorAction,
+  SetTransfersSuccessPercAction,
+  SetTransfersSuccessPercErrorAction,
+  SetFxpConversionsAction,
+  SetTransfersAvgTimeAction,
+  SetTransfersAvgTimeErrorAction,
+  SetFxpConversionDetailsAction,
 } from './types';
 
 const dateRanges = {
@@ -63,6 +74,21 @@ function getTransferFinderFilterInitialState() {
   };
 }
 
+function getFxpConversionFinderFilterInitialState() {
+  return {
+    conversionId: undefined,
+    dates: DateRange.Today,
+    from: getFromDateBySelection(DateRange.Today),
+    to: getToDateBySelection(DateRange.Today),
+    aliasType: undefined,
+    payeeAlias: undefined,
+    aliasSubValue: undefined,
+    direction: undefined,
+    institution: undefined,
+    status: undefined,
+  };
+}
+
 export const initialState: FxpConversionsState = {
   transfersErrors: [],
   transfersErrorsError: null,
@@ -72,6 +98,7 @@ export const initialState: FxpConversionsState = {
   transferFinderFilter: getTransferFinderFilterInitialState(),
   isTransfersRequested: false,
   transfers: [],
+  fxpConversions: [],
   transfersError: null,
   transfersStatuses: [],
   transfersStatusesError: null,
@@ -79,22 +106,23 @@ export const initialState: FxpConversionsState = {
   transfersAvgTimeError: null,
   isTransferDetailsModalVisible: false,
   transferDetailsError: null,
+  fxpConversionFinderFilter: getFxpConversionFinderFilterInitialState(),
 };
 
 export default function fxpConversionsReducer(
   state = initialState,
-  action: TransfersActionTypes
+  action: FxpConversionFilter | TransfersActionTypes
 ): FxpConversionsState {
-  switch (action.type) {
+  switch ('type' in action ? action.type : action) {
     case SET_TRANSFERS_ERRORS:
       return {
         ...state,
-        transfersErrors: action.data,
+        transfersErrors: (action as { data: any }).data,
       };
     case SET_TRANSFERS_ERRORS_ERROR:
       return {
         ...state,
-        transfersErrorsError: action.error,
+        transfersErrorsError: 'error' in action ? action.error : null,
       };
     case TOGGLE_TRANSFERS_ERRORS_VIEW_ALL:
       return {
@@ -105,13 +133,22 @@ export default function fxpConversionsReducer(
     case SET_TRANSFERS_ERRORS_TYPE_FILTER:
       return {
         ...state,
-        transfersErrorsTypeFilter: action.filter,
+        transfersErrorsTypeFilter: 'filter' in action ? action.filter : undefined,
       };
     case TOGGLE_TRANSFER_FINDER_MODAL: {
       return {
         ...state,
         isTransferFinderModalVisible: !state.isTransferFinderModalVisible,
         transferFinderFilter: getTransferFinderFilterInitialState(),
+        isTransfersRequested: false,
+      };
+    }
+    // fxp
+    case TOGGLE_TRANSFER_FINDER_MODAL: {
+      return {
+        ...state,
+        isTransferFinderModalVisible: !state.isTransferFinderModalVisible,
+        fxpConversionFinderFilter: getFxpConversionFinderFilterInitialState(),
         isTransfersRequested: false,
       };
     }
@@ -122,7 +159,7 @@ export default function fxpConversionsReducer(
       };
     }
     case SET_TRANSFER_FINDER_FILTER: {
-      const { field, value } = action;
+      const { field, value } = action as { field: string; value: any };
 
       if (field === 'dates' && value) {
         return {
@@ -166,54 +203,54 @@ export default function fxpConversionsReducer(
     case SET_TRANSFERS:
       return {
         ...state,
-        transfers: action.data,
+        transfers: (action as SetTransfersAction).data,
       };
     case SET_TRANSFERS_ERROR:
       return {
         ...state,
-        transfersError: action.error,
+        transfersError: (action as SetTransfersErrorAction).error,
       };
     case SET_TRANSFERS_STATUSES:
       return {
         ...state,
-        transfersStatuses: action.data,
+        transfersStatuses: (action as SetTransfersStatusesAction).data,
       };
     case SET_TRANSFERS_STATUSES_ERROR:
       return {
         ...state,
-        transfersStatusesError: action.error,
+        transfersStatusesError: (action as SetTransfersStatusesErrorAction).error,
       };
     case SET_TRANSFERS_SUCCESS_PERC:
       return {
         ...state,
-        transfersSuccessPerc: action.data,
+        transfersSuccessPerc: (action as SetTransfersSuccessPercAction).data,
       };
     case SET_TRANSFERS_SUCCESS_PERC_ERROR:
       return {
         ...state,
-        transfersSuccessPercError: action.error,
+        transfersSuccessPercError: (action as SetTransfersSuccessPercErrorAction).error,
       };
     case SET_TRANSFERS_AVG_TIME:
       return {
         ...state,
-        transfersAvgTime: action.data,
+        transfersAvgTime: (action as SetTransfersAvgTimeAction).data,
       };
     case SET_TRANSFERS_AVG_TIME_ERROR:
       return {
         ...state,
-        transfersAvgTimeError: action.error,
+        transfersAvgTimeError: (action as SetTransfersAvgTimeErrorAction).error,
       };
       // FXP
     case SET_FXPCONVERSIONS:
       return {
         ...state,
-        transfers: action.data,
+        fxpConversions: (action as SetFxpConversionsAction).data,
       };
-    // case REQUEST_FXPCONVERSION:
-    //   return {
-    //     ...state,
-    //     isTransfersRequested: true,
-    //   };
+    case REQUEST_FXPCONVERSION:
+      return {
+        ...state,
+        isTransfersRequested: true,
+      };
     case UNREQUEST_FXPCONVERSION:
       return {
         ...state,
@@ -222,7 +259,7 @@ export default function fxpConversionsReducer(
     case SET_FXPCONVERSION_DETAILS:
       return {
         ...state,
-        fxpConversionDetails: action.data,
+        fxpConversionDetails: (action as SetFxpConversionDetailsAction).data,
         isTransferDetailsModalVisible: true,
       };
     default:

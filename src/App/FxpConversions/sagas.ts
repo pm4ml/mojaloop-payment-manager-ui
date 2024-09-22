@@ -37,7 +37,8 @@ import {
   setTransferDetailsError,
   setTransferDetails,
   setFxpConversionDetails,
-  setFxpConversionDetailsError, //fxp
+  setFxpConversionDetailsError,
+  setFxpConversions, //fxp
 } from './actions';
 
 export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
@@ -193,7 +194,7 @@ export function* FxpConversionDetailsSaga() {
   yield takeEvery([REQUEST_FXPCONVERSION_DETAILS], fetchFxpConversionDetails);
 }
 
-function* fetchTransfers(action: RequestFxpConversionsAction) {
+function* fetchFxpConversions(action: RequestFxpConversionsAction) {
   try {
     let params;
     if (action.filters.conversionId) {
@@ -216,7 +217,7 @@ function* fetchTransfers(action: RequestFxpConversionsAction) {
     const response = yield call(apis.fxpConversions.read, { params });
     console.log(response);
     if (is20x(response.status)) {
-      yield put(setTransfers({ data: response.data.slice(0, 50) }));
+      yield put(setFxpConversions({ data: response.data.slice(0, 50) }));
     } else {
       yield put(setTransfersError({ error: response.status }));
     }
@@ -225,5 +226,5 @@ function* fetchTransfers(action: RequestFxpConversionsAction) {
   }
 }
 export function* fxpConversionsSaga() {
-  yield takeLatest([REQUEST_FXPCONVERSION], fetchTransfers);
+  yield takeLatest([REQUEST_FXPCONVERSION], fetchFxpConversions);
 }

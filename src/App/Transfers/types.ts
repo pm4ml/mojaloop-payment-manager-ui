@@ -1,3 +1,4 @@
+import { FxpConversionFilter } from 'App/FxpConversions/types';
 import {
   ErrorMessage,
   LinesConfig,
@@ -355,7 +356,7 @@ export interface FxpConversionsState {
   isTransfersErrorsViewAllActive: boolean;
   transfersErrorsTypeFilter?: string;
   isTransferFinderModalVisible: boolean;
-  transferFinderFilter: TransferFilter;
+  fxpConversionFinderFilter: FxpConversionFilter;
   isTransfersRequested: boolean;
   transfersError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
