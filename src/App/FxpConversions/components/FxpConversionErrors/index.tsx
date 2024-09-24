@@ -3,15 +3,15 @@ import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
 import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
 import xlsx from 'xlsx';
-import { FxpConversionDetails, TransferError } from '../../types';
+import { FxpConversionDetails, FxpConversionError, TransferError } from '../../types';
 import * as helpers from '../../helpers';
 import TransfersErrorsModal from './TransfersErrorsModal';
 
 const transfersErrorsColumns = [
   {
-    label: 'Transfer ID',
+    label: 'Conversion ID',
     key: 'id',
-    func: (value: string, item: TransferError) => (
+    func: (value: string, item: FxpConversionError) => (
       <Link>
         <span style={{ textDecoration: 'underline' }}>{item.id}</span>
       </Link>
@@ -45,11 +45,11 @@ const transfersErrorsColumns = [
 
 interface TransfersErrorsProps {
   isPending: boolean | undefined;
-  items: TransferError[];
+  items: FxpConversionError[];
   isViewAllActive: boolean;
   error: ErrorMessage;
   onViewAllClick: () => void;
-  onTransferRowClick: (transferError: TransferError) => void;
+  onTransferRowClick: (fxpConversionError: FxpConversionError) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -112,8 +112,8 @@ const TransfersErrors: FC<TransfersErrorsProps> = ({
 };
 
 interface ErrorsListProps {
-  items: TransferError[];
-  onTransferRowClick: (transferError: TransferError) => void;
+  items: FxpConversionError[];
+  onTransferRowClick: (fxpConversionError: FxpConversionError) => void;
 }
 
 const ErrorsList: FC<ErrorsListProps> = ({ items, onTransferRowClick }) => {

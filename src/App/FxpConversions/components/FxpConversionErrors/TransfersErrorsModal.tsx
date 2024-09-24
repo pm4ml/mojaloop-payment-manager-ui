@@ -23,7 +23,7 @@ const dispatchProps = (dispatch: Dispatch) => ({
 
 const transfersErrorsColumns = [
   {
-    label: 'Transfer ID',
+    label: 'Conversion ID',
     key: 'id',
     func: (value: string, item: TransferError) => (
       <Link>

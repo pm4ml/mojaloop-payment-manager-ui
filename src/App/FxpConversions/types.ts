@@ -13,12 +13,11 @@ export const SET_TRANSFERS_ERRORS_ERROR = 'Transfers / Set Transfers Errors Erro
 export const TOGGLE_TRANSFERS_ERRORS_VIEW_ALL = 'Transfers / Select Transfers Errors View All';
 export const SET_TRANSFERS_ERRORS_TYPE_FILTER = 'Transfers / Set Transfers Errors Type Filter';
 export const TOGGLE_TRANSFER_FINDER_MODAL = 'Transfers / Open Transfer Finder Modal';
-export const TOGGLE_FXPCONVERSION_FINDER_MODAL = 'FxpConversions / Open FxpConversion Finder Modal';
 export const SET_TRANSFER_FINDER_FILTER = 'Transfers / Set Transfer Finder Filter';
 export const REQUEST_TRANSFERS = 'Transfers / Request Transfers';
 export const UNREQUEST_TRANSFERS = 'Transfers / Unrequest Transfers';
 export const SET_TRANSFERS = 'Transfers / Set Transfers';
-export const SET_FXPCONVERSIONS = 'FxpConversion / Set FxpConversion';
+
 export const SET_TRANSFERS_ERROR = 'Transfers / Set Transfers Error';
 export const REQUEST_TRANSFERS_STATUSES = 'Transfers / Request Transfers Statuses';
 export const SET_TRANSFERS_STATUSES = 'Transfers / Set Transfers Statuses';
@@ -32,19 +31,39 @@ export const SET_TRANSFERS_AVG_TIME = 'Transfers / Set Transfers Average Time';
 export const SET_TRANSFERS_AVG_TIME_ERROR = 'Transfers / Set Transfers Average Time Error';
 
 export const REQUEST_TRANSFER_DETAILS = 'Transfers / Request Transfer Details';
-// export const SET_TRANSFER_DETAILS = 'Transfers / Set Transfer Details';
 export const TOGGLE_TRANSFER_DETAILS_MODAL = 'Transfers / Select Transfers Detail View';
 export const SET_TRANSFER_DETAILS_ERROR = 'Transfers / Set Transfer Details Error';
 
 // FXp Types
+export const SET_FXPCONVERSIONS = 'FxpConversion / Set FxpConversion';
+export const TOGGLE_FXPCONVERSION_FINDER_MODAL = 'FxpConversions / Open FxpConversion Finder Modal';
 export const SET_FXPCONVERSION_DETAILS = 'FxpConversion / Set FxpConversion Details';
 export const REQUEST_FXPCONVERSION_DETAILS = 'FxpConversion / Request FxpConversion Details';
-
 export const REQUEST_FXPCONVERSION = 'FxpConversion / Request FxpConversion';
 export const UNREQUEST_FXPCONVERSION = 'FxpConversion / UnRequest FxpConversion';
 export const SET_FXPCONVERSION_FINDER_FILTER = 'FxpConversion / Set FxpConversion Finder Filter';
+export const SET_FXPCONVERSION_DETAILS_ERROR = 'FxpConversions / Set FxpConversion Details Error';
+export const SET_FXPCONVERSIONS_ERRORS = 'FxpConversions / Set FxpConversions Errors';
+export const SET_FXPCONVERSIONS_ERRORS_ERROR = 'FxpConversions / Set FxpConversions Errors Error';
+export const REQUEST_FXPCONVERSIONS_ERRORS = 'FxpConversions / Request FxpConversions Errors';
+export const TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL = 'FxpConversions / Select FxpConversions Errors View All';
+export const SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER = 'FxpConversions / Set FxpConversions Errors Type Filter';
+export const SET_FXPCONVERSIONS_ERROR = 'FxpConversions / Set FxpConversions Errors';
 
 export interface TransferError {
+  id: string;
+  institution: string;
+  direction: ErrorDirection;
+  type: TransferType;
+  currency: string;
+  value: string;
+  errorType: ErrorType;
+  committedDate: string;
+  receiveAmount?: string;
+  receiveCurrency?: string;
+}
+
+export interface FxpConversionError {
   id: string;
   institution: string;
   direction: ErrorDirection;
@@ -159,6 +178,11 @@ export interface MojaloopErrorInformation {
 }
 
 export interface TransferDetailsError {
+  httpStatusCode: number;
+  mojaloopError?: MojaloopError;
+}
+// FxpConversionDetailsError
+export interface FxpConversionDetailsError {
   httpStatusCode: number;
   mojaloopError?: MojaloopError;
 }
@@ -358,7 +382,7 @@ export interface FxpTechnicalDetails {
     fulfilment: string;
     completedTimeStamp: string;
   };
-  lastError?: TransferDetailsError;
+  lastError?: FxpConversionDetailsError;
 }
 
 export enum DateRange {
@@ -408,18 +432,17 @@ export interface TransfersState {
 }
 
 export interface FxpConversionsState {
-  // fxpConversionFinderFilter: any;
-  transfersErrors: TransferError[];
-  transfersErrorsError: ErrorMessage;
+  fxpConversionsErrors: FxpConversionError[];
+  fxpConversionsErrorsError: ErrorMessage;
   isTransfersErrorsViewAllActive: boolean;
   transfersErrorsTypeFilter?: string;
   isTransferFinderModalVisible: boolean;
   transferFinderFilter: TransferFilter;
   fxpConversionFinderFilter: FxpConversionFilter;
   isTransfersRequested: boolean;
-  transfers: Transfer[];
+  fxpConversion: FxpConversion[];
   fxpConversions: FxpConversion[];
-  transfersError: ErrorMessage;
+  fxpConversionsError: ErrorMessage;
   transfersStatuses: TransfersStatus[];
   transfersStatusesError: ErrorMessage;
   transfersSuccessPerc?: SuccessPerc;
@@ -429,7 +452,7 @@ export interface FxpConversionsState {
   fxpConversionDetails?: FxpConversionDetails;
 
   isTransferDetailsModalVisible: boolean;
-  transferDetailsError: ErrorMessage;
+  fxpConversionDetailsError: ErrorMessage;
 }
 
 export interface RequestTransfersPageDataAction {
@@ -439,10 +462,20 @@ export interface RequestTransfersPageDataAction {
 export interface RequestTransfersErrorsAction {
   type: typeof REQUEST_TRANSFERS_ERRORS;
 }
+// RequestFxpConversionsErrorsAction
+export interface RequestFxpConversionsErrorsAction {
+  type: typeof REQUEST_FXPCONVERSIONS_ERRORS;
+}
 
 export interface SetTransfersErrorsAction {
   type: typeof SET_TRANSFERS_ERRORS;
   data: TransferError[];
+}
+
+// SetFxpConversionErrorsAction
+export interface SetFxpConversionErrorsAction {
+  type: typeof SET_FXPCONVERSIONS_ERRORS;
+  data: FxpConversionError[];
 }
 
 export interface SetTransfersErrorsErrorAction {
@@ -450,8 +483,19 @@ export interface SetTransfersErrorsErrorAction {
   error: string;
 }
 
+// SetFxpConversionsErrorsErrorAction
+export interface SetFxpConversionsErrorsErrorAction {
+  type: typeof SET_FXPCONVERSIONS_ERRORS_ERROR;
+  error: string;
+}
+
 export interface ToggleTransfersErrorsViewAllAction {
   type: typeof TOGGLE_TRANSFERS_ERRORS_VIEW_ALL;
+}
+
+// ToggleFxpConversionsErrorsViewAllAction
+export interface ToggleFxpConversionsErrorsViewAllAction {
+  type: typeof TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL;
 }
 
 export interface SetTransfersErrorsTypeFilterAction {
@@ -459,10 +503,17 @@ export interface SetTransfersErrorsTypeFilterAction {
   filter: string;
 }
 
+// SetFxpConversionsErrorsTypeFilterAction
+export interface SetFxpConversionsErrorsTypeFilterAction {
+  type: typeof SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER;
+  filter: string;
+}
+
 export interface ToggleTransferFinderModalAction {
   type: typeof TOGGLE_TRANSFER_FINDER_MODAL;
 }
 
+// ToggleFxpConversionFinderModalAction
 export interface ToggleFxpConversionFinderModalAction {
   type: typeof TOGGLE_FXPCONVERSION_FINDER_MODAL;
 }
@@ -495,6 +546,12 @@ export interface SetTransfersAction {
 
 export interface SetTransfersErrorAction {
   type: typeof SET_TRANSFERS_ERROR;
+  error: string;
+}
+
+// SetFxpConversionsErrorAction
+export interface SetFxpConversionsErrorAction {
+  type: typeof SET_FXPCONVERSIONS_ERROR;
   error: string;
 }
 
@@ -550,11 +607,6 @@ export interface RequestFxpConversionDetailsAction {
   conversionId: string;
 }
 
-// export interface SetTransferDetailsAction {
-//   type: typeof SET_TRANSFER_DETAILS;
-//   data: FxpConversionDetails;
-// }
-
 // fxp
 export interface SetFxpConversionDetailsAction {
   type: typeof SET_FXPCONVERSION_DETAILS;
@@ -572,7 +624,7 @@ export interface SetTransferDetailsErrorAction {
 
 export interface SetFxpConversionDetailsErrorAction {
   // fxp
-  type: typeof SET_TRANSFER_DETAILS_ERROR;
+  type: typeof SET_FXPCONVERSION_DETAILS_ERROR;
   error: string;
 }
 
@@ -619,6 +671,12 @@ export type TransfersActionTypes =
   | SetFxpConversionDetailsErrorAction
   | UnrequestFxpConversionsAction
   | RequestFxpConversionsAction
-  | FxpConversionFilter
+  | SetFxpConversionFinderFilterAction
   | SetFxpConversionsAction
+  | SetFxpConversionErrorsAction
+  | SetFxpConversionsErrorsErrorAction
+  | RequestFxpConversionsErrorsAction
+  | ToggleFxpConversionsErrorsViewAllAction
+  | SetFxpConversionsErrorsTypeFilterAction
+  | SetFxpConversionsErrorAction
   | ToggleTransferDetailsModalAction;

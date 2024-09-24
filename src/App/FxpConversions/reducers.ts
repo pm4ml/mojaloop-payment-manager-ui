@@ -91,22 +91,22 @@ function getFxpConversionFinderFilterInitialState() {
 }
 
 export const initialState: FxpConversionsState = {
-  transfersErrors: [],
-  transfersErrorsError: null,
+  fxpConversionsErrors: [],
+  fxpConversionsErrorsError: null,
   isTransfersErrorsViewAllActive: false,
   transfersErrorsTypeFilter: undefined,
   isTransferFinderModalVisible: false,
   transferFinderFilter: getTransferFinderFilterInitialState(),
   isTransfersRequested: false,
-  transfers: [],
+  fxpConversion: [],
   fxpConversions: [],
-  transfersError: null,
+  fxpConversionsError: null,
   transfersStatuses: [],
   transfersStatusesError: null,
   transfersSuccessPercError: null,
   transfersAvgTimeError: null,
   isTransferDetailsModalVisible: false,
-  transferDetailsError: null,
+  fxpConversionDetailsError: null,
   fxpConversionFinderFilter: getFxpConversionFinderFilterInitialState(),
 };
 
@@ -118,12 +118,12 @@ export default function fxpConversionsReducer(
     case SET_TRANSFERS_ERRORS:
       return {
         ...state,
-        transfersErrors: (action as { data: any }).data,
+        fxpConversionsErrors: (action as { data: any }).data,
       };
     case SET_TRANSFERS_ERRORS_ERROR:
       return {
         ...state,
-        transfersErrorsError: 'error' in action ? action.error : null,
+        fxpConversionsErrorsError: 'error' in action ? action.error : null,
       };
     case TOGGLE_TRANSFERS_ERRORS_VIEW_ALL:
       return {
@@ -204,12 +204,12 @@ export default function fxpConversionsReducer(
     case SET_TRANSFERS:
       return {
         ...state,
-        transfers: (action as SetTransfersAction).data,
+        fxpConversions: (action as SetFxpConversionsAction).data,
       };
     case SET_TRANSFERS_ERROR:
       return {
         ...state,
-        transfersError: (action as SetTransfersErrorAction).error,
+        fxpConversionsError: (action as SetTransfersErrorAction).error,
       };
     case SET_TRANSFERS_STATUSES:
       return {

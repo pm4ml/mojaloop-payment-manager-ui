@@ -10,8 +10,10 @@ import {
   REQUEST_TRANSFERS_SUCCESS_PERC,
   REQUEST_TRANSFERS_AVG_TIME,
   REQUEST_TRANSFER_DETAILS,
-  REQUEST_FXPCONVERSION_DETAILS, //fxp
-  RequestFxpConversionDetailsAction, //fxp
+  REQUEST_FXPCONVERSION_DETAILS,
+  REQUEST_FXPCONVERSIONS_ERRORS,
+  RequestFxpConversionDetailsAction,
+  RequestFxpConversionsErrorsAction,
   RequestTransfersAction,
   RequestTransfersErrorsAction,
   RequestTransfersStatusesAction,
@@ -38,10 +40,12 @@ import {
   setTransferDetails,
   setFxpConversionDetails,
   setFxpConversionDetailsError,
-  setFxpConversions, //fxp
+  setFxpConversions,
+  setFxpConversionsErrors,
+  setFxpConversionsErrorsError,
 } from './actions';
 
-export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) {
+export function* fetchTransfersErrors(action: RequestTransfersErrorsAction) { 
   try {
     // eslint-disable-next-line
     const response = yield call(apis.transfersErrors.read, {});
@@ -59,7 +63,7 @@ export function* transfersErrorsSaga() {
   yield takeLatest([REQUEST_TRANSFERS_ERRORS], fetchTransfersErrors);
 }
 
-function* fetchTransfersStatuses(action: RequestTransfersStatusesAction) {
+function* fetchTransfersStatuses(action: RequestTransfersStatusesAction) { 
   try {
     // eslint-disable-next-line
     const response = yield call(apis.transfersStatuses.read, {});
@@ -160,40 +164,7 @@ export function* transfersPageSaga() {
   yield takeLatest([REQUEST_TRANSFERS_PAGE_DATA], fetchTransfersAllData);
 }
 
-export default function* rootSaga() {
-  yield all([
-    transfersPageSaga(),
-    transfersErrorsSaga(),
-    fxpConversionsSaga(),
-    transfersStatusesSaga(),
-    transfersSuccessPercSaga(),
-    transfersAvgTimeSaga(),
-    transferDetailsSaga(),
-  ]);
-}
-
-//Fxp Functions
-function* fetchFxpConversionDetails(action: RequestFxpConversionDetailsAction) {
-  try {
-    // eslint-disable-next-line
-    const response = yield call(apis.Details.fxpConversionDetails, {
-      conversionId: action.conversionId,
-    });
-    console.log(response);
-    if (is20x(response.status)) {
-      yield put(setFxpConversionDetails({ data: response.data }));
-    } else {
-      yield put(setFxpConversionDetailsError({ error: response.status }));
-    }
-  } catch (e) {
-    yield put(setFxpConversionDetailsError({ error: e.message }));
-  }
-}
-
-export function* FxpConversionDetailsSaga() {
-  yield takeEvery([REQUEST_FXPCONVERSION_DETAILS], fetchFxpConversionDetails);
-}
-
+//Fxp Conversions API
 function* fetchFxpConversions(action: RequestFxpConversionsAction) {
   try {
     let params;
@@ -227,4 +198,144 @@ function* fetchFxpConversions(action: RequestFxpConversionsAction) {
 }
 export function* fxpConversionsSaga() {
   yield takeLatest([REQUEST_FXPCONVERSION], fetchFxpConversions);
+}
+
+// FXP Conversions Details
+function* fetchFxpConversionDetails(action: RequestFxpConversionDetailsAction) {
+  try {
+    // eslint-disable-next-line
+    const response = yield call(apis.fxpConversionDetails.read, {
+      conversionId: action.conversionId,
+    });
+    console.log(response);
+    if (is20x(response.status)) {
+      yield put(setFxpConversionDetails({ data: response.data }));
+    } else {
+      yield put(setFxpConversionDetailsError({ error: response.status }));
+    }
+  } catch (e) {
+    yield put(setFxpConversionDetailsError({ error: e.message }));
+  }
+}
+
+export function* FxpConversionDetailsSaga() {
+  yield takeEvery([REQUEST_FXPCONVERSION_DETAILS], fetchFxpConversionDetails);
+}
+
+// FXP Conversions errors API
+export function* fetchFxpConversionsErrors(action: RequestFxpConversionsErrorsAction) { 
+  try {
+    // eslint-disable-next-line
+    const response = yield call(apis.fxpConversionsErrors.read, {});
+    if (is20x(response.status)) {
+      yield put(setFxpConversionsErrors({ data: response.data }));
+    } else {
+      yield put(setFxpConversionsErrorsError({ error: response.status }));
+    }
+  } catch (e) {
+    yield put(setFxpConversionsErrorsError({ error: e.message }));
+  }
+}
+
+export function* fxpConversionsErrorsSaga() {
+  yield takeLatest([REQUEST_FXPCONVERSIONS_ERRORS], fetchFxpConversionsErrors);
+}
+
+//FXP Conversions Status API
+// function* fetchTransfersStatuses(action: RequestTransfersStatusesAction) { 
+//   try {
+//     // eslint-disable-next-line
+//     const response = yield call(apis.transfersStatuses.read, {});
+//     if (is20x(response.status)) {
+//       yield put(setTransfersStatuses({ data: response.data }));
+//     } else {
+//       yield put(setTransfersStatusesError({ error: response.status }));
+//     }
+//   } catch (e) {
+//     yield put(setTransfersStatusesError({ error: e.message }));
+//   }
+// }
+
+// export function* transfersStatusesSaga() {
+//   yield takeLatest([REQUEST_TRANSFERS_STATUSES], fetchTransfersStatuses);
+// }
+
+//FXP Conversions SuccessPerc
+// function* fetchTransfersSuccessPerc(action: RequestTransfersSuccessPercAction) { 
+//   try {
+//     // eslint-disable-next-line
+//     const response = yield call(apis.transfersSuccessPerc.read, {
+//       params: { minutePrevious: 1440 },
+//     });
+//     yield put(
+//       setTransfersSuccessPerc({
+//         data: {
+//           color: '',
+//           points: response.data.map((d: SuccessPercApi) => {
+//             return [Number(d.timestamp), Number(d.percentage)];
+//           }),
+//         },
+//       })
+//     );
+//   } catch (e) {
+//     yield put(setTransfersSuccessPercError({ error: e.message }));
+//   }
+// }
+
+// export function* transfersSuccessPercSaga() {
+//   yield takeLatest([REQUEST_TRANSFERS_SUCCESS_PERC], fetchTransfersSuccessPerc);
+// }
+
+// FXP Converions AVGTime
+// function* fetchTransfersAvgTime(action: RequestTransfersAvgTimeAction) { 
+//   try {
+//     // eslint-disable-next-line
+//     const response = yield call(apis.transfersAvgTime.read, { params: { minutePrevious: 1440 } });
+
+//     yield put(
+//       setTransfersAvgTime({
+//         data: {
+//           color: '',
+//           points: response.data.map((d: AvgTimeApi) => {
+//             return [Number(d.timestamp), Number(d.averageResponseTime)];
+//           }),
+//         },
+//       })
+//     );
+//   } catch (e) {
+//     yield put(setTransfersAvgTimeError({ error: e.message }));
+//   }
+// }
+
+// export function* transfersAvgTimeSaga() {
+//   yield takeLatest([REQUEST_TRANSFERS_AVG_TIME], fetchTransfersAvgTime);
+// }
+
+// FXPConversions ALL Data
+function* fetchFxpConversionsAllData(action: Action) { 
+  yield all([
+    call(fetchTransfersErrors, action),
+    call(fetchTransfersStatuses, action),
+    // call(fetchTransfersSuccessPerc, action),
+    // call(fetchTransfersAvgTime, action),
+  ]);
+}
+
+export function* fxpConversionsPageSaga() { 
+  yield takeLatest([REQUEST_TRANSFERS_PAGE_DATA], fetchFxpConversionsAllData);
+}
+
+// Root Saga
+export default function* rootSaga() {
+  yield all([
+    transfersPageSaga(),
+    transfersErrorsSaga(),
+    fxpConversionsSaga(),
+    transfersStatusesSaga(),
+    transfersSuccessPercSaga(),
+    transfersAvgTimeSaga(),
+    transferDetailsSaga(),
+    fxpConversionsPageSaga(),
+    fxpConversionsErrorsSaga()
+  ]);
 }

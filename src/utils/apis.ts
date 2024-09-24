@@ -63,7 +63,7 @@ const transfersErrors: Config<Todo, State> = {
   url: () => '/errors',
 };
 
-const fxpErrors: Config<Todo, State> = {
+const fxpConversionsErrors: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/fxperrors',
 };
@@ -254,7 +254,7 @@ const endpoints = {
   outboundEnrollmentAutoCertificate,
   metric,
   fxpConversionDetails,
-  fxpErrors,
+  fxpConversionsErrors,
   fxpConversions,
 };
 

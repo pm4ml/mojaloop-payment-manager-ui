@@ -55,6 +55,7 @@ import {
   REQUEST_TRANSFER_DETAILS,
   SET_FXPCONVERSION_DETAILS,
   RequestTransferDetailsAction,
+  SET_FXPCONVERSION_DETAILS_ERROR,
   // SetTransferDetailsAction,
   SetFxpConversionDetailsAction,
   SetFxpConversionsAction,
@@ -72,6 +73,20 @@ import {
   UNREQUEST_FXPCONVERSION,
   FxpConversion,
   SET_FXPCONVERSIONS,
+  FxpConversionError,
+  SetFxpConversionErrorsAction,
+  SET_FXPCONVERSIONS_ERRORS,
+  SetFxpConversionsErrorsErrorAction,
+  SET_FXPCONVERSIONS_ERRORS_ERROR,
+  RequestFxpConversionsErrorsAction,
+  REQUEST_FXPCONVERSIONS_ERRORS,
+  ToggleFxpConversionsErrorsViewAllAction,
+  SetFxpConversionsErrorsTypeFilterAction,
+  TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL,
+  SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER,
+  SetFxpConversionsErrorAction,
+  SET_FXPCONVERSIONS_ERROR,
+  
 } from './types';
 
 export function requestTransfersPageData(): RequestTransfersPageDataAction {
@@ -86,6 +101,13 @@ export function setTransfersErrors({ data }: { data: TransferError[] }): SetTran
     data,
   };
 }
+// setFxpConversionsErrors
+export function setFxpConversionsErrors({ data }: { data: FxpConversionError[] }): SetFxpConversionErrorsAction {
+  return {
+    type: SET_FXPCONVERSIONS_ERRORS,
+    data,
+  };
+}
 
 export function setTransfersErrorsError({
   error,
@@ -97,6 +119,17 @@ export function setTransfersErrorsError({
     error,
   };
 }
+// setFxpConversionsErrorsError
+export function setFxpConversionsErrorsError({
+  error,
+}: {
+  error: string;
+}): SetFxpConversionsErrorsErrorAction {
+  return {
+    type: SET_FXPCONVERSIONS_ERRORS_ERROR,
+    error,
+  };
+}
 
 export function requestTransfersErrors(): RequestTransfersErrorsAction {
   return {
@@ -104,10 +137,24 @@ export function requestTransfersErrors(): RequestTransfersErrorsAction {
   };
 }
 
+// requestFxpConversionsErrors
+export function requestFxpConversionsErrors(): RequestFxpConversionsErrorsAction {
+  return {
+    type: REQUEST_FXPCONVERSIONS_ERRORS,
+  };
+}
+
 // eslint-disable-next-line max-len
 export function toggleTransfersErrorsViewAll(): ToggleTransfersErrorsViewAllAction {
   return {
     type: TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
+  };
+}
+
+// toggleFxpConversionsErrorsViewAll
+export function toggleFxpConversionsErrorsViewAll(): ToggleFxpConversionsErrorsViewAllAction {
+  return {
+    type: TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL,
   };
 }
 
@@ -119,6 +166,17 @@ export function setTransfersErrorsTypeFilter({
 }): SetTransfersErrorsTypeFilterAction {
   return {
     type: SET_TRANSFERS_ERRORS_TYPE_FILTER,
+    filter,
+  };
+}
+// setFxpConversionsErrorsTypeFilter
+export function setFxpConversionsErrorsTypeFilter({
+  filter,
+}: {
+  filter: string;
+}): SetFxpConversionsErrorsTypeFilterAction {
+  return {
+    type: SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER,
     filter,
   };
 }
@@ -179,6 +237,13 @@ export function setFxpConversions({ data }: { data: FxpConversion[] }): SetFxpCo
 export function setTransfersError({ error }: { error: string }): SetTransfersErrorAction {
   return {
     type: SET_TRANSFERS_ERROR,
+    error,
+  };
+}
+// setFxpConversionsError
+export function setFxpConversionsError({ error }: { error: string }): SetFxpConversionsErrorAction {
+  return {
+    type: SET_FXPCONVERSIONS_ERROR,
     error,
   };
 }
@@ -363,7 +428,7 @@ export function setFxpConversionDetailsError({
   error: string;
 }): SetFxpConversionDetailsErrorAction {
   return {
-    type: SET_TRANSFER_DETAILS_ERROR,
+    type: SET_FXPCONVERSION_DETAILS_ERROR,
     error,
   };
 }
