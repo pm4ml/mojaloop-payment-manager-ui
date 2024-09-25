@@ -3,9 +3,9 @@ import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import groupBy from 'lodash/groupBy';
 import ColorScheme from 'color-scheme';
-import { TransferError } from './types';
+import { FxpConversionError } from './types';
 
-export function toTransfersDate(ISODateString: string): string {
+export function toFxpConversionsDate(ISODateString: string): string {
   return ISODateString; // moment(ISODateString).format('DD/MM/YYYY LT z');
 }
 
@@ -18,7 +18,7 @@ interface ErrorCount {
   label: string;
   color: string;
 }
-export function getErrorsByType(errors: TransferError[]): ErrorCount[] {
+export function getErrorsByType(errors: FxpConversionError[]): ErrorCount[] {
   const colors = generateColors();
   return Object.entries(groupBy(errors, 'errorType')).map(([type, items], index) => ({
     label: toSpacedPascalCase(type),

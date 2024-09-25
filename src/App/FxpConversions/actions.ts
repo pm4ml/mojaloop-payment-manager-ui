@@ -1,124 +1,84 @@
 import {
-  REQUEST_TRANSFERS_PAGE_DATA,
-  RequestTransfersPageDataAction,
-  REQUEST_TRANSFERS_ERRORS,
-  SET_TRANSFERS_ERRORS,
-  SET_TRANSFERS_ERRORS_ERROR,
-  TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
-  SET_TRANSFERS_ERRORS_TYPE_FILTER,
-  RequestTransfersErrorsAction,
-  RequestFxpConversionDetailsAction, // fxp
-  REQUEST_FXPCONVERSION_DETAILS,
-  SetTransfersErrorsAction,
-  SetTransfersErrorsErrorAction,
-  ToggleTransfersErrorsViewAllAction,
-  SetTransfersErrorsTypeFilterAction,
-  TOGGLE_TRANSFER_FINDER_MODAL,
-  ToggleTransferFinderModalAction,
-  ToggleFxpConversionFinderModalAction,
-  SET_TRANSFER_FINDER_FILTER,
-  SetTransferFinderFilterAction,
-  REQUEST_TRANSFERS,
-  UNREQUEST_TRANSFERS,
-  SET_TRANSFERS,
-  SET_TRANSFERS_ERROR,
-  RequestTransfersAction,
-  UnrequestTransfersAction,
-  SetTransfersAction,
-  SetTransfersErrorAction,
-  REQUEST_TRANSFERS_STATUSES,
-  SET_TRANSFERS_STATUSES,
-  SET_TRANSFERS_STATUSES_ERROR,
-  RequestTransfersStatusesAction,
-  SetTransfersStatusesAction,
-  SetTransfersStatusesErrorAction,
-  REQUEST_TRANSFERS_SUCCESS_PERC,
-  SET_TRANSFERS_SUCCESS_PERC,
-  SET_TRANSFERS_SUCCESS_PERC_ERROR,
-  REQUEST_TRANSFERS_AVG_TIME,
-  SET_TRANSFERS_AVG_TIME,
-  SET_TRANSFERS_AVG_TIME_ERROR,
-  TOGGLE_FXPCONVERSION_FINDER_MODAL,
-  RequestTransfersSuccessPercAction,
-  SetTransfersSuccessPercAction,
-  SetTransfersSuccessPercErrorAction,
-  RequestTransfersAvgTimeAction,
-  SetTransfersAvgTimeAction,
-  SetTransfersAvgTimeErrorAction,
-  TransferError,
-  Transfer,
-  FxpConversionDetails,
-  TransferFilter,
-  TransfersStatus,
-  SuccessPerc,
-  AvgTime,
-  REQUEST_TRANSFER_DETAILS,
-  SET_FXPCONVERSION_DETAILS,
-  RequestTransferDetailsAction,
-  SET_FXPCONVERSION_DETAILS_ERROR,
-  // SetTransferDetailsAction,
-  SetFxpConversionDetailsAction,
-  SetFxpConversionsAction,
-  SET_FXPCONVERSION_FINDER_FILTER,
-  SetFxpConversionFinderFilterAction,
-  SetFxpConversionDetailsErrorAction,
-  ToggleTransferDetailsModalAction,
-  TOGGLE_TRANSFER_DETAILS_MODAL,
-  SetTransferDetailsErrorAction,
-  SET_TRANSFER_DETAILS_ERROR,
-  REQUEST_FXPCONVERSION,
-  RequestFxpConversionsAction,
-  FxpConversionFilter,
-  UnrequestFxpConversionsAction,
-  UNREQUEST_FXPCONVERSION,
-  FxpConversion,
-  SET_FXPCONVERSIONS,
-  FxpConversionError,
-  SetFxpConversionErrorsAction,
-  SET_FXPCONVERSIONS_ERRORS,
-  SetFxpConversionsErrorsErrorAction,
-  SET_FXPCONVERSIONS_ERRORS_ERROR,
-  RequestFxpConversionsErrorsAction,
+  REQUEST_FXPCONVERSIONS_PAGE_DATA,
+  RequestFxpConversionsPageDataAction,
   REQUEST_FXPCONVERSIONS_ERRORS,
-  ToggleFxpConversionsErrorsViewAllAction,
-  SetFxpConversionsErrorsTypeFilterAction,
+  SET_FXPCONVERSIONS_ERRORS,
+  SET_FXPCONVERSIONS_ERRORS_ERROR,
   TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL,
   SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER,
-  SetFxpConversionsErrorAction,
+  RequestFxpConversionsErrorsAction,
+  RequestFxpConversionDetailsAction,
+  REQUEST_FXPCONVERSION_DETAILS,
+  SetFxpConversionsErrorsAction,
+  SetFxpConversionsErrorsErrorAction,
+  ToggleFxpConversionsErrorsViewAllAction,
+  SetFxpConversionsErrorsTypeFilterAction,
+  TOGGLE_FXPCONVERSION_FINDER_MODAL,
+  ToggleFxpConversionFinderModalAction,
+  SET_FXPCONVERSION_FINDER_FILTER,
+  SetFxpConversionFinderFilterAction,
+  REQUEST_FXPCONVERSIONS,
+  UNREQUEST_FXPCONVERSIONS,
+  SET_FXPCONVERSIONS,
   SET_FXPCONVERSIONS_ERROR,
-  
+  RequestFxpConversionsAction,
+  UnrequestFxpConversionsAction,
+  SetFxpConversionsAction,
+  SetFxpConversionsErrorAction,
+  REQUEST_FXPCONVERSIONS_STATUSES,
+  SET_FXPCONVERSIONS_STATUSES,
+  SET_FXPCONVERSIONS_STATUSES_ERROR,
+  RequestFxpConversionsStatusesAction,
+  SetFxpConversionsStatusesAction,
+  SetFxpConversionsStatusesErrorAction,
+  REQUEST_FXPCONVERSIONS_SUCCESS_PERC,
+  SET_FXPCONVERSIONS_SUCCESS_PERC,
+  SET_FXPCONVERSIONS_SUCCESS_PERC_ERROR,
+  REQUEST_FXPCONVERSIONS_AVG_TIME,
+  SET_FXPCONVERSIONS_AVG_TIME,
+  SET_FXPCONVERSIONS_AVG_TIME_ERROR,
+  RequestFxpConversionsSuccessPercAction,
+  SetFxpConversionsSuccessPercAction,
+  SetFxpConversionsSuccessPercErrorAction,
+  RequestFxpConversionsAvgTimeAction,
+  SetFxpConversionsAvgTimeAction,
+  SetFxpConversionsAvgTimeErrorAction,
+  FxpConversionError,
+  FxpConversion,
+  FxpConversionDetails,
+  FxpConversionFilter,
+  FxpConversionsStatus,
+  SuccessPerc,
+  AvgTime,
+  SET_FXPCONVERSION_DETAILS,
+  SET_FXPCONVERSION_DETAILS_ERROR,
+  SetFxpConversionDetailsAction,
+  SetFxpConversionDetailsErrorAction,
+  ToggleFxpConversionDetailsModalAction,
+  TOGGLE_FXPCONVERSION_DETAILS_MODAL,
+  REQUEST_FXPCONVERSION,
+  UNREQUEST_FXPCONVERSION,
+  SetFxpConversionErrorsAction,
 } from './types';
 
-export function requestTransfersPageData(): RequestTransfersPageDataAction {
+export function requestFxpConversionsPageData(): RequestFxpConversionsPageDataAction {
   return {
-    type: REQUEST_TRANSFERS_PAGE_DATA,
+    type: REQUEST_FXPCONVERSIONS_PAGE_DATA,
   };
 }
 
-export function setTransfersErrors({ data }: { data: TransferError[] }): SetTransfersErrorsAction {
-  return {
-    type: SET_TRANSFERS_ERRORS,
-    data,
-  };
-}
 // setFxpConversionsErrors
-export function setFxpConversionsErrors({ data }: { data: FxpConversionError[] }): SetFxpConversionErrorsAction {
+export function setFxpConversionsErrors({
+  data,
+}: {
+  data: FxpConversionError[];
+}): SetFxpConversionErrorsAction {
   return {
     type: SET_FXPCONVERSIONS_ERRORS,
     data,
   };
 }
 
-export function setTransfersErrorsError({
-  error,
-}: {
-  error: string;
-}): SetTransfersErrorsErrorAction {
-  return {
-    type: SET_TRANSFERS_ERRORS_ERROR,
-    error,
-  };
-}
 // setFxpConversionsErrorsError
 export function setFxpConversionsErrorsError({
   error,
@@ -131,23 +91,10 @@ export function setFxpConversionsErrorsError({
   };
 }
 
-export function requestTransfersErrors(): RequestTransfersErrorsAction {
-  return {
-    type: REQUEST_TRANSFERS_ERRORS,
-  };
-}
-
 // requestFxpConversionsErrors
 export function requestFxpConversionsErrors(): RequestFxpConversionsErrorsAction {
   return {
     type: REQUEST_FXPCONVERSIONS_ERRORS,
-  };
-}
-
-// eslint-disable-next-line max-len
-export function toggleTransfersErrorsViewAll(): ToggleTransfersErrorsViewAllAction {
-  return {
-    type: TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
   };
 }
 
@@ -158,17 +105,6 @@ export function toggleFxpConversionsErrorsViewAll(): ToggleFxpConversionsErrorsV
   };
 }
 
-// eslint-disable-next-line max-len
-export function setTransfersErrorsTypeFilter({
-  filter,
-}: {
-  filter: string;
-}): SetTransfersErrorsTypeFilterAction {
-  return {
-    type: SET_TRANSFERS_ERRORS_TYPE_FILTER,
-    filter,
-  };
-}
 // setFxpConversionsErrorsTypeFilter
 export function setFxpConversionsErrorsTypeFilter({
   filter,
@@ -181,29 +117,15 @@ export function setFxpConversionsErrorsTypeFilter({
   };
 }
 
-export function toggleTransferFinderModal(): ToggleTransferFinderModalAction {
+export function toggleFxpConversionFinderModal(): ToggleFxpConversionFinderModalAction {
   return {
-    type: TOGGLE_TRANSFER_FINDER_MODAL,
+    type: TOGGLE_FXPCONVERSION_FINDER_MODAL,
   };
 }
 
 export function toggleFxpConversionFinderModalAction(): ToggleFxpConversionFinderModalAction {
   return {
     type: TOGGLE_FXPCONVERSION_FINDER_MODAL,
-  };
-}
-
-export function setTransferFinderFilter({
-  field,
-  value,
-}: {
-  field: string;
-  value: string | number;
-}): SetTransferFinderFilterAction {
-  return {
-    type: SET_TRANSFER_FINDER_FILTER,
-    field,
-    value,
   };
 }
 
@@ -221,37 +143,18 @@ export function setFxpConversionFinderFilter({
   };
 }
 
-export function setTransfers({ data }: { data: Transfer[] }): SetTransfersAction {
-  return {
-    type: SET_TRANSFERS,
-    data,
-  };
-}
-
 export function setFxpConversions({ data }: { data: FxpConversion[] }): SetFxpConversionsAction {
   return {
     type: SET_FXPCONVERSIONS,
     data,
   };
 }
-export function setTransfersError({ error }: { error: string }): SetTransfersErrorAction {
-  return {
-    type: SET_TRANSFERS_ERROR,
-    error,
-  };
-}
+
 // setFxpConversionsError
 export function setFxpConversionsError({ error }: { error: string }): SetFxpConversionsErrorAction {
   return {
     type: SET_FXPCONVERSIONS_ERROR,
     error,
-  };
-}
-
-export function requestTransfers({ filters }: { filters: TransferFilter }): RequestTransfersAction {
-  return {
-    type: REQUEST_TRANSFERS,
-    filters,
   };
 }
 
@@ -267,147 +170,37 @@ export function requestFxpConversions({
   };
 }
 
-export function unrequestTransfers(): UnrequestTransfersAction {
-  return {
-    type: UNREQUEST_TRANSFERS,
-  };
-}
-
-// fxp
-export function UnrequestFxpConversions(): UnrequestFxpConversionsAction {
+export function unrequestFxpConversions(): UnrequestFxpConversionsAction {
   return {
     type: UNREQUEST_FXPCONVERSION,
   };
 }
 
-export function setTransfersStatuses({
+export function setFxpConversionsStatuses({
   data,
 }: {
-  data: TransfersStatus[];
-}): SetTransfersStatusesAction {
+  data: FxpConversionsStatus[];
+}): SetFxpConversionsStatusesAction {
   return {
-    type: SET_TRANSFERS_STATUSES,
+    type: SET_FXPCONVERSIONS_STATUSES,
     data,
   };
 }
 
-export function setTransfersStatusesError({
+export function setFxpConversionsStatusesError({
   error,
 }: {
   error: string;
-}): SetTransfersStatusesErrorAction {
+}): SetFxpConversionsStatusesErrorAction {
   return {
-    type: SET_TRANSFERS_STATUSES_ERROR,
+    type: SET_FXPCONVERSIONS_STATUSES_ERROR,
     error,
   };
 }
 
-export function requestTransfersStatuses(): RequestTransfersStatusesAction {
+export function requestFxpConversionsStatuses(): RequestFxpConversionsStatusesAction {
   return {
-    type: REQUEST_TRANSFERS_STATUSES,
-  };
-}
-
-export function requestTransferDetails({
-  transferId,
-}: {
-  transferId: string;
-}): RequestTransferDetailsAction {
-  return {
-    type: REQUEST_TRANSFER_DETAILS,
-    transferId,
-  };
-}
-
-export function setTransferDetails({
-  data,
-}: {
-  data: FxpConversionDetails;
-}): SetFxpConversionDetailsAction {
-  return {
-    type: SET_FXPCONVERSION_DETAILS,
-    data,
-  };
-}
-
-export function setTransferDetailsError({
-  error,
-}: {
-  error: string;
-}): SetTransferDetailsErrorAction {
-  return {
-    type: SET_TRANSFER_DETAILS_ERROR,
-    error,
-  };
-}
-
-export function toggleTransferDetailsModal(): ToggleTransferDetailsModalAction {
-  return {
-    type: TOGGLE_TRANSFER_DETAILS_MODAL,
-  };
-}
-
-export function requestTransfersSuccessPerc(): RequestTransfersSuccessPercAction {
-  return {
-    type: REQUEST_TRANSFERS_SUCCESS_PERC,
-  };
-}
-
-export function setTransfersSuccessPerc({
-  data,
-}: {
-  data: SuccessPerc;
-}): SetTransfersSuccessPercAction {
-  return {
-    type: SET_TRANSFERS_SUCCESS_PERC,
-    data,
-  };
-}
-
-export function setTransfersSuccessPercError({
-  error,
-}: {
-  error: string;
-}): SetTransfersSuccessPercErrorAction {
-  return {
-    type: SET_TRANSFERS_SUCCESS_PERC_ERROR,
-    error,
-  };
-}
-
-export function requestTransfersAvgTime(): RequestTransfersAvgTimeAction {
-  return {
-    type: REQUEST_TRANSFERS_AVG_TIME,
-  };
-}
-
-export function setTransfersAvgTime({ data }: { data: AvgTime }): SetTransfersAvgTimeAction {
-  return {
-    type: SET_TRANSFERS_AVG_TIME,
-    data,
-  };
-}
-
-export function setTransfersAvgTimeError({
-  error,
-}: {
-  error: string;
-}): SetTransfersAvgTimeErrorAction {
-  return {
-    type: SET_TRANSFERS_AVG_TIME_ERROR,
-    error,
-  };
-}
-
-// fxp actions
-export function setFxpConversionDetails({
-  data,
-}: {
-  data: FxpConversionDetails;
-}): SetFxpConversionDetailsAction {
-  return {
-    type: SET_FXPCONVERSION_DETAILS,
-    data,
+    type: REQUEST_FXPCONVERSIONS_STATUSES,
   };
 }
 
@@ -422,6 +215,17 @@ export function requestFxpConversionDetails({
   };
 }
 
+export function setFxpConversionDetails({
+  data,
+}: {
+  data: FxpConversionDetails;
+}): SetFxpConversionDetailsAction {
+  return {
+    type: SET_FXPCONVERSION_DETAILS,
+    data,
+  };
+}
+
 export function setFxpConversionDetailsError({
   error,
 }: {
@@ -429,6 +233,68 @@ export function setFxpConversionDetailsError({
 }): SetFxpConversionDetailsErrorAction {
   return {
     type: SET_FXPCONVERSION_DETAILS_ERROR,
+    error,
+  };
+}
+
+export function toggleFxpConversionDetailsModal(): ToggleFxpConversionDetailsModalAction {
+  return {
+    type: TOGGLE_FXPCONVERSION_DETAILS_MODAL,
+  };
+}
+
+export function requestFxpConversionsSuccessPerc(): RequestFxpConversionsSuccessPercAction {
+  return {
+    type: REQUEST_FXPCONVERSIONS_SUCCESS_PERC,
+  };
+}
+
+export function setFxpConversionsSuccessPerc({
+  data,
+}: {
+  data: SuccessPerc;
+}): SetFxpConversionsSuccessPercAction {
+  return {
+    type: SET_FXPCONVERSIONS_SUCCESS_PERC,
+    data,
+  };
+}
+
+export function setFxpConversionsSuccessPercError({
+  error,
+}: {
+  error: string;
+}): SetFxpConversionsSuccessPercErrorAction {
+  return {
+    type: SET_FXPCONVERSIONS_SUCCESS_PERC_ERROR,
+    error,
+  };
+}
+
+export function requestFxpConversionsAvgTime(): RequestFxpConversionsAvgTimeAction {
+  return {
+    type: REQUEST_FXPCONVERSIONS_AVG_TIME,
+  };
+}
+
+export function setFxpConversionsAvgTime({
+  data,
+}: {
+  data: AvgTime;
+}): SetFxpConversionsAvgTimeAction {
+  return {
+    type: SET_FXPCONVERSIONS_AVG_TIME,
+    data,
+  };
+}
+
+export function setFxpConversionsAvgTimeError({
+  error,
+}: {
+  error: string;
+}): SetFxpConversionsAvgTimeErrorAction {
+  return {
+    type: SET_FXPCONVERSIONS_AVG_TIME_ERROR,
     error,
   };
 }

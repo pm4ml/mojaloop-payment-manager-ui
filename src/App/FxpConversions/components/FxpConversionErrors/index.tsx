@@ -3,17 +3,17 @@ import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
 import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
 import xlsx from 'xlsx';
-import { FxpConversionDetails, FxpConversionError, TransferError } from '../../types';
+import { FxpConversionDetails, FxpConversionError } from '../../types';
 import * as helpers from '../../helpers';
-import TransfersErrorsModal from './TransfersErrorsModal';
+import FxpConversionsErrorsModal from './FxpConversionsErrorsModal';
 
-const transfersErrorsColumns = [
+const fxpConversionsErrorsColumns = [
   {
     label: 'Conversion ID',
     key: 'id',
     func: (value: string, item: FxpConversionError) => (
       <Link>
-        <span style={{ textDecoration: 'underline' }}>{item.id}</span>
+        <span style={{ textDecoration: 'underline' }}>{item.conversionId}</span>
       </Link>
     ),
   },
@@ -39,17 +39,17 @@ const transfersErrorsColumns = [
   {
     label: 'Date',
     key: 'initiatedTimestamp',
-    func: helpers.toTransfersDate,
+    func: helpers.toFxpConversionsDate,
   },
 ];
 
-interface TransfersErrorsProps {
+interface FxpConversionsErrorsProps {
   isPending: boolean | undefined;
   items: FxpConversionError[];
   isViewAllActive: boolean;
   error: ErrorMessage;
   onViewAllClick: () => void;
-  onTransferRowClick: (fxpConversionError: FxpConversionError) => void;
+  onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,34 +63,34 @@ async function downloadErrorsToExcel(errors: any): Promise<void> {
   xlsx.writeFile(wb, fileName);
 }
 
-const TransfersErrors: FC<TransfersErrorsProps> = ({
+const FxpConversionsErrors: FC<FxpConversionsErrorsProps> = ({
   isPending,
   items,
   error,
   onViewAllClick,
   isViewAllActive,
-  onTransferRowClick,
+  onFxpConversionRowClick,
 }) => {
   let content = null;
   if (isPending) {
     content = (
-      <div className="transfers__errors__loader">
+      <div className="fxpConversions__errors__loader">
         <Spinner size={20} />
       </div>
     );
   } else if (error) {
-    content = <ErrorBox>Transfers errors: Unable to load data</ErrorBox>;
+    content = <ErrorBox>FxpConversions errors: Unable to load data</ErrorBox>;
   } else {
     content = (
       <>
-        <ErrorsList items={items.slice(0, 4)} onTransferRowClick={onTransferRowClick} />
+        <ErrorsList items={items.slice(0, 4)} onFxpConversionRowClick={onFxpConversionRowClick} />
         {items.length > 0 && (
           <Button
             label="Download Errors"
             kind="secondary"
             size="m"
             noFill
-            className="transfers__errors__download__button"
+            className="fxpConversions__errors__download__button"
             onClick={() => downloadErrorsToExcel(items)}
           />
         )}
@@ -100,28 +100,28 @@ const TransfersErrors: FC<TransfersErrorsProps> = ({
             noFill
             kind="secondary"
             size="m"
-            className="transfers__errors__button"
+            className="fxpConversions__errors__button"
             onClick={onViewAllClick}
           />
         )}
-        {isViewAllActive && <TransfersErrorsModal />}
+        {isViewAllActive && <FxpConversionsErrorsModal />}
       </>
     );
   }
-  return <div className="transfers__errors__section">{content}</div>;
+  return <div className="fxpConversions__errors__section">{content}</div>;
 };
 
 interface ErrorsListProps {
   items: FxpConversionError[];
-  onTransferRowClick: (fxpConversionError: FxpConversionError) => void;
+  onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
 }
 
-const ErrorsList: FC<ErrorsListProps> = ({ items, onTransferRowClick }) => {
+const ErrorsList: FC<ErrorsListProps> = ({ items, onFxpConversionRowClick }) => {
   return (
-    <div className="transfers__errors__list-container">
-      <DataList columns={transfersErrorsColumns} list={items} onSelect={onTransferRowClick} />
+    <div className="fxpConversions__errors__list-container">
+      <DataList columns={fxpConversionsErrorsColumns} list={items} onSelect={onFxpConversionRowClick} />
     </div>
   );
 };
 
-export default TransfersErrors;
+export default FxpConversionsErrors;

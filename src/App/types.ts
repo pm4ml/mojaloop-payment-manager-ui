@@ -115,7 +115,17 @@ export enum TransferDirection {
   All = 'ALL',
 }
 
+export enum FxpConversionDirection {
+  Inbound = 'INBOUND',
+  Outbound = 'OUTBOUND',
+  All = 'ALL',
+}
+
 export enum TransferType {
+  P2P = 'P2P',
+}
+
+export enum FxpConversionType {
   P2P = 'P2P',
 }
 
@@ -136,6 +146,11 @@ export enum TransferStatus {
   Error = 'ERROR',
 }
 
+export enum FxpConversionStatus {
+  Success = 'SUCCESS',
+  Pending = 'PENDING',
+  Error = 'ERROR',
+}
 export interface CertificateValidationResultsData {
   [key: string]: {
     type: string;

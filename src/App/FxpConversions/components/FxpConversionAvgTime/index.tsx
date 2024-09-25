@@ -3,39 +3,39 @@ import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
 
-interface TransfersChartsProps {
+interface FxpConversionsChartsProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
 }
 
-const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) => {
+const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, error }) => {
   let content = null;
   if (isPending || !data) {
     content = (
-      <div className="transfers__avg-time__graph-loader">
+      <div className="fxpConversions__avg-time__graph-loader">
         <Spinner size={20} />
       </div>
     );
   } else if (error) {
-    content = <ErrorBox>Transfers average time: Unable to load data</ErrorBox>;
+    content = <ErrorBox>FxpConversions average time: Unable to load data</ErrorBox>;
   } else {
     content = (
       <ChartLayout
-        title="Average Transfer Time (E2E)"
-        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: '#4fc7e7' }]}
-        Graph={() => <AverageTransferTimeGraph data={data} />}
+        title="Average FxpConversion Time (E2E)"
+        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: '#4fc7e7' }]}
+        Graph={() => <AverageFxpConversionTimeGraph data={data} />}
       />
     );
   }
-  return <div className="transfers__avg-time__section">{content}</div>;
+  return <div className="fxpConversions__avg-time__section">{content}</div>;
 };
 
-interface AverageTransferTimeGraphProps {
+interface AverageFxpConversionTimeGraphProps {
   data: XYCoordinate[];
 }
 
-const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) => {
+const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({ data }) => {
   const series = {
     name: 'Average Response Time',
     data,
@@ -43,7 +43,7 @@ const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) =
 
   const opts = {
     chart: {
-      id: 'transfer-avg-time-chart',
+      id: 'fxpConversion-avg-time-chart',
     },
     xaxis: {
       type: 'datetime',
@@ -79,4 +79,4 @@ const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) =
   return <Chart options={opts} series={[series]} type="line" width="100%" height={300} />;
 };
 
-export default TransfersCharts;
+export default FxpConversionsCharts;

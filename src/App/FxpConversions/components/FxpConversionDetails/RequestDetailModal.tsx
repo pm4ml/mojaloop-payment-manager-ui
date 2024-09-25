@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
 import { ContentReader, Modal } from 'components';
 
-interface TransferRequestDetailModalProps {
+interface FxpConversionRequestDetailModalProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   model: any | null;
   title: string;
   onCloseClick: () => void;
 }
 
-export const TransferRequestDetailsModal: FC<TransferRequestDetailModalProps> = ({
+export const FxpConversionRequestDetailsModal: FC<FxpConversionRequestDetailModalProps> = ({
   model,
   title,
   onCloseClick,
 }) => {
   return (
     <Modal
-      id="transferRequestDetailsModal"
+      id="fxpConversionRequestDetailsModal"
       title={title}
       width="1000px"
       onClose={onCloseClick}

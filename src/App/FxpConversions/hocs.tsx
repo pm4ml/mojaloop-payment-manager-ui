@@ -4,22 +4,22 @@ import { Dispatch } from 'store/types';
 import * as actions from './actions';
 
 const dispatchProps = (dispatch: Dispatch) => ({
-  onTransfersMount: () => dispatch(actions.requestTransfersPageData()),
+  onFxpConversionsMount: () => dispatch(actions.requestFxpConversionsPageData()),
 });
 
-type TransfersProps = {
-  onTransfersMount: () => void;
+type FxpConversionsProps = {
+  onFxpConversionsMount: () => void;
 };
 
-export function loadTransfers(Transfers: FC) {
-  class TransfersLoader extends Component<TransfersProps, {}> {
+export function loadFxpConversions(FxpConversions: FC) {
+  class FxpConversionsLoader extends Component<FxpConversionsProps, {}> {
     componentDidMount() {
-      this.props.onTransfersMount();
+      this.props.onFxpConversionsMount();
     }
 
     render() {
-      return <Transfers />;
+      return <FxpConversions />;
     }
   }
-  return connect(null, dispatchProps)(TransfersLoader);
+  return connect(null, dispatchProps)(FxpConversionsLoader);
 }

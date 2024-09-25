@@ -2,122 +2,122 @@ import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { Button, Heading, Row } from 'components';
 import { State, Dispatch } from 'store/types';
-import { loadTransfers } from './hocs';
+import { loadFxpConversions } from './hocs';
 import * as selectors from './selectors';
 import * as actions from './actions';
-import { TransfersStatus, TransferError } from './types';
+import { FxpConversionsStatus, FxpConversionError } from './types';
 import { XYCoordinate } from '../types';
 import FxpConversionFinderModal from './components/FxpConversionFinderModal';
-import TransferDetailsModal from './components/FxpConversionDetails';
-import TransfersErrors from './components/FxpConversionErrors';
-import TransfersErrorsChart from './components/FxpConversionErrorsChart';
-import TransfersSuccessPerc from './components/FxpConversionSuccessPerc';
-import TransfersAvgTime from './components/FxpConversionAvgTime';
-import TransfersStatuses from './components/FxpConversionStatuses';
+import FxpConversionDetailsModal from './components/FxpConversionDetails';
+import FxpConversionsErrors from './components/FxpConversionErrors';
+import FxpConversionsErrorsChart from './components/FxpConversionErrorsChart';
+import FxpConversionsSuccessPerc from './components/FxpConversionSuccessPerc';
+import FxpConversionsAvgTime from './components/FxpConversionAvgTime';
+import FxpConversionsStatuses from './components/FxpConversionStatuses';
 import './FxpConversions.css';
 
 const stateProps = (state: State) => ({
-  transfersErrors: selectors.getTransfersErrors(state),
-  transfersErrorsError: selectors.getTransfersErrorsError(state),
-  isTransfersErrorsViewAllActive: selectors.getIsTransfersErrorsViewAllActive(state),
-  isTransfersErrorsPending: selectors.getIsTransfersErrorsPending(state),
-  transfersStatuses: selectors.getTransfersStatuses(state),
-  transfersStatusesError: selectors.getTransfersStatusesError(state),
-  isTransfersStatusesPending: selectors.getIsTransfersStatusesPending(state),
-  isTransferFinderModalVisible: selectors.getIsTransferFinderModalVisible(state),
-  transfersSuccessPerc: selectors.getTransfersSuccessPercTransformed(state),
-  transfersSuccessPercError: selectors.getTransfersSuccessPercError(state),
-  isTransfersSuccessPercPending: selectors.getIsTransfersSuccessPercPending(state),
-  transfersAvgTime: selectors.getTransfersAvgTimeTransformed(state),
-  transfersAvgTimeError: selectors.getTransfersAvgTimeError(state),
-  isTransfersAvgTimePending: selectors.getIsTransfersAvgTimePending(state),
-  isTransferDetailsModalVisible: selectors.getIsTransferDetailsModalVisible(state),
+  fxpConversionsErrors: selectors.getFxpConversionsErrors(state),
+  fxpConversionsErrorsError: selectors.getFxpConversionsErrorsError(state),
+  isFxpConversionsErrorsViewAllActive: selectors.getIsFxpConversionsErrorsViewAllActive(state),
+  isFxpConversionsErrorsPending: selectors.getIsFxpConversionsErrorsPending(state),
+  fxpConversionsStatuses: selectors.getFxpConversionsStatuses(state),
+  fxpConversionsStatusesError: selectors.getFxpConversionsStatusesError(state),
+  isFxpConversionsStatusesPending: selectors.getIsFxpConversionsStatusesPending(state),
+  isFxpConversionFinderModalVisible: selectors.getIsFxpConversionFinderModalVisible(state),
+  fxpConversionsSuccessPerc: selectors.getFxpConversionsSuccessPercTransformed(state),
+  fxpConversionsSuccessPercError: selectors.getFxpConversionsSuccessPercError(state),
+  isFxpConversionsSuccessPercPending: selectors.getIsFxpConversionsSuccessPercPending(state),
+  fxpConversionsAvgTime: selectors.getFxpConversionsAvgTimeTransformed(state),
+  fxpConversionsAvgTimeError: selectors.getFxpConversionsAvgTimeError(state),
+  isFxpConversionsAvgTimePending: selectors.getIsFxpConversionsAvgTimePending(state),
+  isFxpConversionDetailsModalVisible: selectors.getIsFxpConversionDetailsModalVisible(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
-  onViewAllReconcilationErrorsButtonClick: () => dispatch(actions.toggleTransfersErrorsViewAll()),
-  onTransferFinderButtonClick: () => dispatch(actions.toggleTransferFinderModal()),
-  onModalCloseClick: () => dispatch(actions.toggleTransferFinderModal()),
-  onTransferRowClick: (transferError: TransferError) => {
-    dispatch(actions.requestTransferDetails({ transferId: transferError.id }));
+  onViewAllReconcilationErrorsButtonClick: () => dispatch(actions.toggleFxpConversionsErrorsViewAll()),
+  onFxpConversionFinderButtonClick: () => dispatch(actions.toggleFxpConversionFinderModal()),
+  onModalCloseClick: () => dispatch(actions.toggleFxpConversionFinderModal()),
+  onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => {
+    dispatch(actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId }));
   },
 });
 
-type FxpTransfersProps = {
-  transfersErrors: TransferError[];
-  transfersErrorsError: string | null;
-  isTransfersErrorsViewAllActive: boolean;
-  isTransfersErrorsPending?: boolean;
-  isTransferFinderModalVisible: boolean;
-  isTransferDetailsModalVisible: boolean;
-  transfersStatuses: TransfersStatus[];
-  transfersStatusesError: string | null;
-  isTransfersStatusesPending: boolean;
-  transfersSuccessPerc?: XYCoordinate[];
-  transfersSuccessPercError: string | null;
-  isTransfersSuccessPercPending: boolean;
-  transfersAvgTime?: XYCoordinate[];
-  transfersAvgTimeError: string | null;
-  isTransfersAvgTimePending: boolean;
+type FxpFxpConversionsProps = {
+  fxpConversionsErrors: FxpConversionError[];
+  fxpConversionsErrorsError: string | null;
+  isFxpConversionsErrorsViewAllActive: boolean;
+  isFxpConversionsErrorsPending?: boolean;
+  isFxpConversionFinderModalVisible: boolean;
+  isFxpConversionDetailsModalVisible: boolean;
+  fxpConversionsStatuses: FxpConversionsStatus[];
+  fxpConversionsStatusesError: string | null;
+  isFxpConversionsStatusesPending: boolean;
+  fxpConversionsSuccessPerc?: XYCoordinate[];
+  fxpConversionsSuccessPercError: string | null;
+  isFxpConversionsSuccessPercPending: boolean;
+  fxpConversionsAvgTime?: XYCoordinate[];
+  fxpConversionsAvgTimeError: string | null;
+  isFxpConversionsAvgTimePending: boolean;
   onViewAllReconcilationErrorsButtonClick: () => void;
-  onTransferFinderButtonClick: () => void;
-  onTransferRowClick: (transferError: TransferError) => void;
+  onFxpConversionFinderButtonClick: () => void;
+  onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
 };
 
-const FxpTransfers: FC<FxpTransfersProps> = ({
-  transfersErrors,
-  transfersErrorsError,
-  isTransfersErrorsViewAllActive,
-  isTransfersErrorsPending,
-  isTransferFinderModalVisible,
-  isTransferDetailsModalVisible,
-  transfersStatuses,
-  transfersStatusesError,
-  isTransfersStatusesPending,
-  transfersSuccessPerc,
-  transfersSuccessPercError,
-  isTransfersSuccessPercPending,
-  transfersAvgTime,
-  transfersAvgTimeError,
-  isTransfersAvgTimePending,
+const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
+  fxpConversionsErrors,
+  fxpConversionsErrorsError,
+  isFxpConversionsErrorsViewAllActive,
+  isFxpConversionsErrorsPending,
+  isFxpConversionFinderModalVisible,
+  isFxpConversionDetailsModalVisible,
+  fxpConversionsStatuses,
+  fxpConversionsStatusesError,
+  isFxpConversionsStatusesPending,
+  fxpConversionsSuccessPerc,
+  fxpConversionsSuccessPercError,
+  isFxpConversionsSuccessPercPending,
+  fxpConversionsAvgTime,
+  fxpConversionsAvgTimeError,
+  isFxpConversionsAvgTimePending,
   onViewAllReconcilationErrorsButtonClick,
-  onTransferFinderButtonClick,
-  onTransferRowClick,
+  onFxpConversionFinderButtonClick,
+  onFxpConversionRowClick,
 }) => {
   return (
-    <div className="fxptransfers">
+    <div className="fxpfxpConversions">
       <Heading size="3">FXP Conversions Overview</Heading>
       <Row style={{ marginBottom: '20px' }}>
-        <Button onClick={onTransferFinderButtonClick} label="Find a Conversion" kind="secondary" />
+        <Button onClick={onFxpConversionFinderButtonClick} label="Find a Conversion" kind="secondary" />
       </Row>
-      <TransfersSuccessPerc
-        data={transfersSuccessPerc}
-        error={transfersSuccessPercError}
-        isPending={isTransfersSuccessPercPending}
+      <FxpConversionsSuccessPerc
+        data={fxpConversionsSuccessPerc}
+        error={fxpConversionsSuccessPercError}
+        isPending={isFxpConversionsSuccessPercPending}
       />
-      <TransfersAvgTime
-        data={transfersAvgTime}
-        error={transfersAvgTimeError}
-        isPending={isTransfersAvgTimePending}
+      <FxpConversionsAvgTime
+        data={fxpConversionsAvgTime}
+        error={fxpConversionsAvgTimeError}
+        isPending={isFxpConversionsAvgTimePending}
       />
-      <TransfersStatuses
-        isPending={isTransfersStatusesPending}
-        items={transfersStatuses}
-        error={transfersStatusesError}
+      <FxpConversionsStatuses
+        isPending={isFxpConversionsStatusesPending}
+        items={fxpConversionsStatuses}
+        error={fxpConversionsStatusesError}
       />
-      <TransfersErrorsChart />
-      <TransfersErrors
-        isPending={isTransfersErrorsPending}
-        items={transfersErrors}
-        error={transfersErrorsError}
+      <FxpConversionsErrorsChart />
+      <FxpConversionsErrors
+        isPending={isFxpConversionsErrorsPending}
+        items={fxpConversionsErrors}
+        error={fxpConversionsErrorsError}
         onViewAllClick={onViewAllReconcilationErrorsButtonClick}
-        isViewAllActive={isTransfersErrorsViewAllActive}
-        onTransferRowClick={onTransferRowClick}
+        isViewAllActive={isFxpConversionsErrorsViewAllActive}
+        onFxpConversionRowClick={onFxpConversionRowClick}
       />
-      {isTransferFinderModalVisible && <FxpConversionFinderModal />}
-      {isTransferDetailsModalVisible && <TransferDetailsModal />}
+      {isFxpConversionFinderModalVisible && <FxpConversionFinderModal />}
+      {isFxpConversionDetailsModalVisible && <FxpConversionDetailsModal />}
     </div>
   );
 };
 
-export default loadTransfers(connect(stateProps, dispatchProps)(FxpTransfers));
+export default loadFxpConversions(connect(stateProps, dispatchProps)(FxpFxpConversions));

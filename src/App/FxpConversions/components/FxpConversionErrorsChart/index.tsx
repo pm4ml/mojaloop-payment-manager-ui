@@ -5,31 +5,31 @@ import { State } from 'store/types';
 import { ErrorMessage } from 'App/types';
 import PieChart from 'components/Charts/PieChart';
 import * as selectors from '../../selectors';
-import { TransferError } from '../../types';
+import { FxpConversionError } from '../../types';
 import * as helpers from '../../helpers';
 
 const stateProps = (state: State) => ({
-  items: selectors.getTransfersErrors(state),
-  error: selectors.getTransfersErrorsError(state),
-  isPending: selectors.getIsTransfersErrorsPending(state),
+  items: selectors.getFxpConversionsErrors(state),
+  error: selectors.getFxpConversionsErrorsError(state),
+  isPending: selectors.getIsFxpConversionsErrorsPending(state),
 });
 
-interface TransfersErrorsChartProps {
+interface FxpConversionsErrorsChartProps {
   isPending: boolean | undefined;
-  items: TransferError[];
+  items: FxpConversionError[];
   error: ErrorMessage;
 }
 
-const TransfersErrorsChart: FC<TransfersErrorsChartProps> = ({ isPending, items, error }) => {
+const FxpConversionsErrorsChart: FC<FxpConversionsErrorsChartProps> = ({ isPending, items, error }) => {
   let content = null;
   if (isPending) {
     content = (
-      <div className="transfers__errors__loader">
+      <div className="fxpConversions__errors__loader">
         <Spinner size={20} />
       </div>
     );
   } else if (error) {
-    content = <ErrorBox>Transfers errors: Unable to load data</ErrorBox>;
+    content = <ErrorBox>FxpConversions errors: Unable to load data</ErrorBox>;
   } else {
     const errors = helpers.getErrorsByType(items);
     const totalErrors = errors.reduce((a, b) => {
@@ -39,7 +39,7 @@ const TransfersErrorsChart: FC<TransfersErrorsChartProps> = ({ isPending, items,
     content = (
       <Row align="flex-start center">
         <AnimateFadeIn delay={0.3} initial={{ x: -10 }} animate={{ x: 0 }}>
-          <div className="transfers__errors__graph-display-label">
+          <div className="fxpConversions__errors__graph-display-label">
             <DataLabel size="s" bold>
               Total Errors
             </DataLabel>
@@ -48,7 +48,7 @@ const TransfersErrorsChart: FC<TransfersErrorsChartProps> = ({ isPending, items,
             </DataLabel>
           </div>
         </AnimateFadeIn>
-        <div className="transfers__errors__graph-chart-container">
+        <div className="fxpConversions__errors__graph-chart-container">
           <AnimateFadeIn delay={0.3} initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
             <PieChart
               canvasSize={200}
@@ -58,12 +58,12 @@ const TransfersErrorsChart: FC<TransfersErrorsChartProps> = ({ isPending, items,
             />
           </AnimateFadeIn>
         </div>
-        <div className="transfers__errors__graph-legend-container">
+        <div className="fxpConversions__errors__graph-legend-container">
           <DataLabel size="s" bold>
             Error Breakdown
           </DataLabel>
           <Legend
-            className="transfers__errors__graph-legend"
+            className="fxpConversions__errors__graph-legend"
             vertical
             items={errors.map((errorItem) => ({
               ...errorItem,
@@ -75,11 +75,11 @@ const TransfersErrorsChart: FC<TransfersErrorsChartProps> = ({ isPending, items,
     );
   }
   return (
-    <div className="transfers__errors__section">
-      <DataLabel size="m">Transfers Errors Overview</DataLabel>
+    <div className="fxpConversions__errors__section">
+      <DataLabel size="m">FxpConversions Errors Overview</DataLabel>
       {content}
     </div>
   );
 };
 
-export default connect(stateProps)(TransfersErrorsChart);
+export default connect(stateProps)(FxpConversionsErrorsChart);

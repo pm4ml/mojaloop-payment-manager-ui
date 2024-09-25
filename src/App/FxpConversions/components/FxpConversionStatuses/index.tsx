@@ -1,32 +1,32 @@
 import React, { FC } from 'react';
 import { AnimateFadeIn, Column, DataLabel, ErrorBox, Pill, Row, Spinner } from 'components';
-import { ErrorMessage, TransferStatus } from 'App/types';
-import { TransfersStatus } from '../../types';
+import { ErrorMessage, FxpConversionStatus } from 'App/types';
+import { FxpConversionsStatus } from '../../types';
 
-function getCount(items: TransfersStatus[], status: TransferStatus): number | undefined {
-  const transfersStatus = items.find((item) => item.status === status);
-  return transfersStatus?.count;
+function getCount(items: FxpConversionsStatus[], status: FxpConversionStatus): number | undefined {
+  const fxpConversionsStatus = items.find((item) => item.status === status);
+  return fxpConversionsStatus?.count;
 }
 
-interface TransfersStatusesProps {
+interface FxpConversionsStatusesProps {
   isPending: boolean;
-  items: TransfersStatus[];
+  items: FxpConversionsStatus[];
   error: ErrorMessage;
 }
-const TransfersStatusesItems: FC<TransfersStatusesProps> = ({ isPending, items, error }) => {
+const FxpConversionsStatusesItems: FC<FxpConversionsStatusesProps> = ({ isPending, items, error }) => {
   let content = null;
   if (isPending) {
     content = (
-      <div className="transfers__statuses__loader">
+      <div className="fxpConversions__statuses__loader">
         <Spinner size={20} />
       </div>
     );
   } else if (error) {
-    content = <ErrorBox>Transfers Status: Unable to load data</ErrorBox>;
+    content = <ErrorBox>FxpConversions Status: Unable to load data</ErrorBox>;
   } else {
-    const success = getCount(items, TransferStatus.Success);
-    const pending = getCount(items, TransferStatus.Pending);
-    const failed = getCount(items, TransferStatus.Error);
+    const success = getCount(items, FxpConversionStatus.Success);
+    const pending = getCount(items, FxpConversionStatus.Pending);
+    const failed = getCount(items, FxpConversionStatus.Error);
 
     content = (
       <Row>
@@ -37,19 +37,19 @@ const TransfersStatusesItems: FC<TransfersStatusesProps> = ({ isPending, items, 
                 active
                 label={`${success} Successful`}
                 kind="primary"
-                className="transfers__statuses__status transfers__statuses__status--successful"
+                className="fxpConversions__statuses__status fxpConversions__statuses__status--successful"
               />
               <Pill
                 active
                 label={`${pending} Pending`}
                 kind="success"
-                className="transfers__statuses__status transfers__statuses__status--pending"
+                className="fxpConversions__statuses__status fxpConversions__statuses__status--pending"
               />
               <Pill
                 active
                 label={`${failed} Failed`}
                 kind="danger"
-                className="transfers__statuses__status transfers__statuses__status--has-errors"
+                className="fxpConversions__statuses__status fxpConversions__statuses__status--has-errors"
               />
             </AnimateFadeIn>
           </Row>
@@ -59,12 +59,12 @@ const TransfersStatusesItems: FC<TransfersStatusesProps> = ({ isPending, items, 
   }
 
   return (
-    <div className="transfers__statuses__section">
-      <DataLabel size="m">Total Transfer Statuses</DataLabel>
+    <div className="fxpConversions__statuses__section">
+      <DataLabel size="m">Total FxpConversion Statuses</DataLabel>
       <br />
       {content}
     </div>
   );
 };
 
-export default TransfersStatusesItems;
+export default FxpConversionsStatusesItems;

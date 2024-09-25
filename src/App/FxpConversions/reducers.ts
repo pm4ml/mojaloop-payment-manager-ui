@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from 'moment';
 import {
-  SET_TRANSFERS_ERRORS,
-  SET_TRANSFERS_ERRORS_ERROR,
-  TOGGLE_TRANSFERS_ERRORS_VIEW_ALL,
-  SET_TRANSFERS_ERRORS_TYPE_FILTER,
-  TOGGLE_TRANSFER_FINDER_MODAL,
-  SET_TRANSFER_FINDER_FILTER,
-  REQUEST_TRANSFERS,
-  UNREQUEST_TRANSFERS,
-  SET_TRANSFERS,
+  SET_FXPCONVERSIONS_ERRORS,
+  SET_FXPCONVERSIONS_ERRORS_ERROR,
+  TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL,
+  SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER,
+  TOGGLE_FXPCONVERSION_FINDER_MODAL,
+  SET_FXPCONVERSION_FINDER_FILTER,
+  REQUEST_FXPCONVERSIONS,
+  UNREQUEST_FXPCONVERSIONS,
   SET_FXPCONVERSIONS,
-  SET_TRANSFERS_ERROR,
-  SET_TRANSFERS_STATUSES,
-  SET_TRANSFERS_STATUSES_ERROR,
-  SET_TRANSFERS_SUCCESS_PERC,
-  SET_TRANSFERS_SUCCESS_PERC_ERROR,
-  SET_TRANSFERS_AVG_TIME,
-  SET_TRANSFERS_AVG_TIME_ERROR,
-  TransfersActionTypes,
+  SET_FXPCONVERSIONS_ERROR,
+  SET_FXPCONVERSIONS_STATUSES,
+  SET_FXPCONVERSIONS_STATUSES_ERROR,
+  SET_FXPCONVERSIONS_SUCCESS_PERC,
+  SET_FXPCONVERSIONS_SUCCESS_PERC_ERROR,
+  SET_FXPCONVERSIONS_AVG_TIME,
+  SET_FXPCONVERSIONS_AVG_TIME_ERROR,
+  FxpConversionsActionTypes,
   FxpConversionsState,
   DateRange,
   SET_FXPCONVERSION_DETAILS,
-  TOGGLE_TRANSFER_DETAILS_MODAL,
+  TOGGLE_FXPCONVERSION_DETAILS_MODAL,
   REQUEST_FXPCONVERSION,
   UNREQUEST_FXPCONVERSION,
   FxpConversionFilter,
-  SetTransfersAction,
-  SetTransfersErrorAction,
-  SetTransfersStatusesAction,
-  SetTransfersStatusesErrorAction,
-  SetTransfersSuccessPercAction,
-  SetTransfersSuccessPercErrorAction,
+  SetFxpConversionsErrorAction,
+  SetFxpConversionsStatusesAction,
+  SetFxpConversionsStatusesErrorAction,
+  SetFxpConversionsSuccessPercAction,
+  SetFxpConversionsSuccessPercErrorAction,
   SetFxpConversionsAction,
-  SetTransfersAvgTimeAction,
-  SetTransfersAvgTimeErrorAction,
+  SetFxpConversionsAvgTimeAction,
+  SetFxpConversionsAvgTimeErrorAction,
   SetFxpConversionDetailsAction,
 } from './types';
 
@@ -60,21 +58,6 @@ function getToDateBySelection(range: DateRange) {
   return parseInt(dateRanges[range][1], 10);
 }
 
-function getTransferFinderFilterInitialState() {
-  return {
-    transferId: undefined,
-    dates: DateRange.Today,
-    from: getFromDateBySelection(DateRange.Today),
-    to: getToDateBySelection(DateRange.Today),
-    aliasType: undefined,
-    payeeAlias: undefined,
-    aliasSubValue: undefined,
-    direction: undefined,
-    institution: undefined,
-    status: undefined,
-  };
-}
-
 function getFxpConversionFinderFilterInitialState() {
   return {
     conversionId: undefined,
@@ -93,80 +76,70 @@ function getFxpConversionFinderFilterInitialState() {
 export const initialState: FxpConversionsState = {
   fxpConversionsErrors: [],
   fxpConversionsErrorsError: null,
-  isTransfersErrorsViewAllActive: false,
-  transfersErrorsTypeFilter: undefined,
-  isTransferFinderModalVisible: false,
-  transferFinderFilter: getTransferFinderFilterInitialState(),
-  isTransfersRequested: false,
-  fxpConversion: [],
+  isFxpConversionsErrorsViewAllActive: false,
+  fxpConversionsErrorsTypeFilter: undefined,
+  isFxpConversionFinderModalVisible: false,
+  isFxpConversionsRequested: false,
+  // fxpConversion: [],
   fxpConversions: [],
   fxpConversionsError: null,
-  transfersStatuses: [],
-  transfersStatusesError: null,
-  transfersSuccessPercError: null,
-  transfersAvgTimeError: null,
-  isTransferDetailsModalVisible: false,
+  fxpConversionsStatuses: [],
+  fxpConversionsStatusesError: null,
+  fxpConversionsSuccessPercError: null,
+  fxpConversionsAvgTimeError: null,
+  isFxpConversionDetailsModalVisible: false,
   fxpConversionDetailsError: null,
   fxpConversionFinderFilter: getFxpConversionFinderFilterInitialState(),
 };
 
 export default function fxpConversionsReducer(
   state = initialState,
-  action: FxpConversionFilter | TransfersActionTypes
+  action: FxpConversionFilter | FxpConversionsActionTypes
 ): FxpConversionsState {
   switch ('type' in action ? action.type : action) {
-    case SET_TRANSFERS_ERRORS:
+    case SET_FXPCONVERSIONS_ERRORS:
       return {
         ...state,
         fxpConversionsErrors: (action as { data: any }).data,
       };
-    case SET_TRANSFERS_ERRORS_ERROR:
+    case SET_FXPCONVERSIONS_ERRORS_ERROR:
       return {
         ...state,
         fxpConversionsErrorsError: 'error' in action ? action.error : null,
       };
-    case TOGGLE_TRANSFERS_ERRORS_VIEW_ALL:
+    case TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL:
       return {
         ...state,
-        isTransfersErrorsViewAllActive: !state.isTransfersErrorsViewAllActive,
-        transfersErrorsTypeFilter: initialState.transfersErrorsTypeFilter,
+        isFxpConversionsErrorsViewAllActive: !state.isFxpConversionsErrorsViewAllActive,
+        fxpConversionsErrorsTypeFilter: initialState.fxpConversionsErrorsTypeFilter,
       };
-    case SET_TRANSFERS_ERRORS_TYPE_FILTER:
+    case SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER:
       return {
         ...state,
-        transfersErrorsTypeFilter: 'filter' in action ? action.filter : undefined,
+        fxpConversionsErrorsTypeFilter: 'filter' in action ? action.filter : undefined,
       };
-    case TOGGLE_TRANSFER_FINDER_MODAL: {
+    case TOGGLE_FXPCONVERSION_FINDER_MODAL: {
       return {
         ...state,
-        isTransferFinderModalVisible: !state.isTransferFinderModalVisible,
-        transferFinderFilter: getTransferFinderFilterInitialState(),
-        isTransfersRequested: false,
-      };
-    }
-    // fxp
-    case TOGGLE_TRANSFER_FINDER_MODAL: {
-      return {
-        ...state,
-        isTransferFinderModalVisible: !state.isTransferFinderModalVisible,
+        isFxpConversionFinderModalVisible: !state.isFxpConversionFinderModalVisible,
         fxpConversionFinderFilter: getFxpConversionFinderFilterInitialState(),
-        isTransfersRequested: false,
+        isFxpConversionsRequested: false,
       };
     }
-    case TOGGLE_TRANSFER_DETAILS_MODAL: {
+    case TOGGLE_FXPCONVERSION_DETAILS_MODAL: {
       return {
         ...state,
-        isTransferDetailsModalVisible: !state.isTransferDetailsModalVisible,
+        isFxpConversionDetailsModalVisible: !state.isFxpConversionDetailsModalVisible,
       };
     }
-    case SET_TRANSFER_FINDER_FILTER: {
+    case SET_FXPCONVERSION_FINDER_FILTER: {
       const { field, value } = action as { field: string; value: any };
 
       if (field === 'dates' && value) {
         return {
           ...state,
-          transferFinderFilter: {
-            ...state.transferFinderFilter,
+          fxpConversionFinderFilter: {
+            ...state.fxpConversionFinderFilter,
             dates: value,
             from: getFromDateBySelection(value as DateRange),
             to: getToDateBySelection(value as DateRange),
@@ -176,8 +149,8 @@ export default function fxpConversionsReducer(
       if (field === 'from' || field === 'to') {
         return {
           ...state,
-          transferFinderFilter: {
-            ...state.transferFinderFilter,
+          fxpConversionFinderFilter: {
+            ...state.fxpConversionFinderFilter,
             [field]: value,
             dates: 'CUSTOM',
           },
@@ -185,61 +158,61 @@ export default function fxpConversionsReducer(
       }
       return {
         ...state,
-        transferFinderFilter: {
-          ...state.transferFinderFilter,
+        fxpConversionFinderFilter: {
+          ...state.fxpConversionFinderFilter,
           [field]: value,
         },
       };
     }
-    case REQUEST_TRANSFERS:
+    case REQUEST_FXPCONVERSIONS:
       return {
         ...state,
-        isTransfersRequested: true,
+        isFxpConversionsRequested: true,
       };
-    case UNREQUEST_TRANSFERS:
+    case UNREQUEST_FXPCONVERSIONS:
       return {
         ...state,
-        isTransfersRequested: false,
+        isFxpConversionsRequested: false,
       };
-    case SET_TRANSFERS:
+    case SET_FXPCONVERSIONS:
       return {
         ...state,
         fxpConversions: (action as SetFxpConversionsAction).data,
       };
-    case SET_TRANSFERS_ERROR:
+    case SET_FXPCONVERSIONS_ERROR:
       return {
         ...state,
-        fxpConversionsError: (action as SetTransfersErrorAction).error,
+        fxpConversionsError: (action as SetFxpConversionsErrorAction).error,
       };
-    case SET_TRANSFERS_STATUSES:
+    case SET_FXPCONVERSIONS_STATUSES:
       return {
         ...state,
-        transfersStatuses: (action as SetTransfersStatusesAction).data,
+        fxpConversionsStatuses: (action as SetFxpConversionsStatusesAction).data,
       };
-    case SET_TRANSFERS_STATUSES_ERROR:
+    case SET_FXPCONVERSIONS_STATUSES_ERROR:
       return {
         ...state,
-        transfersStatusesError: (action as SetTransfersStatusesErrorAction).error,
+        fxpConversionsStatusesError: (action as SetFxpConversionsStatusesErrorAction).error,
       };
-    case SET_TRANSFERS_SUCCESS_PERC:
+    case SET_FXPCONVERSIONS_SUCCESS_PERC:
       return {
         ...state,
-        transfersSuccessPerc: (action as SetTransfersSuccessPercAction).data,
+        fxpConversionsSuccessPerc: (action as SetFxpConversionsSuccessPercAction).data,
       };
-    case SET_TRANSFERS_SUCCESS_PERC_ERROR:
+    case SET_FXPCONVERSIONS_SUCCESS_PERC_ERROR:
       return {
         ...state,
-        transfersSuccessPercError: (action as SetTransfersSuccessPercErrorAction).error,
+        fxpConversionsSuccessPercError: (action as SetFxpConversionsSuccessPercErrorAction).error,
       };
-    case SET_TRANSFERS_AVG_TIME:
+    case SET_FXPCONVERSIONS_AVG_TIME:
       return {
         ...state,
-        transfersAvgTime: (action as SetTransfersAvgTimeAction).data,
+        fxpConversionsAvgTime: (action as SetFxpConversionsAvgTimeAction).data,
       };
-    case SET_TRANSFERS_AVG_TIME_ERROR:
+    case SET_FXPCONVERSIONS_AVG_TIME_ERROR:
       return {
         ...state,
-        transfersAvgTimeError: (action as SetTransfersAvgTimeErrorAction).error,
+        fxpConversionsAvgTimeError: (action as SetFxpConversionsAvgTimeErrorAction).error,
       };
     // FXP
     case SET_FXPCONVERSIONS:
@@ -250,18 +223,18 @@ export default function fxpConversionsReducer(
     case REQUEST_FXPCONVERSION:
       return {
         ...state,
-        isTransfersRequested: true,
+        isFxpConversionsRequested: true,
       };
     case UNREQUEST_FXPCONVERSION:
       return {
         ...state,
-        isTransfersRequested: false,
+        isFxpConversionsRequested: false,
       };
     case SET_FXPCONVERSION_DETAILS:
       return {
         ...state,
         fxpConversionDetails: (action as SetFxpConversionDetailsAction).data,
-        isTransferDetailsModalVisible: true,
+        isFxpConversionDetailsModalVisible: true,
       };
     default:
       return state;

@@ -3,39 +3,39 @@ import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
 
-interface TransfersSuccessPercProps {
+interface FxpConversionsSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
 }
 
-const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, error }) => {
+const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({ isPending, data, error }) => {
   let content = null;
   if (isPending || !data) {
     content = (
-      <div className="transfers__successful-perc__graph-loader">
+      <div className="fxpConversions__successful-perc__graph-loader">
         <Spinner size={20} />
       </div>
     );
   } else if (error) {
-    content = <ErrorBox>Transfers Successful Percentage: Unable to load data</ErrorBox>;
+    content = <ErrorBox>FxpConversions Successful Percentage: Unable to load data</ErrorBox>;
   } else {
     content = (
       <ChartLayout
-        title="Successful Transfers"
+        title="Successful FxpConversions"
         legend={[{ label: 'Percent / Min', color: '#4fc7e7' }]}
-        Graph={() => <SuccessfulTransferGraph data={data} />}
+        Graph={() => <SuccessfulFxpConversionGraph data={data} />}
       />
     );
   }
-  return <div className="transfers__successful-perc__section">{content}</div>;
+  return <div className="fxpConversions__successful-perc__section">{content}</div>;
 };
 
-interface SuccessfulTransferGraphProps {
+interface SuccessfulFxpConversionGraphProps {
   data: XYCoordinate[];
 }
 
-const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => {
+const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ data }) => {
   const series = {
     name: 'Success Percentage',
     data,
@@ -43,7 +43,7 @@ const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => 
 
   const opts = {
     chart: {
-      id: 'transfer-success-perc-chart',
+      id: 'fxpConversion-success-perc-chart',
     },
     xaxis: {
       type: 'datetime',
@@ -79,4 +79,4 @@ const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => 
   return <Chart options={opts} series={[series]} type="line" width="100%" height={300} />;
 };
 
-export default TransfersSuccessPerc;
+export default FxpConversionsSuccessPerc;

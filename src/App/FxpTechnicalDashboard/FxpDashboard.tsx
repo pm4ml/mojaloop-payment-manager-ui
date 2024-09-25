@@ -32,7 +32,7 @@ const stateProps = (state: State) => ({
   ),
   prepareRateData: selectors.getMetricData(
     state,
-    'mojaloop_connector_outbound_transfer_prepare_count'
+    'mojaloop_connector_outbound_fxpConversion_prepare_count'
   ),
   partyLookupLatencyData: selectors.getMetricData(
     state,
@@ -42,9 +42,9 @@ const stateProps = (state: State) => ({
     state,
     'mojaloop_connector_outbound_quote_request_latency'
   ),
-  transferLatencyData: selectors.getMetricData(
+  fxpConversionLatencyData: selectors.getMetricData(
     state,
-    'mojaloop_connector_outbound_transfer_latency'
+    'mojaloop_connector_outbound_fxpConversion_latency'
   ),
 });
 
@@ -60,7 +60,7 @@ type FxpTechnicalDashboardProps = {
   prepareRateData?: MetricDataWrapper<XYCoordinate>;
   partyLookupLatencyData?: MetricDataWrapper<XYCoordinate>;
   quoteRequestLatencyData?: MetricDataWrapper<XYCoordinate>;
-  transferLatencyData?: MetricDataWrapper<XYCoordinate>;
+  fxpConversionLatencyData?: MetricDataWrapper<XYCoordinate>;
   filters: TechnicalDashboardFilters;
   onFilterChange: ({ field, value }: { field: string; value: string | number }) => void;
 };
@@ -71,7 +71,7 @@ const FxpTechnicalDashboard: FC<FxpTechnicalDashboardProps> = ({
   prepareRateData,
   partyLookupLatencyData,
   quoteRequestLatencyData,
-  transferLatencyData,
+  fxpConversionLatencyData,
   filters,
   onFilterChange,
 }) => {
@@ -111,21 +111,21 @@ const FxpTechnicalDashboard: FC<FxpTechnicalDashboardProps> = ({
     });
   }
 
-  const transferRequestData = [];
+  const fxpConversionRequestData = [];
   if (prepareRateData) {
-    transferRequestData.push({
+    fxpConversionRequestData.push({
       chartType: 'line',
       color: '#4fc7e7',
       legendText: 'Requests/sec',
       data: prepareRateData.data,
     });
   }
-  if (transferLatencyData) {
-    transferRequestData.push({
+  if (fxpConversionLatencyData) {
+    fxpConversionRequestData.push({
       chartType: 'line',
       color: '#12d670',
       legendText: 'Latency ms',
-      data: transferLatencyData.data.map((d) => ({ x: d.x, y: d.y * 1000 })),
+      data: fxpConversionLatencyData.data.map((d) => ({ x: d.x, y: d.y * 1000 })),
     });
   }
 
@@ -236,8 +236,8 @@ const FxpTechnicalDashboard: FC<FxpTechnicalDashboardProps> = ({
                     height={300}
                     isPending={false}
                     error={null}
-                    title="Transfer Service"
-                    data={transferRequestData}
+                    title="FxpConversion Service"
+                    data={fxpConversionRequestData}
                   />
                 </Column>
               </Row>

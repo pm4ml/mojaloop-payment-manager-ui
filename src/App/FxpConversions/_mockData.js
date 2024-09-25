@@ -1,5 +1,5 @@
 import { generatePoints, generatePercPoints } from 'utils/charts';
-import { TransferType } from 'App/types';
+import { FxpConversionType } from 'App/types';
 import { ErrorDirection, ErrorType } from './types';
 
 function timestamp() {
@@ -10,12 +10,12 @@ function id() {
   return Math.ceil(Math.random() * 1000);
 }
 
-export const transfersErrors = [
+export const fxpConversionsErrors = [
   {
     id: id(),
     institution: 'DFSP 1',
     direction: ErrorDirection.Inbound,
-    type: TransferType.P2P,
+    type: FxpConversionType.P2P,
     value: '523$',
     errorType: ErrorType.FromHub,
     committedDate: timestamp(),
@@ -24,7 +24,7 @@ export const transfersErrors = [
     id: id(),
     institution: 'DFSP 1',
     direction: ErrorDirection.Inbound,
-    type: TransferType.P2P,
+    type: FxpConversionType.P2P,
     value: '523$',
     errorType: ErrorType.FromHub,
     committedDate: timestamp(),
@@ -33,7 +33,7 @@ export const transfersErrors = [
     id: id(),
     institution: 'DFSP 1',
     direction: ErrorDirection.Inbound,
-    type: TransferType.P2P,
+    type: FxpConversionType.P2P,
     value: '523$',
     errorType: ErrorType.FromHub,
     committedDate: timestamp(),
@@ -42,7 +42,7 @@ export const transfersErrors = [
     id: id(),
     institution: 'DFSP 1',
     direction: ErrorDirection.Inbound,
-    type: TransferType.P2P,
+    type: FxpConversionType.P2P,
     value: '523$',
     errorType: ErrorType.FromHub,
     committedDate: timestamp(),

@@ -1,73 +1,69 @@
 import {
   ErrorMessage,
   LinesConfig,
-  TransferType,
-  TransferStatus,
-  TransferDirection,
+  FxpConversionType,
+  FxpConversionStatus,
+  FxpConversionDirection,
 } from 'App/types';
 
-export const REQUEST_TRANSFERS_PAGE_DATA = 'Transfers / Request Page Data';
-export const REQUEST_TRANSFERS_ERRORS = 'Transfers / Request Transfers Errors';
-export const SET_TRANSFERS_ERRORS = 'Transfers / Set Transfers Errors';
-export const SET_TRANSFERS_ERRORS_ERROR = 'Transfers / Set Transfers Errors Error';
-export const TOGGLE_TRANSFERS_ERRORS_VIEW_ALL = 'Transfers / Select Transfers Errors View All';
-export const SET_TRANSFERS_ERRORS_TYPE_FILTER = 'Transfers / Set Transfers Errors Type Filter';
-export const TOGGLE_TRANSFER_FINDER_MODAL = 'Transfers / Open Transfer Finder Modal';
-export const SET_TRANSFER_FINDER_FILTER = 'Transfers / Set Transfer Finder Filter';
-export const REQUEST_TRANSFERS = 'Transfers / Request Transfers';
-export const UNREQUEST_TRANSFERS = 'Transfers / Unrequest Transfers';
-export const SET_TRANSFERS = 'Transfers / Set Transfers';
-
-export const SET_TRANSFERS_ERROR = 'Transfers / Set Transfers Error';
-export const REQUEST_TRANSFERS_STATUSES = 'Transfers / Request Transfers Statuses';
-export const SET_TRANSFERS_STATUSES = 'Transfers / Set Transfers Statuses';
-export const SET_TRANSFERS_STATUSES_ERROR = 'Transfers / Set Transfers Statuses Error';
-
-export const REQUEST_TRANSFERS_SUCCESS_PERC = 'Transfers / Request Transfers Success Perc';
-export const SET_TRANSFERS_SUCCESS_PERC = 'Transfers / Set Transfers Success Perc';
-export const SET_TRANSFERS_SUCCESS_PERC_ERROR = 'Transfers / Set Transfers Success Perc Error';
-export const REQUEST_TRANSFERS_AVG_TIME = 'Transfers / Request Transfers Average Time';
-export const SET_TRANSFERS_AVG_TIME = 'Transfers / Set Transfers Average Time';
-export const SET_TRANSFERS_AVG_TIME_ERROR = 'Transfers / Set Transfers Average Time Error';
-
-export const REQUEST_TRANSFER_DETAILS = 'Transfers / Request Transfer Details';
-export const TOGGLE_TRANSFER_DETAILS_MODAL = 'Transfers / Select Transfers Detail View';
-export const SET_TRANSFER_DETAILS_ERROR = 'Transfers / Set Transfer Details Error';
-
-// FXp Types
-export const SET_FXPCONVERSIONS = 'FxpConversion / Set FxpConversion';
-export const TOGGLE_FXPCONVERSION_FINDER_MODAL = 'FxpConversions / Open FxpConversion Finder Modal';
-export const SET_FXPCONVERSION_DETAILS = 'FxpConversion / Set FxpConversion Details';
-export const REQUEST_FXPCONVERSION_DETAILS = 'FxpConversion / Request FxpConversion Details';
-export const REQUEST_FXPCONVERSION = 'FxpConversion / Request FxpConversion';
-export const UNREQUEST_FXPCONVERSION = 'FxpConversion / UnRequest FxpConversion';
-export const SET_FXPCONVERSION_FINDER_FILTER = 'FxpConversion / Set FxpConversion Finder Filter';
-export const SET_FXPCONVERSION_DETAILS_ERROR = 'FxpConversions / Set FxpConversion Details Error';
+export const REQUEST_FXPCONVERSIONS_PAGE_DATA = 'FxpConversions / Request Page Data';
+export const REQUEST_FXPCONVERSIONS_ERRORS = 'FxpConversions / Request FxpConversions Errors';
 export const SET_FXPCONVERSIONS_ERRORS = 'FxpConversions / Set FxpConversions Errors';
 export const SET_FXPCONVERSIONS_ERRORS_ERROR = 'FxpConversions / Set FxpConversions Errors Error';
-export const REQUEST_FXPCONVERSIONS_ERRORS = 'FxpConversions / Request FxpConversions Errors';
-export const TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL = 'FxpConversions / Select FxpConversions Errors View All';
-export const SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER = 'FxpConversions / Set FxpConversions Errors Type Filter';
-export const SET_FXPCONVERSIONS_ERROR = 'FxpConversions / Set FxpConversions Errors';
+export const TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL =
+  'FxpConversions / Select FxpConversions Errors View All';
+export const SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER =
+  'FxpConversions / Set FxpConversions Errors Type Filter';
+export const TOGGLE_FXPCONVERSION_FINDER_MODAL = 'FxpConversions / Open FxpConversion Finder Modal';
+export const SET_FXPCONVERSION_FINDER_FILTER = 'FxpConversions / Set FxpConversion Finder Filter';
+export const REQUEST_FXPCONVERSIONS = 'FxpConversions / Request FxpConversions';
+export const UNREQUEST_FXPCONVERSIONS = 'FxpConversions / Unrequest FxpConversions';
+export const SET_FXPCONVERSIONS = 'FxpConversions / Set FxpConversions';
 
-export interface TransferError {
-  id: string;
-  institution: string;
-  direction: ErrorDirection;
-  type: TransferType;
-  currency: string;
-  value: string;
-  errorType: ErrorType;
-  committedDate: string;
-  receiveAmount?: string;
-  receiveCurrency?: string;
-}
+export const SET_FXPCONVERSIONS_ERROR = 'FxpConversions / Set FxpConversions Error';
+export const REQUEST_FXPCONVERSIONS_STATUSES = 'FxpConversions / Request FxpConversions Statuses';
+export const SET_FXPCONVERSIONS_STATUSES = 'FxpConversions / Set FxpConversions Statuses';
+export const SET_FXPCONVERSIONS_STATUSES_ERROR =
+  'FxpConversions / Set FxpConversions Statuses Error';
+
+export const REQUEST_FXPCONVERSIONS_SUCCESS_PERC =
+  'FxpConversions / Request FxpConversions Success Perc';
+export const SET_FXPCONVERSIONS_SUCCESS_PERC = 'FxpConversions / Set FxpConversions Success Perc';
+export const SET_FXPCONVERSIONS_SUCCESS_PERC_ERROR =
+  'FxpConversions / Set FxpConversions Success Perc Error';
+export const REQUEST_FXPCONVERSIONS_AVG_TIME =
+  'FxpConversions / Request FxpConversions Average Time';
+export const SET_FXPCONVERSIONS_AVG_TIME = 'FxpConversions / Set FxpConversions Average Time';
+export const SET_FXPCONVERSIONS_AVG_TIME_ERROR =
+  'FxpConversions / Set FxpConversions Average Time Error';
+
+export const REQUEST_FXPCONVERSION_DETAILS = 'FxpConversions / Request FxpConversion Details';
+export const TOGGLE_FXPCONVERSION_DETAILS_MODAL =
+  'FxpConversions / Select FxpConversions Detail View';
+export const SET_FXPCONVERSION_DETAILS_ERROR = 'FxpConversions / Set FxpConversion Details Error';
+
+// FXp Types
+export const SET_FXPCONVERSION_DETAILS = 'FxpConversion / Set FxpConversion Details';
+export const REQUEST_FXPCONVERSION = 'FxpConversion / Request FxpConversion';
+export const UNREQUEST_FXPCONVERSION = 'FxpConversion / UnRequest FxpConversion';
+// export interface FxpConversionError {
+//   id: string;
+//   institution: string;
+//   direction: ErrorDirection;
+//   type: FxpConversionType;
+//   currency: string;
+//   value: string;
+//   errorType: ErrorType;
+//   committedDate: string;
+//   receiveAmount?: string;
+//   receiveCurrency?: string;
+// }
 
 export interface FxpConversionError {
-  id: string;
+  conversionId: string;
   institution: string;
   direction: ErrorDirection;
-  type: TransferType;
+  type: FxpConversionType;
   currency: string;
   value: string;
   errorType: ErrorType;
@@ -98,18 +94,18 @@ export enum ErrorType {
   PayeeLimitError = 'PAYEE LIMIT ERROR',
 }
 
-export interface TransferFilter {
-  transferId: string | number | undefined;
-  dates: string | number | undefined;
-  from: string | number | undefined;
-  to: string | number | undefined;
-  aliasType: string | undefined;
-  payeeAlias: string | undefined;
-  aliasSubValue: string | undefined;
-  direction: string | number | undefined;
-  institution: string | number | undefined;
-  status: string | number | undefined;
-}
+// export interface FxpConversionFilter {
+//   fxpConversionId: string | number | undefined;
+//   dates: string | number | undefined;
+//   from: string | number | undefined;
+//   to: string | number | undefined;
+//   aliasType: string | undefined;
+//   payeeAlias: string | undefined;
+//   aliasSubValue: string | undefined;
+//   direction: string | number | undefined;
+//   institution: string | number | undefined;
+//   status: string | number | undefined;
+// }
 
 export interface FxpConversionFilter {
   conversionId: string | number | undefined;
@@ -124,25 +120,25 @@ export interface FxpConversionFilter {
   status: string | number | undefined;
 }
 
-export interface Transfer {
+export interface FxpConversion {
   id: string;
   institution: string;
-  direction: TransferDirection;
-  type: TransferType;
+  direction: FxpConversionDirection;
+  type: FxpConversionType;
   currency: string;
   amount: string;
-  status: TransferStatus;
+  status: FxpConversionStatus;
   initiatedTimestamp: string;
 }
 
 export interface FxpConversion {
   conversionId: string;
   institution: string;
-  direction: TransferDirection;
-  type: TransferType;
+  direction: FxpConversionDirection;
+  type: FxpConversionType;
   current: string;
   amount: string;
-  status: TransferStatus;
+  status: FxpConversionStatus;
   initiatedTimestamp: string;
 }
 
@@ -151,7 +147,7 @@ export interface ExtensionListItem {
   value: string;
 }
 
-export interface TransferParty {
+export interface FxpConversionParty {
   type: string;
   idType: string;
   idValue: string;
@@ -177,7 +173,7 @@ export interface MojaloopErrorInformation {
   extensionList?: ExtensionListItem[];
 }
 
-export interface TransferDetailsError {
+export interface FxpConversionDetailsError {
   httpStatusCode: number;
   mojaloopError?: MojaloopError;
 }
@@ -187,7 +183,7 @@ export interface FxpConversionDetailsError {
   mojaloopError?: MojaloopError;
 }
 
-export interface TransferTechnicalDetailsApiMessage {
+export interface FxpConversionTechnicalDetailsApiMessage {
   headers?: object;
   body?: object;
 }
@@ -207,7 +203,7 @@ export interface QuoteAmount {
   currency: string;
 }
 
-export interface TransferAmount {
+export interface FxpConversionAmount {
   amount: string;
   currency: string;
 }
@@ -228,7 +224,7 @@ export interface PayeeDfspCommision {
 }
 
 export interface ConversionTerms {
-  transferAmount: {
+  fxpConversionAmount: {
     amount: string;
     currency: string;
   };
@@ -249,28 +245,28 @@ export interface ConversionTerms {
   expiryDate: string;
 }
 
-export interface TransferTechnicalDetails {
-  schemeTransferId: string;
-  homeTransferId: string;
+export interface FxpConversionTechnicalDetails {
+  schemeFxpConversionId: string;
+  homeFxpConversionId: string;
   transactionId: string;
-  payerParty: TransferParty;
-  payeeParty: TransferParty;
+  payerParty: FxpConversionParty;
+  payeeParty: FxpConversionParty;
   quoteId: string;
-  transferState: string;
-  getPartiesRequest?: TransferTechnicalDetailsApiMessage;
-  getPartiesResponse?: TransferTechnicalDetailsApiMessage;
-  quoteRequest?: TransferTechnicalDetailsApiMessage;
-  quoteResponse?: TransferTechnicalDetailsApiMessage;
-  transferPrepare?: TransferTechnicalDetailsApiMessage;
-  transferFulfilment?: TransferTechnicalDetailsApiMessage;
-  lastError?: TransferDetailsError;
+  fxpConversionState: string;
+  getPartiesRequest?: FxpConversionTechnicalDetailsApiMessage;
+  getPartiesResponse?: FxpConversionTechnicalDetailsApiMessage;
+  quoteRequest?: FxpConversionTechnicalDetailsApiMessage;
+  quoteResponse?: FxpConversionTechnicalDetailsApiMessage;
+  fxpConversionPrepare?: FxpConversionTechnicalDetailsApiMessage;
+  fxpConversionFulfilment?: FxpConversionTechnicalDetailsApiMessage;
+  lastError?: FxpConversionDetailsError;
   conversionId: string;
   conversionState?: string;
   conversionQuoteId: string;
-  fxQuoteRequest?: TransferTechnicalDetailsApiMessage;
+  fxQuoteRequest?: FxpConversionTechnicalDetailsApiMessage;
   fxQuoteResponse?: FxQuoteResponse;
-  fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
-  fxTransferFulfilment?: FxTransferFulfilment;
+  fxFxpConversionPrepare?: FxpConversionTechnicalDetailsApiMessage;
+  fxFxpConversionFulfilment?: FxFxpConversionFulfilment;
 }
 
 export interface FxQuoteResponse {
@@ -278,66 +274,66 @@ export interface FxQuoteResponse {
   conversionTerms: {};
 }
 
-export interface FxTransferFulfilment {
+export interface FxFxpConversionFulfilment {
   body: {};
 }
 
-export interface TransferTerms {
-  transferId: string;
-  homeTransferId: string;
-  quoteAmount: QuoteAmount;
-  quoteAmountType: string;
-  transferAmount: TransferAmount;
-  payeeReceiveAmount: PayeeReceiveAmount;
-  payeeDfspFee: PayeeDfspFee;
-  payeeDfspCommision: PayeeDfspCommision;
-  expiryDate: string;
-  conversionTerms: ConversionTerms;
-}
+// export interface FxpConversionTerms {
+//   fxpConversionId: string;
+//   homeFxpConversionId: string;
+//   quoteAmount: QuoteAmount;
+//   quoteAmountType: string;
+//   fxpConversionAmount: FxpConversionAmount;
+//   payeeReceiveAmount: PayeeReceiveAmount;
+//   payeeDfspFee: PayeeDfspFee;
+//   payeeDfspCommision: PayeeDfspCommision;
+//   expiryDate: string;
+//   conversionTerms: ConversionTerms;
+// }
 
-export interface TransferParties {
-  transferId: string;
-  transferState: string;
-  transferType: string;
-  payerParty: TransferParty;
-  payeeParty: TransferParty;
+export interface FxpConversionParties {
+  conversionId: string;
+  fxpConversionState: string;
+  fxpConversionType: string;
+  payerParty: FxpConversionParty;
+  payeeParty: FxpConversionParty;
   quoteId: string;
-  getPartiesRequest?: TransferTechnicalDetailsApiMessage;
-  getPartiesResponse?: TransferTechnicalDetailsApiMessage;
-  quoteRequest?: TransferTechnicalDetailsApiMessage;
-  quoteResponse?: TransferTechnicalDetailsApiMessage;
-  transferPrepare?: TransferTechnicalDetailsApiMessage;
-  transferFulfilment?: TransferTechnicalDetailsApiMessage;
-  lastError?: TransferDetailsError;
+  getPartiesRequest?: FxpConversionTechnicalDetailsApiMessage;
+  getPartiesResponse?: FxpConversionTechnicalDetailsApiMessage;
+  quoteRequest?: FxpConversionTechnicalDetailsApiMessage;
+  quoteResponse?: FxpConversionTechnicalDetailsApiMessage;
+  fxpConversionPrepare?: FxpConversionTechnicalDetailsApiMessage;
+  fxpConversionFulfilment?: FxpConversionTechnicalDetailsApiMessage;
+  lastError?: FxpConversionDetailsError;
   fxProviders: string[];
 }
-// Includes the type property to the TransferDetails Interface.
-export interface TransfersDetails {
-  transferId: string;
-  transferState: string;
-  confirmationNumber: number;
-  transactionType: string;
-  sendAmount: string;
-  sendCurrency: string;
-  conversionSubmitted: string;
-  conversionInstitution: string;
-  direction: string;
-  receiveAmount: string;
-  receiveCurrency: string;
-  recipientCurrencies: string;
-  senderDetails: SenderDetails;
-  recipientDetails: RecipientDetails;
-  recipientInstitution: string;
-  initiatedTimestamp: string;
-  dateSubmitted: string;
-  technicalDetails: TransferTechnicalDetails;
-  transferParties: TransferParties;
-  transferTerms: TransferTerms;
-}
+// Includes the type property to the FxpConversionDetails Interface.
+// export interface FxpConversionsDetails {
+//   fxpConversionId: string;
+//   fxpConversionState: string;
+//   confirmationNumber: number;
+//   transactionType: string;
+//   sendAmount: string;
+//   sendCurrency: string;
+//   conversionSubmitted: string;
+//   conversionInstitution: string;
+//   direction: string;
+//   receiveAmount: string;
+//   receiveCurrency: string;
+//   recipientCurrencies: string;
+//   senderDetails: SenderDetails;
+//   recipientDetails: RecipientDetails;
+//   recipientInstitution: string;
+//   initiatedTimestamp: string;
+//   dateSubmitted: string;
+//   technicalDetails: FxpConversionTechnicalDetails;
+//   fxpConversionParties: FxpConversionParties;
+//   fxpConversionTerms: FxpConversionTerms;
+// }
 
 // Includes the type property to the fxpConversionDetails Interface.
 export interface FxpConversionDetails {
-  determiningTransferId: string;
+  determiningFxpConversionId: string;
   conversionId: string;
   conversionState: string;
   sourceAmount: number;
@@ -352,11 +348,11 @@ export interface FxpConversionDetails {
 }
 
 export interface FxpConversionTerms {
-  determiningTransferId: string;
+  determiningFxpConversionId: string;
   conversionState: string;
   quoteAmount: number;
   quoteAmountType: string;
-  transferAmount: TransferAmount;
+  fxpConversionAmount: FxpConversionAmount;
   totalSourceCharges: {
     amount: String;
     currency: string;
@@ -370,15 +366,15 @@ export interface FxpConversionTerms {
 }
 
 export interface FxpTechnicalDetails {
-  determiningTransferId: string;
+  determiningFxpConversionId: string;
   conversionId: string;
   conversionQuoteId: string;
   conversionState: string;
-  fxQuoteRequest: TransferTechnicalDetailsApiMessage;
+  fxQuoteRequest: FxpConversionTechnicalDetailsApiMessage;
   fxQuoteResponse: FxQuoteResponse;
-  fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
-  fxTransferFulfil: {
-    transferState: string;
+  fxFxpConversionPrepare?: FxpConversionTechnicalDetailsApiMessage;
+  fxFxpConversionFulfil: {
+    fxpConversionState: string;
     fulfilment: string;
     completedTimeStamp: string;
   };
@@ -392,8 +388,8 @@ export enum DateRange {
   OneMonth = '1_MONTH',
 }
 
-export interface TransfersStatus {
-  status: TransferStatus;
+export interface FxpConversionsStatus {
+  status: FxpConversionStatus;
   count: number;
 }
 
@@ -409,67 +405,66 @@ export interface AvgTimeApi {
   averageResponseTime: number;
 }
 
-export interface TransfersState {
-  transfersErrors: TransferError[];
-  transfersErrorsError: ErrorMessage;
-  isTransfersErrorsViewAllActive: boolean;
-  transfersErrorsTypeFilter?: string;
-  isTransferFinderModalVisible: boolean;
-  transferFinderFilter: TransferFilter;
-  isTransfersRequested: boolean;
-  transfers: Transfer[];
-  transfersError: ErrorMessage;
-  transfersStatuses: TransfersStatus[];
-  transfersStatusesError: ErrorMessage;
-  transfersSuccessPerc?: SuccessPerc;
-  transfersSuccessPercError: ErrorMessage;
-  transfersAvgTime?: AvgTime;
-  transfersAvgTimeError: ErrorMessage;
-  transferDetails?: TransfersDetails;
-  fxpConversionDetails?: FxpConversionDetails;
-  isTransferDetailsModalVisible: boolean;
-  transferDetailsError: ErrorMessage;
-}
-
 export interface FxpConversionsState {
   fxpConversionsErrors: FxpConversionError[];
   fxpConversionsErrorsError: ErrorMessage;
-  isTransfersErrorsViewAllActive: boolean;
-  transfersErrorsTypeFilter?: string;
-  isTransferFinderModalVisible: boolean;
-  transferFinderFilter: TransferFilter;
+  isFxpConversionsErrorsViewAllActive: boolean;
+  fxpConversionsErrorsTypeFilter?: string;
+  isFxpConversionFinderModalVisible: boolean;
   fxpConversionFinderFilter: FxpConversionFilter;
-  isTransfersRequested: boolean;
-  fxpConversion: FxpConversion[];
+  isFxpConversionsRequested: boolean;
   fxpConversions: FxpConversion[];
   fxpConversionsError: ErrorMessage;
-  transfersStatuses: TransfersStatus[];
-  transfersStatusesError: ErrorMessage;
-  transfersSuccessPerc?: SuccessPerc;
-  transfersSuccessPercError: ErrorMessage;
-  transfersAvgTime?: AvgTime;
-  transfersAvgTimeError: ErrorMessage;
+  fxpConversionsStatuses: FxpConversionsStatus[];
+  fxpConversionsStatusesError: ErrorMessage;
+  fxpConversionsSuccessPerc?: SuccessPerc;
+  fxpConversionsSuccessPercError: ErrorMessage;
+  fxpConversionsAvgTime?: AvgTime;
+  fxpConversionsAvgTimeError: ErrorMessage;
+  // fxpConversionDetails?: FxpConversionsDetails;
   fxpConversionDetails?: FxpConversionDetails;
-
-  isTransferDetailsModalVisible: boolean;
+  isFxpConversionDetailsModalVisible: boolean;
   fxpConversionDetailsError: ErrorMessage;
 }
 
-export interface RequestTransfersPageDataAction {
-  type: typeof REQUEST_TRANSFERS_PAGE_DATA;
+// export interface FxpConversionsState {
+//   fxpConversionsErrors: FxpConversionError[];
+//   fxpConversionsErrorsError: ErrorMessage;
+//   isFxpConversionsErrorsViewAllActive: boolean;
+//   fxpConversionsErrorsTypeFilter?: string;
+//   isFxpConversionFinderModalVisible: boolean;
+//   fxpConversionFinderFilter: FxpConversionFilter;
+//   isFxpConversionsRequested: boolean;
+//   fxpConversion: FxpConversion[];
+//   fxpConversions: FxpConversion[];
+//   fxpConversionsError: ErrorMessage;
+//   fxpConversionsStatuses: FxpConversionsStatus[];
+//   fxpConversionsStatusesError: ErrorMessage;
+//   fxpConversionsSuccessPerc?: SuccessPerc;
+//   fxpConversionsSuccessPercError: ErrorMessage;
+//   fxpConversionsAvgTime?: AvgTime;
+//   fxpConversionsAvgTimeError: ErrorMessage;
+//   fxpConversionDetails?: FxpConversionDetails;
+
+//   isFxpConversionDetailsModalVisible: boolean;
+//   fxpConversionDetailsError: ErrorMessage;
+// }
+
+export interface RequestFxpConversionsPageDataAction {
+  type: typeof REQUEST_FXPCONVERSIONS_PAGE_DATA;
 }
 
-export interface RequestTransfersErrorsAction {
-  type: typeof REQUEST_TRANSFERS_ERRORS;
+export interface RequestFxpConversionsErrorsAction {
+  type: typeof REQUEST_FXPCONVERSIONS_ERRORS;
 }
 // RequestFxpConversionsErrorsAction
 export interface RequestFxpConversionsErrorsAction {
   type: typeof REQUEST_FXPCONVERSIONS_ERRORS;
 }
 
-export interface SetTransfersErrorsAction {
-  type: typeof SET_TRANSFERS_ERRORS;
-  data: TransferError[];
+export interface SetFxpConversionsErrorsAction {
+  type: typeof SET_FXPCONVERSIONS_ERRORS;
+  data: FxpConversionError[];
 }
 
 // SetFxpConversionErrorsAction
@@ -478,8 +473,8 @@ export interface SetFxpConversionErrorsAction {
   data: FxpConversionError[];
 }
 
-export interface SetTransfersErrorsErrorAction {
-  type: typeof SET_TRANSFERS_ERRORS_ERROR;
+export interface SetFxpConversionsErrorsErrorAction {
+  type: typeof SET_FXPCONVERSIONS_ERRORS_ERROR;
   error: string;
 }
 
@@ -489,8 +484,8 @@ export interface SetFxpConversionsErrorsErrorAction {
   error: string;
 }
 
-export interface ToggleTransfersErrorsViewAllAction {
-  type: typeof TOGGLE_TRANSFERS_ERRORS_VIEW_ALL;
+export interface ToggleFxpConversionsErrorsViewAllAction {
+  type: typeof TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL;
 }
 
 // ToggleFxpConversionsErrorsViewAllAction
@@ -498,8 +493,8 @@ export interface ToggleFxpConversionsErrorsViewAllAction {
   type: typeof TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL;
 }
 
-export interface SetTransfersErrorsTypeFilterAction {
-  type: typeof SET_TRANSFERS_ERRORS_TYPE_FILTER;
+export interface SetFxpConversionsErrorsTypeFilterAction {
+  type: typeof SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER;
   filter: string;
 }
 
@@ -509,8 +504,8 @@ export interface SetFxpConversionsErrorsTypeFilterAction {
   filter: string;
 }
 
-export interface ToggleTransferFinderModalAction {
-  type: typeof TOGGLE_TRANSFER_FINDER_MODAL;
+export interface ToggleFxpConversionFinderModalAction {
+  type: typeof TOGGLE_FXPCONVERSION_FINDER_MODAL;
 }
 
 // ToggleFxpConversionFinderModalAction
@@ -518,8 +513,8 @@ export interface ToggleFxpConversionFinderModalAction {
   type: typeof TOGGLE_FXPCONVERSION_FINDER_MODAL;
 }
 
-export interface SetTransferFinderFilterAction {
-  type: typeof SET_TRANSFER_FINDER_FILTER;
+export interface SetFxpConversionFinderFilterAction {
+  type: typeof SET_FXPCONVERSION_FINDER_FILTER;
   value: string | number;
   field: string;
 }
@@ -530,22 +525,22 @@ export interface SetFxpConversionFinderFilterAction {
   field: string;
 }
 
-export interface RequestTransfersAction {
-  type: typeof REQUEST_TRANSFERS;
-  filters: TransferFilter;
+// export interface RequestFxpConversionsAction {
+//   type: typeof REQUEST_FXPCONVERSIONS;
+//   filters: FxpConversionFilter;
+// }
+
+// export interface UnrequestFxpConversionsAction {
+//   type: typeof UNREQUEST_FXPCONVERSIONS;
+// }
+
+export interface SetFxpConversionsAction {
+  type: typeof SET_FXPCONVERSIONS;
+  data: FxpConversion[];
 }
 
-export interface UnrequestTransfersAction {
-  type: typeof UNREQUEST_TRANSFERS;
-}
-
-export interface SetTransfersAction {
-  type: typeof SET_TRANSFERS;
-  data: Transfer[];
-}
-
-export interface SetTransfersErrorAction {
-  type: typeof SET_TRANSFERS_ERROR;
+export interface SetFxpConversionsErrorAction {
+  type: typeof SET_FXPCONVERSIONS_ERROR;
   error: string;
 }
 
@@ -555,51 +550,51 @@ export interface SetFxpConversionsErrorAction {
   error: string;
 }
 
-export interface RequestTransfersStatusesAction {
-  type: typeof REQUEST_TRANSFERS_STATUSES;
+export interface RequestFxpConversionsStatusesAction {
+  type: typeof REQUEST_FXPCONVERSIONS_STATUSES;
 }
 
-export interface SetTransfersStatusesAction {
-  type: typeof SET_TRANSFERS_STATUSES;
-  data: TransfersStatus[];
+export interface SetFxpConversionsStatusesAction {
+  type: typeof SET_FXPCONVERSIONS_STATUSES;
+  data: FxpConversionsStatus[];
 }
 
-export interface SetTransfersStatusesErrorAction {
-  type: typeof SET_TRANSFERS_STATUSES_ERROR;
+export interface SetFxpConversionsStatusesErrorAction {
+  type: typeof SET_FXPCONVERSIONS_STATUSES_ERROR;
   error: string;
 }
 
-export interface RequestTransfersSuccessPercAction {
-  type: typeof REQUEST_TRANSFERS_SUCCESS_PERC;
+export interface RequestFxpConversionsSuccessPercAction {
+  type: typeof REQUEST_FXPCONVERSIONS_SUCCESS_PERC;
 }
 
-export interface SetTransfersSuccessPercAction {
-  type: typeof SET_TRANSFERS_SUCCESS_PERC;
+export interface SetFxpConversionsSuccessPercAction {
+  type: typeof SET_FXPCONVERSIONS_SUCCESS_PERC;
   data: SuccessPerc;
 }
 
-export interface SetTransfersSuccessPercErrorAction {
-  type: typeof SET_TRANSFERS_SUCCESS_PERC_ERROR;
+export interface SetFxpConversionsSuccessPercErrorAction {
+  type: typeof SET_FXPCONVERSIONS_SUCCESS_PERC_ERROR;
   error: string;
 }
 
-export interface RequestTransfersAvgTimeAction {
-  type: typeof REQUEST_TRANSFERS_AVG_TIME;
+export interface RequestFxpConversionsAvgTimeAction {
+  type: typeof REQUEST_FXPCONVERSIONS_AVG_TIME;
 }
 
-export interface SetTransfersAvgTimeAction {
-  type: typeof SET_TRANSFERS_AVG_TIME;
+export interface SetFxpConversionsAvgTimeAction {
+  type: typeof SET_FXPCONVERSIONS_AVG_TIME;
   data: AvgTime;
 }
 
-export interface SetTransfersAvgTimeErrorAction {
-  type: typeof SET_TRANSFERS_AVG_TIME_ERROR;
+export interface SetFxpConversionsAvgTimeErrorAction {
+  type: typeof SET_FXPCONVERSIONS_AVG_TIME_ERROR;
   error: string;
 }
 
-export interface RequestTransferDetailsAction {
-  type: typeof REQUEST_TRANSFER_DETAILS;
-  transferId: string;
+export interface RequestFxpConversionDetailsAction {
+  type: typeof REQUEST_FXPCONVERSION_DETAILS;
+  conversionId: string;
 }
 // fxp
 export interface RequestFxpConversionDetailsAction {
@@ -613,12 +608,12 @@ export interface SetFxpConversionDetailsAction {
   data: FxpConversionDetails;
 }
 
-export interface ToggleTransferDetailsModalAction {
-  type: typeof TOGGLE_TRANSFER_DETAILS_MODAL;
+export interface ToggleFxpConversionDetailsModalAction {
+  type: typeof TOGGLE_FXPCONVERSION_DETAILS_MODAL;
 }
 
-export interface SetTransferDetailsErrorAction {
-  type: typeof SET_TRANSFER_DETAILS_ERROR;
+export interface SetFxpConversionDetailsErrorAction {
+  type: typeof SET_FXPCONVERSION_DETAILS_ERROR;
   error: string;
 }
 
@@ -642,30 +637,30 @@ export interface UnrequestFxpConversionsAction {
   type: typeof UNREQUEST_FXPCONVERSION;
 }
 
-export type TransfersActionTypes =
-  | RequestTransfersPageDataAction
-  | RequestTransfersErrorsAction
-  | SetTransfersErrorsAction
-  | SetTransfersErrorsErrorAction
-  | ToggleTransfersErrorsViewAllAction
-  | SetTransfersErrorsTypeFilterAction
-  | ToggleTransferFinderModalAction
+export type FxpConversionsActionTypes =
+  | RequestFxpConversionsPageDataAction
+  | RequestFxpConversionsErrorsAction
+  | SetFxpConversionsErrorsAction
+  | SetFxpConversionsErrorsErrorAction
+  | ToggleFxpConversionsErrorsViewAllAction
+  | SetFxpConversionsErrorsTypeFilterAction
   | ToggleFxpConversionFinderModalAction
-  | SetTransferFinderFilterAction
-  | RequestTransfersAction
-  | UnrequestTransfersAction
-  | SetTransfersAction
-  | SetTransfersErrorAction
-  | RequestTransfersStatusesAction
-  | SetTransfersStatusesAction
-  | SetTransfersStatusesErrorAction
-  | RequestTransfersSuccessPercAction
-  | SetTransfersSuccessPercAction
-  | SetTransfersSuccessPercErrorAction
-  | RequestTransfersAvgTimeAction
-  | SetTransfersAvgTimeAction
-  | SetTransfersAvgTimeErrorAction
-  | RequestTransferDetailsAction
+  | ToggleFxpConversionFinderModalAction
+  | SetFxpConversionFinderFilterAction
+  | RequestFxpConversionsAction
+  | UnrequestFxpConversionsAction
+  | SetFxpConversionsAction
+  | SetFxpConversionsErrorAction
+  | RequestFxpConversionsStatusesAction
+  | SetFxpConversionsStatusesAction
+  | SetFxpConversionsStatusesErrorAction
+  | RequestFxpConversionsSuccessPercAction
+  | SetFxpConversionsSuccessPercAction
+  | SetFxpConversionsSuccessPercErrorAction
+  | RequestFxpConversionsAvgTimeAction
+  | SetFxpConversionsAvgTimeAction
+  | SetFxpConversionsAvgTimeErrorAction
+  | RequestFxpConversionDetailsAction
   | SetFxpConversionDetailsAction
   | SetFxpConversionsAction
   | SetFxpConversionDetailsErrorAction
@@ -679,4 +674,4 @@ export type TransfersActionTypes =
   | ToggleFxpConversionsErrorsViewAllAction
   | SetFxpConversionsErrorsTypeFilterAction
   | SetFxpConversionsErrorAction
-  | ToggleTransferDetailsModalAction;
+  | ToggleFxpConversionDetailsModalAction;

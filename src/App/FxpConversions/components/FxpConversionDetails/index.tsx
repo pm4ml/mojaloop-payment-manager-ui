@@ -17,49 +17,49 @@ import {
   TabPanels,
   TabPanel,
 } from 'components';
-import { TransferRequestDetailsModal } from './RequestDetailModal';
-import { TransferPartyDetailsModal } from './PartyDetailsModal';
+import { FxpConversionRequestDetailsModal } from './RequestDetailModal';
+import { FxpConversionPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { FxpConversionDetails } from '../../types';
 
 const stateProps = (state: State) => ({
   model: selectors.getFxpConversionDetails(state),
-  transferDetailsError: selectors.getTransferDetailsError(state),
-  isTransferDetailsPending: selectors.getIsTransferDetailsPending(state),
+  fxpConversionDetailsError: selectors.getFxpConversionDetailsError(state),
+  isFxpConversionDetailsPending: selectors.getIsFxpConversionDetailsPending(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
-  onModalCloseClick: () => dispatch(actions.toggleTransferDetailsModal()),
+  onModalCloseClick: () => dispatch(actions.toggleFxpConversionDetailsModal()),
 });
 
 interface FxpConversionDetailsModalProps {
   model?: FxpConversionDetails;
-  transferDetailsError: string | null;
-  isTransferDetailsPending: boolean;
+  fxpConversionDetailsError: string | null;
+  isFxpConversionDetailsPending: boolean;
   onModalCloseClick: () => void;
 }
 
 const FxpConversionDetailsModal: FC<FxpConversionDetailsModalProps> = ({
   model,
-  transferDetailsError,
-  isTransferDetailsPending,
+  fxpConversionDetailsError,
+  isFxpConversionDetailsPending,
   onModalCloseClick,
 }) => {
   let content = null;
 
-  if (transferDetailsError || !model) {
-    content = <ErrorBox>Transfer: Unable to load transfer details</ErrorBox>;
-  } else if (isTransferDetailsPending) {
+  if (fxpConversionDetailsError || !model) {
+    content = <ErrorBox>FxpConversion: Unable to load fxpConversion details</ErrorBox>;
+  } else if (isFxpConversionDetailsPending) {
     content = (
-      <div className="transfers__transfers__loader">
+      <div className="fxpConversions__fxpConversions__loader">
         <Spinner size={20} />
       </div>
     );
   } else if (model) {
     content = (
-      <div className="transfers__transfer__details">
-        <TransferDetailsView model={model} />
+      <div className="fxpConversions__fxpConversion__details">
+        <FxpConversionDetailsView model={model} />
       </div>
     );
   }
@@ -81,7 +81,7 @@ interface FxpConversionDetailsProps {
   model: FxpConversionDetails;
 }
 
-const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
+const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   const [isRequestDetailsVisible, setIsRequestDetailsVisible] = useState(false);
   const [requestModel, setRequestModel] = useState(null);
   const [requestModalTitle, setRequestModalTitle] = useState('');
@@ -126,23 +126,23 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showTransferPrepare = (aModel: any) => {
+  const showFxpConversionPrepare = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Transfer Prepare');
+    setRequestModalTitle('FxpConversion Prepare');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showTransferFulfil = (aModel: any) => {
+  const showFxpConversionFulfil = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Transfer Fulfil');
+    setRequestModalTitle('FxpConversion Fulfil');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showTransferError = (aModel: any) => {
+  const showFxpConversionError = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Transfer Error');
+    setRequestModalTitle('FxpConversion Error');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
@@ -161,16 +161,16 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showFxTransferPrepare = (aModel: any) => {
+  const showFxFxpConversionPrepare = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Fx Transfer Prepare');
+    setRequestModalTitle('Fx FxpConversion Prepare');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showFxTransferFulfil = (aModel: any) => {
+  const showFxFxpConversionFulfil = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Fx Transfer Fulfil');
+    setRequestModalTitle('Fx FxpConversion Fulfil');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
@@ -184,7 +184,7 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   // let conversionStateInput = (
   //   <FormInput
   //     disabled={true}
-  //     label="Transfer State"
+  //     label="FxpConversion State"
   //     value={model.FxpTechnicalDetails.conversionState}
   //   />
   // );
@@ -197,9 +197,9 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   //         <label>Conversion State</label>
   //         <TextField
   //           disabled={false}
-  //           label="Transfer State"
+  //           label="FxpConversion State"
   //           value={model.FxpTechnicalDetails.conversionState}
-  //           onButtonClick={() => showTransferError(model.FxpTechnicalDetails.lastError)}
+  //           onButtonClick={() => showFxpConversionError(model.FxpTechnicalDetails.lastError)}
   //           buttonText="View Error"
   //           buttonKind="secondary"
   //         />
@@ -248,9 +248,9 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
-                  label="Transfer ID"
+                  label="FxpConversion ID"
                   type="text"
-                  value={model.determiningTransferId}
+                  value={model.determiningFxpConversionId}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -360,9 +360,9 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
-                  label="Transfer ID"
+                  label="FxpConversion ID"
                   type="text"
-                  // value={model.FxpConversionTerms.determiningTransferId}
+                  // value={model.FxpConversionTerms.determiningFxpConversionId}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -423,20 +423,20 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Transfer Amount
+                    FxpConversion Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.transferAmount}
+                      // value={model.FxpConversionTerms.fxpConversionAmount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.transferTerms.conversionTerms.transferAmount.currency}
+                      // value={model.fxpConversionTerms.conversionTerms.fxpConversionAmount.currency}
                     />
                   </div>
                 </Row>
@@ -516,14 +516,14 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <FormInput
                     disabled={true}
-                    label="Transfer ID"
-                    // value={model.FxpTechnicalDetails.determiningTransferId}
+                    label="FxpConversion ID"
+                    // value={model.FxpTechnicalDetails.determiningFxpConversionId}
                   />
                 </Row>
 
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <FormInput
-                    id="transfer-details-modal__conversion-id"
+                    id="fxpConversion-details-modal__conversion-id"
                     disabled={true}
                     label="Conversion ID"
                     // value={model.FxpTechnicalDetails.conversionId}
@@ -531,7 +531,7 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 </Row>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                   <FormInput
-                    id="transfer-details-modal__home-transfer-id"
+                    id="fxpConversion-details-modal__home-fxpConversion-id"
                     disabled={true}
                     label="Conversion Quote ID"
                     // value={model.FxpTechnicalDetails.conversionQuoteId}
@@ -570,7 +570,7 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                           // model.FxpTechnicalDetails.fxQuoteRequest.body
                           model.conversionId
                         ) &&
-                        'This option is only available when an Fx POST /quote request can be found for the transfer'
+                        'This option is only available when an Fx POST /quote request can be found for the fxpConversion'
                       }
                       noFill={true}
                       label={
@@ -600,7 +600,7 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                           // model.FxpTechnicalDetails.fxQuoteResponse
                           model.conversionId
                         ) &&
-                        'This option is only available when an fx POST /fxquote response can be found for the transfer'
+                        'This option is only available when an fx POST /fxquote response can be found for the fxpConversion'
                       }
                       noFill={true}
                       label={
@@ -619,27 +619,27 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.FxpTechnicalDetails.fxTransferPrepare &&
-                          // model.FxpTechnicalDetails.fxTransferPrepare.body
+                          // model.FxpTechnicalDetails.fxFxpConversionPrepare &&
+                          // model.FxpTechnicalDetails.fxFxpConversionPrepare.body
                           model.conversionId
                         )
                       }
                       tooltip={
                         !(
-                          // model.FxpTechnicalDetails.fxTransferPrepare &&
-                          // model.FxpTechnicalDetails.fxTransferPrepare.body
+                          // model.FxpTechnicalDetails.fxFxpConversionPrepare &&
+                          // model.FxpTechnicalDetails.fxFxpConversionPrepare.body
                           model.conversionId
                         ) &&
-                        'This option is only available when an fx POST /transfers prepare can be found for the transfer'
+                        'This option is only available when an fx POST /fxpConversions prepare can be found for the fxpConversion'
                       }
                       noFill={true}
                       label={
                         <span>
-                          <span> FX Transfer Prepare</span>
+                          <span> FX FxpConversion Prepare</span>
                         </span>
                       }
                       onClick={() =>
-                        showFxTransferPrepare(model.conversionId/*model.FxpTechnicalDetails.fxTransferPrepare*/)
+                        showFxFxpConversionPrepare(model.conversionId/*model.FxpTechnicalDetails.fxFxpConversionPrepare*/)
                       }
                     />
                   </div>
@@ -651,27 +651,27 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.FxpTechnicalDetails.fxTransferFulfil &&
-                          // model.FxpTechnicalDetails.fxTransferFulfil
+                          // model.FxpTechnicalDetails.fxFxpConversionFulfil &&
+                          // model.FxpTechnicalDetails.fxFxpConversionFulfil
                           model.conversionId
                         )
                       }
                       tooltip={
                         !(
-                          // model.FxpTechnicalDetails.fxTransferFulfil &&
-                          // model.FxpTechnicalDetails.fxTransferFulfil
+                          // model.FxpTechnicalDetails.fxFxpConversionFulfil &&
+                          // model.FxpTechnicalDetails.fxFxpConversionFulfil
                           model.conversionId
                         ) &&
-                        'This option is only available when a POST /transfers fulfilment can be found for the transfer'
+                        'This option is only available when a POST /fxpConversions fulfilment can be found for the fxpConversion'
                       }
                       noFill={true}
                       label={
                         <span>
-                          <span> FX Transfer Fulfil</span>
+                          <span> FX FxpConversion Fulfil</span>
                         </span>
                       }
                       onClick={() =>
-                        showFxTransferFulfil(model.conversionId/*model.FxpTechnicalDetails.fxTransferFulfil*/)
+                        showFxFxpConversionFulfil(model.conversionId/*model.FxpTechnicalDetails.fxFxpConversionFulfil*/)
                       }
                     />
                   </div>
@@ -682,7 +682,7 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
         </TabPanels>
       </Tabs>
       {isRequestDetailsVisible && (
-        <TransferRequestDetailsModal
+        <FxpConversionRequestDetailsModal
           model={requestModel}
           title={requestModalTitle}
           onCloseClick={() => {
@@ -691,7 +691,7 @@ const TransferDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
         />
       )}
       {isRequestPartyDetailsVisible && (
-        <TransferPartyDetailsModal
+        <FxpConversionPartyDetailsModal
           model={partyModel}
           title={partyModalTitle}
           onCloseClick={() => {

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { State, Dispatch } from 'store/types';
-import { AliasType, TransferDirection, TransferStatus } from 'App/types';
+import { AliasType, FxpConversionDirection, FxpConversionStatus } from 'App/types';
 import {
   DataLabel,
   DataList,
@@ -26,10 +26,9 @@ import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import {
   FxpConversion,
-  TransferError,
+  FxpConversionError,
   DateRange,
   FxpConversionFilter,
-  Transfer,
 } from '../../types';
 import * as helpers from '../../helpers';
 
@@ -37,66 +36,66 @@ type FilterChangeValue = string | number;
 
 const stateProps = (state: State) => ({
   model: selectors.getFxpConversionFinderFilter(state),
-  // transfers: selectors.getTransfers(state),
+  // fxpConversions: selectors.getFxpConversions(state),
   fxpConversions: selectors.getFxpConversions(state),
-  transfersError: selectors.getTransfersError(state),
-  isTransfersPending: selectors.getIsTransfersPending(state),
-  isTransfersRequested: selectors.getIsTransfersRequested(state),
+  fxpConversionsError: selectors.getFxpConversionsError(state),
+  isFxpConversionsPending: selectors.getIsFxpConversionsPending(state),
+  isFxpConversionsRequested: selectors.getIsFxpConversionsRequested(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
-  onModalCloseClick: () => dispatch(actions.toggleTransferFinderModal()),
+  onModalCloseClick: () => dispatch(actions.toggleFxpConversionFinderModal()),
   onFiltersSubmitClick: (filters: FxpConversionFilter) =>
     dispatch(actions.requestFxpConversions({ filters })),
-  onTransfersSubmitClick: () => dispatch(actions.UnrequestFxpConversions()),
+  onFxpConversionsSubmitClick: () => dispatch(actions.unrequestFxpConversions()),
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) =>
     dispatch(actions.setFxpConversionFinderFilter({ field, value })),
-  onTransferRowClick: (transferError: TransferError) => {
-    dispatch(actions.requestFxpConversionDetails({ conversionId: transferError.id }));
+  onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => {
+    dispatch(actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId }));
   },
 });
 
 interface FxpConversionFinderModalProps {
   model: FxpConversionFilter;
   fxpConversions: FxpConversion[];
-  transfersError: string | null;
-  isTransfersPending: boolean;
-  isTransfersRequested: boolean;
+  fxpConversionsError: string | null;
+  isFxpConversionsPending: boolean;
+  isFxpConversionsRequested: boolean;
   onFiltersSubmitClick: (filters: FxpConversionFilter) => void;
-  onTransfersSubmitClick: () => void;
+  onFxpConversionsSubmitClick: () => void;
   onModalCloseClick: () => void;
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) => void;
-  onTransferRowClick: (transferError: TransferError) => void;
+  onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function downloadTransfersToExcel(transfers: any): Promise<void> {
-  const ws = xlsx.utils.json_to_sheet(transfers);
+async function downloadFxpConversionsToExcel(fxpConversions: any): Promise<void> {
+  const ws = xlsx.utils.json_to_sheet(fxpConversions);
   const wscols = [{ wch: 20 }];
   ws['!cols'] = wscols;
   const wb = xlsx.utils.book_new();
-  xlsx.utils.book_append_sheet(wb, ws, 'Transfers');
-  const fileName: string = `Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
+  xlsx.utils.book_append_sheet(wb, ws, 'FxpConversions');
+  const fileName: string = `Payment_Manager_FxpConversions_${new Date().toDateString()}.xlsx`;
   xlsx.writeFile(wb, fileName);
 }
 
 const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
   model,
   fxpConversions,
-  transfersError,
-  isTransfersPending,
-  isTransfersRequested,
+  fxpConversionsError,
+  isFxpConversionsPending,
+  isFxpConversionsRequested,
   onFiltersSubmitClick,
-  onTransfersSubmitClick,
+  onFxpConversionsSubmitClick,
   onModalCloseClick,
   onFilterChange,
-  onTransferRowClick,
+  onFxpConversionRowClick,
 }) => {
   let content = null;
   let onSubmit: (() => void) | undefined;
   let submitLabel: string | undefined;
 
-  const transfersColumns = [
+  const fxpConversionsColumns = [
     {
       label: 'Conversion ID',
       key: 'id',
@@ -132,46 +131,46 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
     {
       label: 'Date',
       key: 'initiatedTimestamp',
-      func: helpers.toTransfersDate,
+      func: helpers.toFxpConversionsDate,
     },
   ];
 
-  console.log('isTransfersRequested:', isTransfersRequested); // Debugging log
-  console.log('isTransfersPending:', isTransfersPending); // Debugging log
-  console.log('transfersError:', transfersError); // Debugging log
+  console.log('isFxpConversionsRequested:', isFxpConversionsRequested); // Debugging log
+  console.log('isFxpConversionsPending:', isFxpConversionsPending); // Debugging log
+  console.log('fxpConversionsError:', fxpConversionsError); // Debugging log
 
-  if (!isTransfersRequested) {
+  if (!isFxpConversionsRequested) {
     content = <FxpConversionFilters model={model} onFilterChange={onFilterChange} />;
     onSubmit = () => {
       console.log('Submitting filters:', model); // Debugging log
       onFiltersSubmitClick(model);
     };
     submitLabel = 'Find Conversions';
-  } else if (transfersError) {
-    content = <ErrorBox>Transfer: Unable to load Conversions</ErrorBox>;
-  } else if (isTransfersPending) {
+  } else if (fxpConversionsError) {
+    content = <ErrorBox>FxpConversion: Unable to load Conversions</ErrorBox>;
+  } else if (isFxpConversionsPending) {
     content = (
-      <div className="transfers__transfers__loader">
+      <div className="fxpConversions__fxpConversions__loader">
         <Spinner size={20} />
       </div>
     );
   } else {
     console.log('fxpConversions:', fxpConversions); // Debugging log
     content = (
-      <div className="transfers__transfers__list">
+      <div className="fxpConversions__fxpConversions__list">
         {fxpConversions.length > 0 && (
           <Button
-            label="Download Transfers"
+            label="Download FxpConversions"
             noFill
-            onClick={() => downloadTransfersToExcel(fxpConversions)}
+            onClick={() => downloadFxpConversionsToExcel(fxpConversions)}
           />
         )}
-        <DataList columns={transfersColumns} list={fxpConversions} onSelect={onTransferRowClick} />
+        <DataList columns={fxpConversionsColumns} list={fxpConversions} onSelect={onFxpConversionRowClick} />
       </div>
     );
     onSubmit = () => {
       console.log('Returning to filtering'); // Debugging log
-      onTransfersSubmitClick();
+      onFxpConversionsSubmitClick();
     };
     submitLabel = 'Back to filtering';
   }
@@ -201,10 +200,10 @@ const dateRanges = [
   { label: helpers.toSpacedPascalCase(DateRange.OneMonth), value: DateRange.OneMonth },
 ];
 
-const transferStatuses = [
-  { label: helpers.toSpacedPascalCase(TransferStatus.Success), value: TransferStatus.Success },
-  { label: helpers.toSpacedPascalCase(TransferStatus.Pending), value: TransferStatus.Pending },
-  { label: helpers.toSpacedPascalCase(TransferStatus.Error), value: TransferStatus.Error },
+const fxpConversionStatuses = [
+  { label: helpers.toSpacedPascalCase(FxpConversionStatus.Success), value: FxpConversionStatus.Success },
+  { label: helpers.toSpacedPascalCase(FxpConversionStatus.Pending), value: FxpConversionStatus.Pending },
+  { label: helpers.toSpacedPascalCase(FxpConversionStatus.Error), value: FxpConversionStatus.Error },
 ];
 
 const aliasType = [
@@ -219,18 +218,18 @@ const aliasType = [
   { label: helpers.toSpacedPascalCase(AliasType.Alias), value: AliasType.Alias },
 ];
 
-const transferDirectionOfFunds = [
+const fxpConversionDirectionOfFunds = [
   {
-    label: helpers.toSpacedPascalCase(TransferDirection.Inbound),
-    value: TransferDirection.Inbound,
+    label: helpers.toSpacedPascalCase(FxpConversionDirection.Inbound),
+    value: FxpConversionDirection.Inbound,
   },
   {
-    label: helpers.toSpacedPascalCase(TransferDirection.Outbound),
-    value: TransferDirection.Outbound,
+    label: helpers.toSpacedPascalCase(FxpConversionDirection.Outbound),
+    value: FxpConversionDirection.Outbound,
   },
   {
-    label: helpers.toSpacedPascalCase(TransferDirection.All),
-    value: TransferDirection.All,
+    label: helpers.toSpacedPascalCase(FxpConversionDirection.All),
+    value: FxpConversionDirection.All,
   },
 ];
 
@@ -251,7 +250,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
         <br />
         <br />
         <FormInput
-          id="find-transfer-modal__transfer-id"
+          id="find-fxpConversion-modal__fxpConversion-id"
           label="Conversion ID"
           type="text"
           value={model.conversionId || ''}
@@ -268,7 +267,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
             <Row>
               <Column>
                 <Select
-                  id="find-transfer-modal__date"
+                  id="find-fxpConversion-modal__date"
                   placeholder="Date"
                   type="select"
                   style={{ width: '200px' }}
@@ -279,7 +278,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
               </Column>
               <Column>
                 <DatePicker
-                  id="find-transfer-modal__from-date"
+                  id="find-fxpConversion-modal__from-date"
                   placeholder="From"
                   style={{ width: '250px' }}
                   withTime
@@ -290,7 +289,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
               </Column>
               <Column>
                 <DatePicker
-                  id="find-transfer-modal__to-date"
+                  id="find-fxpConversion-modal__to-date"
                   placeholder="To"
                   style={{ width: '250px' }}
                   withTime
@@ -303,12 +302,12 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
           </Column>
           <Column style={{ paddingLeft: '20px' }}>
             <FormInput
-              id="find-transfer-modal__directionOfFunds"
+              id="find-fxpConversion-modal__directionOfFunds"
               label="Direction of Funds"
               style={{ width: '250px' }}
               type="select"
-              options={transferDirectionOfFunds}
-              value={model.direction || TransferDirection.All}
+              options={fxpConversionDirectionOfFunds}
+              value={model.direction || FxpConversionDirection.All}
               onChange={(value: FilterChangeValue) => onFilterChange({ field: 'direction', value })}
             />
           </Column>
@@ -317,7 +316,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
         <Row>
           <Column>
             <FormInput
-              id="find-transfer-modal__aliasType"
+              id="find-fxpConversion-modal__aliasType"
               label="Payee Alias Type"
               type="select"
               style={{ width: '200px' }}
@@ -328,7 +327,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
           </Column>
           <Column>
             <FormInput
-              id="find-transfer-modal__payeeAlias"
+              id="find-fxpConversion-modal__payeeAlias"
               label="Payee Alias"
               type="text"
               style={{ width: '250px' }}
@@ -340,7 +339,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
           </Column>
           <Column>
             <FormInput
-              id="find-transfer-modal__aliasSubValue"
+              id="find-fxpConversion-modal__aliasSubValue"
               label="Payee Alias Sub Value"
               type="text"
               style={{ width: '250px' }}
@@ -357,7 +356,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
         {/* <Row>
           <Column>
             <FormInput
-              id="find-transfer-modal__aliasType"
+              id="find-fxpConversion-modal__aliasType"
               label="Payee Alias Type"
               type="select"
               options={aliasType}
@@ -367,7 +366,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
           </Column>
           <Column style={{ marginLeft: '10px' }}>
             <FormInput
-              id="find-transfer-modal__payeeAlias"
+              id="find-fxpConversion-modal__payeeAlias"
               label="Payee Alias"
               type="text"
               value={model.payeeAlias || ''}
@@ -376,7 +375,7 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
           </Column>
           <Column style={{ marginLeft: '10px' }}>
             <FormInput
-              id="find-transfer-modal__aliasSubValue"
+              id="find-fxpConversion-modal__aliasSubValue"
               label="Payee Alias Sub Value"
               type="text"
               value={model.aliasSubValue || ''}
@@ -386,17 +385,17 @@ const FxpConversionFilters: FC<FxpConversionFiltersProps> = ({ model, onFilterCh
         </Row> */}
         <br />
         <FormInput
-          id="find-transfer-modal__institution"
+          id="find-fxpConversion-modal__institution"
           label="Contains Institution"
           type="text"
           value={model.institution || ''}
           onChange={(value: FilterChangeValue) => onFilterChange({ field: 'institution', value })}
         />
         <FormInput
-          id="find-transfer-modal__transfer-status"
+          id="find-fxpConversion-modal__fxpConversion-status"
           label="Conversion Status"
           type="select"
-          options={transferStatuses}
+          options={fxpConversionStatuses}
           value={model.status || ''}
           onChange={(value: FilterChangeValue) => onFilterChange({ field: 'status', value })}
         />

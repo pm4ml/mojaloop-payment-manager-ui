@@ -109,7 +109,7 @@ const getMetricRequests = (filters: TechnicalDashboardFilters): RequestMetricAct
       resolutionSeconds,
     }),
     requestMetric({
-      metricName: 'mojaloop_connector_outbound_transfer_prepare_count',
+      metricName: 'mojaloop_connector_outbound_fxpConversion_prepare_count',
       startTimestamp: startTimestamp.toISOString(),
       endTimestamp: endTimestamp.toISOString(),
       aggregateDurationSeconds,
@@ -132,7 +132,7 @@ const getMetricRequests = (filters: TechnicalDashboardFilters): RequestMetricAct
       resolutionSeconds,
     }),
     requestMetric({
-      metricName: 'mojaloop_connector_outbound_transfer_latency',
+      metricName: 'mojaloop_connector_outbound_fxpConversion_latency',
       metricType: 'HIST_SIZE',
       startTimestamp: startTimestamp.toISOString(),
       endTimestamp: endTimestamp.toISOString(),

@@ -3,24 +3,22 @@ import { State } from 'store/types';
 import { isPending } from 'utils/api';
 import { XYCoordinate, LinesConfig } from '../types';
 
-export const getTransfersErrors = (state: State) => state.transfers.transfersErrors;
-export const getTransfersErrorsError = (state: State) => state.transfers.transfersErrorsError;
-export const getIsTransfersErrorsPending = createSelector(
+export const getFxpConversionsErrors = (state: State) => state.fxpConversions.fxpConversionsErrors;
+export const getFxpConversionsErrorsError = (state: State) => state.fxpConversions.fxpConversionsErrorsError;
+export const getIsFxpConversionsErrorsPending = createSelector(
   (state: State) => state.api,
-  isPending('transfersErrors.read')
+  isPending('fxpConversionsErrors.read')
 );
-export const getIsTransfersErrorsViewAllActive = (state: State) =>
-  state.transfers.isTransfersErrorsViewAllActive;
-export const getTransfersErrorsTypeFilter = (state: State) =>
-  state.transfers.transfersErrorsTypeFilter;
-export const getIsTransferFinderModalVisible = (state: State) =>
-  state.transfers.isTransferFinderModalVisible;
-export const getTransferFinderFilter = (state: State) => state.transfers.transferFinderFilter;
-export const getFxpConversionFinderFilter = (state: State) =>
-  state.fxpConversions.fxpConversionFinderFilter;
-export const getFilteredByStatusTransfersErrors = createSelector(
-  getTransfersErrors,
-  getTransfersErrorsTypeFilter,
+export const getIsFxpConversionsErrorsViewAllActive = (state: State) =>
+  state.fxpConversions.isFxpConversionsErrorsViewAllActive;
+export const getFxpConversionsErrorsTypeFilter = (state: State) =>
+  state.fxpConversions.fxpConversionsErrorsTypeFilter;
+export const getIsFxpConversionFinderModalVisible = (state: State) =>
+  state.fxpConversions.isFxpConversionFinderModalVisible;
+export const getFxpConversionFinderFilter = (state: State) => state.fxpConversions.fxpConversionFinderFilter;
+export const getFilteredByStatusFxpConversionsErrors = createSelector(
+  getFxpConversionsErrors,
+  getFxpConversionsErrorsTypeFilter,
   (errors, status) => {
     if (status) {
       return errors.filter((error) => error.errorType === status);
@@ -29,23 +27,23 @@ export const getFilteredByStatusTransfersErrors = createSelector(
   }
 );
 
-export const getIsTransfersRequested = (state: State) => state.fxpConversions.isTransfersRequested;
-// export const getTransfers = (state: State) => state.transfers.transfers;
+export const getIsFxpConversionsRequested = (state: State) => state.fxpConversions.isFxpConversionsRequested;
+// export const getFxpConversions = (state: State) => state.fxpConversions.fxpConversions;
 export const getFxpConversions = (state: State) => state.fxpConversions.fxpConversions;
-export const getTransfersError = (state: State) => state.transfers.transfersError;
-export const getIsTransfersPending = createSelector(
+export const getFxpConversionsError = (state: State) => state.fxpConversions.fxpConversionsError;
+export const getIsFxpConversionsPending = createSelector(
   (state: State) => state.api,
   isPending('fxpConversions.read')
 );
 
-export const getTransfersStatuses = (state: State) => state.transfers.transfersStatuses;
-export const getTransfersStatusesError = (state: State) => state.transfers.transfersStatusesError;
-export const getIsTransfersStatusesPending = createSelector(
+export const getFxpConversionsStatuses = (state: State) => state.fxpConversions.fxpConversionsStatuses;
+export const getFxpConversionsStatusesError = (state: State) => state.fxpConversions.fxpConversionsStatusesError;
+export const getIsFxpConversionsStatusesPending = createSelector(
   (state: State) => state.api,
-  isPending('transfersStatuses.read')
+  isPending('fxpConversionsStatuses.read')
 );
 
-const transformRawTransferData = (lines?: LinesConfig) => {
+const transformRawFxpConversionData = (lines?: LinesConfig) => {
   const data: [number, number][] = [];
 
   const now: Date = new Date();
@@ -95,36 +93,35 @@ const transformRawTransferData = (lines?: LinesConfig) => {
   });
 };
 
-export const getTransfersSuccessPerc = (state: State) => state.transfers.transfersSuccessPerc;
-export const getTransfersSuccessPercError = (state: State) =>
-  state.transfers.transfersSuccessPercError;
-export const getIsTransfersSuccessPercPending = createSelector(
+export const getFxpConversionsSuccessPerc = (state: State) => state.fxpConversions.fxpConversionsSuccessPerc;
+export const getFxpConversionsSuccessPercError = (state: State) =>
+  state.fxpConversions.fxpConversionsSuccessPercError;
+export const getIsFxpConversionsSuccessPercPending = createSelector(
   (state: State) => state.api,
-  isPending('transfersSuccessPerc.read')
+  isPending('fxpConversionsSuccessPerc.read')
 );
-export const getTransfersSuccessPercTransformed = createSelector(
-  getTransfersSuccessPerc,
-  transformRawTransferData
+export const getFxpConversionsSuccessPercTransformed = createSelector(
+  getFxpConversionsSuccessPerc,
+  transformRawFxpConversionData
 );
 
-export const getTransfersAvgTime = (state: State) => state.transfers.transfersAvgTime;
-export const getTransfersAvgTimeError = (state: State) => state.transfers.transfersAvgTimeError;
-export const getIsTransfersAvgTimePending = createSelector(
+export const getFxpConversionsAvgTime = (state: State) => state.fxpConversions.fxpConversionsAvgTime;
+export const getFxpConversionsAvgTimeError = (state: State) => state.fxpConversions.fxpConversionsAvgTimeError;
+export const getIsFxpConversionsAvgTimePending = createSelector(
   (state: State) => state.api,
-  isPending('transfersAvgTime.read')
+  isPending('fxpConversionsAvgTime.read')
 );
-export const getTransfersAvgTimeTransformed = createSelector(
-  getTransfersAvgTime,
-  transformRawTransferData
+export const getFxpConversionsAvgTimeTransformed = createSelector(
+  getFxpConversionsAvgTime,
+  transformRawFxpConversionData
 );
 
-export const getIsTransferDetailsModalVisible = (state: State) =>
-  state.transfers.isTransferDetailsModalVisible;
+export const getIsFxpConversionDetailsModalVisible = (state: State) =>
+  state.fxpConversions.isFxpConversionDetailsModalVisible;
 
-export const getTransferDetails = (state: State) => state.transfers.transferDetails;
 export const getFxpConversionDetails = (state: State) => state.fxpConversions.fxpConversionDetails;
-export const getTransferDetailsError = (state: State) => state.transfers.transferDetailsError;
-export const getIsTransferDetailsPending = createSelector(
+export const getFxpConversionDetailsError = (state: State) => state.fxpConversions.fxpConversionDetailsError;
+export const getIsFxpConversionDetailsPending = createSelector(
   (state: State) => state.api,
-  isPending('transferDetails.read')
+  isPending('fxpConversionDetails.read')
 );

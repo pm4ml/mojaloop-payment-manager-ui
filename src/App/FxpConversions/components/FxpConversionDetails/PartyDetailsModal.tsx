@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react';
 import { Modal, FormInput, ErrorBox, Row, Button } from 'components';
-import { TransferParty } from '../../types';
+import { FxpConversionParty } from '../../types';
 import { ExtensionListModal } from './ExtensionListModal';
 
-interface TransferPartyDetailModalProps {
-  model: TransferParty | null;
+interface FxpConversionPartyDetailModalProps {
+  model: FxpConversionParty | null;
   title: string;
   onCloseClick: () => void;
 }
 
-export const TransferPartyDetailsModal: FC<TransferPartyDetailModalProps> = ({
+export const FxpConversionPartyDetailsModal: FC<FxpConversionPartyDetailModalProps> = ({
   model,
   title,
   onCloseClick,
@@ -23,7 +23,7 @@ export const TransferPartyDetailsModal: FC<TransferPartyDetailModalProps> = ({
   };
 
   if (!model) {
-    content = <ErrorBox>Transfer: Unable to load transfer details</ErrorBox>;
+    content = <ErrorBox>FxpConversion: Unable to load fxpConversion details</ErrorBox>;
   } else {
     content = (
       <div style={{ width: '100%' }}>
