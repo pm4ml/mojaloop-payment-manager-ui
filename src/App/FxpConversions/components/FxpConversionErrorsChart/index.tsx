@@ -20,7 +20,11 @@ interface FxpConversionsErrorsChartProps {
   error: ErrorMessage;
 }
 
-const FxpConversionsErrorsChart: FC<FxpConversionsErrorsChartProps> = ({ isPending, items, error }) => {
+const FxpConversionsErrorsChart: FC<FxpConversionsErrorsChartProps> = ({
+  isPending,
+  items,
+  error,
+}) => {
   let content = null;
   if (isPending) {
     content = (

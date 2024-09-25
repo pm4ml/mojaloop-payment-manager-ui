@@ -3,7 +3,7 @@ import { History } from 'history';
 import { connectRouter } from 'connected-react-router';
 import { apiReducer } from 'utils/api';
 import { reducer as appReducer } from 'App';
-import  fxpConversionsReducer  from '../App/FxpConversions/reducers';
+import fxpConversionsReducer from '../App/FxpConversions/reducers';
 import { reducer as dashboardReducer } from 'App/Dashboard';
 import { reducer as technicalDashboardReducer } from 'App/TechnicalDashboard';
 import { reducer as transfersReducer } from 'App/Transfers';

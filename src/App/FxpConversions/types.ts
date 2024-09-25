@@ -333,7 +333,7 @@ export interface FxpConversionParties {
 
 // Includes the type property to the fxpConversionDetails Interface.
 export interface FxpConversionDetails {
-  determiningFxpConversionId: string;
+  determiningTransferId: string;
   conversionId: string;
   conversionState: string;
   sourceAmount: number;
@@ -348,7 +348,7 @@ export interface FxpConversionDetails {
 }
 
 export interface FxpConversionTerms {
-  determiningFxpConversionId: string;
+  determiningTransferId: string;
   conversionState: string;
   quoteAmount: number;
   quoteAmountType: string;
@@ -366,7 +366,7 @@ export interface FxpConversionTerms {
 }
 
 export interface FxpTechnicalDetails {
-  determiningFxpConversionId: string;
+  determiningTransferId: string;
   conversionId: string;
   conversionQuoteId: string;
   conversionState: string;

@@ -9,7 +9,11 @@ interface FxpConversionsSuccessPercProps {
   error: ErrorMessage;
 }
 
-const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({ isPending, data, error }) => {
+const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
+  isPending,
+  data,
+  error,
+}) => {
   let content = null;
   if (isPending || !data) {
     content = (

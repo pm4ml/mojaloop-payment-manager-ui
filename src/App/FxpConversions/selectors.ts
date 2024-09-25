@@ -4,7 +4,8 @@ import { isPending } from 'utils/api';
 import { XYCoordinate, LinesConfig } from '../types';
 
 export const getFxpConversionsErrors = (state: State) => state.fxpConversions.fxpConversionsErrors;
-export const getFxpConversionsErrorsError = (state: State) => state.fxpConversions.fxpConversionsErrorsError;
+export const getFxpConversionsErrorsError = (state: State) =>
+  state.fxpConversions.fxpConversionsErrorsError;
 export const getIsFxpConversionsErrorsPending = createSelector(
   (state: State) => state.api,
   isPending('fxpConversionsErrors.read')
@@ -15,7 +16,8 @@ export const getFxpConversionsErrorsTypeFilter = (state: State) =>
   state.fxpConversions.fxpConversionsErrorsTypeFilter;
 export const getIsFxpConversionFinderModalVisible = (state: State) =>
   state.fxpConversions.isFxpConversionFinderModalVisible;
-export const getFxpConversionFinderFilter = (state: State) => state.fxpConversions.fxpConversionFinderFilter;
+export const getFxpConversionFinderFilter = (state: State) =>
+  state.fxpConversions.fxpConversionFinderFilter;
 export const getFilteredByStatusFxpConversionsErrors = createSelector(
   getFxpConversionsErrors,
   getFxpConversionsErrorsTypeFilter,
@@ -27,7 +29,8 @@ export const getFilteredByStatusFxpConversionsErrors = createSelector(
   }
 );
 
-export const getIsFxpConversionsRequested = (state: State) => state.fxpConversions.isFxpConversionsRequested;
+export const getIsFxpConversionsRequested = (state: State) =>
+  state.fxpConversions.isFxpConversionsRequested;
 // export const getFxpConversions = (state: State) => state.fxpConversions.fxpConversions;
 export const getFxpConversions = (state: State) => state.fxpConversions.fxpConversions;
 export const getFxpConversionsError = (state: State) => state.fxpConversions.fxpConversionsError;
@@ -36,8 +39,10 @@ export const getIsFxpConversionsPending = createSelector(
   isPending('fxpConversions.read')
 );
 
-export const getFxpConversionsStatuses = (state: State) => state.fxpConversions.fxpConversionsStatuses;
-export const getFxpConversionsStatusesError = (state: State) => state.fxpConversions.fxpConversionsStatusesError;
+export const getFxpConversionsStatuses = (state: State) =>
+  state.fxpConversions.fxpConversionsStatuses;
+export const getFxpConversionsStatusesError = (state: State) =>
+  state.fxpConversions.fxpConversionsStatusesError;
 export const getIsFxpConversionsStatusesPending = createSelector(
   (state: State) => state.api,
   isPending('fxpConversionsStatuses.read')
@@ -93,7 +98,8 @@ const transformRawFxpConversionData = (lines?: LinesConfig) => {
   });
 };
 
-export const getFxpConversionsSuccessPerc = (state: State) => state.fxpConversions.fxpConversionsSuccessPerc;
+export const getFxpConversionsSuccessPerc = (state: State) =>
+  state.fxpConversions.fxpConversionsSuccessPerc;
 export const getFxpConversionsSuccessPercError = (state: State) =>
   state.fxpConversions.fxpConversionsSuccessPercError;
 export const getIsFxpConversionsSuccessPercPending = createSelector(
@@ -105,8 +111,10 @@ export const getFxpConversionsSuccessPercTransformed = createSelector(
   transformRawFxpConversionData
 );
 
-export const getFxpConversionsAvgTime = (state: State) => state.fxpConversions.fxpConversionsAvgTime;
-export const getFxpConversionsAvgTimeError = (state: State) => state.fxpConversions.fxpConversionsAvgTimeError;
+export const getFxpConversionsAvgTime = (state: State) =>
+  state.fxpConversions.fxpConversionsAvgTime;
+export const getFxpConversionsAvgTimeError = (state: State) =>
+  state.fxpConversions.fxpConversionsAvgTimeError;
 export const getIsFxpConversionsAvgTimePending = createSelector(
   (state: State) => state.api,
   isPending('fxpConversionsAvgTime.read')
@@ -120,7 +128,8 @@ export const getIsFxpConversionDetailsModalVisible = (state: State) =>
   state.fxpConversions.isFxpConversionDetailsModalVisible;
 
 export const getFxpConversionDetails = (state: State) => state.fxpConversions.fxpConversionDetails;
-export const getFxpConversionDetailsError = (state: State) => state.fxpConversions.fxpConversionDetailsError;
+export const getFxpConversionDetailsError = (state: State) =>
+  state.fxpConversions.fxpConversionDetailsError;
 export const getIsFxpConversionDetailsPending = createSelector(
   (state: State) => state.api,
   isPending('fxpConversionDetails.read')

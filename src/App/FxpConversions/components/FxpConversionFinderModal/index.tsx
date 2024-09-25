@@ -24,12 +24,7 @@ import {
 import xlsx from 'xlsx';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
-import {
-  FxpConversion,
-  FxpConversionError,
-  DateRange,
-  FxpConversionFilter,
-} from '../../types';
+import { FxpConversion, FxpConversionError, DateRange, FxpConversionFilter } from '../../types';
 import * as helpers from '../../helpers';
 
 type FilterChangeValue = string | number;
@@ -51,7 +46,9 @@ const dispatchProps = (dispatch: Dispatch) => ({
   onFilterChange: ({ field, value }: { field: string; value: FilterChangeValue }) =>
     dispatch(actions.setFxpConversionFinderFilter({ field, value })),
   onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => {
-    dispatch(actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId }));
+    dispatch(
+      actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId })
+    );
   },
 });
 
@@ -165,7 +162,11 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
             onClick={() => downloadFxpConversionsToExcel(fxpConversions)}
           />
         )}
-        <DataList columns={fxpConversionsColumns} list={fxpConversions} onSelect={onFxpConversionRowClick} />
+        <DataList
+          columns={fxpConversionsColumns}
+          list={fxpConversions}
+          onSelect={onFxpConversionRowClick}
+        />
       </div>
     );
     onSubmit = () => {
@@ -201,9 +202,18 @@ const dateRanges = [
 ];
 
 const fxpConversionStatuses = [
-  { label: helpers.toSpacedPascalCase(FxpConversionStatus.Success), value: FxpConversionStatus.Success },
-  { label: helpers.toSpacedPascalCase(FxpConversionStatus.Pending), value: FxpConversionStatus.Pending },
-  { label: helpers.toSpacedPascalCase(FxpConversionStatus.Error), value: FxpConversionStatus.Error },
+  {
+    label: helpers.toSpacedPascalCase(FxpConversionStatus.Success),
+    value: FxpConversionStatus.Success,
+  },
+  {
+    label: helpers.toSpacedPascalCase(FxpConversionStatus.Pending),
+    value: FxpConversionStatus.Pending,
+  },
+  {
+    label: helpers.toSpacedPascalCase(FxpConversionStatus.Error),
+    value: FxpConversionStatus.Error,
+  },
 ];
 
 const aliasType = [

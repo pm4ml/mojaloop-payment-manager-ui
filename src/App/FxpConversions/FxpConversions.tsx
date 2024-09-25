@@ -35,11 +35,14 @@ const stateProps = (state: State) => ({
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
-  onViewAllReconcilationErrorsButtonClick: () => dispatch(actions.toggleFxpConversionsErrorsViewAll()),
+  onViewAllReconcilationErrorsButtonClick: () =>
+    dispatch(actions.toggleFxpConversionsErrorsViewAll()),
   onFxpConversionFinderButtonClick: () => dispatch(actions.toggleFxpConversionFinderModal()),
   onModalCloseClick: () => dispatch(actions.toggleFxpConversionFinderModal()),
   onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => {
-    dispatch(actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId }));
+    dispatch(
+      actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId })
+    );
   },
 });
 
@@ -88,7 +91,11 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
     <div className="fxpfxpConversions">
       <Heading size="3">FXP Conversions Overview</Heading>
       <Row style={{ marginBottom: '20px' }}>
-        <Button onClick={onFxpConversionFinderButtonClick} label="Find a Conversion" kind="secondary" />
+        <Button
+          onClick={onFxpConversionFinderButtonClick}
+          label="Find a Conversion"
+          kind="secondary"
+        />
       </Row>
       <FxpConversionsSuccessPerc
         data={fxpConversionsSuccessPerc}

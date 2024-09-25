@@ -17,7 +17,9 @@ const stateProps = (state: State) => ({
 const dispatchProps = (dispatch: Dispatch) => ({
   onModalCloseClick: () => dispatch(actions.toggleFxpConversionsErrorsViewAll()),
   onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => {
-    dispatch(actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId }));
+    dispatch(
+      actions.requestFxpConversionDetails({ conversionId: fxpConversionError.conversionId })
+    );
   },
 });
 

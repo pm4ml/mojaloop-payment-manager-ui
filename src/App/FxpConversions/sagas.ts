@@ -35,7 +35,7 @@ import {
   setFxpConversionDetails,
 } from './actions';
 
-export function* fetchFxpConversionsErrors(action: RequestFxpConversionsErrorsAction) { 
+export function* fetchFxpConversionsErrors(action: RequestFxpConversionsErrorsAction) {
   try {
     // eslint-disable-next-line
     const response = yield call(apis.fxpConversionsErrors.read, {});
@@ -53,7 +53,7 @@ export function* fxpConversionsErrorsSaga() {
   yield takeLatest([REQUEST_FXPCONVERSIONS_ERRORS], fetchFxpConversionsErrors);
 }
 
-function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) { 
+function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) {
   try {
     // eslint-disable-next-line
     const response = yield call(apis.fxpConversionsStatuses.read, {});
@@ -99,7 +99,9 @@ export function* fxpConversionsSuccessPercSaga() {
 function* fetchFxpConversionsAvgTime(action: RequestFxpConversionsAvgTimeAction) {
   try {
     // eslint-disable-next-line
-    const response = yield call(apis.fxpConversionsAvgTime.read, { params: { minutePrevious: 1440 } });
+    const response = yield call(apis.fxpConversionsAvgTime.read, {
+      params: { minutePrevious: 1440 },
+    });
 
     yield put(
       setFxpConversionsAvgTime({
@@ -123,9 +125,11 @@ export function* fxpConversionsAvgTimeSaga() {
 function* fetchFxpConversionDetails(action: RequestFxpConversionDetailsAction) {
   try {
     // eslint-disable-next-line
-    const response = yield call(apis.fxpConversionDetails.read, { conversionId: action.conversionId });
-    
-    console.log("callingfetchFxpConversionDetails");
+    const response = yield call(apis.fxpConversionDetails.read, {
+      conversionId: action.conversionId,
+    });
+
+    console.log('callingfetchFxpConversionDetails');
 
     if (is20x(response.status)) {
       yield put(setFxpConversionDetails({ data: response.data }));
@@ -190,10 +194,8 @@ export function* fxpConversionsSaga() {
   yield takeLatest([REQUEST_FXPCONVERSION], fetchFxpConversions);
 }
 
-
-
 //FXP Conversions Status API
-// function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) { 
+// function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) {
 //   try {
 //     // eslint-disable-next-line
 //     const response = yield call(apis.fxpConversionsStatuses.read, {});
@@ -212,7 +214,7 @@ export function* fxpConversionsSaga() {
 // }
 
 //FXP Conversions SuccessPerc
-// function* fetchFxpConversionsSuccessPerc(action: RequestFxpConversionsSuccessPercAction) { 
+// function* fetchFxpConversionsSuccessPerc(action: RequestFxpConversionsSuccessPercAction) {
 //   try {
 //     // eslint-disable-next-line
 //     const response = yield call(apis.fxpConversionsSuccessPerc.read, {
@@ -238,7 +240,7 @@ export function* fxpConversionsSaga() {
 // }
 
 // FXP Converions AVGTime
-// function* fetchFxpConversionsAvgTime(action: RequestFxpConversionsAvgTimeAction) { 
+// function* fetchFxpConversionsAvgTime(action: RequestFxpConversionsAvgTimeAction) {
 //   try {
 //     // eslint-disable-next-line
 //     const response = yield call(apis.fxpConversionsAvgTime.read, { params: { minutePrevious: 1440 } });
@@ -264,7 +266,6 @@ export function* fxpConversionsSaga() {
 
 // FXPConversions ALL Data
 
-
 // Root Saga
 export default function* rootSaga() {
   yield all([
@@ -276,6 +277,6 @@ export default function* rootSaga() {
     fxpConversionsAvgTimeSaga(),
     fxpConversionDetailsSaga(),
     fxpConversionsPageSaga(),
-    fxpConversionsErrorsSaga()
+    fxpConversionsErrorsSaga(),
   ]);
 }

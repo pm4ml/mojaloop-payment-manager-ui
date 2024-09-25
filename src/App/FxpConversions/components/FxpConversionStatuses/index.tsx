@@ -13,7 +13,11 @@ interface FxpConversionsStatusesProps {
   items: FxpConversionsStatus[];
   error: ErrorMessage;
 }
-const FxpConversionsStatusesItems: FC<FxpConversionsStatusesProps> = ({ isPending, items, error }) => {
+const FxpConversionsStatusesItems: FC<FxpConversionsStatusesProps> = ({
+  isPending,
+  items,
+  error,
+}) => {
   let content = null;
   if (isPending) {
     content = (

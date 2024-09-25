@@ -119,7 +119,11 @@ interface ErrorsListProps {
 const ErrorsList: FC<ErrorsListProps> = ({ items, onFxpConversionRowClick }) => {
   return (
     <div className="fxpConversions__errors__list-container">
-      <DataList columns={fxpConversionsErrorsColumns} list={items} onSelect={onFxpConversionRowClick} />
+      <DataList
+        columns={fxpConversionsErrorsColumns}
+        list={items}
+        onSelect={onFxpConversionRowClick}
+      />
     </div>
   );
 };
