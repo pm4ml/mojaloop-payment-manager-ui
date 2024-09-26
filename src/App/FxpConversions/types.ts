@@ -173,10 +173,10 @@ export interface MojaloopErrorInformation {
   extensionList?: ExtensionListItem[];
 }
 
-export interface FxpConversionDetailsError {
-  httpStatusCode: number;
-  mojaloopError?: MojaloopError;
-}
+// export interface FxpConversionDetailsError {
+//   httpStatusCode: number;
+//   mojaloopError?: MojaloopError;
+// }
 // FxpConversionDetailsError
 export interface FxpConversionDetailsError {
   httpStatusCode: number;

@@ -181,58 +181,33 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
-  // let conversionStateInput = (
-  //   <FormInput
-  //     disabled={true}
-  //     label="FxpConversion State"
-  //     value={model.technicalDetails.conversionState}
-  //   />
-  // );
+  let conversionStateInput = (
+    <FormInput
+      disabled={true}
+      label="FxpConversion State"
+      value={model.technicalDetails.conversionState}
+    />
+  );
 
-  // if (model.technicalDetails.lastError) {
-  //   conversionStateInput = (
-  //     <div className="forminput__row">
-  //       <div className="forminput-input">
-  //         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-  //         <label>Conversion State</label>
-  //         <TextField
-  //           disabled={false}
-  //           label="FxpConversion State"
-  //           value={model.technicalDetails.conversionState}
-  //           onButtonClick={() => showFxpConversionError(model.technicalDetails.lastError)}
-  //           buttonText="View Error"
-  //           buttonKind="secondary"
-  //         />
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (model.technicalDetails.lastError) {
+    conversionStateInput = (
+      <div className="forminput__row">
+        <div className="forminput-input">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label>Conversion State</label>
+          <TextField
+            disabled={false}
+            label="FxpConversion State"
+            value={model.technicalDetails.conversionState}
+            onButtonClick={() => showFxpConversionError(model.technicalDetails.lastError)}
+            buttonText="View Error"
+            buttonKind="secondary"
+          />
+        </div>
+      </div>
+    );
+  }
 
-  // let conversionStateInput = (
-  //   <FormInput
-  //     disabled={true}
-  //     label="Conversion State"
-  //     value={model.technicalDetails.conversionState}
-  //   />
-  // );
-
-  // if (model.technicalDetails.lastError) {
-  //   conversionStateInput = (
-  //     <div className="forminput__row">
-  //       <div className="forminput-input">
-  //         <label>Conversion State</label>
-  //         <TextField
-  //           disabled={false}
-  //           label="Conversion State"
-  //           value={model.technicalDetails.conversionState}
-  //           onButtonClick={() => showConversionError(model.technicalDetails.lastError)}
-  //           buttonText="View Error"
-  //           buttonKind="secondary"
-  //         />
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div>
@@ -423,20 +398,20 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    FxpConversion Amount
+                    Transfer Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.conversionTerms.quoteAmount.amount}
+                      value={model.conversionTerms.quoteAmount.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.conversionTerms.quoteAmount.currency}
+                      value={model.conversionTerms.quoteAmount.currency}
                     />
                   </div>
                 </Row>
@@ -541,7 +516,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
 
                 {/* Conversion State */}
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  {/* {conversionStateInput} */}
+                  {{conversionStateInput}}
                 </Row>
               </div>
               <div style={{ alignItems: 'flex-start', flex: '0 0 50%', marginRight: '5px' }}>
