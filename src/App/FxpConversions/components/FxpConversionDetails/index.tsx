@@ -238,6 +238,11 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   label="Conversion ID"
                   type="text"
                   value={model.conversionDetails.conversionRequestId}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -360,7 +365,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionTerms.quoteAmount.amount}
                 />
               </div>
-              <div style={{ flex: '0 0 1%', marginRight: '5px', maxWidth: '10%' }}>
+              <div style={{ flex: '0 0 12%', marginRight: '5px', maxWidth: '10%' }}>
                 <FormInput
                   disabled={true}
                   label=" "
