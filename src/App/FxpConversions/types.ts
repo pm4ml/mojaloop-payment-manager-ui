@@ -223,27 +223,7 @@ export interface PayeeDfspCommision {
   currency: string;
 }
 
-export interface ConversionTerms {
-  fxpConversionAmount: {
-    amount: string;
-    currency: string;
-  };
-  charges?: [
-    {
-      chargeType: string;
-      sourceAmount?: {
-        amount: string;
-        currency: string;
-      };
-      targetAmount?: {
-        amount: string;
-        currency: string;
-      };
-    }
-  ];
-  exchangeRate: string;
-  expiryDate: string;
-}
+
 
 export interface FxpConversionTechnicalDetails {
   schemeFxpConversionId: string;
@@ -331,38 +311,32 @@ export interface FxpConversionParties {
 //   fxpConversionTerms: FxpConversionTerms;
 // }
 
+
 // Includes the type property to the fxpConversionDetails Interface.
 export interface FxpConversionDetails {
+
+  conversionDetails: FxpDetails;
+  conversionTerms: FxpConversionTerms;
+  technicalDetails: FxpTechnicalDetails;
+}
+
+export interface FxpDetails {
   determiningTransferId: string;
-  conversionId: string;
+  conversionRequestId: string;
   conversionState: string;
-  sourceAmount: number;
-  sourceCurrency: string;
-  targetAmount: string;
-  sendCurrency: string;
+  sourceAmount: FxpConversionAmount;
+  targetAmount: FxpConversionAmount;
   conversionAcceptedDate: string;
   conversionSettlementBatch: string;
   dfspInstitution: string;
-  FxpConversionTerms: FxpConversionTerms;
-  FxpTechnicalDetails: FxpTechnicalDetails;
 }
-
 export interface FxpConversionTerms {
   determiningTransferId: string;
+  conversionId: string;
   conversionState: string;
-  quoteAmount: number;
+  quoteAmount: FxpConversionAmount;
   quoteAmountType: string;
-  fxpConversionAmount: FxpConversionAmount;
-  totalSourceCharges: {
-    amount: String;
-    currency: string;
-  };
-  totalTargetCharges: {
-    amount: String;
-    currency: string;
-  };
-  exchangeRate: number;
-  expiryDateTime: string;
+  conversionTerms: ConversionTerms;
 }
 
 export interface FxpTechnicalDetails {
@@ -379,6 +353,23 @@ export interface FxpTechnicalDetails {
     completedTimeStamp: string;
   };
   lastError?: FxpConversionDetailsError;
+}
+
+export interface ConversionTerms {
+  charges?: [
+    {
+      totalSourceCurrencyCharges: FxpConversionAmount;
+      totalTargetCurrencyCharges: FxpConversionAmount;
+    }
+  ];
+  transferAmount?: [
+    {
+      sourceAmount: FxpConversionAmount;
+      targetAmount: FxpConversionAmount;
+    }
+  ];
+  exchangeRate: string;
+  expiryDate: string;
 }
 
 export enum DateRange {
