@@ -65,13 +65,30 @@ const transfersErrors: Config<Todo, State> = {
 
 const fxpConversionsErrors: Config<Todo, State> = {
   service: services.localNode,
-  url: () => '/fxperrors',
+  url: () => '/fxpErrors',
 };
 
 const fxpConversions: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/fxpConversions',
 };
+
+const fxpStatuses: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/fxpConversionStatusSummary',
+};
+
+
+const fxpSuccessPerc: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/minuteSuccessfulFxpConversionsPerc',
+};
+
+const fxpAvgTime: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/minuteAverageFxpConversionsResponseTime',
+};
+
 
 const transfers: Config<Todo, State> = {
   service: services.localNode,
@@ -256,6 +273,9 @@ const endpoints = {
   fxpConversionDetails,
   fxpConversionsErrors,
   fxpConversions,
+  fxpStatuses,
+  fxpSuccessPerc,
+  fxpAvgTime,
 };
 
 type MyMap = typeof endpoints;
