@@ -185,11 +185,11 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   //   <FormInput
   //     disabled={true}
   //     label="FxpConversion State"
-  //     value={model.FxpTechnicalDetails.conversionState}
+  //     value={model.technicalDetails.conversionState}
   //   />
   // );
 
-  // if (model.FxpTechnicalDetails.lastError) {
+  // if (model.technicalDetails.lastError) {
   //   conversionStateInput = (
   //     <div className="forminput__row">
   //       <div className="forminput-input">
@@ -198,8 +198,8 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   //         <TextField
   //           disabled={false}
   //           label="FxpConversion State"
-  //           value={model.FxpTechnicalDetails.conversionState}
-  //           onButtonClick={() => showFxpConversionError(model.FxpTechnicalDetails.lastError)}
+  //           value={model.technicalDetails.conversionState}
+  //           onButtonClick={() => showFxpConversionError(model.technicalDetails.lastError)}
   //           buttonText="View Error"
   //           buttonKind="secondary"
   //         />
@@ -212,11 +212,11 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   //   <FormInput
   //     disabled={true}
   //     label="Conversion State"
-  //     value={model.FxpTechnicalDetails.conversionState}
+  //     value={model.technicalDetails.conversionState}
   //   />
   // );
 
-  // if (model.FxpTechnicalDetails.lastError) {
+  // if (model.technicalDetails.lastError) {
   //   conversionStateInput = (
   //     <div className="forminput__row">
   //       <div className="forminput-input">
@@ -224,8 +224,8 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   //         <TextField
   //           disabled={false}
   //           label="Conversion State"
-  //           value={model.FxpTechnicalDetails.conversionState}
-  //           onButtonClick={() => showConversionError(model.FxpTechnicalDetails.lastError)}
+  //           value={model.technicalDetails.conversionState}
+  //           onButtonClick={() => showConversionError(model.technicalDetails.lastError)}
   //           buttonText="View Error"
   //           buttonKind="secondary"
   //         />
@@ -250,7 +250,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="FxpConversion ID"
                   type="text"
-                  value={model.determiningTransferId}
+                  value={model.conversionDetails.determiningTransferId}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -263,7 +263,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion ID"
                   type="text"
-                  value={model.conversionId}
+                  value={model.conversionDetails.conversionRequestId}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -271,7 +271,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion State"
                   type="text"
-                  value={model.conversionState}
+                  value={model.conversionDetails.conversionState}
                 />
               </div>
             </Row>
@@ -282,7 +282,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Source Amount"
                   type="text"
-                  value={model.sourceAmount}
+                  value={model.conversionDetails.sourceAmount.amount}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -290,7 +290,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Source Currency"
                   type="text"
-                  value={model.sourceCurrency}
+                  value={model.conversionDetails.sourceAmount.currency}
                 />
               </div>
             </Row>
@@ -300,7 +300,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Target Amount"
                   type="text"
-                  value={model.targetAmount}
+                  value={model.conversionDetails.targetAmount.amount}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -308,7 +308,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Target Currency"
                   type="text"
-                  value={model.sendCurrency}
+                  value={model.conversionDetails.targetAmount.currency}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -316,7 +316,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Submitted"
                   type="text"
-                  value={model.conversionAcceptedDate}
+                  value={model.conversionDetails.conversionAcceptedDate}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -324,7 +324,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Settlement Batch"
                   type="text"
-                  value={model.conversionSettlementBatch}
+                  value={model.conversionDetails.conversionSettlementBatch}
                 />
               </div>
             </Row>
@@ -342,7 +342,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Institution"
                   type="text"
-                  value={model.dfspInstitution}
+                  value={model.conversionDetails.dfspInstitution}
                 />
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -350,7 +350,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion State"
                   type="text"
-                  // value={model.FxpTechnicalDetails.conversionState}
+                  value={model.conversionDetails.conversionState}
                 />
               </div>
             </Row>
@@ -362,7 +362,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="FxpConversion ID"
                   type="text"
-                  // value={model.FxpConversionTerms.determiningTransferId}
+                  value={model.conversionTerms.determiningTransferId}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -375,7 +375,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion State"
                   type="text"
-                  // value={model.FxpConversionTerms.conversionState}
+                  value={model.conversionTerms.conversionState}
                 />
               </div>
               <div style={{ flex: '0 0 12%', marginRight: '0', maxWidth: '15%' }}>
@@ -383,7 +383,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Quote Amount"
                   type="text"
-                  // value={model.FxpConversionTerms.quoteAmount}
+                  value={model.conversionTerms.quoteAmount.amount}
                 />
               </div>
               <div style={{ flex: '0 0 1%', marginRight: '5px', maxWidth: '10%' }}>
@@ -391,7 +391,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label=" "
                   type="text"
-                  // value={model.FxpConversionTerms.quoteAmount}
+                  value={model.conversionTerms.quoteAmount.currency}
                 />
               </div>
               <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '20%' }}>
@@ -399,7 +399,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Quote Amount Type"
                   type="text"
-                  // value={model.FxpConversionTerms.quoteAmountType}
+                  value={model.conversionTerms.quoteAmountType}
                 />
               </div>
             </Row>
@@ -429,14 +429,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.fxpConversionAmount}
+                      // value={model.conversionTerms.quoteAmount.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.fxpConversionTerms.conversionTerms.fxpConversionAmount.currency}
+                      // value={model.conversionTerms.quoteAmount.currency}
                     />
                   </div>
                 </Row>
@@ -449,15 +449,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.totalSourceCharges.amount}
+                      value={model.conversionTerms.conversionTerms.charges?.totalSourceCurrencyCharges.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.totalSourceCharges.currency}
-                      value={model.conversionId}
+                      value={model.conversionTerms.conversionTerms.charges?.totalSourceCurrencyCharges.currency}
+
                     />
                   </div>
                 </Row>
@@ -470,14 +470,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.totalTargetCharges.amount}
+                      value={model.conversionTerms.conversionTerms.charges?.totalTargetCurrencyCharges.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.totalTargetCharges.currency}
+                      value={model.conversionTerms.conversionTerms.charges?.totalTargetCurrencyCharges.currency}
                     />
                   </div>
                 </Row>
@@ -490,7 +490,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.exchangeRate}
+                      value={model.conversionTerms.conversionTerms.exchangeRate}
                     />
                   </div>
                 </Row>
@@ -503,7 +503,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      // value={model.FxpConversionTerms.expiryDateTime}
+                      value={model.conversionTerms.conversionTerms.expiryDate}
                     />
                   </div>
                 </Row>
@@ -517,7 +517,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   <FormInput
                     disabled={true}
                     label="FxpConversion ID"
-                    // value={model.FxpTechnicalDetails.determiningTransferId}
+                    // value={model.technicalDetails.determiningTransferId}
                   />
                 </Row>
 
@@ -526,7 +526,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     id="fxpConversion-details-modal__conversion-id"
                     disabled={true}
                     label="Conversion ID"
-                    // value={model.FxpTechnicalDetails.conversionId}
+                    // value={model.technicalDetails.conversionId}
                   />
                 </Row>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -534,7 +534,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     id="fxpConversion-details-modal__home-fxpConversion-id"
                     disabled={true}
                     label="Conversion Quote ID"
-                    // value={model.FxpTechnicalDetails.conversionQuoteId}
+                    // value={model.technicalDetails.conversionQuoteId}
                     style={{ flex: 1 }}
                   />
                 </div>
@@ -559,15 +559,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.FxpTechnicalDetails.fxQuoteRequest &&
-                          // model.FxpTechnicalDetails.fxQuoteRequest.body
+                          // model.technicalDetails.fxQuoteRequest &&
+                          // model.technicalDetails.fxQuoteRequest.body
                           model.conversionId
                         )
                       }
                       tooltip={
                         !(
-                          // model.FxpTechnicalDetails.fxQuoteRequest &&
-                          // model.FxpTechnicalDetails.fxQuoteRequest.body
+                          // model.technicalDetails.fxQuoteRequest &&
+                          // model.technicalDetails.fxQuoteRequest.body
                           model.conversionId
                         ) &&
                         'This option is only available when an Fx POST /quote request can be found for the fxpConversion'
@@ -580,7 +580,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       }
                       onClick={() =>
                         showFxQuoteRequest(
-                          model.conversionId /*model.FxpTechnicalDetails.fxQuoteRequest)*/
+                          model.conversionId /*model.technicalDetails.fxQuoteRequest)*/
                         )
                       }
                     />
@@ -593,15 +593,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.FxpTechnicalDetails.fxQuoteResponse &&
-                          // model.FxpTechnicalDetails.fxQuoteResponse
+                          // model.technicalDetails.fxQuoteResponse &&
+                          // model.technicalDetails.fxQuoteResponse
                           model.conversionId
                         )
                       }
                       tooltip={
                         !(
-                          // model.FxpTechnicalDetails.fxQuoteResponse &&
-                          // model.FxpTechnicalDetails.fxQuoteResponse
+                          // model.technicalDetails.fxQuoteResponse &&
+                          // model.technicalDetails.fxQuoteResponse
                           model.conversionId
                         ) &&
                         'This option is only available when an fx POST /fxquote response can be found for the fxpConversion'
@@ -614,7 +614,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       }
                       onClick={() =>
                         showFxQuoteResponse(
-                          model.conversionId /*model.FxpTechnicalDetails.fxQuoteResponse*/
+                          model.conversionId /*model.technicalDetails.fxQuoteResponse*/
                         )
                       }
                     />
@@ -627,15 +627,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.FxpTechnicalDetails.fxFxpConversionPrepare &&
-                          // model.FxpTechnicalDetails.fxFxpConversionPrepare.body
+                          // model.technicalDetails.fxFxpConversionPrepare &&
+                          // model.technicalDetails.fxFxpConversionPrepare.body
                           model.conversionId
                         )
                       }
                       tooltip={
                         !(
-                          // model.FxpTechnicalDetails.fxFxpConversionPrepare &&
-                          // model.FxpTechnicalDetails.fxFxpConversionPrepare.body
+                          // model.technicalDetails.fxFxpConversionPrepare &&
+                          // model.technicalDetails.fxFxpConversionPrepare.body
                           model.conversionId
                         ) &&
                         'This option is only available when an fx POST /fxpConversions prepare can be found for the fxpConversion'
@@ -648,7 +648,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       }
                       onClick={() =>
                         showFxFxpConversionPrepare(
-                          model.conversionId /*model.FxpTechnicalDetails.fxFxpConversionPrepare*/
+                          model.conversionId /*model.technicalDetails.fxFxpConversionPrepare*/
                         )
                       }
                     />
@@ -661,15 +661,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.FxpTechnicalDetails.fxFxpConversionFulfil &&
-                          // model.FxpTechnicalDetails.fxFxpConversionFulfil
+                          // model.technicalDetails.fxFxpConversionFulfil &&
+                          // model.technicalDetails.fxFxpConversionFulfil
                           model.conversionId
                         )
                       }
                       tooltip={
                         !(
-                          // model.FxpTechnicalDetails.fxFxpConversionFulfil &&
-                          // model.FxpTechnicalDetails.fxFxpConversionFulfil
+                          // model.technicalDetails.fxFxpConversionFulfil &&
+                          // model.technicalDetails.fxFxpConversionFulfil
                           model.conversionId
                         ) &&
                         'This option is only available when a POST /fxpConversions fulfilment can be found for the fxpConversion'
@@ -682,7 +682,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       }
                       onClick={() =>
                         showFxFxpConversionFulfil(
-                          model.conversionId /*model.FxpTechnicalDetails.fxFxpConversionFulfil*/
+                          model.conversionId /*model.technicalDetails.fxFxpConversionFulfil*/
                         )
                       }
                     />
