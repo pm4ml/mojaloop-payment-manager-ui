@@ -56,7 +56,7 @@ export function* fxpConversionsErrorsSaga() {
 function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) {
   try {
     // eslint-disable-next-line
-    const response = yield call(apis.fxpConversionsStatuses.read, {});
+    const response = yield call(apis.fxpStatuses.read, {});
     if (is20x(response.status)) {
       yield put(setFxpConversionsStatuses({ data: response.data }));
     } else {

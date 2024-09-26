@@ -75,7 +75,7 @@ const fxpConversions: Config<Todo, State> = {
 
 const fxpStatuses: Config<Todo, State> = {
   service: services.localNode,
-  url: () => '/fxpConversionStatusSummary',
+  url: () => '/fxpConversionsStatusSummary',
 };
 
 
