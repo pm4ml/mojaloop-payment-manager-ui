@@ -224,8 +224,6 @@ export interface totalTargetCurrencyCharges {
   currency: string;
 }
 
-
-
 export interface PayeeReceiveAmount {
   amount: string;
   currency: string;
@@ -240,8 +238,6 @@ export interface PayeeDfspCommision {
   amount: string;
   currency: string;
 }
-
-
 
 export interface FxpConversionTechnicalDetails {
   schemeFxpConversionId: string;
@@ -329,10 +325,8 @@ export interface FxpConversionParties {
 //   fxpConversionTerms: FxpConversionTerms;
 // }
 
-
 // Includes the type property to the fxpConversionDetails Interface.
 export interface FxpConversionDetails {
-
   conversionDetails: FxpDetails;
   conversionTerms: FxpConversionTerms;
   technicalDetails: FxpTechnicalDetails;
@@ -374,18 +368,14 @@ export interface FxpTechnicalDetails {
 }
 
 export interface ConversionTerms {
-  charges:
-    {
-      totalSourceCurrencyCharges: totalSourceCurrencyCharges;
-      totalTargetCurrencyCharges: totalTargetCurrencyCharges;
-    }
-  ;
-  transferAmount:
-    {
-      sourceAmount: SourceAmount;
-      targetAmount: QuoteAmount;
-    }
-  ;
+  charges: {
+    totalSourceCurrencyCharges: totalSourceCurrencyCharges;
+    totalTargetCurrencyCharges: totalTargetCurrencyCharges;
+  };
+  transferAmount: {
+    sourceAmount: SourceAmount;
+    targetAmount: QuoteAmount;
+  };
   exchangeRate: string;
   expiryDate: string;
 }
