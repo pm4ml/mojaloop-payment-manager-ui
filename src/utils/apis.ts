@@ -47,22 +47,6 @@ const batchTransfers: Config<Todo, State> = {
   url: (_: State, { batchId }: any) => `/batches/${batchId}/transfers`,
 };
 
-const transferDetails: Config<Todo, State> = {
-  service: services.localNode,
-  url: (_: State, { transferId }: { transferId: string }) => `/transfers/${transferId}/details`,
-};
-
-const fxpConversionDetails: Config<Todo, State> = {
-  service: services.localNode,
-  url: (_: State, { conversionId }: { conversionId: string }) =>
-    `/fxpConversions/${conversionId}/details`,
-};
-
-const transfersErrors: Config<Todo, State> = {
-  service: services.localNode,
-  url: () => '/errors',
-};
-
 const fxpConversionsErrors: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/fxpErrors',
@@ -73,26 +57,40 @@ const fxpConversions: Config<Todo, State> = {
   url: () => '/fxpConversions',
 };
 
-const fxpStatuses: Config<Todo, State> = {
+const fxpConversionDetails: Config<Todo, State> = {
+  service: services.localNode,
+  url: (_: State, { conversionId }: { conversionId: string }) =>
+    `/fxpConversions/${conversionId}/details`,
+};
+
+const fxpConversionsStatuses: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/fxpConversionsStatusSummary',
 };
 
-
-const fxpSuccessPerc: Config<Todo, State> = {
+const fxpConversionsSuccessPerc: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/minuteSuccessfulFxpConversionsPerc',
 };
 
-const fxpAvgTime: Config<Todo, State> = {
+const fxpConversionsAvgTime: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/minuteAverageFxpConversionsResponseTime',
 };
 
+const transfersErrors: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/errors',
+};
 
 const transfers: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/transfers',
+};
+
+const transferDetails: Config<Todo, State> = {
+  service: services.localNode,
+  url: (_: State, { transferId }: { transferId: string }) => `/transfers/${transferId}/details`,
 };
 
 const transfersStatuses: Config<Todo, State> = {
@@ -273,9 +271,9 @@ const endpoints = {
   fxpConversionDetails,
   fxpConversionsErrors,
   fxpConversions,
-  fxpStatuses,
-  fxpSuccessPerc,
-  fxpAvgTime,
+  fxpConversionsStatuses,
+  fxpConversionsSuccessPerc,
+  fxpConversionsAvgTime,
 };
 
 type MyMap = typeof endpoints;
