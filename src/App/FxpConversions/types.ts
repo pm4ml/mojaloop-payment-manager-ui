@@ -268,8 +268,8 @@ export interface FxpConversionTechnicalDetails {
 }
 
 export interface FxQuoteResponse {
-  condition: {};
-  conversionTerms: {};
+  headers?: object;
+  body?: object;
 }
 
 export interface FxFxpConversionFulfilment {
@@ -361,12 +361,11 @@ export interface FxpTechnicalDetails {
   determiningTransferId: string;
   conversionRequestId: string;
   conversionId: string;
-  conversionQuoteId: string;
   conversionState: string;
   fxQuoteRequest: FxpConversionTechnicalDetailsApiMessage;
   fxQuoteResponse: FxQuoteResponse;
-  fxFxpConversionPrepare?: FxpConversionTechnicalDetailsApiMessage;
-  fxFxpConversionFulfil: {
+  fxTransferPrepare?: FxpConversionTechnicalDetailsApiMessage;
+  fxTransferFulfil: {
     fxpConversionState: string;
     fulfilment: string;
     completedTimeStamp: string;

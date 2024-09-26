@@ -517,7 +517,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   <FormInput
                     disabled={true}
                     label="FxpConversion ID"
-                    // value={model.technicalDetails.determiningTransferId}
+                    value={model.technicalDetails.determiningTransferId}
                   />
                 </Row>
 
@@ -526,15 +526,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     id="fxpConversion-details-modal__conversion-id"
                     disabled={true}
                     label="Conversion ID"
-                    // value={model.technicalDetails.conversionId}
+                    value={model.technicalDetails.conversionId}
                   />
                 </Row>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                   <FormInput
                     id="fxpConversion-details-modal__home-fxpConversion-id"
                     disabled={true}
-                    label="Conversion Quote ID"
-                    // value={model.technicalDetails.conversionQuoteId}
+                    label="Conversion Request ID"
+                    value={model.technicalDetails.conversionRequestId}
                     style={{ flex: 1 }}
                   />
                 </div>
@@ -559,16 +559,16 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.technicalDetails.fxQuoteRequest &&
-                          // model.technicalDetails.fxQuoteRequest.body
-                          model.conversionId
+                          model.technicalDetails.fxQuoteRequest &&
+                          model.technicalDetails.fxQuoteRequest.headers &&
+                          model.technicalDetails.fxQuoteRequest.body
                         )
                       }
                       tooltip={
                         !(
-                          // model.technicalDetails.fxQuoteRequest &&
-                          // model.technicalDetails.fxQuoteRequest.body
-                          model.conversionId
+                          model.technicalDetails.fxQuoteRequest &&
+                          model.technicalDetails.fxQuoteRequest.headers &&
+                          model.technicalDetails.fxQuoteRequest.body
                         ) &&
                         'This option is only available when an Fx POST /quote request can be found for the fxpConversion'
                       }
@@ -580,7 +580,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       }
                       onClick={() =>
                         showFxQuoteRequest(
-                          model.conversionId /*model.technicalDetails.fxQuoteRequest)*/
+                          model.technicalDetails.fxQuoteRequest
                         )
                       }
                     />
@@ -593,16 +593,17 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.technicalDetails.fxQuoteResponse &&
-                          // model.technicalDetails.fxQuoteResponse
-                          model.conversionId
+                          model.technicalDetails.fxQuoteResponse &&
+                          model.technicalDetails.fxQuoteResponse.headers && 
+                          model.technicalDetails.fxQuoteResponse.body
                         )
                       }
                       tooltip={
                         !(
-                          // model.technicalDetails.fxQuoteResponse &&
-                          // model.technicalDetails.fxQuoteResponse
-                          model.conversionId
+                          model.technicalDetails.fxQuoteResponse &&
+                          model.technicalDetails.fxQuoteResponse.headers && 
+                          model.technicalDetails.fxQuoteResponse.body
+
                         ) &&
                         'This option is only available when an fx POST /fxquote response can be found for the fxpConversion'
                       }
@@ -614,7 +615,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       }
                       onClick={() =>
                         showFxQuoteResponse(
-                          model.conversionId /*model.technicalDetails.fxQuoteResponse*/
+                          model.technicalDetails.fxQuoteResponse
                         )
                       }
                     />
@@ -627,28 +628,28 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.technicalDetails.fxFxpConversionPrepare &&
-                          // model.technicalDetails.fxFxpConversionPrepare.body
-                          model.conversionId
+                          model.technicalDetails.fxTransferPrepare &&
+                          model.technicalDetails.fxTransferPrepare.headers &&
+                          model.technicalDetails.fxTransferPrepare.body
                         )
                       }
                       tooltip={
                         !(
-                          // model.technicalDetails.fxFxpConversionPrepare &&
-                          // model.technicalDetails.fxFxpConversionPrepare.body
-                          model.conversionId
+                          model.technicalDetails.fxTransferPrepare &&
+                          model.technicalDetails.fxTransferPrepare.headers &&
+                          model.technicalDetails.fxTransferPrepare.body
                         ) &&
                         'This option is only available when an fx POST /fxpConversions prepare can be found for the fxpConversion'
                       }
                       noFill={true}
                       label={
                         <span>
-                          <span> FX FxpConversion Prepare</span>
+                          <span> FX Conversion Prepare</span>
                         </span>
                       }
                       onClick={() =>
                         showFxFxpConversionPrepare(
-                          model.conversionId /*model.technicalDetails.fxFxpConversionPrepare*/
+                          model.technicalDetails.fxTransferPrepare
                         )
                       }
                     />
@@ -661,28 +662,24 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       style={{ width: '100%' }}
                       disabled={
                         !(
-                          // model.technicalDetails.fxFxpConversionFulfil &&
-                          // model.technicalDetails.fxFxpConversionFulfil
-                          model.conversionId
+                          model.technicalDetails.fxTransferFulfil
                         )
                       }
                       tooltip={
                         !(
-                          // model.technicalDetails.fxFxpConversionFulfil &&
-                          // model.technicalDetails.fxFxpConversionFulfil
-                          model.conversionId
+                          model.technicalDetails.fxTransferFulfil
                         ) &&
                         'This option is only available when a POST /fxpConversions fulfilment can be found for the fxpConversion'
                       }
                       noFill={true}
                       label={
                         <span>
-                          <span> FX FxpConversion Fulfil</span>
+                          <span> FX Conversion Fulfil</span>
                         </span>
                       }
                       onClick={() =>
                         showFxFxpConversionFulfil(
-                          model.conversionId /*model.technicalDetails.fxFxpConversionFulfil*/
+                          model.technicalDetails.fxTransferFulfil
                         )
                       }
                     />
