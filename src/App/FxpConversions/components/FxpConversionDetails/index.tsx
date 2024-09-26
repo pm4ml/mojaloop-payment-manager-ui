@@ -449,14 +449,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.conversionTerms.conversionTerms.charges?.totalSourceCurrencyCharges.amount}
+                      value={model.conversionTerms.conversionTerms.charges.totalSourceCurrencyCharges.amount}
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.conversionTerms.conversionTerms.charges?.totalSourceCurrencyCharges.currency}
+                      value={model.conversionTerms.conversionTerms.charges.totalSourceCurrencyCharges.currency}
 
                     />
                   </div>

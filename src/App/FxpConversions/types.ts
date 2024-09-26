@@ -203,10 +203,28 @@ export interface QuoteAmount {
   currency: string;
 }
 
+export interface SourceAmount {
+  amount: string;
+  currency: string;
+}
+export interface TargetAmount {
+  amount: string;
+  currency: string;
+}
 export interface FxpConversionAmount {
   amount: string;
   currency: string;
 }
+export interface totalSourceCurrencyCharges {
+  amount: string;
+  currency: string;
+}
+export interface totalTargetCurrencyCharges {
+  amount: string;
+  currency: string;
+}
+
+
 
 export interface PayeeReceiveAmount {
   amount: string;
@@ -324,8 +342,8 @@ export interface FxpDetails {
   determiningTransferId: string;
   conversionRequestId: string;
   conversionState: string;
-  sourceAmount: FxpConversionAmount;
-  targetAmount: FxpConversionAmount;
+  sourceAmount: SourceAmount;
+  targetAmount: TargetAmount;
   conversionAcceptedDate: string;
   conversionSettlementBatch: string;
   dfspInstitution: string;
@@ -334,13 +352,14 @@ export interface FxpConversionTerms {
   determiningTransferId: string;
   conversionId: string;
   conversionState: string;
-  quoteAmount: FxpConversionAmount;
+  quoteAmount: QuoteAmount;
   quoteAmountType: string;
   conversionTerms: ConversionTerms;
 }
 
 export interface FxpTechnicalDetails {
   determiningTransferId: string;
+  conversionRequestId: string;
   conversionId: string;
   conversionQuoteId: string;
   conversionState: string;
@@ -356,18 +375,18 @@ export interface FxpTechnicalDetails {
 }
 
 export interface ConversionTerms {
-  charges?: [
+  charges:
     {
-      totalSourceCurrencyCharges: FxpConversionAmount;
-      totalTargetCurrencyCharges: FxpConversionAmount;
+      totalSourceCurrencyCharges: totalSourceCurrencyCharges;
+      totalTargetCurrencyCharges: totalTargetCurrencyCharges;
     }
-  ];
-  transferAmount?: [
+  ;
+  transferAmount:
     {
-      sourceAmount: FxpConversionAmount;
-      targetAmount: FxpConversionAmount;
+      sourceAmount: SourceAmount;
+      targetAmount: QuoteAmount;
     }
-  ];
+  ;
   exchangeRate: string;
   expiryDate: string;
 }
