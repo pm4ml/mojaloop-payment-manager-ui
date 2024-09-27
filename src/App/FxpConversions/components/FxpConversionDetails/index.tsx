@@ -123,7 +123,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   let conversionStateInput = (
     <FormInput
       disabled={true}
-      label="FxpConversion State"
+      label="Conversion State"
       value={model.technicalDetails.conversionState}
     />
   );
@@ -133,10 +133,10 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
       <div className="forminput__row">
         <div className="forminput-input">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>FxpConversion State</label>
+          <label>Conversion State</label>
           <TextField
             disabled={false}
-            label="FxpConversion State"
+            label="Conversion State"
             value={model.technicalDetails.conversionState}
             onButtonClick={() => showFxpConversionError(model.technicalDetails.lastError)}
             buttonText="View Error"
@@ -161,8 +161,9 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
-                  label="FxpConversion ID"
+                  label="Determining Transfer ID"
                   type="text"
+                  readOnly={true}
                   value={model.conversionDetails.determiningTransferId}
                   style={{
                     whiteSpace: 'nowrap',
@@ -237,14 +238,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionDetails.conversionAcceptedDate}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              {/* <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
                   label="Conversion Settlement Batch"
                   type="text"
                   value={model.conversionDetails.conversionSettlementBatch}
                 />
-              </div>
+              </div> */}
             </Row>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
@@ -263,14 +264,6 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionDetails.dfspInstitution}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
-                <FormInput
-                  disabled={true}
-                  label="Conversion State"
-                  type="text"
-                  value={model.conversionDetails.conversionState}
-                />
-              </div>
             </Row>
           </TabPanel>
           <TabPanel>
@@ -278,7 +271,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
-                  label="FxpConversion ID"
+                  label="Determining Transfer ID"
                   type="text"
                   value={model.conversionTerms.determiningTransferId}
                   style={{
@@ -337,6 +330,26 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   <label style={{ paddingTop: '5px', paddingBottom: '5px' }}>
                     Conversion Terms
                   </label>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Source Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.conversionTerms.conversionTerms.transferAmount.sourceAmount.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.conversionTerms.conversionTerms.transferAmount.sourceAmount.currency}
+                    />
+                  </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -445,7 +458,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   <FormInput
                     disabled={true}
-                    label="FxpConversion ID"
+                    label="Determining Transfer ID"
                     value={model.technicalDetails.determiningTransferId}
                   />
                 </Row>

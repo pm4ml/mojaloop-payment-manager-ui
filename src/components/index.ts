@@ -15,6 +15,7 @@ import {
   FormInputsGroup,
   Heading,
   Icon,
+  content_copy,
   Link,
   Menu,
   MenuItem,
@@ -53,6 +54,7 @@ import Status from './Status';
 import PendingOverlay from './PendingOverlay';
 import ProgressTabs, { ProgressTab } from './ProgressTab';
 import MetricsChart from './Charts/MetricsChart';
+import { copyFile } from 'fs';
 
 export {
   Accordion,
@@ -77,6 +79,7 @@ export {
   FileUploader,
   Heading,
   Icon,
+  content_copy,
   Legend,
   Link,
   Menu,
