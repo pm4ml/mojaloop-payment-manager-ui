@@ -193,6 +193,19 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionDetails.conversionState}
                 />
               </div>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+                <FormInput
+                  disabled={true}
+                  label="Commited Request ID"
+                  type="text"
+                  value={model.conversionDetails.conversionRequestId}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                />
+              </div>
             </Row>
 
             <Row align="flex-start" style={{ marginTop: '5px' }}>
@@ -241,7 +254,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
               {/* <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
-                  label="Conversion Settlement Batch"
+                  label="Transfer Settlement Batch"
                   type="text"
                   value={model.conversionDetails.conversionSettlementBatch}
                 />
@@ -493,6 +506,18 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {conversionStateInput}
                 </Row>
+                
+                <div>
+                  <FormInput
+                    id="transfer-details-modal__home-transfer-id"
+                    disabled={true}
+                    label="Commited Request ID"
+                    value={model ? 'CommitedId' : ''}
+                    style={{ flex: 1 }}
+                  />
+                </div>
+
+
               </div>
               <div style={{ alignItems: 'flex-start', flex: '0 0 50%', marginRight: '5px' }}>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>

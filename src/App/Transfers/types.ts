@@ -259,6 +259,7 @@ export interface TransferParties {
 }
 // Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
+  needFx: string;
   conversionAcceptedDate: string;
   transferId: string;
   transferState: string;
