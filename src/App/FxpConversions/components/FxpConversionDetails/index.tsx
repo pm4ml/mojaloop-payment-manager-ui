@@ -18,7 +18,6 @@ import {
   TabPanel,
 } from 'components';
 import { FxpConversionRequestDetailsModal } from './RequestDetailModal';
-import { FxpConversionPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { FxpConversionDetails } from '../../types';
@@ -86,59 +85,6 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   const [requestModel, setRequestModel] = useState(null);
   const [requestModalTitle, setRequestModalTitle] = useState('');
 
-  const [isRequestPartyDetailsVisible, setIsRequestPartyDetailsVisible] = useState(false);
-  const [partyModel, setPartyModel] = useState(null);
-  const [partyModalTitle, setPartyModalTitle] = useState('');
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showPayeeParty = (aModel: any) => {
-    setPartyModel(aModel);
-    setPartyModalTitle('Payee Party');
-    setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showPayerParty = (aModel: any) => {
-    setPartyModel(aModel);
-    setPartyModalTitle('Payer Party');
-    setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showPartyLookupResponse = (aModel: any) => {
-    setRequestModel(aModel);
-    setRequestModalTitle('Party Lookup Response');
-    setIsRequestDetailsVisible(!isRequestDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showQuoteRequest = (aModel: any) => {
-    setRequestModel(aModel);
-    setRequestModalTitle('Quote Request');
-    setIsRequestDetailsVisible(!isRequestDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showQuoteResponse = (aModel: any) => {
-    setRequestModel(aModel);
-    setRequestModalTitle('Quote Response');
-    setIsRequestDetailsVisible(!isRequestDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showFxpConversionPrepare = (aModel: any) => {
-    setRequestModel(aModel);
-    setRequestModalTitle('FxpConversion Prepare');
-    setIsRequestDetailsVisible(!isRequestDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showFxpConversionFulfil = (aModel: any) => {
-    setRequestModel(aModel);
-    setRequestModalTitle('FxpConversion Fulfil');
-    setIsRequestDetailsVisible(!isRequestDetailsVisible);
-  };
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const showFxpConversionError = (aModel: any) => {
     setRequestModel(aModel);
@@ -161,23 +107,16 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showFxFxpConversionPrepare = (aModel: any) => {
+  const showFxTransferPrepare = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Fx FxpConversion Prepare');
+    setRequestModalTitle('Fx Transfer Prepare');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showFxFxpConversionFulfil = (aModel: any) => {
+  const showFxTransferFulfil = (aModel: any) => {
     setRequestModel(aModel);
-    setRequestModalTitle('Fx FxpConversion Fulfil');
-    setIsRequestDetailsVisible(!isRequestDetailsVisible);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const showConversionError = (aModel: any) => {
-    setRequestModel(aModel);
-    setRequestModalTitle('Conversion Error');
+    setRequestModalTitle('Fx Transfer Fulfil');
     setIsRequestDetailsVisible(!isRequestDetailsVisible);
   };
 
@@ -194,7 +133,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
       <div className="forminput__row">
         <div className="forminput-input">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>Conversion State</label>
+          <label>FxpConversion State</label>
           <TextField
             disabled={false}
             label="FxpConversion State"
@@ -521,7 +460,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                 </Row>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                   <FormInput
-                    id="fxpConversion-details-modal__home-fxpConversion-id"
+                    id="fxpConversion-details-modal__home-fxpConversion-request-id"
                     disabled={true}
                     label="Conversion Request ID"
                     value={model.technicalDetails.conversionRequestId}
@@ -531,7 +470,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
 
                 {/* Conversion State */}
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  {{ conversionStateInput }}
+                  {conversionStateInput}
                 </Row>
               </div>
               <div style={{ alignItems: 'flex-start', flex: '0 0 50%', marginRight: '5px' }}>
@@ -625,11 +564,11 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       noFill={true}
                       label={
                         <span>
-                          <span> FX Conversion Prepare</span>
+                          <span> FX Transfer Prepare</span>
                         </span>
                       }
                       onClick={() =>
-                        showFxFxpConversionPrepare(model.technicalDetails.fxTransferPrepare)
+                        showFxTransferPrepare(model.technicalDetails.fxTransferPrepare)
                       }
                     />
                   </div>
@@ -647,12 +586,10 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       noFill={true}
                       label={
                         <span>
-                          <span> FX Conversion Fulfil</span>
+                          <span> FX Transfer Fulfil</span>
                         </span>
                       }
-                      onClick={() =>
-                        showFxFxpConversionFulfil(model.technicalDetails.fxTransferFulfil)
-                      }
+                      onClick={() => showFxTransferFulfil(model.technicalDetails.fxTransferFulfil)}
                     />
                   </div>
                 </Row>
@@ -667,15 +604,6 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
           title={requestModalTitle}
           onCloseClick={() => {
             setIsRequestDetailsVisible(!isRequestDetailsVisible);
-          }}
-        />
-      )}
-      {isRequestPartyDetailsVisible && (
-        <FxpConversionPartyDetailsModal
-          model={partyModel}
-          title={partyModalTitle}
-          onCloseClick={() => {
-            setIsRequestPartyDetailsVisible(!isRequestPartyDetailsVisible);
           }}
         />
       )}
