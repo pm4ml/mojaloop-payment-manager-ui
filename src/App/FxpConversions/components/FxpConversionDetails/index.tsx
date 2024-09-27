@@ -340,34 +340,42 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.conversionTerms.conversionTerms.transferAmount.sourceAmount.amount}
+                      value={
+                        model.conversionTerms.conversionTerms.transferAmount.sourceAmount.amount
+                      }
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.conversionTerms.conversionTerms.transferAmount.sourceAmount.currency}
+                      value={
+                        model.conversionTerms.conversionTerms.transferAmount.sourceAmount.currency
+                      }
                     />
                   </div>
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Transfer Amount
+                    Target Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.conversionTerms.quoteAmount.amount}
+                      value={
+                        model.conversionTerms.conversionTerms.transferAmount.targetAmount.amount
+                      }
                     />
                   </div>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
                       disabled={true}
                       type="text"
-                      value={model.conversionTerms.quoteAmount.currency}
+                      value={
+                        model.conversionTerms.conversionTerms.transferAmount.targetAmount.currency
+                      }
                     />
                   </div>
                 </Row>

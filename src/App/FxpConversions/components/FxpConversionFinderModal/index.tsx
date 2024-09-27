@@ -105,7 +105,7 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
     {
       label: 'Amount',
       key: 'amount',
-      func: (value: string, item: FxpConversion) => `${item.current} ${item.amount}`,
+      func: (value: string, item: FxpConversion) => `${item.currency} ${item.amount}`,
     },
     {
       label: 'Direction',
