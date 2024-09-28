@@ -21,6 +21,7 @@ import { FxpConversionRequestDetailsModal } from './RequestDetailModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { FxpConversionDetails } from '../../types';
+import { trim } from 'lodash';
 
 const stateProps = (state: State) => ({
   model: selectors.getFxpConversionDetails(state),
@@ -147,6 +148,44 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
     );
   }
 
+  const [isCopiedConversionRequestId, setIsCopiedConversionRequestId] = useState(false);
+  const [isCopiedDeterminingTransferId, setIsCopiedDeterminingTransferId] = useState(false);
+  const [isCopiedCommittedRequestId, setIsCopiedCommittedRequestId] = useState(false);
+  const [isCopiedConversionId, setIsCopiedConversionId] = useState(false);
+
+  // Functions to copy the Ids to the clipboard
+  const copyDeterminingTransferId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedDeterminingTransferId(true);
+    setTimeout(() => setIsCopiedDeterminingTransferId(false), 2000);
+  };
+
+  const copyConversionRequestId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedConversionRequestId(true);
+    setTimeout(() => setIsCopiedConversionRequestId(false), 2000);
+  };
+
+  const copyCommittedRequestId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedCommittedRequestId(true);
+    setTimeout(() => setIsCopiedCommittedRequestId(false), 2000);
+  };
+
+  const copyConversionId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedConversionId(true);
+    setTimeout(() => setIsCopiedConversionId(false), 2000);
+  };
+
+  const trim = (id: string) => {
+    const maxLength = 21;
+    if (id.length > maxLength) {
+      return id.substring(0, maxLength) + '...';
+    }
+    return id;
+  };
+
   return (
     <div>
       <Tabs>
@@ -158,33 +197,112 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
         <TabPanels>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
                   label="Determining Transfer ID"
                   type="text"
                   readOnly={true}
-                  value={model.conversionDetails.determiningTransferId}
+                  value={trim(model.conversionDetails.determiningTransferId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 />
+
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() =>
+                    copyDeterminingTransferId(model.conversionDetails.determiningTransferId)
+                  }
+                >
+                  {isCopiedDeterminingTransferId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
                   label="Conversion ID"
                   type="text"
-                  value={model.conversionDetails.conversionRequestId}
+                  value={trim(model.conversionTerms.conversionId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() => copyConversionId(model.conversionTerms.conversionId)}
+                >
+                  {isCopiedConversionId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
+
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
                   disabled={true}
@@ -193,18 +311,59 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionDetails.conversionState}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+
+              {/* needs proper mapping for commited request Id */}
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
-                  label="Commited Request ID"
+                  label="Committed Request ID"
                   type="text"
-                  value={model.conversionDetails.conversionRequestId}
+                  value={trim(model.technicalDetails.conversionRequestId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() =>
+                    copyConversionRequestId(model.conversionDetails.conversionRequestId)
+                  }
+                >
+                  {isCopiedConversionRequestId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
             </Row>
 
@@ -286,7 +445,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Determining Transfer ID"
                   type="text"
-                  value={model.conversionTerms.determiningTransferId}
+                  value={trim(model.conversionTerms.determiningTransferId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -476,23 +635,111 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
           <TabPanel>
             <Row align="flex-start stretch">
               <div style={{ flex: '0 0 50%', marginRight: '10px' }}>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <FormInput
-                    disabled={true}
-                    label="Determining Transfer ID"
-                    value={model.technicalDetails.determiningTransferId}
-                  />
-                </Row>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    position: 'relative',
+                  }}
+                >
+                  <Row align="flex-start" style={{ marginTop: '5px' }}>
+                    <FormInput
+                      disabled={true}
+                      label="Determining Transfer ID"
+                      value={model.technicalDetails.determiningTransferId}
+                    />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onClick={() =>
+                        copyDeterminingTransferId(model.technicalDetails.determiningTransferId)
+                      }
+                    >
+                      {isCopiedDeterminingTransferId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Row>
+                </div>
 
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <FormInput
-                    id="fxpConversion-details-modal__conversion-id"
-                    disabled={true}
-                    label="Conversion ID"
-                    value={model.technicalDetails.conversionId}
-                  />
-                </Row>
-                <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    position: 'relative',
+                  }}
+                >
+                  <Row align="flex-start" style={{ marginTop: '5px' }}>
+                    <FormInput
+                      id="fxpConversion-details-modal__conversion-id"
+                      disabled={true}
+                      label="Conversion ID"
+                      value={model.technicalDetails.conversionId}
+                    />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onClick={() => copyConversionId(model.technicalDetails.conversionId)}
+                    >
+                      {isCopiedConversionId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Row>
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    position: 'relative',
+                  }}
+                >
                   <FormInput
                     id="fxpConversion-details-modal__home-fxpConversion-request-id"
                     disabled={true}
@@ -500,14 +747,54 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     value={model.technicalDetails.conversionRequestId}
                     style={{ flex: 1 }}
                   />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    onClick={() =>
+                      copyConversionRequestId(model.technicalDetails.conversionRequestId)
+                    }
+                  >
+                    {isCopiedConversionRequestId ? (
+                      <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                        ✓Copied
+                      </span>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        width="22"
+                        fill="#acacac"
+                        style={{ marginLeft: '8px', marginTop: '16px' }}
+                      >
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                      </svg>
+                    )}
+                  </span>
                 </div>
 
                 {/* Conversion State */}
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {conversionStateInput}
                 </Row>
-                
-                <div>
+
+                {/* Commited REquest Id needs proper mapping */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: '100%',
+                    position: 'relative',
+                  }}
+                >
                   <FormInput
                     id="transfer-details-modal__home-transfer-id"
                     disabled={true}
@@ -515,9 +802,37 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     value={model ? 'CommitedId' : ''}
                     style={{ flex: 1 }}
                   />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    onClick={() => (model ? 'CommitedId' : '')}
+                  >
+                    {isCopiedCommittedRequestId ? (
+                      <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                        ✓Copied
+                      </span>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        width="22"
+                        fill="#acacac"
+                        style={{ marginLeft: '8px', marginTop: '16px' }}
+                      >
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                      </svg>
+                    )}
+                  </span>
                 </div>
-
-
               </div>
               <div style={{ alignItems: 'flex-start', flex: '0 0 50%', marginRight: '5px' }}>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
