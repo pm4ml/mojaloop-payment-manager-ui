@@ -512,7 +512,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Conversion Type"
                   type="text"
-                  value={model.needFx ? model.conversionInstitution : ''}
+                  value={model.needFx ? model.conversionType : ''}
                 />
               </div>
               <div
