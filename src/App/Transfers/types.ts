@@ -1,3 +1,4 @@
+import { FxpConversionFilter } from 'App/FxpConversions/types';
 import {
   ErrorMessage,
   LinesConfig,
@@ -43,6 +44,8 @@ export interface TransferError {
   value: string;
   errorType: ErrorType;
   committedDate: string;
+  receiveAmount?: string;
+  receiveCurrency?: string;
 }
 
 export enum ErrorDirection {
@@ -108,6 +111,7 @@ export interface TransferParty {
   dateOfBirth?: string;
   merchantClassificationCode?: string;
   fspId: string;
+  supportedCurrencies: string[];
   extensionList?: ExtensionListItem[];
 }
 
@@ -131,6 +135,66 @@ export interface TransferTechnicalDetailsApiMessage {
   body?: object;
 }
 
+export interface SenderDetails {
+  idType: string;
+  idValue: string;
+}
+
+export interface RecipientDetails {
+  idType: string;
+  idValue: string;
+}
+
+export interface QuoteAmount {
+  amount: string;
+  currency: string;
+}
+
+export interface TransferAmount {
+  amount: string;
+  currency: string;
+}
+
+export interface PayeeReceiveAmount {
+  amount: string;
+  currency: string;
+}
+
+export interface PayeeDfspFee {
+  amount: string;
+  currency: string;
+}
+
+export interface PayeeDfspCommision {
+  amount: string;
+  currency: string;
+}
+
+export interface ConversionTerms {
+  transferAmount: {
+    sourceAmount: {
+      amount: string;
+      currency: string;
+    };
+    targetAmount: {
+      amount: string;
+      currency: string;
+    };
+  };
+  charges: {
+    totalSourceCurrencyCharges: {
+      amount: string;
+      currency: string;
+    };
+    totalTargetCurrencyCharges: {
+      amount: string;
+      currency: string;
+    };
+  }; // Define charges as an array of Charge objects
+  exchangeRate: string;
+  expiryDate: string;
+}
+
 export interface TransferTechnicalDetails {
   schemeTransferId: string;
   homeTransferId: string;
@@ -139,6 +203,7 @@ export interface TransferTechnicalDetails {
   payeeParty: TransferParty;
   quoteId: string;
   transferState: string;
+  commitRequestId: string;
   getPartiesRequest?: TransferTechnicalDetailsApiMessage;
   getPartiesResponse?: TransferTechnicalDetailsApiMessage;
   quoteRequest?: TransferTechnicalDetailsApiMessage;
@@ -146,23 +211,103 @@ export interface TransferTechnicalDetails {
   transferPrepare?: TransferTechnicalDetailsApiMessage;
   transferFulfilment?: TransferTechnicalDetailsApiMessage;
   lastError?: TransferDetailsError;
+  conversionId: string;
+  conversionState?: string;
+  conversionQuoteId: string;
+  fxQuoteRequest?: TransferTechnicalDetailsApiMessage;
+  fxQuoteResponse?: FxQuoteResponse;
+  fxTransferPrepare?: TransferTechnicalDetailsApiMessage;
+  fxTransferFulfilment?: FxTransferFulfilment;
 }
 
+export interface FxQuoteResponse {
+  condition: {};
+  conversionTerms: {};
+}
+
+export interface FxTransferFulfilment {
+  body: {};
+}
+
+export interface TransferTerms {
+  transferId: string;
+  homeTransferId: string;
+  quoteAmount: QuoteAmount;
+  quoteAmountType: string;
+  transferAmount: TransferAmount;
+  payeeReceiveAmount: PayeeReceiveAmount;
+  payeeDfspFee: PayeeDfspFee;
+  payeeDfspCommision: PayeeDfspCommision;
+  expiryDate: string;
+  conversionTerms: ConversionTerms;
+}
+
+export interface TransferParties {
+  transferId: string;
+  transferState: string;
+  transferType: string;
+  payerParty: TransferParty;
+  payeeParty: TransferParty;
+  quoteId: string;
+  getPartiesRequest?: TransferTechnicalDetailsApiMessage;
+  getPartiesResponse?: TransferTechnicalDetailsApiMessage;
+  quoteRequest?: TransferTechnicalDetailsApiMessage;
+  quoteResponse?: TransferTechnicalDetailsApiMessage;
+  transferPrepare?: TransferTechnicalDetailsApiMessage;
+  transferFulfilment?: TransferTechnicalDetailsApiMessage;
+  lastError?: TransferDetailsError;
+  fxProviders: string[];
+}
+// Includes the type property to the TransferDetails Interface.
 export interface TransferDetails {
-  id: string;
+  needFx: string;
+  conversionAcceptedDate: string;
+  transferId: string;
+  transferState: string;
   confirmationNumber: number;
-  amount: string;
-  currency: string;
-  institution: string;
+  transactionType: string;
+  sendAmount: string;
+  sendCurrency: string;
+  conversionSubmitted: string;
+  conversionInstitution: string;
   direction: string;
-  sender: string;
-  recipient: string;
-  details: string;
-  status: string;
+  receiveAmount: string;
+  receiveCurrency: string;
+  recipientCurrencies: string;
+  senderDetails: SenderDetails;
+  recipientDetails: RecipientDetails;
+  recipientInstitution: string;
   initiatedTimestamp: string;
+  dateSubmitted: string;
+  conversionType: string;
   technicalDetails: TransferTechnicalDetails;
+  transferParties: TransferParties;
+  transferTerms: TransferTerms;
 }
 
+export interface FxpConversionDetails {
+  conversionAcceptedDate: string;
+  transferId: string;
+  transferState: string;
+  confirmationNumber: number;
+  transactionType: string;
+  sendAmount: string;
+  sendCurrency: string;
+  conversionSubmitted: string;
+  conversionInstitution: string;
+  direction: string;
+  receiveAmount: string;
+  receiveCurrency: string;
+  recipientCurrencies: string;
+  senderDetails: SenderDetails;
+  recipientDetails: RecipientDetails;
+  recipientInstitution: string;
+  initiatedTimestamp: string;
+  dateSubmitted: string;
+  technicalDetails: TransferTechnicalDetails;
+  transferParties: TransferParties;
+  transferTerms: TransferTerms;
+}
 export enum DateRange {
   Today = 'TODAY',
   Past48Hours = 'PAST_48_HOURS',
@@ -204,6 +349,26 @@ export interface TransfersState {
   transfersAvgTime?: AvgTime;
   transfersAvgTimeError: ErrorMessage;
   transferDetails?: TransferDetails;
+  isTransferDetailsModalVisible: boolean;
+  transferDetailsError: ErrorMessage;
+}
+
+export interface FxpConversionsState {
+  transfersErrors: TransferError[];
+  transfersErrorsError: ErrorMessage;
+  isTransfersErrorsViewAllActive: boolean;
+  transfersErrorsTypeFilter?: string;
+  isTransferFinderModalVisible: boolean;
+  fxpConversionFinderFilter: FxpConversionFilter;
+  isTransfersRequested: boolean;
+  transfersError: ErrorMessage;
+  transfersStatuses: TransfersStatus[];
+  transfersStatusesError: ErrorMessage;
+  transfersSuccessPerc?: SuccessPerc;
+  transfersSuccessPercError: ErrorMessage;
+  transfersAvgTime?: AvgTime;
+  transfersAvgTimeError: ErrorMessage;
+  fxpConversionDetails?: FxpConversionDetails;
   isTransferDetailsModalVisible: boolean;
   transferDetailsError: ErrorMessage;
 }

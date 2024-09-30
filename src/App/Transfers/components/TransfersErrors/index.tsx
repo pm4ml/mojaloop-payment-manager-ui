@@ -3,7 +3,7 @@ import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
 import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
 import xlsx from 'xlsx';
-import { TransferError } from '../../types';
+import { TransferDetails, TransferError } from '../../types';
 import * as helpers from '../../helpers';
 import TransfersErrorsModal from './TransfersErrorsModal';
 
@@ -20,9 +20,20 @@ const transfersErrorsColumns = [
   { label: 'Direction', key: 'direction', func: helpers.toSpacedPascalCase },
   { label: 'Type', key: 'type' },
   {
-    label: 'Value',
+    label: 'Send Value',
     key: 'amount',
-    func: (amount: string, item: TransferError) => `${getCurrencySymbol(item.currency)} ${amount}`,
+  },
+  {
+    label: 'Send Currency',
+    key: 'currency',
+  },
+  {
+    label: 'Receive Value',
+    key: 'amount',
+  },
+  {
+    label: 'Receive Currency',
+    key: 'currency',
   },
   { label: 'Error Type', key: 'errorType', func: helpers.toSpacedPascalCase },
   {

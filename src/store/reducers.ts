@@ -3,6 +3,7 @@ import { History } from 'history';
 import { connectRouter } from 'connected-react-router';
 import { apiReducer } from 'utils/api';
 import { reducer as appReducer } from 'App';
+import fxpConversionsReducer from '../App/FxpConversions/reducers';
 import { reducer as dashboardReducer } from 'App/Dashboard';
 import { reducer as technicalDashboardReducer } from 'App/TechnicalDashboard';
 import { reducer as transfersReducer } from 'App/Transfers';
@@ -17,6 +18,7 @@ const getReducer = (history: History): Reducer =>
     technicalDashboard: technicalDashboardReducer,
     transfers: transfersReducer,
     wizard: wizardReducer,
+    fxpConversions: fxpConversionsReducer,
   });
 
 export default getReducer;
