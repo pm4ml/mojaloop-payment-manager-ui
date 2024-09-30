@@ -533,7 +533,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Source Transfer Amount
+                    Transfer Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
@@ -641,7 +641,29 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
-                    Target Transfer Amount
+                    Source Amount
+                  </label>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={model.transferTerms.conversionTerms.transferAmount.sourceAmount.amount}
+                    />
+                  </div>
+                  <div style={{ marginRight: '5px', minWidth: '15%' }}>
+                    <FormInput
+                      disabled={true}
+                      type="text"
+                      value={
+                        model.transferTerms.conversionTerms.transferAmount.sourceAmount.currency
+                      }
+                    />
+                  </div>
+                </Row>
+                <Row align="flex-start" style={{ marginTop: '5px' }}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                    Target Amount
                   </label>
                   <div style={{ marginRight: '5px', minWidth: '15%' }}>
                     <FormInput
