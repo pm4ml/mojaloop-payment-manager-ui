@@ -957,9 +957,9 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     <FormInput
                       id="transfer-details-modal__home-transfer-id"
                       disabled={true}
-                      label="Commited Request ID"
-                      // Committed Id to be replaced with actual mapping
-                      value={model.needFx ? 'CommittedId' : ''}
+                      label="Commit Request ID"
+                      // Commit Id to be replaced with actual mapping
+                      value={model.needFx ? model.technicalDetails.commitRequestId : ''}
                       style={{ flex: 1 }}
                     />
                   </div>

@@ -356,6 +356,7 @@ export interface FxpTechnicalDetails {
   conversionRequestId: string;
   conversionId: string;
   conversionState: string;
+  commitRequestId: string;
   fxQuoteRequest: FxpConversionTechnicalDetailsApiMessage;
   fxQuoteResponse: FxQuoteResponse;
   fxTransferPrepare?: FxpConversionTechnicalDetailsApiMessage;

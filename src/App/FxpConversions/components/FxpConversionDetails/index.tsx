@@ -150,7 +150,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
 
   const [isCopiedConversionRequestId, setIsCopiedConversionRequestId] = useState(false);
   const [isCopiedDeterminingTransferId, setIsCopiedDeterminingTransferId] = useState(false);
-  const [isCopiedCommittedRequestId, setIsCopiedCommittedRequestId] = useState(false);
+  const [isCopiedCommitRequestId, setIsCopiedCommitRequestId] = useState(false);
   const [isCopiedConversionId, setIsCopiedConversionId] = useState(false);
 
   // Functions to copy the Ids to the clipboard
@@ -166,10 +166,10 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
     setTimeout(() => setIsCopiedConversionRequestId(false), 2000);
   };
 
-  const copyCommittedRequestId = (text: string) => {
+  const copyCommitRequestId = (text: string) => {
     navigator.clipboard.writeText(text);
-    setIsCopiedCommittedRequestId(true);
-    setTimeout(() => setIsCopiedCommittedRequestId(false), 2000);
+    setIsCopiedCommitRequestId(true);
+    setTimeout(() => setIsCopiedCommitRequestId(false), 2000);
   };
 
   const copyConversionId = (text: string) => {
@@ -323,7 +323,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
               >
                 <FormInput
                   disabled={true}
-                  label="Committed Request ID"
+                  label="Conversion Request ID"
                   type="text"
                   value={trim(model.technicalDetails.conversionRequestId)}
                   style={{
@@ -798,8 +798,8 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   <FormInput
                     id="transfer-details-modal__home-transfer-id"
                     disabled={true}
-                    label="Commited Request ID"
-                    value={model ? 'CommitedId' : ''}
+                    label="Commit Request ID"
+                    value={model ? model.technicalDetails.commitRequestId : ''}
                     style={{ flex: 1 }}
                   />
                   <span
@@ -812,9 +812,11 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       display: 'flex',
                       alignItems: 'center',
                     }}
-                    onClick={() => (model ? 'CommitedId' : '')}
+                    onClick={() =>
+                     copyCommitRequestId(model.technicalDetails.commitRequestId)
+                    }
                   >
-                    {isCopiedCommittedRequestId ? (
+                    {isCopiedCommitRequestId ? (
                       <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
                         ✓Copied
                       </span>

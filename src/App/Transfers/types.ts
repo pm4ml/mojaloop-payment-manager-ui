@@ -203,6 +203,7 @@ export interface TransferTechnicalDetails {
   payeeParty: TransferParty;
   quoteId: string;
   transferState: string;
+  commitRequestId: string;
   getPartiesRequest?: TransferTechnicalDetailsApiMessage;
   getPartiesResponse?: TransferTechnicalDetailsApiMessage;
   quoteRequest?: TransferTechnicalDetailsApiMessage;
