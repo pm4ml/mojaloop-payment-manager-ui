@@ -186,6 +186,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
     return id;
   };
 
+  const trimDt = (id: string) => {
+    const maxLength = 15;
+    if (id.length > maxLength) {
+      return id.substring(0, maxLength) + '...';
+    }
+    return id;
+  };
+
   return (
     <div>
       <Tabs>
@@ -440,20 +448,52 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
           </TabPanel>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%', position: 'relative' }}>
                 <FormInput
                   disabled={true}
                   label="Determining Transfer ID"
                   type="text"
-                  value={trim(model.conversionTerms.determiningTransferId)}
+                  value={trimDt(model.conversionTerms.determiningTransferId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() =>
+                    copyDeterminingTransferId(model.conversionDetails.determiningTransferId)
+                  }
+                >
+                  {isCopiedDeterminingTransferId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '18%' }}>
                 <FormInput
                   disabled={true}
                   label="Conversion State"
@@ -461,7 +501,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionTerms.conversionState}
                 />
               </div>
-              <div style={{ flex: '0 0 12%', marginRight: '0', maxWidth: '15%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '18%' }}>
                 <FormInput
                   disabled={true}
                   label="Quote Amount"
@@ -469,15 +509,15 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   value={model.conversionTerms.quoteAmount.amount}
                 />
               </div>
-              <div style={{ flex: '0 0 12%', marginRight: '5px', maxWidth: '10%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
-                  label=" "
+                  label="Quote Currency"
                   type="text"
                   value={model.conversionTerms.quoteAmount.currency}
                 />
               </div>
-              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '20%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
                   label="Quote Amount Type"

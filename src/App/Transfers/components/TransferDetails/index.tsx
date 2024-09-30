@@ -243,6 +243,60 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     );
   }
 
+  const [isCopiedSchemeTransferId, setIsCopiedSchemeTransferId] = useState(false);
+  const [isCopiedTransferId, setIsCopiedTransferId] = useState(false);
+  const [isCopiedQuoteId, setIsCopiedQuoteId] = useState(false);
+  const [isCopiedHomeTId, setIsCopiedHomeTId] = useState(false);
+  const [isCopiedConversionRId, setIsCopiedConversionRId] = useState(false);
+  const [isCopiedCommitRId, setIsCopiedCommitRId] = useState(false);
+
+  const copySchemeTransferId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedSchemeTransferId(true);
+    setTimeout(() => setIsCopiedSchemeTransferId(false), 2000);
+  };
+  const copyTransferId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedTransferId(true);
+    setTimeout(() => setIsCopiedTransferId(false), 2000);
+  };
+  const copyQuoteId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedQuoteId(true);
+    setTimeout(() => setIsCopiedQuoteId(false), 2000);
+  };
+  const copyHomeTId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedHomeTId(true);
+    setTimeout(() => setIsCopiedHomeTId(false), 2000);
+  };
+  const copyConversionRId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedConversionRId(true);
+    setTimeout(() => setIsCopiedConversionRId(false), 2000);
+  };
+  const copyCommitRId = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setIsCopiedCommitRId(true);
+    setTimeout(() => setIsCopiedCommitRId(false), 2000);
+  };
+
+  const trim = (id: string) => {
+    const maxLength = 21;
+    if (id.length > maxLength) {
+      return id.substring(0, maxLength) + '...';
+    }
+    return id;
+  };
+
+  const trimTt = (id: string) => {
+    const maxLength = 15;
+    if (id.length > maxLength) {
+      return id.substring(0, maxLength) + '...';
+    }
+    return id;
+  };
+
   return (
     <div>
       <Tabs>
@@ -255,18 +309,55 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
         <TabPanels>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
                   label="Transfer ID"
                   type="text"
-                  value={model.transferId}
+                  value={trim(model.transferId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() => copyTransferId(model.transferId)}
+                >
+                  {isCopiedTransferId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '25%' }}>
                 <FormInput
@@ -469,20 +560,58 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
           </TabPanel>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '20%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
                   label="Transfer ID"
                   type="text"
-                  value={model.transferTerms.transferId}
+                  value={trimTt(model.transferTerms.transferId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() => copyTransferId(model.transferTerms.transferId)}
+                >
+                  {isCopiedTransferId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
+
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '18%' }}>
                 <FormInput
                   disabled={true}
                   label="Transfer State"
@@ -490,7 +619,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.transferState}
                 />
               </div>
-              <div style={{ flex: '0 0 12%', marginRight: '0', maxWidth: '15%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '18%' }}>
                 <FormInput
                   disabled={true}
                   label="Quote Amount"
@@ -498,15 +627,15 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.transferTerms.quoteAmount.amount}
                 />
               </div>
-              <div style={{ flex: '0 0 1%', marginRight: '5px', maxWidth: '10%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
-                  label=" "
+                  label="Quote Currency"
                   type="text"
                   value={model.transferTerms.quoteAmount.currency}
                 />
               </div>
-              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '20%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
                   label="Quote Amount Type"
@@ -765,13 +894,55 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
           </TabPanel>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+              <div
+                style={{
+                  flex: '0 0 20%',
+                  marginRight: '5px',
+                  maxWidth: '25%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
                   label="Transfer ID"
                   type="text"
-                  value={model.transferParties.transferId}
+                  value={trim(model.transferParties.transferId)}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
                 />
+                <span
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onClick={() => copyTransferId(model.transferParties.transferId)}
+                >
+                  {isCopiedTransferId ? (
+                    <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                      ✓Copied
+                    </span>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      width="22"
+                      fill="#acacac"
+                      style={{ marginLeft: '8px', marginTop: '16px' }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  )}
+                </span>
               </div>
               <div
                 style={{ flex: '0 0 20%', marginLeft: '50px', marginRight: '5px', maxWidth: '25%' }}
@@ -906,35 +1077,186 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
           <TabPanel>
             <Row align="flex-start stretch">
               <div style={{ flex: '0 0 50%', marginRight: '10px' }}>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <FormInput
-                    disabled={true}
-                    label="Scheme Transfer ID"
-                    value={model.technicalDetails.schemeTransferId}
-                  />
-                </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <FormInput
-                    disabled={true}
-                    label="Transaction ID"
-                    value={model.technicalDetails.transactionId}
-                  />
-                </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <FormInput
-                    disabled={true}
-                    label="Quote ID"
-                    value={model.technicalDetails.quoteId}
-                  />
-                </Row>
-                <Row align="flex-start" style={{ marginTop: '5px' }}>
-                  <FormInput
-                    id="transfer-details-modal__home-transfer-id"
-                    disabled={true}
-                    label="Home Transfer ID"
-                    value={model.technicalDetails.homeTransferId}
-                  />
-                </Row>
+                <div style={{ width: '100%', position: 'relative' }}>
+                  <Row align="flex-start" style={{ marginTop: '5px' }}>
+                    <FormInput
+                      disabled={true}
+                      label="Scheme Transfer ID"
+                      value={model.technicalDetails.schemeTransferId}
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onClick={() => copySchemeTransferId(model.technicalDetails.schemeTransferId)}
+                    >
+                      {isCopiedSchemeTransferId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Row>
+                </div>
+
+                <div style={{ width: '100%', position: 'relative' }}>
+                  <Row align="flex-start" style={{ marginTop: '5px' }}>
+                    <FormInput
+                      disabled={true}
+                      label="Transaction ID"
+                      value={model.technicalDetails.transactionId}
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onClick={() => copyTransferId(model.transferTerms.transferId)}
+                    >
+                      {isCopiedTransferId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Row>
+                </div>
+
+                <div style={{ width: '100%', position: 'relative' }}>
+                  <Row align="flex-start" style={{ marginTop: '5px' }}>
+                    <FormInput
+                      disabled={true}
+                      label="Quote ID"
+                      value={model.technicalDetails.quoteId}
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onClick={() => copyQuoteId(model.technicalDetails.quoteId)}
+                    >
+                      {isCopiedQuoteId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Row>
+                </div>
+
+                <div style={{ width: '100%', position: 'relative' }}>
+                  <Row align="flex-start" style={{ marginTop: '5px' }}>
+                    <FormInput
+                      id="transfer-details-modal__home-transfer-id"
+                      disabled={true}
+                      label="Home Transfer ID"
+                      value={model.technicalDetails.homeTransferId}
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onClick={() => copyHomeTId(model.technicalDetails.homeTransferId)}
+                    >
+                      {isCopiedHomeTId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
+                  </Row>
+                </div>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {transferStateInput}
                 </Row>
@@ -943,6 +1265,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   <div
                     style={{
                       width: '100%',
+                      position: 'relative',
                       color: model.needFx ? 'initial' : 'rgba(128, 128, 128, 0.5)',
                     }}
                     title={
@@ -956,7 +1279,47 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       disabled={true}
                       label="Conversion Request ID"
                       value={model.needFx ? model.technicalDetails.conversionQuoteId : ''}
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
                     />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: model.needFx ? 'pointer' : 'disabled',
+                        display: 'flex',
+                        alignItems: 'center',
+                        opacity: model.needFx ? 1 : 0,
+                      }}
+                      onClick={() => {
+                        if (model.needFx) {
+                          copyConversionRId(model.technicalDetails.conversionQuoteId); // Only execute if needfx is true
+                        }
+                      }}
+                    >
+                      {isCopiedConversionRId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
                   </div>
                 </Row>
 
@@ -968,6 +1331,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   <div
                     style={{
                       width: '100%',
+                      position: 'relative',
                       color: model.needFx ? 'initial' : 'rgba(128, 128, 128, 0.5)',
                     }}
                     title={
@@ -984,6 +1348,41 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                       value={model.needFx ? model.technicalDetails.commitRequestId : ''}
                       style={{ flex: 1 }}
                     />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: model.needFx ? 'pointer' : 'disabled',
+                        display: 'flex',
+                        alignItems: 'center',
+                        opacity: model.needFx ? 1 : 0,
+                      }}
+                      onClick={() => {
+                        if (model.needFx) {
+                          copyCommitRId(model.technicalDetails.commitRequestId);
+                        }
+                      }}
+                    >
+                      {isCopiedCommitRId ? (
+                        <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
+                          ✓Copied
+                        </span>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          width="22"
+                          fill="#acacac"
+                          style={{ marginLeft: '8px', marginTop: '16px' }}
+                        >
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                      )}
+                    </span>
                   </div>
                 </Row>
               </div>
