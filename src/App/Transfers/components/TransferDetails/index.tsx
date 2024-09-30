@@ -258,7 +258,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   const copyTransferId = (text: string) => {
     navigator.clipboard.writeText(text);
     setIsCopiedTransferId(true);
-    setTimeout(() => setIsCopiedTransferId(false), 2000);
+    setTimeout(() => setIsCopiedTransferId(false), 1500);
   };
   const copyQuoteId = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -297,6 +297,14 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
     return id;
   };
 
+  const trimTp = (id: string) => {
+    const maxLength = 28;
+    if (id.length > maxLength) {
+      return id.substring(0, maxLength) + '...';
+    }
+    return id;
+  };
+  
   return (
     <div>
       <Tabs>
@@ -611,7 +619,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 </span>
               </div>
 
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '18%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '19%' }}>
                 <FormInput
                   disabled={true}
                   label="Transfer State"
@@ -619,7 +627,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.transferState}
                 />
               </div>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '18%' }}>
+              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
                   label="Quote Amount"
@@ -638,7 +646,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
-                  label="Quote Amount Type"
+                  label="Quote Amount Type" 
                   type="text"
                   value={model.transferTerms.quoteAmountType}
                 />
@@ -865,7 +873,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '35%' }}>
                     Exchange Rate
                   </label>
                   <div style={{ marginRight: '0', maxWidth: '30%' }}>
@@ -878,7 +886,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 </Row>
                 <Row align="flex-start" style={{ marginTop: '5px' }}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '30%' }}>
+                  <label style={{ padding: '5px', marginRight: '5px', minWidth: '35%' }}>
                     Expiry Date Time
                   </label>
                   <div style={{ marginRight: '0', minWidth: '15%' }}>
@@ -898,7 +906,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 style={{
                   flex: '0 0 20%',
                   marginRight: '5px',
-                  maxWidth: '25%',
+                  maxWidth: '30%',
                   position: 'relative',
                 }}
               >
@@ -906,7 +914,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   disabled={true}
                   label="Transfer ID"
                   type="text"
-                  value={trim(model.transferParties.transferId)}
+                  value={trimTp(model.transferParties.transferId)}
                   style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -945,7 +953,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                 </span>
               </div>
               <div
-                style={{ flex: '0 0 20%', marginLeft: '50px', marginRight: '5px', maxWidth: '25%' }}
+                style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '35%' }}
               >
                 <FormInput
                   disabled={true}
@@ -954,7 +962,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   value={model.transferParties.transferState}
                 />
               </div>
-              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '25%' }}>
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '35%' }}>
                 <FormInput
                   disabled={true}
                   label="Transfer Type"
