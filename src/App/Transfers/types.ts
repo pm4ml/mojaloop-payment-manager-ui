@@ -279,6 +279,7 @@ export interface TransferDetails {
   recipientInstitution: string;
   initiatedTimestamp: string;
   dateSubmitted: string;
+  conversionType: string;
   technicalDetails: TransferTechnicalDetails;
   transferParties: TransferParties;
   transferTerms: TransferTerms;
