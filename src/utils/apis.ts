@@ -8,6 +8,11 @@ const services = {
   },
 };
 
+// const mockServices = {
+//   localNode: {
+//     baseUrl: 'http://localhost:4040/exp',
+//   },
+// };
 interface Todo {
   title: string;
 }
@@ -42,9 +47,35 @@ const batchTransfers: Config<Todo, State> = {
   url: (_: State, { batchId }: any) => `/batches/${batchId}/transfers`,
 };
 
-const transferDetails: Config<Todo, State> = {
+const fxpConversionsErrors: Config<Todo, State> = {
   service: services.localNode,
-  url: (_: State, { transferId }: { transferId: string }) => `/transfers/${transferId}/details`,
+  url: () => '/fxpErrors',
+};
+
+const fxpConversions: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/fxpConversions',
+};
+
+const fxpConversionDetails: Config<Todo, State> = {
+  service: services.localNode,
+  url: (_: State, { conversionId }: { conversionId: string }) =>
+    `/fxpConversions/${conversionId}/details`,
+};
+
+const fxpConversionsStatuses: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/fxpConversionsStatusSummary',
+};
+
+const fxpConversionsSuccessPerc: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/minuteSuccessfulFxpConversionsPerc',
+};
+
+const fxpConversionsAvgTime: Config<Todo, State> = {
+  service: services.localNode,
+  url: () => '/minuteAverageFxpConversionsResponseTime',
 };
 
 const transfersErrors: Config<Todo, State> = {
@@ -55,6 +86,11 @@ const transfersErrors: Config<Todo, State> = {
 const transfers: Config<Todo, State> = {
   service: services.localNode,
   url: () => '/transfers',
+};
+
+const transferDetails: Config<Todo, State> = {
+  service: services.localNode,
+  url: (_: State, { transferId }: { transferId: string }) => `/transfers/${transferId}/details`,
 };
 
 const transfersStatuses: Config<Todo, State> = {
@@ -197,6 +233,7 @@ const metric: Config<Todo, State> = {
 
 const endpoints = {
   dfsps,
+  // mockServices,
   environmentStatus,
   monetaryZones,
   batches,
@@ -231,6 +268,12 @@ const endpoints = {
   outboundEnrollmentCertificate,
   outboundEnrollmentAutoCertificate,
   metric,
+  fxpConversionDetails,
+  fxpConversionsErrors,
+  fxpConversions,
+  fxpConversionsStatuses,
+  fxpConversionsSuccessPerc,
+  fxpConversionsAvgTime,
 };
 
 type MyMap = typeof endpoints;

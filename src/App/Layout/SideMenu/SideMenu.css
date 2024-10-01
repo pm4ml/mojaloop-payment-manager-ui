@@ -2,4 +2,70 @@
   flex: 0 0 200px;
   border-right: 1px solid #ccc;
   background: #eee;
+  transition: transform 0.3s ease;
 }
+/* .sidebar-container {
+  position: relative;
+} */
+
+/* .side-menu {
+  flex: 0 0 200px;
+  border-right: 1px solid #ccc;
+  background: #eee;
+  height: 100vh;
+  transition: transform 0.3s ease;
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+/* }  */
+
+/* .side-menu.open {
+  transform: translateX(0);
+}
+
+.side-menu.closed {
+  transform: translateX(-100%);
+} */
+
+/* Toggle button styling */
+/* .toggle-button {
+  position: absolute;
+  top: 20px;
+  left: 200px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: left 0.3s ease;
+} */
+
+/* Move button when sidebar is closed */
+/* .side-menu.closed ~ .toggle-button {
+  left: 10px;
+}
+
+/* Styling for the toggle icon */
+/* .toggle-icon {
+  font-size: 20px;
+  color: #333;
+  transition: transform 0.3s ease;
+} */
+
+/* .toggle-icon.open {
+  transform: rotate(0); /* Show < when open */
+/* } */
+
+/* .toggle-icon.closed {
+  transform: rotate(180deg); /* Show > when closed */
+/* } */
+
+/* Add hover effects for the button */
+/* .toggle-button:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
+}  */

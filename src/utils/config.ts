@@ -3,7 +3,7 @@ import axios from 'axios';
 const getConfig = async () => {
   const { protocol, host } = window.location;
   const configURL = `${protocol}//${host}/config`;
-  let apiBaseUrl = 'http://localhost:4010';
+  let apiBaseUrl = 'http://localhost:3000';
   let checkSession;
   let loginUrl;
   let loginProvider;

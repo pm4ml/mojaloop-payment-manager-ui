@@ -15,75 +15,73 @@ export const getStartTimestamp = (secs: string | number) => {
   return now;
 };
 
-
 export const getAggregateDurationFromTimeFrame = (secs: string | number) => {
   // 1 hour
-  if(secs <= 3600) {
+  if (secs <= 3600) {
     return 20;
   }
   // 2 hours
-  if(secs <= 7200) {
+  if (secs <= 7200) {
     return 20;
   }
   // 4 hours
-  if(secs <= 14400) {
+  if (secs <= 14400) {
     return 20;
   }
   // 8 hours
-  if(secs <= 28800) {
+  if (secs <= 28800) {
     return 40;
   }
   // 12 hours
-  if(secs <= 43200) {
+  if (secs <= 43200) {
     return 40;
   }
   // 24 hours
-  if(secs <= 86400) {
+  if (secs <= 86400) {
     return 40;
   }
   // 48 hours
-  if(secs <= 172800) {
+  if (secs <= 172800) {
     return 120;
   }
   // 1 week
-  if(secs <= 604800) {
+  if (secs <= 604800) {
     return 120;
   }
   return 120;
 };
 
-
 export const getResolutionSecondsFromTimeFrame = (secs: string | number) => {
   // 1 hour
-  if(secs <= 3600) {
+  if (secs <= 3600) {
     return 20;
   }
   // 2 hours
-  if(secs <= 7200) {
+  if (secs <= 7200) {
     return 20;
   }
   // 4 hours
-  if(secs <= 14400) {
+  if (secs <= 14400) {
     return 20;
   }
   // 8 hours
-  if(secs <= 28800) {
+  if (secs <= 28800) {
     return 40;
   }
   // 12 hours
-  if(secs <= 43200) {
+  if (secs <= 43200) {
     return 40;
   }
   // 24 hours
-  if(secs <= 86400) {
+  if (secs <= 86400) {
     return 40;
   }
   // 48 hours
-  if(secs <= 172800) {
+  if (secs <= 172800) {
     return 120;
   }
   // 1 week
-  if(secs <= 604800) {
+  if (secs <= 604800) {
     return 120;
   }
   return 120;
@@ -111,7 +109,7 @@ const getMetricRequests = (filters: TechnicalDashboardFilters): RequestMetricAct
       resolutionSeconds,
     }),
     requestMetric({
-      metricName: 'mojaloop_connector_outbound_transfer_prepare_count',
+      metricName: 'mojaloop_connector_outbound_fxpConversion_prepare_count',
       startTimestamp: startTimestamp.toISOString(),
       endTimestamp: endTimestamp.toISOString(),
       aggregateDurationSeconds,
@@ -134,7 +132,7 @@ const getMetricRequests = (filters: TechnicalDashboardFilters): RequestMetricAct
       resolutionSeconds,
     }),
     requestMetric({
-      metricName: 'mojaloop_connector_outbound_transfer_latency',
+      metricName: 'mojaloop_connector_outbound_fxpConversion_latency',
       metricType: 'HIST_SIZE',
       startTimestamp: startTimestamp.toISOString(),
       endTimestamp: endTimestamp.toISOString(),

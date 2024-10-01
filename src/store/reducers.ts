@@ -7,6 +7,7 @@ import { reducer as dashboardReducer } from 'App/Dashboard';
 import { reducer as technicalDashboardReducer } from 'App/TechnicalDashboard';
 import { reducer as transfersReducer } from 'App/Transfers';
 import { reducer as wizardReducer } from 'App/ConnectionWizard';
+import fxpConversionsReducer from '../App/FxpConversions/reducers';
 
 const getReducer = (history: History): Reducer =>
   combineReducers({
@@ -17,6 +18,7 @@ const getReducer = (history: History): Reducer =>
     technicalDashboard: technicalDashboardReducer,
     transfers: transfersReducer,
     wizard: wizardReducer,
+    fxpConversions: fxpConversionsReducer,
   });
 
 export default getReducer;
