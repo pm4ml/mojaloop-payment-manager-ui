@@ -34,9 +34,20 @@ const transfersErrorsColumns = [
   { label: 'Direction', key: 'direction', func: helpers.toSpacedPascalCase },
   { label: 'Type', key: 'type', className: 'col-100' },
   {
-    label: 'Value',
+    label: 'Send Value',
     key: 'amount',
-    func: (amount: string, item: TransferError) => `${item.currency} ${amount}`,
+  },
+  {
+    label: 'Send Currency',
+    key: 'currency',
+  },
+  {
+    label: 'Receive Value',
+    key: 'receiveAmount',
+  },
+  {
+    label: 'Receive Currency',
+    key: 'receiveCurrency',
   },
   { label: 'Error Type', key: 'errorType', func: helpers.toSpacedPascalCase },
   {

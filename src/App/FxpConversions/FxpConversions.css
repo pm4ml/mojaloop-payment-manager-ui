@@ -1,0 +1,94 @@
+.fxpconversions {
+}
+
+.fxpConversions__errors__loader,
+.fxpConversions__fxpConversions__loader,
+.fxpConversions__statuses__loader {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.fxpConversions__errors__list,
+.fxpConversions__fxpConversions__list,
+.fxpConversions__statuses__list {
+  margin: 10px;
+}
+
+.fxpConversions__charts__loader {
+}
+
+.fxpConversions__successful-perc__section,
+.fxpConversions__avg-time__section {
+  margin-bottom: 20px;
+}
+
+.fxpConversions__successful-perc__graph-loader,
+.fxpConversions__avg-time__graph-loader {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.fxpConversions__successul-perc__graph-container,
+.fxpConversions__avg-time__graph-container {
+  height: 300px;
+}
+
+.fxpConversions__statuses__status {
+  background: transparent;
+  margin: 5px;
+}
+.fxpConversions__statuses__status--successful {
+  border-color: #8721a9;
+  color: #8721a9;
+}
+.fxpConversions__statuses__status--pending {
+  border-color: #12d670;
+  color: #12d670;
+}
+.fxpConversions__statuses__status--has-errors {
+  border-color: #e23a54;
+  color: #e23a54;
+}
+
+.fxpConversions__errors__section {
+  margin-bottom: 20px;
+}
+
+.fxpConversions__errors__graph-display-label {
+  width: 120px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.fxpConversions__errors__graph-chart-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.fxpConversions__errors__graph-legend-container {
+  width: 300px;
+  height: 180px;
+}
+.fxpConversions__errors__graph-container {
+}
+
+.fxpConversions__errors__graph-legend {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.fxpConversions__errors__button,
+.fxpConversions__errors__download__button {
+  margin: 10px;
+}
+
+.fxpConversions__errors__list-container {
+  margin: 10px;
+}
