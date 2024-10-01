@@ -132,14 +132,10 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
     },
   ];
 
-  console.log('isFxpConversionsRequested:', isFxpConversionsRequested); // Debugging log
-  console.log('isFxpConversionsPending:', isFxpConversionsPending); // Debugging log
-  console.log('fxpConversionsError:', fxpConversionsError); // Debugging log
-
   if (!isFxpConversionsRequested) {
     content = <FxpConversionFilters model={model} onFilterChange={onFilterChange} />;
     onSubmit = () => {
-      console.log('Submitting filters:', model); // Debugging log
+      // console.log('Submitting filters:', model);
       onFiltersSubmitClick(model);
     };
     submitLabel = 'Find Conversions';
@@ -152,7 +148,6 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
       </div>
     );
   } else {
-    console.log('fxpConversions:', fxpConversions); // Debugging log
     content = (
       <div className="fxpConversions__fxpConversions__list">
         {fxpConversions.length > 0 && (
@@ -170,13 +165,10 @@ const FxpConversionFinderModal: FC<FxpConversionFinderModalProps> = ({
       </div>
     );
     onSubmit = () => {
-      console.log('Returning to filtering'); // Debugging log
       onFxpConversionsSubmitClick();
     };
     submitLabel = 'Back to filtering';
   }
-
-  console.log('submitLabel:', submitLabel); // Debugging log
 
   return (
     <Modal

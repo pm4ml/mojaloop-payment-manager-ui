@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { Menu, MenuItem, MenuSection } from 'components';
 import { useHistory } from 'react-router-dom';

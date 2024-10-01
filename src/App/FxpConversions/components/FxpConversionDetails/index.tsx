@@ -17,11 +17,11 @@ import {
   TabPanels,
   TabPanel,
 } from 'components';
+// import { trim } from 'lodash';
 import { FxpConversionRequestDetailsModal } from './RequestDetailModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { FxpConversionDetails } from '../../types';
-import { trim } from 'lodash';
 
 const stateProps = (state: State) => ({
   model: selectors.getFxpConversionDetails(state),
@@ -181,7 +181,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   const trim = (id: string) => {
     const maxLength = 21;
     if (id.length > maxLength) {
-      return id.substring(0, maxLength) + '...';
+      return `${id.substring(0, maxLength)}...`;
     }
     return id;
   };
@@ -189,7 +189,7 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
   const trimDt = (id: string) => {
     const maxLength = 15;
     if (id.length > maxLength) {
-      return id.substring(0, maxLength) + '...';
+      return `${id.substring(0, maxLength)}...`;
     }
     return id;
   };
@@ -239,6 +239,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   onClick={() =>
                     copyDeterminingTransferId(model.conversionDetails.determiningTransferId)
                   }
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyDeterminingTransferId(model.conversionDetails.determiningTransferId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedDeterminingTransferId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -290,6 +297,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     alignItems: 'center',
                   }}
                   onClick={() => copyConversionId(model.conversionTerms.conversionId)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyConversionId(model.conversionTerms.conversionId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedConversionId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -353,6 +367,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   onClick={() =>
                     copyConversionRequestId(model.conversionDetails.conversionRequestId)
                   }
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyConversionRequestId(model.conversionDetails.conversionRequestId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedConversionRequestId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -448,7 +469,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
           </TabPanel>
           <TabPanel>
             <Row align="flex-start" style={{ marginTop: '5px' }}>
-              <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%', position: 'relative' }}>
+              <div
+                style={{
+                  flex: '0 0 24%',
+                  marginRight: '5px',
+                  maxWidth: '20%',
+                  position: 'relative',
+                }}
+              >
                 <FormInput
                   disabled={true}
                   label="Determining Transfer ID"
@@ -473,6 +501,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                   onClick={() =>
                     copyDeterminingTransferId(model.conversionDetails.determiningTransferId)
                   }
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyDeterminingTransferId(model.conversionDetails.determiningTransferId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedDeterminingTransferId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -702,6 +737,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       onClick={() =>
                         copyDeterminingTransferId(model.technicalDetails.determiningTransferId)
                       }
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyDeterminingTransferId(model.technicalDetails.determiningTransferId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedDeterminingTransferId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -750,6 +792,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                         alignItems: 'center',
                       }}
                       onClick={() => copyConversionId(model.technicalDetails.conversionId)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyConversionId(model.technicalDetails.conversionId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedConversionId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -800,6 +849,13 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                     onClick={() =>
                       copyConversionRequestId(model.technicalDetails.conversionRequestId)
                     }
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        copyConversionRequestId(model.technicalDetails.conversionRequestId);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
                   >
                     {isCopiedConversionRequestId ? (
                       <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -852,9 +908,14 @@ const FxpConversionDetailsView: FC<FxpConversionDetailsProps> = ({ model }) => {
                       display: 'flex',
                       alignItems: 'center',
                     }}
-                    onClick={() =>
-                     copyCommitRequestId(model.technicalDetails.commitRequestId)
-                    }
+                    onClick={() => copyCommitRequestId(model.technicalDetails.commitRequestId)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        copyCommitRequestId(model.technicalDetails.commitRequestId);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
                   >
                     {isCopiedCommitRequestId ? (
                       <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>

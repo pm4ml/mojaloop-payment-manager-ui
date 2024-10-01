@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
-import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
 import xlsx from 'xlsx';
-import { FxpConversionDetails, FxpConversionError } from '../../types';
+import { FxpConversionError } from '../../types';
 import * as helpers from '../../helpers';
 import FxpConversionsErrorsModal from './FxpConversionsErrorsModal';
 

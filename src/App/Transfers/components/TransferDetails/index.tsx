@@ -17,12 +17,12 @@ import {
   TabPanels,
   TabPanel,
 } from 'components';
+// import { NONAME } from 'dns';
 import { TransferRequestDetailsModal } from './RequestDetailModal';
 import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { TransferDetails } from '../../types';
-import { NONAME } from 'dns';
 
 const stateProps = (state: State) => ({
   model: selectors.getTransferDetails(state),
@@ -284,7 +284,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   const trim = (id: string) => {
     const maxLength = 21;
     if (id.length > maxLength) {
-      return id.substring(0, maxLength) + '...';
+      return `${id.substring(0, maxLength)}...`;
     }
     return id;
   };
@@ -292,7 +292,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   const trimTt = (id: string) => {
     const maxLength = 15;
     if (id.length > maxLength) {
-      return id.substring(0, maxLength) + '...';
+      return `${id.substring(0, maxLength)}...`;
     }
     return id;
   };
@@ -300,11 +300,11 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   const trimTp = (id: string) => {
     const maxLength = 28;
     if (id.length > maxLength) {
-      return id.substring(0, maxLength) + '...';
+      return `${id.substring(0, maxLength)}...`;
     }
     return id;
   };
-  
+
   return (
     <div>
       <Tabs>
@@ -347,6 +347,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     alignItems: 'center',
                   }}
                   onClick={() => copyTransferId(model.transferId)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyTransferId(model.transferId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedTransferId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -598,6 +605,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     alignItems: 'center',
                   }}
                   onClick={() => copyTransferId(model.transferTerms.transferId)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyTransferId(model.transferTerms.transferId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedTransferId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -646,7 +660,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
               <div style={{ flex: '0 0 24%', marginRight: '5px', maxWidth: '20%' }}>
                 <FormInput
                   disabled={true}
-                  label="Quote Amount Type" 
+                  label="Quote Amount Type"
                   type="text"
                   value={model.transferTerms.quoteAmountType}
                 />
@@ -932,6 +946,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                     alignItems: 'center',
                   }}
                   onClick={() => copyTransferId(model.transferParties.transferId)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      copyTransferId(model.transferParties.transferId);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                 >
                   {isCopiedTransferId ? (
                     <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -952,9 +973,7 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                   )}
                 </span>
               </div>
-              <div
-                style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '35%' }}
-              >
+              <div style={{ flex: '0 0 20%', marginRight: '5px', maxWidth: '35%' }}>
                 <FormInput
                   disabled={true}
                   label="Transfer State"
@@ -1108,6 +1127,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                         alignItems: 'center',
                       }}
                       onClick={() => copySchemeTransferId(model.technicalDetails.schemeTransferId)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copySchemeTransferId(model.technicalDetails.schemeTransferId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedSchemeTransferId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -1153,6 +1179,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                         alignItems: 'center',
                       }}
                       onClick={() => copyTransferId(model.transferTerms.transferId)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyTransferId(model.transferTerms.transferId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedTransferId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -1198,6 +1231,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                         alignItems: 'center',
                       }}
                       onClick={() => copyQuoteId(model.technicalDetails.quoteId)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyQuoteId(model.technicalDetails.quoteId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedQuoteId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -1244,6 +1284,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                         alignItems: 'center',
                       }}
                       onClick={() => copyHomeTId(model.technicalDetails.homeTransferId)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyHomeTId(model.technicalDetails.homeTransferId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedHomeTId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -1309,6 +1356,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                           copyConversionRId(model.technicalDetails.conversionQuoteId); // Only execute if needfx is true
                         }
                       }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyConversionRId(model.technicalDetails.conversionQuoteId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedConversionRId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>
@@ -1372,6 +1426,13 @@ const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
                           copyCommitRId(model.technicalDetails.commitRequestId);
                         }
                       }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          copyCommitRId(model.technicalDetails.commitRequestId);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {isCopiedCommitRId ? (
                         <span style={{ color: '#acacac', fontWeight: 'normal', marginTop: '20px' }}>

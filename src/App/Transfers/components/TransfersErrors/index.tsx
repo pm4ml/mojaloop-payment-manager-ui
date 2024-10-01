@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { Button, DataList, ErrorBox, Spinner, Link } from 'components';
-import { getCurrencySymbol } from 'utils/currencies';
 import { ErrorMessage } from 'App/types';
 import xlsx from 'xlsx';
-import { TransferDetails, TransferError } from '../../types';
+import { TransferError } from '../../types';
 import * as helpers from '../../helpers';
 import TransfersErrorsModal from './TransfersErrorsModal';
 

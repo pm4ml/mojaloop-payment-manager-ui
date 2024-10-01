@@ -215,11 +215,11 @@ export default function fxpConversionsReducer(
         fxpConversionsAvgTimeError: (action as SetFxpConversionsAvgTimeErrorAction).error,
       };
     // FXP
-    case SET_FXPCONVERSIONS:
-      return {
-        ...state,
-        fxpConversions: (action as SetFxpConversionsAction).data,
-      };
+    // case SET_FXPCONVERSIONS:
+    //   return {
+    //     ...state,
+    //     fxpConversions: (action as SetFxpConversionsAction).data,
+    //   };
     case REQUEST_FXPCONVERSION:
       return {
         ...state,

@@ -9,7 +9,7 @@ import { ApiState } from 'utils/api';
 import { FxpConversionsState } from 'App/FxpConversions/types';
 
 export interface State {
-  user: any;
+  user: AppState;
   router: RouterState;
   app: AppState;
   dashboard: DashboardState;

@@ -4,7 +4,6 @@ import apis from 'utils/apis';
 import { is20x } from 'utils/http';
 import {
   REQUEST_FXPCONVERSIONS_PAGE_DATA,
-  REQUEST_FXPCONVERSIONS,
   REQUEST_FXPCONVERSIONS_STATUSES,
   REQUEST_FXPCONVERSIONS_SUCCESS_PERC,
   REQUEST_FXPCONVERSIONS_AVG_TIME,
@@ -156,7 +155,7 @@ export function* fxpConversionsPageSaga() {
   yield takeLatest([REQUEST_FXPCONVERSIONS_PAGE_DATA], fetchFxpConversionsAllData);
 }
 
-//Fxp Conversions API
+// Fxp Conversions API
 function* fetchFxpConversions(action: RequestFxpConversionsAction) {
   try {
     let params;
@@ -178,7 +177,7 @@ function* fetchFxpConversions(action: RequestFxpConversionsAction) {
     }
     // eslint-disable-next-line
     const response = yield call(apis.fxpConversions.read, { params });
-    console.log(response);
+    // console.log(response);
     if (is20x(response.status)) {
       yield put(setFxpConversions({ data: response.data.slice(0, 50) }));
     } else {
@@ -192,7 +191,7 @@ export function* fxpConversionsSaga() {
   yield takeLatest([REQUEST_FXPCONVERSION], fetchFxpConversions);
 }
 
-//FXP Conversions Status API
+// FXP Conversions Status API
 // function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) {
 //   try {
 //     // eslint-disable-next-line
@@ -211,7 +210,7 @@ export function* fxpConversionsSaga() {
 //   yield takeLatest([REQUEST_FXPCONVERSIONS_STATUSES], fetchFxpConversionsStatuses);
 // }
 
-//FXP Conversions SuccessPerc
+// FXP Conversions SuccessPerc
 // function* fetchFxpConversionsSuccessPerc(action: RequestFxpConversionsSuccessPercAction) {
 //   try {
 //     // eslint-disable-next-line

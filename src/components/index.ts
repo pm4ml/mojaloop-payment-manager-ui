@@ -54,7 +54,6 @@ import Status from './Status';
 import PendingOverlay from './PendingOverlay';
 import ProgressTabs, { ProgressTab } from './ProgressTab';
 import MetricsChart from './Charts/MetricsChart';
-import { copyFile } from 'fs';
 
 export {
   Accordion,

@@ -121,22 +121,11 @@ export interface FxpConversionFilter {
 }
 
 export interface FxpConversion {
-  id: string;
-  institution: string;
-  direction: FxpConversionDirection;
-  type: FxpConversionType;
-  currency: string;
-  amount: string;
-  status: FxpConversionStatus;
-  initiatedTimestamp: string;
-}
-
-export interface FxpConversion {
   conversionId: string;
   institution: string;
   direction: FxpConversionDirection;
   type: FxpConversionType;
-  current: string;
+  currency: string;
   amount: string;
   status: FxpConversionStatus;
   initiatedTimestamp: string;
@@ -215,11 +204,11 @@ export interface FxpConversionAmount {
   amount: string;
   currency: string;
 }
-export interface totalSourceCurrencyCharges {
+export interface TotalSourceCurrencyCharges {
   amount: string;
   currency: string;
 }
-export interface totalTargetCurrencyCharges {
+export interface TotalTargetCurrencyCharges {
   amount: string;
   currency: string;
 }
@@ -370,8 +359,8 @@ export interface FxpTechnicalDetails {
 
 export interface ConversionTerms {
   charges: {
-    totalSourceCurrencyCharges: totalSourceCurrencyCharges;
-    totalTargetCurrencyCharges: totalTargetCurrencyCharges;
+    totalSourceCurrencyCharges: TotalSourceCurrencyCharges;
+    totalTargetCurrencyCharges: TotalTargetCurrencyCharges;
   };
   transferAmount: {
     sourceAmount: SourceAmount;
@@ -427,36 +416,10 @@ export interface FxpConversionsState {
   fxpConversionDetailsError: ErrorMessage;
 }
 
-// export interface FxpConversionsState {
-//   fxpConversionsErrors: FxpConversionError[];
-//   fxpConversionsErrorsError: ErrorMessage;
-//   isFxpConversionsErrorsViewAllActive: boolean;
-//   fxpConversionsErrorsTypeFilter?: string;
-//   isFxpConversionFinderModalVisible: boolean;
-//   fxpConversionFinderFilter: FxpConversionFilter;
-//   isFxpConversionsRequested: boolean;
-//   fxpConversion: FxpConversion[];
-//   fxpConversions: FxpConversion[];
-//   fxpConversionsError: ErrorMessage;
-//   fxpConversionsStatuses: FxpConversionsStatus[];
-//   fxpConversionsStatusesError: ErrorMessage;
-//   fxpConversionsSuccessPerc?: SuccessPerc;
-//   fxpConversionsSuccessPercError: ErrorMessage;
-//   fxpConversionsAvgTime?: AvgTime;
-//   fxpConversionsAvgTimeError: ErrorMessage;
-//   fxpConversionDetails?: FxpConversionDetails;
-
-//   isFxpConversionDetailsModalVisible: boolean;
-//   fxpConversionDetailsError: ErrorMessage;
-// }
-
 export interface RequestFxpConversionsPageDataAction {
   type: typeof REQUEST_FXPCONVERSIONS_PAGE_DATA;
 }
 
-export interface RequestFxpConversionsErrorsAction {
-  type: typeof REQUEST_FXPCONVERSIONS_ERRORS;
-}
 // RequestFxpConversionsErrorsAction
 export interface RequestFxpConversionsErrorsAction {
   type: typeof REQUEST_FXPCONVERSIONS_ERRORS;
@@ -473,19 +436,10 @@ export interface SetFxpConversionErrorsAction {
   data: FxpConversionError[];
 }
 
-export interface SetFxpConversionsErrorsErrorAction {
-  type: typeof SET_FXPCONVERSIONS_ERRORS_ERROR;
-  error: string;
-}
-
 // SetFxpConversionsErrorsErrorAction
 export interface SetFxpConversionsErrorsErrorAction {
   type: typeof SET_FXPCONVERSIONS_ERRORS_ERROR;
   error: string;
-}
-
-export interface ToggleFxpConversionsErrorsViewAllAction {
-  type: typeof TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL;
 }
 
 // ToggleFxpConversionsErrorsViewAllAction
@@ -493,19 +447,10 @@ export interface ToggleFxpConversionsErrorsViewAllAction {
   type: typeof TOGGLE_FXPCONVERSIONS_ERRORS_VIEW_ALL;
 }
 
-export interface SetFxpConversionsErrorsTypeFilterAction {
-  type: typeof SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER;
-  filter: string;
-}
-
 // SetFxpConversionsErrorsTypeFilterAction
 export interface SetFxpConversionsErrorsTypeFilterAction {
   type: typeof SET_FXPCONVERSIONS_ERRORS_TYPE_FILTER;
   filter: string;
-}
-
-export interface ToggleFxpConversionFinderModalAction {
-  type: typeof TOGGLE_FXPCONVERSION_FINDER_MODAL;
 }
 
 // ToggleFxpConversionFinderModalAction
@@ -517,31 +462,6 @@ export interface SetFxpConversionFinderFilterAction {
   type: typeof SET_FXPCONVERSION_FINDER_FILTER;
   value: string | number;
   field: string;
-}
-
-export interface SetFxpConversionFinderFilterAction {
-  type: typeof SET_FXPCONVERSION_FINDER_FILTER;
-  value: string | number;
-  field: string;
-}
-
-// export interface RequestFxpConversionsAction {
-//   type: typeof REQUEST_FXPCONVERSIONS;
-//   filters: FxpConversionFilter;
-// }
-
-// export interface UnrequestFxpConversionsAction {
-//   type: typeof UNREQUEST_FXPCONVERSIONS;
-// }
-
-export interface SetFxpConversionsAction {
-  type: typeof SET_FXPCONVERSIONS;
-  data: FxpConversion[];
-}
-
-export interface SetFxpConversionsErrorAction {
-  type: typeof SET_FXPCONVERSIONS_ERROR;
-  error: string;
 }
 
 // SetFxpConversionsErrorAction
@@ -592,10 +512,6 @@ export interface SetFxpConversionsAvgTimeErrorAction {
   error: string;
 }
 
-export interface RequestFxpConversionDetailsAction {
-  type: typeof REQUEST_FXPCONVERSION_DETAILS;
-  conversionId: string;
-}
 // fxp
 export interface RequestFxpConversionDetailsAction {
   type: typeof REQUEST_FXPCONVERSION_DETAILS;
@@ -610,11 +526,6 @@ export interface SetFxpConversionDetailsAction {
 
 export interface ToggleFxpConversionDetailsModalAction {
   type: typeof TOGGLE_FXPCONVERSION_DETAILS_MODAL;
-}
-
-export interface SetFxpConversionDetailsErrorAction {
-  type: typeof SET_FXPCONVERSION_DETAILS_ERROR;
-  error: string;
 }
 
 export interface SetFxpConversionDetailsErrorAction {
@@ -645,11 +556,9 @@ export type FxpConversionsActionTypes =
   | ToggleFxpConversionsErrorsViewAllAction
   | SetFxpConversionsErrorsTypeFilterAction
   | ToggleFxpConversionFinderModalAction
-  | ToggleFxpConversionFinderModalAction
   | SetFxpConversionFinderFilterAction
   | RequestFxpConversionsAction
   | UnrequestFxpConversionsAction
-  | SetFxpConversionsAction
   | SetFxpConversionsErrorAction
   | RequestFxpConversionsStatusesAction
   | SetFxpConversionsStatusesAction
@@ -667,11 +576,9 @@ export type FxpConversionsActionTypes =
   | UnrequestFxpConversionsAction
   | RequestFxpConversionsAction
   | SetFxpConversionFinderFilterAction
-  | SetFxpConversionsAction
   | SetFxpConversionErrorsAction
   | SetFxpConversionsErrorsErrorAction
   | RequestFxpConversionsErrorsAction
   | ToggleFxpConversionsErrorsViewAllAction
   | SetFxpConversionsErrorsTypeFilterAction
-  | SetFxpConversionsErrorAction
   | ToggleFxpConversionDetailsModalAction;
