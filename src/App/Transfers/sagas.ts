@@ -74,7 +74,8 @@ function* fetchTransfers(action: RequestTransfersAction) {
     // eslint-disable-next-line
     const response = yield call(apis.transfers.read, { params });
     if (is20x(response.status)) {
-      yield put(setTransfers({ data: response.data.slice(0, 50) }));
+      // yield put(setTransfers({ data: response.data.slice(0, 50) }));
+      yield put(setTransfers({ data: response.data })); // Remove the slice limit
     } else {
       yield put(setTransfersError({ error: response.status }));
     }
