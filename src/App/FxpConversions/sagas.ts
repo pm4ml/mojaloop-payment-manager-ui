@@ -179,7 +179,8 @@ function* fetchFxpConversions(action: RequestFxpConversionsAction) {
     const response = yield call(apis.fxpConversions.read, { params });
     // console.log(response);
     if (is20x(response.status)) {
-      yield put(setFxpConversions({ data: response.data.slice(0, 50) }));
+      // yield put(setFxpConversions({ data: response.data.slice(0, 50) }));
+      yield put(setFxpConversions({ data: response.data })); // Remove the slice limit
     } else {
       yield put(setFxpConversionsError({ error: response.status }));
     }
