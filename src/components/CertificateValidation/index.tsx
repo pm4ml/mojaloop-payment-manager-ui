@@ -1,7 +1,7 @@
 import React, { PureComponent, FC, SFC } from 'react';
 import moment from 'moment';
 import { composeClassName } from 'utils/html';
-import { Button, Icon, Modal } from '@modusbox/modusbox-ui-components/dist/index';
+import { Button, Icon, Modal } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
 import './index.scss';
 import { CertificateValidationResults } from 'App/types';
 import {

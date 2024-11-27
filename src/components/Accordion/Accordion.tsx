@@ -2,7 +2,7 @@ import React, { FC, useState, ReactElement } from 'react';
 import classnames from 'classnames';
 import AnimateFadeIn from 'components/AnimateFadeIn';
 import DataLabel from 'components/DataLabel';
-import { Icon, Button, Spinner } from '@modusbox/modusbox-ui-components/dist/index';
+import { Icon, Button, Spinner } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
 import { AccordionItemProps } from './AccordionItem';
 import './Accordion.css';
 

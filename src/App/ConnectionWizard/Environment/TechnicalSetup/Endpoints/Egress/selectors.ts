@@ -3,7 +3,7 @@ import { State } from 'store/types';
 import { isPending } from 'utils/api';
 import isEqual from 'lodash/isEqual';
 import find from 'lodash/find';
-import { validate, getIsValid } from '@modusbox/modusbox-ui-components/dist/redux-validation';
+import { validate, getIsValid } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/redux-validation';
 import * as testers from 'utils/testers';
 import { States } from '../types';
 import { getEgressAddressValidation, getEgressPortValidation } from './validators';

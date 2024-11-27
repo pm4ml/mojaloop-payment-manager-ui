@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@modusbox/modusbox-ui-components": "^1.23.0",
+    "@pm4ml/mojaloop-payment-manager-ui-components": "^1.23.3",
     "@redux-saga/testing-utils": "^1.1.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

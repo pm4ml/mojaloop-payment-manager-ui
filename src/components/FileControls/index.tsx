@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { Button } from '@modusbox/modusbox-ui-components/dist/index';
+import { Button } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
 import './index.css';
 
 interface FileControlsProps {

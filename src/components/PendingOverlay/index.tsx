@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Spinner } from '@modusbox/modusbox-ui-components/dist/index';
+import { Spinner } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
 import './index.css';
 
 const PendingOverlay: FC<{}> = () => (
