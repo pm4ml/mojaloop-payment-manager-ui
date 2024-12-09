@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Chart from 'react-apexcharts';
 import { ErrorMessage, XYCoordinate } from 'App/types';
-import { Spinner } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
+import { Spinner } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index';
 import ErrorBox from '../../ErrorBox';
 import ChartLayout from '../../ChartLayout';
 

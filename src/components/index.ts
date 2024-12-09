@@ -1,4 +1,4 @@
-import '@pm4ml/mojaloop-payment-manager-ui-components/dist/index.css';
+import '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index.css';
 
 import {
   Button,
@@ -37,7 +37,7 @@ import {
   TextField,
   Toast,
   Tooltip,
-} from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
+} from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index';
 
 import Accordion, { AccordionItem } from './Accordion';
 import AnimateFadeIn from './AnimateFadeIn';

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { MessageBox } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/index';
+import { MessageBox } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index';
 
 interface ErrorBoxProps {}
 const ErrorBox: FC<ErrorBoxProps> = ({ children }) => (

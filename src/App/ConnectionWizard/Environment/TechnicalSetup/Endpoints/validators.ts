@@ -1,4 +1,4 @@
-import { createValidator } from '@pm4ml/mojaloop-payment-manager-ui-components/dist/redux-validation';
+import { createValidator } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/redux-validation';
 
 const isNumberBetween = (lower: number, higher: number) => (value: string | number) =>
   value !== '' && !isNaN(value as number) && value >= lower && value <= higher;
