@@ -1476,6 +1476,42 @@
   resolved "https://registry.npmjs.org/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@pm4ml/mojaloop-payment-manager-ui-components-legacy@^1.23.0":
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/@pm4ml/mojaloop-payment-manager-ui-components-legacy/-/mojaloop-payment-manager-ui-components-legacy-1.23.0.tgz#e831974db1b67e7524bae7f8e70a43aef7a5630a"
+  integrity sha512-OcC2l05ShhR5KDetyeRDVKwseOKY4xBHdFbiwgJgN4PZiz/+TMRDZ4SAScyVm+5vwXD7wJaEIKEbpRHCPieWcQ==
+  dependencies:
+    "@babel/cli" "^7.0.0"
+    "@babel/core" "^7.8.7"
+    "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
+    "@babel/plugin-transform-react-jsx" "^7.0.0"
+    "@babel/plugin-transform-runtime" "^7.8.3"
+    "@babel/preset-env" "^7.8.7"
+    "@babel/preset-react" "^7.0.0"
+    babel-core "^7.0.0-bridge"
+    babel-eslint "^9.0.0"
+    babel-jest "25.3.0"
+    babel-loader "^8.0.0"
+    babel-plugin-lodash "^3.3.2"
+    babel-plugin-syntax-async-functions "^6.13.0"
+    eslint-plugin-babel "^3.0.0"
+    highlight.js "^9.15.10"
+    lodash "^4.12.0"
+    mini-css-extract-plugin "^0.9.0"
+    moment ">= 2.6.0"
+    prop-types "^15.6.1"
+    rc-notification "^3.0.0"
+    react "16.13.1"
+    react-day-picker "7.1.9"
+    react-dom "16.13.1"
+    react-hot-loader "4.12.13"
+    react-resize-detector "5.0.4"
+    redux "^4.0.1"
+    redux-mock-store "^1.5.3"
+    redux-thunk "^2.3.0"
+    vkbeautify "^0.99.3"
+    whatwg-fetch "^3.0.0"
+
 "@popmotion/easing@^1.0.1", "@popmotion/easing@^1.0.2":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@popmotion/easing/-/easing-1.0.2.tgz"

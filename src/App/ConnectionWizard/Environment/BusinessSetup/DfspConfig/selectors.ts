@@ -3,7 +3,7 @@ import { State } from 'store/types';
 import { ValidationResults } from 'App/types';
 import { DFSP } from 'App/ConnectionWizard/Environment/Main/types';
 
-import { toValidationResult } from '@modusbox/modusbox-ui-components/dist/redux-validation';
+import { toValidationResult } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/redux-validation';
 import { getDfspConfigValidation } from './validators';
 
 export const getDfspConfig = (state: State) => state.wizard.environment.main.dfsp;
