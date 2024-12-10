@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 import DataLabel from 'components/DataLabel';
-import { Button, Spinner } from '@modusbox/modusbox-ui-components/dist/index';
+import { Button, Spinner } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index';
 import './AccordionItem.css';
 
 export interface AccordionItemProps {

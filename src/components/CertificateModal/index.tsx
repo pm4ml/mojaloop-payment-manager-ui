@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { Modal, ContentReader } from '@modusbox/modusbox-ui-components/dist/index';
+import { Modal, ContentReader } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index';
 
 interface CertificateModalProps {
   onClose: () => void;

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Row } from '@modusbox/modusbox-ui-components/dist/index';
+import { Row } from '@pm4ml/mojaloop-payment-manager-ui-components-legacy/dist/index';
 import AnimateFadeIn from './AnimateFadeIn';
 import Legend from './Legend';
 import DataLabel from './DataLabel';
