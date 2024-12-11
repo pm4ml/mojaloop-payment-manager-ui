@@ -8,6 +8,7 @@ const getConfig = async () => {
   let loginUrl;
   let loginProvider;
   let logoutUrl;
+  let enableAuthentication = false;
 
   try {
     const { headers, data } = await axios(configURL);
@@ -20,13 +21,15 @@ const getConfig = async () => {
       loginUrl = data.LOGIN_URL;
       loginProvider = data.LOGIN_PROVIDER;
       logoutUrl = data.LOGOUT_URL;
+      enableAuthentication = data.ENABLE_AUTHENTICATION === 'true';
+
     }
   } catch (err) {
     // eslint-disable-next-line
     console.info('Config not found. Falling back to default values');
   }
 
-  return { apiBaseUrl, checkSession, loginUrl, loginProvider, logoutUrl };
+  return { apiBaseUrl, checkSession, loginUrl, loginProvider, logoutUrl, enableAuthentication };
 };
 
 export default getConfig;
