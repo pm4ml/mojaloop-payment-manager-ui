@@ -22,7 +22,6 @@ const getConfig = async () => {
       loginProvider = data.LOGIN_PROVIDER;
       logoutUrl = data.LOGOUT_URL;
       enableAuthentication = data.ENABLE_AUTHENTICATION === 'true';
-
     }
   } catch (err) {
     // eslint-disable-next-line
