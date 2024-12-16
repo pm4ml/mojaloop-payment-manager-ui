@@ -1,22 +1,37 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Icon } from 'components';
 import './Navbar.css';
 
-type Navbar = {
+type NavbarProps = {
   username?: string;
   logoutUrl?: string;
   activeConnectionName: string;
   activeConnectionStatusColor: string;
   kratos?: boolean;
+  countryCode?: string; // Country Code: ZM, UG, RW, MW
 };
 
-const Navbar: FC<Navbar> = ({
+const Navbar: FC<NavbarProps> = ({
   username,
   activeConnectionName,
   activeConnectionStatusColor,
   logoutUrl,
   kratos,
+  countryCode = 'ZM',
 }) => {
+  // Fetch country logo dynamically
+  const countryLogoUrl =
+    process.env[`REACT_APP_COUNTRY_LOGO_${countryCode}`] || process.env.REACT_APP_DEFAULT_LOGO;
+
+  // Fetch DFSP Logo dynamically
+  const dfspLogoUrl =
+    process.env[`REACT_APP_DFSP_LOGO_MTN_${countryCode}`] ||
+    process.env.REACT_APP_DEFAULT_DFSP_LOGO;
+
+  // Fetch UI Color dynamically
+  const uiColor =
+    process.env[`REACT_APP_UI_COLOR_MTN_${countryCode}`] || process.env.REACT_APP_DEFAULT_UI_COLOR;
+
   const clickFunc = () => {
     if (logoutUrl) {
       if (kratos) {
@@ -34,7 +49,8 @@ const Navbar: FC<Navbar> = ({
   };
 
   return (
-    <div id="navbar">
+    <div id="navbar" style={{ backgroundColor: uiColor }}>
+      <img src={dfspLogoUrl} alt="DFSP Logo" className="navbar__dfsp-logo" />
       <div id="navbar__controls">
         <a id="navbar__link" href="/">
           Payment Manager
@@ -44,10 +60,11 @@ const Navbar: FC<Navbar> = ({
         Connected to: {activeConnectionName}
         <div
           className="navbar__connection-led"
-          style={{ background: activeConnectionStatusColor }}
+          style={{ backgroundColor: activeConnectionStatusColor }}
         />
       </div>
       <div id="navbar__user">
+        <img src={countryLogoUrl} alt="Country Flag" className="navbar__country-logo" />
         <div id="navbar__user__icon">
           <Icon name="user-small" fill="#fff" />
         </div>
