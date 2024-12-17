@@ -25,12 +25,10 @@ const Navbar: FC<NavbarProps> = ({
 
   // Fetch DFSP Logo dynamically
   const dfspLogoUrl =
-    process.env[`REACT_APP_DFSP_LOGO_MTN_${countryCode}`] ||
-    process.env.REACT_APP_DEFAULT_DFSP_LOGO;
+    process.env.REACT_APP_DFSP_LOGO_ATL || process.env.REACT_APP_DEFAULT_DFSP_LOGO;
 
   // Fetch UI Color dynamically
-  const uiColor =
-    process.env[`REACT_APP_UI_COLOR_MTN_${countryCode}`] || process.env.REACT_APP_DEFAULT_UI_COLOR;
+  const uiColor = process.env.REACT_APP_UI_COLOR_ATL || process.env.REACT_APP_DEFAULT_UI_COLOR;
 
   const clickFunc = () => {
     if (logoutUrl) {
