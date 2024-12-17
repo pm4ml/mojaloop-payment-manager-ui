@@ -1,0 +1,15 @@
+# This is configuration template
+version: '0.0'
+
+services:
+  react-app-atl:
+    image: your-react-app-image
+    container_name: react_app_atl
+    environment:
+      - REACT_APP_UI_COLOR=#e90000
+      - REACT_APP_NAVBAR_COLOR=#9B0315
+      - REACT_APP_DFSP_LOGO=
+      - REACT_APP_COUNTRY_LOGO=https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png
+      - REACT_APP_SUBTITLE=Airtel
+    ports:
+      - "3000:3000"

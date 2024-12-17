@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { FC, useMemo } from 'react';
 import { Icon } from 'components';
 import './Navbar.css';
@@ -8,7 +9,6 @@ type NavbarProps = {
   activeConnectionName: string;
   activeConnectionStatusColor: string;
   kratos?: boolean;
-  countryCode?: string; // Country Code: ZM, UG, RW, MW
 };
 
 const Navbar: FC<NavbarProps> = ({
@@ -17,18 +17,13 @@ const Navbar: FC<NavbarProps> = ({
   activeConnectionStatusColor,
   logoutUrl,
   kratos,
-  countryCode = 'ZM',
 }) => {
-  // Fetch country logo dynamically
-  const countryLogoUrl =
-    process.env[`REACT_APP_COUNTRY_LOGO_${countryCode}`] || process.env.REACT_APP_DEFAULT_LOGO;
+  const dfspSubtitle = process.env.REACT_APP_SUBTITLE || 'CBC';
+  const countryLogo = process.env.REACT_APP_COUNTRY_LOGO || '/Comesa-logo.png';
+  const dfspLogo = process.env.REACT_APP_DFSP_LOGO || '/cbs_logo.jpg';
+  const navbarColor = process.env.REACT_APP_NAVBAR_COLOR || '#02182b';
 
-  // Fetch DFSP Logo dynamically
-  const dfspLogoUrl =
-    process.env.REACT_APP_DFSP_LOGO_ATL || process.env.REACT_APP_DEFAULT_DFSP_LOGO;
-
-  // Fetch UI Color dynamically
-  const uiColor = process.env.REACT_APP_UI_COLOR_ATL || process.env.REACT_APP_DEFAULT_UI_COLOR;
+  document.documentElement.style.setProperty('--navbarColor', navbarColor);
 
   const clickFunc = () => {
     if (logoutUrl) {
@@ -47,11 +42,11 @@ const Navbar: FC<NavbarProps> = ({
   };
 
   return (
-    <div id="navbar" style={{ backgroundColor: uiColor }}>
-      <img src={dfspLogoUrl} alt="DFSP Logo" className="navbar__dfsp-logo" />
+    <div id="navbar" style={{ backgroundColor: navbarColor }}>
+      <img src={dfspLogo} alt="DFSP Logo" className="navbar__dfsp-logo" />
       <div id="navbar__controls">
         <a id="navbar__link" href="/">
-          Payment Manager
+          {dfspSubtitle} Payment Manager
         </a>
       </div>
       <div id="navbar__active__connection">
@@ -62,7 +57,7 @@ const Navbar: FC<NavbarProps> = ({
         />
       </div>
       <div id="navbar__user">
-        <img src={countryLogoUrl} alt="Country Flag" className="navbar__country-logo" />
+        <img src={countryLogo} alt="Country Flag" className="navbar__country-logo" />
         <div id="navbar__user__icon">
           <Icon name="user-small" fill="#fff" />
         </div>

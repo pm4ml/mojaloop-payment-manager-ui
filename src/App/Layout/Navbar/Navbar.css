@@ -6,11 +6,7 @@
   user-select: none;
   height: 55px;
   width: 100%;
-  background: linear-gradient(
-    269.81deg,
-    process.env.REACT_APP_UI_COLOR_ATL, 0.01%,
-    #02182b 100%
-  );
+  background: linear-gradient(269.81deg, var(--navbarColor));
   border-bottom: 5px solid #4fc7e7;
   display: flex;
   align-items: center;
@@ -68,13 +64,12 @@
   margin-left: 10px;
 }
 .navbar__dfsp-logo {
-  width: 100px;
-  height: auto;
+  height: 30px;
   margin-left: 15px;
   object-fit: contain;
 }
 .navbar__country-logo {
-  height: 25px;
+  height: 30px;
   object-fit: cover;
   margin-left: 15px;
 }
