@@ -179,7 +179,10 @@ function* fetchFxpConversions(action: RequestFxpConversionsAction) {
     const response = yield call(apis.fxpConversions.read, { params });
     // console.log(response);
     if (is20x(response.status)) {
-      yield put(setFxpConversions({ data: response.data.slice(0, 50) }));
+      // Original line that limited the number of transfers
+      // yield put(setFxpConversions({ data: response.data.slice(0, 50) }));
+      // Updated line to fetch all transfers
+      yield put(setFxpConversions({ data: response.data }));
     } else {
       yield put(setFxpConversionsError({ error: response.status }));
     }
@@ -190,78 +193,6 @@ function* fetchFxpConversions(action: RequestFxpConversionsAction) {
 export function* fxpConversionsSaga() {
   yield takeLatest([REQUEST_FXPCONVERSION], fetchFxpConversions);
 }
-
-// FXP Conversions Status API
-// function* fetchFxpConversionsStatuses(action: RequestFxpConversionsStatusesAction) {
-//   try {
-//     // eslint-disable-next-line
-//     const response = yield call(apis.fxpConversionsStatuses.read, {});
-//     if (is20x(response.status)) {
-//       yield put(setFxpConversionsStatuses({ data: response.data }));
-//     } else {
-//       yield put(setFxpConversionsStatusesError({ error: response.status }));
-//     }
-//   } catch (e) {
-//     yield put(setFxpConversionsStatusesError({ error: e.message }));
-//   }
-// }
-
-// export function* fxpConversionsStatusesSaga() {
-//   yield takeLatest([REQUEST_FXPCONVERSIONS_STATUSES], fetchFxpConversionsStatuses);
-// }
-
-// FXP Conversions SuccessPerc
-// function* fetchFxpConversionsSuccessPerc(action: RequestFxpConversionsSuccessPercAction) {
-//   try {
-//     // eslint-disable-next-line
-//     const response = yield call(apis.fxpConversionsSuccessPerc.read, {
-//       params: { minutePrevious: 1440 },
-//     });
-//     yield put(
-//       setFxpConversionsSuccessPerc({
-//         data: {
-//           color: '',
-//           points: response.data.map((d: SuccessPercApi) => {
-//             return [Number(d.timestamp), Number(d.percentage)];
-//           }),
-//         },
-//       })
-//     );
-//   } catch (e) {
-//     yield put(setFxpConversionsSuccessPercError({ error: e.message }));
-//   }
-// }
-
-// export function* fxpConversionsSuccessPercSaga() {
-//   yield takeLatest([REQUEST_FXPCONVERSIONS_SUCCESS_PERC], fetchFxpConversionsSuccessPerc);
-// }
-
-// FXP Converions AVGTime
-// function* fetchFxpConversionsAvgTime(action: RequestFxpConversionsAvgTimeAction) {
-//   try {
-//     // eslint-disable-next-line
-//     const response = yield call(apis.fxpConversionsAvgTime.read, { params: { minutePrevious: 1440 } });
-
-//     yield put(
-//       setFxpConversionsAvgTime({
-//         data: {
-//           color: '',
-//           points: response.data.map((d: AvgTimeApi) => {
-//             return [Number(d.timestamp), Number(d.averageResponseTime)];
-//           }),
-//         },
-//       })
-//     );
-//   } catch (e) {
-//     yield put(setFxpConversionsAvgTimeError({ error: e.message }));
-//   }
-// }
-
-// export function* fxpConversionsAvgTimeSaga() {
-//   yield takeLatest([REQUEST_FXPCONVERSIONS_AVG_TIME], fetchFxpConversionsAvgTime);
-// }
-
-// FXPConversions ALL Data
 
 // Root Saga
 export default function* rootSaga() {
