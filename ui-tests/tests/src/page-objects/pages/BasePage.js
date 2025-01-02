@@ -7,13 +7,13 @@ const CSRExchange = require('../components/CSRExchange');
 const Transfers = require('../components/Transfers');
 
 class BasePage {
-    constructor() {
-        this.HeaderNav = new HeaderNav();
-        this.SideMenu = new SideMenu();
-        this.EndPoints = new EndPoints();
-        this.CSRExchange = new CSRExchange();
-        this.Transfers = new Transfers();
-    };
+  constructor() {
+    this.HeaderNav = new HeaderNav();
+    this.SideMenu = new SideMenu();
+    this.EndPoints = new EndPoints();
+    this.CSRExchange = new CSRExchange();
+    this.Transfers = new Transfers();
+  }
 }
 
 module.exports = BasePage;

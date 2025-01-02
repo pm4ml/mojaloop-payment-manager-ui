@@ -23,15 +23,15 @@
     "id": "settlementWindows.items.items.state",
     "pattern": "OPEN|CLOSED"
   },
-  { 
+  {
     "id": "participants.items.accounts.items.state",
     "pattern": "OPEN|CLOSED"
   },
-  { 
+  {
     "id": "participants.items.accounts.items.netSettlementAmount.amount",
     "pattern": "123"
   },
-  { 
+  {
     "id": "participants.items.accounts.items.netSettlementAmount.currency",
     "pattern": "USD"
   }

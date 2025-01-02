@@ -1,190 +1,221 @@
 import { Selector } from 'testcafe';
 import { config } from '../config';
 import { LoginPage } from '../page-objects/pages/LoginPage';
-import { ErrorRow, Transfer, TransferDashboardPage, TransferRow, Error } from '../page-objects/pages/TransferDashboardPage';
+import {
+  ErrorRow,
+  Transfer,
+  TransferDashboardPage,
+  TransferRow,
+  Error,
+} from '../page-objects/pages/TransferDashboardPage';
 import fs from 'fs';
 import xlsx from 'xlsx';
 const apiHelper = require('../helpers/api-helper');
 const { v4: uuidv4 } = require('uuid');
 import { ClientFunction } from 'testcafe';
 
-
-
-fixture`Transfer Dashboard Feature`
-  .page`${config.pm4mlEndpoint}/transfer`
-
-  .beforeEach(async (t) => {
-    // Login if not logged in
-    try{
-
+fixture`Transfer Dashboard Feature`.page`${config.pm4mlEndpoint}/transfer`.beforeEach(async (t) => {
+  // Login if not logged in
+  try {
     if (Selector('.login-pf-header')) {
-      await t.typeText(LoginPage.usernameField, config.credentials.test.username)
-      await t.typeText(LoginPage.passwordField, config.credentials.test.password)
-      await t.click(LoginPage.loginButton)
+      await t.typeText(LoginPage.usernameField, config.credentials.test.username);
+      await t.typeText(LoginPage.passwordField, config.credentials.test.password);
+      await t.click(LoginPage.loginButton);
     }
+  } catch (e) {
+    // console.error(e);
+    var current_url = await t.eval(() => window.location.href);
+    await t.navigateTo(current_url);
+    await t.wait(6000);
+    await t.typeText(LoginPage.usernameField, config.credentials.test.username);
+    await t.typeText(LoginPage.passwordField, config.credentials.test.password);
+    await t.click(LoginPage.loginButton);
   }
-    catch(e){
-     // console.error(e);
-      var current_url = await t.eval(() => window.location.href);
-      await t.navigateTo(current_url);
-      await t.wait(6000);
-      await t.typeText(LoginPage.usernameField, config.credentials.test.username)
-      await t.typeText(LoginPage.passwordField, config.credentials.test.password)
-      await t.click(LoginPage.loginButton)
-    }
-
-  });
-
-  const scroll = ClientFunction(function() {
-    window.scrollBy(0,1500);
 });
 
+const scroll = ClientFunction(function () {
+  window.scrollBy(0, 1500);
+});
 
-test
-  .meta({
-    ID: 'MP-T287',
-    STORY: 'MP-2610'
-  })
-  ('Click Transfers, validate Total Transfer Statuses label, Record counts transfers Overview and other labels', async t => {
-
+test.meta({
+  ID: 'MP-T287',
+  STORY: 'MP-2610',
+})(
+  'Click Transfers, validate Total Transfer Statuses label, Record counts transfers Overview and other labels',
+  async (t) => {
     await t
-      .expect(TransferDashboardPage.transfersOverview.exists).ok()
-      .expect(TransferDashboardPage.successfulTransfers.exists).ok()
-      .expect(TransferDashboardPage.averageTransferTime.exists).ok()
-      .expect(TransferDashboardPage.totalTransferStatuses.exists).ok()
-      .expect(TransferDashboardPage.successfulChart.exists).ok()
-      .expect(TransferDashboardPage.averageTransferTimeChart.exists).ok()
-      .expect(TransferDashboardPage.successfulCount.exists).ok()
-      .expect(TransferDashboardPage.pendingCount.exists).ok()
-      .expect(TransferDashboardPage.failedCount.exists).ok()
-      .expect(TransferDashboardPage.totalErrorsCount.exists).ok()
-  });
+      .expect(TransferDashboardPage.transfersOverview.exists)
+      .ok()
+      .expect(TransferDashboardPage.successfulTransfers.exists)
+      .ok()
+      .expect(TransferDashboardPage.averageTransferTime.exists)
+      .ok()
+      .expect(TransferDashboardPage.totalTransferStatuses.exists)
+      .ok()
+      .expect(TransferDashboardPage.successfulChart.exists)
+      .ok()
+      .expect(TransferDashboardPage.averageTransferTimeChart.exists)
+      .ok()
+      .expect(TransferDashboardPage.successfulCount.exists)
+      .ok()
+      .expect(TransferDashboardPage.pendingCount.exists)
+      .ok()
+      .expect(TransferDashboardPage.failedCount.exists)
+      .ok()
+      .expect(TransferDashboardPage.totalErrorsCount.exists)
+      .ok();
+  }
+);
 
-test
-  .meta({
-    ID: 'MP-T288',
-    STORY: 'MP-2512'
-  })
-  ('Click Transfers, Find a Transfer, Advanced Filtering, Basic Transfer submit back to filter then close', async t => {
-
+test.meta({
+  ID: 'MP-T288',
+  STORY: 'MP-2512',
+})(
+  'Click Transfers, Find a Transfer, Advanced Filtering, Basic Transfer submit back to filter then close',
+  async (t) => {
     await t
       .maximizeWindow()
       .click(TransferDashboardPage.findATransferButton)
-      .expect(TransferDashboardPage.ftTitle.exists).ok()
+      .expect(TransferDashboardPage.ftTitle.exists)
+      .ok()
       .click(TransferDashboardPage.findATransferModalAdvancedFiltering)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.backtoFilteringSubmitButton)
       .click(TransferDashboardPage.findATransferModalCloseButton)
       .click(TransferDashboardPage.findATransferButton)
-      .click(TransferDashboardPage.ftClosesmall)
-  });
+      .click(TransferDashboardPage.ftClosesmall);
+  }
+);
 
-test
-  .meta({
-    ID: 'MP-T291',
-    STORY: 'MP-2512'
-  })
-  ('Click_Transfers_Find_a_Transfer_with_invalid_transfer_id_no_item_expected', async t => {
-    await t
-      .maximizeWindow()
-      .click(TransferDashboardPage.findATransferButton)
-      .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .typeText(TransferDashboardPage.transferIDTextBox, 'abc123', { replace: true })
-      .click(TransferDashboardPage.findATransferModalSubmit)
-      .expect(TransferDashboardPage.noresults).ok()
-      .click(TransferDashboardPage.findATransferModalCloseButton)
-  });
+test.meta({
+  ID: 'MP-T291',
+  STORY: 'MP-2512',
+})('Click_Transfers_Find_a_Transfer_with_invalid_transfer_id_no_item_expected', async (t) => {
+  await t
+    .maximizeWindow()
+    .click(TransferDashboardPage.findATransferButton)
+    .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
+    .typeText(TransferDashboardPage.transferIDTextBox, 'abc123', { replace: true })
+    .click(TransferDashboardPage.findATransferModalSubmit)
+    .expect(TransferDashboardPage.noresults)
+    .ok()
+    .click(TransferDashboardPage.findATransferModalCloseButton);
+});
 
-test
-  .meta({
-    ID: 'MP-T290',
-    STORY: 'MP-2512'
-  })
-  ('Click_Transfers_Find_a_Transfer_with_valid_transfer_ID', async t => {
+test.meta({
+  ID: 'MP-T290',
+  STORY: 'MP-2512',
+})('Click_Transfers_Find_a_Transfer_with_valid_transfer_ID', async (t) => {
+  var transferRequest = {
+    from: {
+      displayName: 'PayerFirst PayerLast',
+      idType: 'MSISDN',
+      idValue: `${config.senderpartyID}`,
+      extensionList: [
+        {
+          key: 4,
+          value: 2,
+        },
+      ],
+    },
+    to: {
+      displayName: 'PartyFirst PartyLast',
+      idType: 'MSISDN',
+      idValue: `${config.receiverpartyID}`,
+    },
+    amountType: 'SEND',
+    currency: `${config.simcurrency}`,
+    amount: 10.123,
+    transactionType: 'TRANSFER',
+    note: 'test payment - Success transfer initiated by Automation',
+    homeTransactionId: uuidv4(),
+  };
+  var payloadHeaders = { 'Content-Type': 'application/json' };
+  var transferResponse = await apiHelper.getResponseBody(
+    'POST',
+    `${config.simCoreConnectorEndpoint}/sendmoney`,
+    JSON.stringify(transferRequest),
+    payloadHeaders
+  );
+  //console.log(transferResponse);
+  let transfer_id = transferResponse.transferId;
 
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`,
+    JSON.stringify({ acceptParty: true }),
+    payloadHeaders
+  );
+
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`,
+    JSON.stringify({ acceptQuote: true }),
+    payloadHeaders
+  );
+
+  await t
+    .maximizeWindow()
+    .click(TransferDashboardPage.findATransferButton)
+    .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
+    .wait(20000)
+    .typeText(TransferDashboardPage.transferIDTextBox, transfer_id, { replace: true })
+    .click(TransferDashboardPage.findATransferModalSubmit)
+    .click(TransferDashboardPage.findATransferModalCloseButton);
+});
+
+test.timeouts({ pageLoadTimeout: 45000 }).meta({
+  ID: 'MP-T292',
+  STORY: 'MP-2512',
+})(
+  'Click Transfers with Valid transfer, validate all labels and textboxes in Basic information',
+  async (t) => {
     var transferRequest = {
       from: {
         displayName: 'PayerFirst PayerLast',
         idType: 'MSISDN',
         idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
+        extensionList: [
+          {
+            key: 4,
+            value: 2,
+          },
+        ],
       },
       to: {
         displayName: 'PartyFirst PartyLast',
         idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
+        idValue: `${config.receiverpartyID}`,
       },
       amountType: 'SEND',
       currency: `${config.simcurrency}`,
       amount: 10.123,
       transactionType: 'TRANSFER',
       note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: uuidv4()
-    }
+      homeTransactionId: uuidv4(),
+    };
     var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    //console.log(transferResponse);
-    let transfer_id = transferResponse.transferId;
+    var transferResponse = await apiHelper.getResponseBody(
+      'POST',
+      `${config.simCoreConnectorEndpoint}/sendmoney`,
+      JSON.stringify(transferRequest),
+      payloadHeaders
+    );
 
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptParty: true }),
+      payloadHeaders
+    );
 
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transfer_id}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-
-    await t
-      .maximizeWindow()
-      .click(TransferDashboardPage.findATransferButton)
-      .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .wait(20000)
-      .typeText(TransferDashboardPage.transferIDTextBox, transfer_id, { replace: true })
-      .click(TransferDashboardPage.findATransferModalSubmit)
-      .click(TransferDashboardPage.findATransferModalCloseButton)
-  });
-
-test.timeouts({ pageLoadTimeout: 45000 })
-  .meta({
-    ID: 'MP-T292',
-    STORY: 'MP-2512'
-  })
-  ('Click Transfers with Valid transfer, validate all labels and textboxes in Basic information', async t => {
-    var transferRequest = {
-      from: {
-        displayName: 'PayerFirst PayerLast',
-        idType: 'MSISDN',
-        idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
-      },
-      to: {
-        displayName: 'PartyFirst PartyLast',
-        idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
-      },
-      amountType: 'SEND',
-      currency: `${config.simcurrency}`,
-      amount: 10.123,
-      transactionType: 'TRANSFER',
-      note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: uuidv4()
-    }
-    var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptQuote: true }),
+      payloadHeaders
+    );
 
     await t
       .setTestSpeed(0.5)
@@ -193,74 +224,117 @@ test.timeouts({ pageLoadTimeout: 45000 })
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(18000)
-      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+        paste: true,
+        replace: false,
+      })
+      .wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
-      .expect(TransferDashboardPage.transferStateLabel.exists).ok()
-      .expect(TransferDashboardPage.transferAmountLabel.exists).ok()
-      .expect(TransferDashboardPage.transferDateLabel.exists).ok()
-      .expect(TransferDashboardPage.transferBatchLabel.exists).ok()
-      .expect(TransferDashboardPage.transferCurrencyLabel.exists).ok()
-      .expect(TransferDashboardPage.transferSenderLabel.exists).ok()
-      .expect(TransferDashboardPage.transferSenderDetailsLabel.exists).ok()
-      .expect(TransferDashboardPage.transferRecipientLabel.exists).ok()
-      .expect(TransferDashboardPage.transferRecipientDetailsLabel.exists).ok()
-      .expect(TransferDashboardPage.transferInstitutionLabel.exists).ok()
-      .expect(TransferDashboardPage.transferDirectionLabel.exists).ok()
-      .expect(TransferDashboardPage.transferState.value).contains('succeeded')
-      .expect(TransferDashboardPage.transferBatch.value).contains('N/A')
-      .expect(TransferDashboardPage.transferDateSubmitted.value).contains(transferResponse.initiatedTimestamp)
-      .expect(TransferDashboardPage.transferAmount.value).contains(transferResponse.amount)
-      .expect(TransferDashboardPage.transferCurrency.value).contains(transferResponse.currency)
-      .expect(TransferDashboardPage.transferSender.value).contains(transferResponse.from.displayName)
-      .expect(TransferDashboardPage.transferSenderDetails.value).contains(transferResponse.from.idType)
-      .expect(TransferDashboardPage.transferSenderDetails.value).contains(transferResponse.from.idValue)
-      .expect(TransferDashboardPage.transferRecipient.value).contains(transferResponse.to.displayName)
-      .expect(TransferDashboardPage.transferRecipientDetails.value).contains(transferResponse.to.idType)
-      .expect(TransferDashboardPage.transferRecipientDetails.value).contains(transferResponse.to.idValue)
-      .expect(TransferDashboardPage.transferInstitution.value).contains(transferResponse.to.fspId)
-      .expect(TransferDashboardPage.transferDirection.value).contains('OUTBOUND')
+      .expect(TransferDashboardPage.transferStateLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferAmountLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferDateLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferBatchLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferCurrencyLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferSenderLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferSenderDetailsLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferRecipientLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferRecipientDetailsLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferInstitutionLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferDirectionLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.transferState.value)
+      .contains('succeeded')
+      .expect(TransferDashboardPage.transferBatch.value)
+      .contains('N/A')
+      .expect(TransferDashboardPage.transferDateSubmitted.value)
+      .contains(transferResponse.initiatedTimestamp)
+      .expect(TransferDashboardPage.transferAmount.value)
+      .contains(transferResponse.amount)
+      .expect(TransferDashboardPage.transferCurrency.value)
+      .contains(transferResponse.currency)
+      .expect(TransferDashboardPage.transferSender.value)
+      .contains(transferResponse.from.displayName)
+      .expect(TransferDashboardPage.transferSenderDetails.value)
+      .contains(transferResponse.from.idType)
+      .expect(TransferDashboardPage.transferSenderDetails.value)
+      .contains(transferResponse.from.idValue)
+      .expect(TransferDashboardPage.transferRecipient.value)
+      .contains(transferResponse.to.displayName)
+      .expect(TransferDashboardPage.transferRecipientDetails.value)
+      .contains(transferResponse.to.idType)
+      .expect(TransferDashboardPage.transferRecipientDetails.value)
+      .contains(transferResponse.to.idValue)
+      .expect(TransferDashboardPage.transferInstitution.value)
+      .contains(transferResponse.to.fspId)
+      .expect(TransferDashboardPage.transferDirection.value)
+      .contains('OUTBOUND')
       .click(TransferDashboardPage.closeTransferDetailsButton)
-      .click(TransferDashboardPage.ftPopupCloseButton)
-  });
+      .click(TransferDashboardPage.ftPopupCloseButton);
+  }
+);
 
-test
-  .meta({
-    ID: 'MP-T293',
-    STORY: 'MP-2512'
-  })
-  ('Click Transfers, with Valid transfer, validate all labels & textboxes in Techinical Details', async t => {
+test.meta({
+  ID: 'MP-T293',
+  STORY: 'MP-2512',
+})(
+  'Click Transfers, with Valid transfer, validate all labels & textboxes in Techinical Details',
+  async (t) => {
     var homeTransactionId = uuidv4();
     var transferRequest = {
       from: {
         displayName: 'PayerFirst PayerLast',
         idType: 'MSISDN',
         idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
+        extensionList: [
+          {
+            key: 4,
+            value: 2,
+          },
+        ],
       },
       to: {
         displayName: 'PartyFirst PartyLast',
         idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
+        idValue: `${config.receiverpartyID}`,
       },
       amountType: 'SEND',
       currency: `${config.simcurrency}`,
       amount: 10.123,
       transactionType: 'TRANSFER',
       note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: homeTransactionId
-    }
+      homeTransactionId: homeTransactionId,
+    };
     var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
+    var transferResponse = await apiHelper.getResponseBody(
+      'POST',
+      `${config.simCoreConnectorEndpoint}/sendmoney`,
+      JSON.stringify(transferRequest),
+      payloadHeaders
+    );
     //console.log(transferResponse);
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-    transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptParty: true }),
+      payloadHeaders
+    );
+    transferResponse = await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptQuote: true }),
+      payloadHeaders
+    );
 
     await t
       .maximizeWindow()
@@ -268,32 +342,49 @@ test
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(20000)
-      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+        paste: true,
+        replace: false,
+      })
+      .wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
       .click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab)
-      .expect(TransferDashboardPage.techSchemeTransferIDLabel.exists).ok()
-      .expect(TransferDashboardPage.techTransactionIDLabel.exists).ok()
-      .expect(TransferDashboardPage.techQuoteID.exists).ok()
-      .expect(TransferDashboardPage.techHomeTransferIDLabel.exists).ok()
-      .expect(TransferDashboardPage.techtransferStateLabel.exists).ok()
-      .expect(TransferDashboardPage.techViewMessageDetailsLabel.exists).ok()
-      .expect(TransferDashboardPage.techPartyInformationLabel.exists).ok()
-      .expect(TransferDashboardPage.techSchemeTransferID.value).contains(transferResponse.transferId)
-      .expect(TransferDashboardPage.techHomeTransferID.value).contains(homeTransactionId)
-      .expect(TransferDashboardPage.techQuoteID.value).contains(transferResponse.quoteId)
-      .expect(TransferDashboardPage.techTransactionID.value).contains(transferResponse.transferId)
-      .expect(TransferDashboardPage.techTransferState.value).eql('succeeded')
+      .expect(TransferDashboardPage.techSchemeTransferIDLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.techTransactionIDLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.techQuoteID.exists)
+      .ok()
+      .expect(TransferDashboardPage.techHomeTransferIDLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.techtransferStateLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.techViewMessageDetailsLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.techPartyInformationLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.techSchemeTransferID.value)
+      .contains(transferResponse.transferId)
+      .expect(TransferDashboardPage.techHomeTransferID.value)
+      .contains(homeTransactionId)
+      .expect(TransferDashboardPage.techQuoteID.value)
+      .contains(transferResponse.quoteId)
+      .expect(TransferDashboardPage.techTransactionID.value)
+      .contains(transferResponse.transferId)
+      .expect(TransferDashboardPage.techTransferState.value)
+      .eql('succeeded')
       .click(TransferDashboardPage.closeTransferDetailsButton)
-      .click(TransferDashboardPage.ftPopupCloseButton)
-  });
+      .click(TransferDashboardPage.ftPopupCloseButton);
+  }
+);
 
-test
-  .meta({
-    ID: 'MP-T294',
-    STORY: 'MP-2512'
-  })
-  ('Click Transfers, with Valid transfer, validate party info including Payer and Payee', async t => {
+test.meta({
+  ID: 'MP-T294',
+  STORY: 'MP-2512',
+})(
+  'Click Transfers, with Valid transfer, validate party info including Payer and Payee',
+  async (t) => {
     // console.log('ExtensionList Key',transferResponse.from.extensionList[0].key)
     // console.log('ExtensionList Value',transferResponse.from.extensionList[0].value)
     // console.log('ExtensionList',transferResponse.from.extensionList)
@@ -303,30 +394,44 @@ test
         displayName: 'PayerFirst PayerLast',
         idType: 'MSISDN',
         idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
+        extensionList: [
+          {
+            key: 4,
+            value: 2,
+          },
+        ],
       },
       to: {
         displayName: 'PartyFirst PartyLast',
         idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
+        idValue: `${config.receiverpartyID}`,
       },
       amountType: 'SEND',
       currency: `${config.simcurrency}`,
       amount: 10.123,
       transactionType: 'TRANSFER',
       note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: homeTransactionId
-    }
+      homeTransactionId: homeTransactionId,
+    };
     var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-    transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+    var transferResponse = await apiHelper.getResponseBody(
+      'POST',
+      `${config.simCoreConnectorEndpoint}/sendmoney`,
+      JSON.stringify(transferRequest),
+      payloadHeaders
+    );
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptParty: true }),
+      payloadHeaders
+    );
+    transferResponse = await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptQuote: true }),
+      payloadHeaders
+    );
 
     await t
       .maximizeWindow()
@@ -334,24 +439,40 @@ test
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(18000)
-      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+        paste: true,
+        replace: false,
+      })
+      .wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
       .click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab)
       //Checking Payer Details
       .click(TransferDashboardPage.payerInfoButton)
-      .expect(TransferDashboardPage.partyIDTypeLabel.exists).ok()
-      .expect(TransferDashboardPage.partyValueLabel.exists).ok()
-      .expect(TransferDashboardPage.partyDisplayNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyFirstNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyMiddleNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyLastNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyDOBLabel.exists).ok()
-      .expect(TransferDashboardPage.partyMerchantCodeLabel.exists).ok()
-      .expect(TransferDashboardPage.partyFSPIdLabel.exists).ok()
-      .expect(TransferDashboardPage.partyIdType.value).contains(transferResponse.from.idType)
-      .expect(TransferDashboardPage.partyIdValue.value).contains(transferResponse.from.idValue)
-      .expect(TransferDashboardPage.partyDisplayName.value).contains(transferResponse.from.displayName)
+      .expect(TransferDashboardPage.partyIDTypeLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyValueLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyDisplayNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyFirstNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyMiddleNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyLastNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyDOBLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyMerchantCodeLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyFSPIdLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyIdType.value)
+      .contains(transferResponse.from.idType)
+      .expect(TransferDashboardPage.partyIdValue.value)
+      .contains(transferResponse.from.idValue)
+      .expect(TransferDashboardPage.partyDisplayName.value)
+      .contains(transferResponse.from.displayName)
       // .click(TransferDashboardPage.partyExtensionListButton)
       // .expect(TransferDashboardPage.partyExtLstTitle.exists).ok()
       // .expect(TransferDashboardPage.keyLabelInExtLst.exists).ok()
@@ -364,66 +485,97 @@ test
       //Checking Payee Details
       // This is failing. Need to double check the logic for finding payee details
       .click(TransferDashboardPage.payeeInfoButton)
-      .expect(TransferDashboardPage.partyIDTypeLabel.exists).ok()
-      .expect(TransferDashboardPage.partyValueLabel.exists).ok()
-      .expect(TransferDashboardPage.partyDisplayNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyFirstNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyMiddleNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyLastNameLabel.exists).ok()
-      .expect(TransferDashboardPage.partyDOBLabel.exists).ok()
-      .expect(TransferDashboardPage.partyMerchantCodeLabel.exists).ok()
-      .expect(TransferDashboardPage.partyFSPIdLabel.exists).ok()
-      .expect(TransferDashboardPage.partyIdType.value).contains(transferResponse.to.idType)
-      .expect(TransferDashboardPage.partyIdValue.value).contains(transferResponse.to.idValue)
-      .expect(TransferDashboardPage.partyDisplayName.value).contains(transferResponse.to.displayName)
-      .expect(TransferDashboardPage.partyFirstName.value).contains(transferResponse.to.firstName)
-      .expect(TransferDashboardPage.partyMiddleName.value).contains(transferResponse.to.middleName)
-      .expect(TransferDashboardPage.partyLastName.value).contains(transferResponse.to.lastName)
-      .expect(TransferDashboardPage.partyDOB.value).contains(transferResponse.to.dateOfBirth)
-      .expect(TransferDashboardPage.partyFSPId.value).contains(transferResponse.to.fspId)
+      .expect(TransferDashboardPage.partyIDTypeLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyValueLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyDisplayNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyFirstNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyMiddleNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyLastNameLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyDOBLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyMerchantCodeLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyFSPIdLabel.exists)
+      .ok()
+      .expect(TransferDashboardPage.partyIdType.value)
+      .contains(transferResponse.to.idType)
+      .expect(TransferDashboardPage.partyIdValue.value)
+      .contains(transferResponse.to.idValue)
+      .expect(TransferDashboardPage.partyDisplayName.value)
+      .contains(transferResponse.to.displayName)
+      .expect(TransferDashboardPage.partyFirstName.value)
+      .contains(transferResponse.to.firstName)
+      .expect(TransferDashboardPage.partyMiddleName.value)
+      .contains(transferResponse.to.middleName)
+      .expect(TransferDashboardPage.partyLastName.value)
+      .contains(transferResponse.to.lastName)
+      .expect(TransferDashboardPage.partyDOB.value)
+      .contains(transferResponse.to.dateOfBirth)
+      .expect(TransferDashboardPage.partyFSPId.value)
+      .contains(transferResponse.to.fspId)
       .click(TransferDashboardPage.closePartyWithExtensionList)
 
       .click(TransferDashboardPage.closeTransferDetailsButton)
-      .click(TransferDashboardPage.ftPopupCloseButton)
-  });
+      .click(TransferDashboardPage.ftPopupCloseButton);
+  }
+);
 
-test
-  .meta({
-    ID: 'MP-T295',
-    STORY: 'MP-2667'
-  })
-  ('Click Transfers, with Valid transfer, validate view Msg details for Party Lookup, Quote Request and Quote Response', async t => {
-
+test.meta({
+  ID: 'MP-T295',
+  STORY: 'MP-2667',
+})(
+  'Click Transfers, with Valid transfer, validate view Msg details for Party Lookup, Quote Request and Quote Response',
+  async (t) => {
     var homeTransactionId = uuidv4();
     var transferRequest = {
       from: {
         displayName: 'PayerFirst PayerLast',
         idType: 'MSISDN',
         idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
+        extensionList: [
+          {
+            key: 4,
+            value: 2,
+          },
+        ],
       },
       to: {
         displayName: 'PartyFirst PartyLast',
         idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
+        idValue: `${config.receiverpartyID}`,
       },
       amountType: 'SEND',
       currency: `${config.simcurrency}`,
       amount: 10.123,
       transactionType: 'TRANSFER',
       note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: homeTransactionId
-    }
+      homeTransactionId: homeTransactionId,
+    };
     var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-    transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+    var transferResponse = await apiHelper.getResponseBody(
+      'POST',
+      `${config.simCoreConnectorEndpoint}/sendmoney`,
+      JSON.stringify(transferRequest),
+      payloadHeaders
+    );
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptParty: true }),
+      payloadHeaders
+    );
+    transferResponse = await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptQuote: true }),
+      payloadHeaders
+    );
 
     await t
       .maximizeWindow()
@@ -431,98 +583,152 @@ test
       .click(TransferDashboardPage.findATransferButton)
       .wait(15000)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
-      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+        paste: true,
+        replace: false,
+      })
+      .wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
       .click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab)
       //Checking Details for Party Lookup Response button
       .click(TransferDashboardPage.partyLookupResponseButton)
-      .expect(TransferDashboardPage.plrpartyIdType.exists).ok()
-      .expect(TransferDashboardPage.plrpartyIdentifier.exists).ok()
-      .expect(TransferDashboardPage.plrfspId.exists).ok()
-      .expect(TransferDashboardPage.plrdateOfBirth.exists).ok()
-      .expect(TransferDashboardPage.plrfirstName.exists).ok()
-      .expect(TransferDashboardPage.plrlastName.exists).ok()
-      .expect(TransferDashboardPage.plrpartyIdTypeValue.innerText).contains(transferResponse.to.idType)
-      .expect(TransferDashboardPage.plrpartyIdentifierValue.innerText).contains(transferResponse.to.idValue)
-      .expect(TransferDashboardPage.plrfspIdValue.innerText).contains(transferResponse.to.fspId)
-      .expect(TransferDashboardPage.plrdateOfBirthValue.innerText).contains(transferResponse.to.dateOfBirth)
-      .expect(TransferDashboardPage.plrfirstNameValue.innerText).contains(transferResponse.to.firstName)
-      .expect(TransferDashboardPage.plrlastNameValue.innerText).contains(transferResponse.to.lastName)
+      .expect(TransferDashboardPage.plrpartyIdType.exists)
+      .ok()
+      .expect(TransferDashboardPage.plrpartyIdentifier.exists)
+      .ok()
+      .expect(TransferDashboardPage.plrfspId.exists)
+      .ok()
+      .expect(TransferDashboardPage.plrdateOfBirth.exists)
+      .ok()
+      .expect(TransferDashboardPage.plrfirstName.exists)
+      .ok()
+      .expect(TransferDashboardPage.plrlastName.exists)
+      .ok()
+      .expect(TransferDashboardPage.plrpartyIdTypeValue.innerText)
+      .contains(transferResponse.to.idType)
+      .expect(TransferDashboardPage.plrpartyIdentifierValue.innerText)
+      .contains(transferResponse.to.idValue)
+      .expect(TransferDashboardPage.plrfspIdValue.innerText)
+      .contains(transferResponse.to.fspId)
+      .expect(TransferDashboardPage.plrdateOfBirthValue.innerText)
+      .contains(transferResponse.to.dateOfBirth)
+      .expect(TransferDashboardPage.plrfirstNameValue.innerText)
+      .contains(transferResponse.to.firstName)
+      .expect(TransferDashboardPage.plrlastNameValue.innerText)
+      .contains(transferResponse.to.lastName)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
       //Checking details for Quote Request button
       .click(TransferDashboardPage.quoteRequestButton)
-      .expect(TransferDashboardPage.qrquoteId.exists).ok()
-      .expect(TransferDashboardPage.qrquoteIdValue.innerText).contains(transferResponse.quoteId)
-      .expect(TransferDashboardPage.qrpayerpartyIdType.exists).ok()
-      .expect(TransferDashboardPage.qrpayerpartyIdTypeValue.innerText).contains(transferResponse.from.idType)
-      .expect(TransferDashboardPage.qrpayerpartyIdentifier.exists).ok()
-      .expect(TransferDashboardPage.qrpayerpartyIdentifierValue.innerText).contains(transferResponse.from.idValue)
-      .expect(TransferDashboardPage.qramountTypeId.exists).ok()
-      .expect(TransferDashboardPage.qramountTypeValue.innerText).contains(transferResponse.amountType)
-      .expect(TransferDashboardPage.qrcurrency.exists).ok()
-      .expect(TransferDashboardPage.qrcurrencyValue.innerText).contains(transferResponse.currency)
-      .expect(TransferDashboardPage.qramount.exists).ok()
-      .expect(TransferDashboardPage.qramountValue.innerText).contains(transferResponse.amount)
-      .expect(TransferDashboardPage.qrpayeepartyIdType.exists).ok()
-      .expect(TransferDashboardPage.qrpayeepartyIdTypeValue.innerText).contains(transferResponse.to.idType)
-      .expect(TransferDashboardPage.qrpayeepartyIdentifier.exists).ok()
-      .expect(TransferDashboardPage.qrpayeepartyIdentifierValue.innerText).contains(transferResponse.to.idValue)
-      .expect(TransferDashboardPage.qrpayeefspId.exists).ok()
-      .expect(TransferDashboardPage.qrpayeefspIdValue.innerText).contains(transferResponse.to.fspId)
+      .expect(TransferDashboardPage.qrquoteId.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrquoteIdValue.innerText)
+      .contains(transferResponse.quoteId)
+      .expect(TransferDashboardPage.qrpayerpartyIdType.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrpayerpartyIdTypeValue.innerText)
+      .contains(transferResponse.from.idType)
+      .expect(TransferDashboardPage.qrpayerpartyIdentifier.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrpayerpartyIdentifierValue.innerText)
+      .contains(transferResponse.from.idValue)
+      .expect(TransferDashboardPage.qramountTypeId.exists)
+      .ok()
+      .expect(TransferDashboardPage.qramountTypeValue.innerText)
+      .contains(transferResponse.amountType)
+      .expect(TransferDashboardPage.qrcurrency.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrcurrencyValue.innerText)
+      .contains(transferResponse.currency)
+      .expect(TransferDashboardPage.qramount.exists)
+      .ok()
+      .expect(TransferDashboardPage.qramountValue.innerText)
+      .contains(transferResponse.amount)
+      .expect(TransferDashboardPage.qrpayeepartyIdType.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrpayeepartyIdTypeValue.innerText)
+      .contains(transferResponse.to.idType)
+      .expect(TransferDashboardPage.qrpayeepartyIdentifier.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrpayeepartyIdentifierValue.innerText)
+      .contains(transferResponse.to.idValue)
+      .expect(TransferDashboardPage.qrpayeefspId.exists)
+      .ok()
+      .expect(TransferDashboardPage.qrpayeefspIdValue.innerText)
+      .contains(transferResponse.to.fspId)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
       //Checking details for Quote Response button
       .click(TransferDashboardPage.quoteResponseButton)
-      .expect(TransferDashboardPage.expiration.exists).ok()
-      .expect(TransferDashboardPage.expirationValue.innerText).contains(transferResponse.quoteResponse.body.expiration)
-      .expect(TransferDashboardPage.ilpPacket.exists).ok()
-      .expect(TransferDashboardPage.ilpPacketValue.innerText).contains(transferResponse.quoteResponse.body.ilpPacket)
-      .expect(TransferDashboardPage.condition.exists).ok()
-      .expect(TransferDashboardPage.conditionValue.innerText).contains(transferResponse.quoteResponse.body.condition)
+      .expect(TransferDashboardPage.expiration.exists)
+      .ok()
+      .expect(TransferDashboardPage.expirationValue.innerText)
+      .contains(transferResponse.quoteResponse.body.expiration)
+      .expect(TransferDashboardPage.ilpPacket.exists)
+      .ok()
+      .expect(TransferDashboardPage.ilpPacketValue.innerText)
+      .contains(transferResponse.quoteResponse.body.ilpPacket)
+      .expect(TransferDashboardPage.condition.exists)
+      .ok()
+      .expect(TransferDashboardPage.conditionValue.innerText)
+      .contains(transferResponse.quoteResponse.body.condition)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
       .click(TransferDashboardPage.closeTransferDetailsButton)
-      .click(TransferDashboardPage.ftPopupCloseButton)
-  });
+      .click(TransferDashboardPage.ftPopupCloseButton);
+  }
+);
 
-test
-  .meta({
-    ID: 'MP-T310',
-    STORY: 'MP-2667'
-  })
+test.meta({
+  ID: 'MP-T310',
+  STORY: 'MP-2667',
+})(
   // ('test1', async t => {
-  ('Click Transfers, with Valid transfer, validate view msg details with Transfer Prepare and Transfer fulfil', async t => {
-
+  'Click Transfers, with Valid transfer, validate view msg details with Transfer Prepare and Transfer fulfil',
+  async (t) => {
     var homeTransactionId = uuidv4();
     var transferRequest = {
       from: {
         displayName: 'PayerFirst PayerLast',
         idType: 'MSISDN',
         idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
+        extensionList: [
+          {
+            key: 4,
+            value: 2,
+          },
+        ],
       },
       to: {
         displayName: 'PartyFirst PartyLast',
         idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
+        idValue: `${config.receiverpartyID}`,
       },
       amountType: 'SEND',
       currency: `${config.simcurrency}`,
       amount: 10.123,
       transactionType: 'TRANSFER',
       note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: homeTransactionId
-    }
+      homeTransactionId: homeTransactionId,
+    };
     var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-   //console.log(transferResponse);
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-    transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+    var transferResponse = await apiHelper.getResponseBody(
+      'POST',
+      `${config.simCoreConnectorEndpoint}/sendmoney`,
+      JSON.stringify(transferRequest),
+      payloadHeaders
+    );
+    //console.log(transferResponse);
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptParty: true }),
+      payloadHeaders
+    );
+    transferResponse = await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptQuote: true }),
+      payloadHeaders
+    );
 
     await t
       .maximizeWindow()
@@ -530,39 +736,58 @@ test
       .click(TransferDashboardPage.findATransferButton)
       .click(TransferDashboardPage.findATransferModalBasicFindTransferTab)
       .wait(20000)
-      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+        paste: true,
+        replace: false,
+      })
+      .wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .wait(5000)
       .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
       .click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab)
       .click(TransferDashboardPage.transferPrepareButton)
-      .expect(TransferDashboardPage.tpilpPacket.exists).ok()
-      .expect(TransferDashboardPage.tpilpPacketValue.innerText).contains(JSON.parse(transferResponse.prepare.body).ilpPacket)
-      .expect(TransferDashboardPage.tpcondition.exists).ok()
-      .expect(TransferDashboardPage.tpconditionValue.innerText).contains(JSON.parse(transferResponse.prepare.body).condition)
-      .expect(TransferDashboardPage.tpexpiration.exists).ok()
-      .expect(TransferDashboardPage.tpexpirationValue.innerText).contains(JSON.parse(transferResponse.prepare.body).expiration)
+      .expect(TransferDashboardPage.tpilpPacket.exists)
+      .ok()
+      .expect(TransferDashboardPage.tpilpPacketValue.innerText)
+      .contains(JSON.parse(transferResponse.prepare.body).ilpPacket)
+      .expect(TransferDashboardPage.tpcondition.exists)
+      .ok()
+      .expect(TransferDashboardPage.tpconditionValue.innerText)
+      .contains(JSON.parse(transferResponse.prepare.body).condition)
+      .expect(TransferDashboardPage.tpexpiration.exists)
+      .ok()
+      .expect(TransferDashboardPage.tpexpirationValue.innerText)
+      .contains(JSON.parse(transferResponse.prepare.body).expiration)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
       .click(TransferDashboardPage.transferFulfilButton)
-      .expect(TransferDashboardPage.tfcompletedTimestamp.exists).ok()
-      .expect(TransferDashboardPage.tftimeStampValue.innerText).contains(transferResponse.fulfil.body.completedTimestamp)
-      .expect(TransferDashboardPage.tftransferState.exists).ok()
-      .expect(TransferDashboardPage.tftransferStateValue.innerText).contains(transferResponse.fulfil.body.transferState)
-      .expect(TransferDashboardPage.tffulfilment.exists).ok()
-      .expect(TransferDashboardPage.tffulfilmentValue.innerText).contains(transferResponse.fulfil.body.fulfilment)
+      .expect(TransferDashboardPage.tfcompletedTimestamp.exists)
+      .ok()
+      .expect(TransferDashboardPage.tftimeStampValue.innerText)
+      .contains(transferResponse.fulfil.body.completedTimestamp)
+      .expect(TransferDashboardPage.tftransferState.exists)
+      .ok()
+      .expect(TransferDashboardPage.tftransferStateValue.innerText)
+      .contains(transferResponse.fulfil.body.transferState)
+      .expect(TransferDashboardPage.tffulfilment.exists)
+      .ok()
+      .expect(TransferDashboardPage.tffulfilmentValue.innerText)
+      .contains(transferResponse.fulfil.body.fulfilment)
       .click(TransferDashboardPage.closeTechDetailsButtonPopupButton)
       .click(TransferDashboardPage.closeTransferDetailsButton)
-      .click(TransferDashboardPage.ftPopupCloseButton)
-  });
+      .click(TransferDashboardPage.ftPopupCloseButton);
+  }
+);
 
 test.meta({
   ID: '',
   STORY: '',
   description: '',
-})
-  ('Can download excel spreadsheet of transfers in basic search', async (t) => {
-  const expectedFilePath = `${process.env.HOME}` + '/Downloads/' + `Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
-  await t.maximizeWindow()
+})('Can download excel spreadsheet of transfers in basic search', async (t) => {
+  const expectedFilePath =
+    `${process.env.HOME}` +
+    '/Downloads/' +
+    `Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
+  await t.maximizeWindow();
   await t.click(TransferDashboardPage.findATransferButton);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
   // Adding `.wait` just as a precaution since this downloads a file.
@@ -571,14 +796,14 @@ test.meta({
   const wb = xlsx.readFile(expectedFilePath);
 
   const transfers = xlsx.utils.sheet_to_json(wb.Sheets['Transfers']) as Transfer[];
-  await t.expect(transfers.length).gt(0)
+  await t.expect(transfers.length).gt(0);
 
   // Check transfer in spreadsheet exists in table
-  const rows = await TransferDashboardPage.getFindATransferRows()
+  const rows = await TransferDashboardPage.getFindATransferRows();
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
 
-  const expectedTransfer = transfers.find( t => t.id[0]);
+  const expectedTransfer = transfers.find((t) => t.id[0]);
   //console.log(expectedTransfer);
   await t.expect(expectedTransfer?.senderIdType).ok();
   //await t.expect(expectedTransfer?.senderIdSubValue).ok();
@@ -586,19 +811,19 @@ test.meta({
   await t.expect(expectedTransfer?.recipientIdType).ok();
   await t.expect(expectedTransfer?.recipientIdValue).ok();
 
-
   // Delete file
   fs.unlinkSync(expectedFilePath);
 });
-
 
 test.meta({
   ID: '',
   STORY: '',
   description: '',
 })('Can download excel spreadsheet of transfers in advanced', async (t) => {
-  const expectedFilePath = `${process.env.HOME}/Downloads/Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
-  await t.maximizeWindow()
+  const expectedFilePath = `${
+    process.env.HOME
+  }/Downloads/Payment_Manager_Transfers_${new Date().toDateString()}.xlsx`;
+  await t.maximizeWindow();
   await t.click(TransferDashboardPage.findATransferButton);
   await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
   await t.click(TransferDashboardPage.findATransferModalSubmit);
@@ -616,7 +841,7 @@ test.meta({
   const transferExists = await Promise.all(rows.map((r: TransferRow) => r.transferId.innerText));
   await t.expect(transferExists).contains(transfers[0].id);
 
-  const expectedTransfer = transfers.find( t => t.id[0]);
+  const expectedTransfer = transfers.find((t) => t.id[0]);
   //console.log(expectedTransfer);
   await t.expect(expectedTransfer?.senderIdType).ok();
 
@@ -628,46 +853,59 @@ test.meta({
   fs.unlinkSync(expectedFilePath);
 });
 
-
 test.timeouts({ pageLoadTimeout: 45000 }).meta({
   ID: '',
   STORY: '',
   description: '',
 })('Can download excel spreadsheet of errors', async (t) => {
-  const expectedFilePath = `${process.env.HOME}/Downloads/Payment_Manager_Errors_${new Date().toDateString()}.xlsx`;
+  const expectedFilePath = `${
+    process.env.HOME
+  }/Downloads/Payment_Manager_Errors_${new Date().toDateString()}.xlsx`;
 
   var homeTransactionId = uuidv4();
-    var transferRequest = {
-      from: {
-        displayName: 'PayerFirst PayerLast',
-        idType: 'MSISDN',
-        idValue: `${config.senderpartyID}`,
-        extensionList:
-          [
-            {
-              key: 4,
-              value: 2
-            }
-          ]
-      },
-      to: {
-        displayName: 'PartyFirst PartyLast',
-        idType: 'MSISDN',
-        idValue: `${config.receiverpartyID}`
-      },
-      amountType: 'SEND',
-      currency: `${config.simcurrency}`,
-      amount: 1234,
-      transactionType: 'TRANSFER',
-      note: 'test payment - Success transfer initiated by Automation',
-      homeTransactionId: homeTransactionId
-    }
-    var payloadHeaders = { 'Content-Type': 'application/json' };
-    var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-    await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-    transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
-
-
+  var transferRequest = {
+    from: {
+      displayName: 'PayerFirst PayerLast',
+      idType: 'MSISDN',
+      idValue: `${config.senderpartyID}`,
+      extensionList: [
+        {
+          key: 4,
+          value: 2,
+        },
+      ],
+    },
+    to: {
+      displayName: 'PartyFirst PartyLast',
+      idType: 'MSISDN',
+      idValue: `${config.receiverpartyID}`,
+    },
+    amountType: 'SEND',
+    currency: `${config.simcurrency}`,
+    amount: 1234,
+    transactionType: 'TRANSFER',
+    note: 'test payment - Success transfer initiated by Automation',
+    homeTransactionId: homeTransactionId,
+  };
+  var payloadHeaders = { 'Content-Type': 'application/json' };
+  var transferResponse = await apiHelper.getResponseBody(
+    'POST',
+    `${config.simCoreConnectorEndpoint}/sendmoney`,
+    JSON.stringify(transferRequest),
+    payloadHeaders
+  );
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptParty: true }),
+    payloadHeaders
+  );
+  transferResponse = await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptQuote: true }),
+    payloadHeaders
+  );
 
   // Adding `.wait` just as a precaution since this downloads a file.
   await t.maximizeWindow();
@@ -678,27 +916,24 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   await scroll();
   await scroll();
   await scroll();
-  try{
-  await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
-  await t.expect(fs.existsSync(expectedFilePath)).ok();
-
-  }
-  catch(e){
+  try {
+    await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
+    await t.expect(fs.existsSync(expectedFilePath)).ok();
+  } catch (e) {
     // console.error(e);
-     var current_url = await t.eval(() => window.location.href);
-     await t.navigateTo(current_url);
-     await t.wait(10000);
-     await scroll();
-     await scroll();
-     await scroll();
-     await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
-     await t.expect(fs.existsSync(expectedFilePath)).ok();
-
-   }
+    var current_url = await t.eval(() => window.location.href);
+    await t.navigateTo(current_url);
+    await t.wait(10000);
+    await scroll();
+    await scroll();
+    await scroll();
+    await t.click(TransferDashboardPage.downloadErrorsButton).wait(6000);
+    await t.expect(fs.existsSync(expectedFilePath)).ok();
+  }
 
   const wb = xlsx.readFile(expectedFilePath);
   const errors = xlsx.utils.sheet_to_json(wb.Sheets['Errors']) as Error[];
-  await t.expect(errors.length).gt(0)
+  await t.expect(errors.length).gt(0);
 
   // Check error in spreadsheet exists in table
   const rows = await TransferDashboardPage.getErrorRows();
@@ -718,38 +953,53 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   description: '',
 })('Will display homeTransactionId in Technical Details if given by Payee DFSP', async (t) => {
   var precision = 100; // 2 decimals
-  var randomnum = Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
-  var homeTransactionId = "5105";
+  var randomnum =
+    Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1 * precision);
+  var homeTransactionId = '5105';
   var transferRequest = {
     from: {
       displayName: 'PayerFirst PayerLast',
       idType: 'MSISDN',
       idValue: `${config.senderpartyID}`,
-      extensionList:
-        [
-          {
-            key: 4,
-            value: 2
-          }
-        ]
+      extensionList: [
+        {
+          key: 4,
+          value: 2,
+        },
+      ],
     },
     to: {
       displayName: 'PartyFirst PartyLast',
       idType: 'MSISDN',
-      idValue: `${config.receiverpartyID}`
+      idValue: `${config.receiverpartyID}`,
     },
     amountType: 'SEND',
     currency: `${config.simcurrency}`,
     amount: randomnum,
     transactionType: 'TRANSFER',
     note: 'test payment - Success transfer initiated by Automation',
-    homeTransactionId: homeTransactionId
-  }
+    homeTransactionId: homeTransactionId,
+  };
   var payloadHeaders = { 'Content-Type': 'application/json' };
-  var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
+  var transferResponse = await apiHelper.getResponseBody(
+    'POST',
+    `${config.simCoreConnectorEndpoint}/sendmoney`,
+    JSON.stringify(transferRequest),
+    payloadHeaders
+  );
   //console.log(transferResponse);
-  await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-  transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptParty: true }),
+    payloadHeaders
+  );
+  transferResponse = await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptQuote: true }),
+    payloadHeaders
+  );
 
   await t.setTestSpeed(0.5);
   await t.maximizeWindow();
@@ -759,42 +1009,45 @@ test.timeouts({ pageLoadTimeout: 45000 }).meta({
   await t.click(TransferDashboardPage.findATransferButton).wait(10000);
   await t.wait(18000);
 
-  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
-      .click(TransferDashboardPage.findATransferModalSubmit)
-      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
+  await t
+    .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+      paste: true,
+      replace: false,
+    })
+    .wait(10000)
+    .click(TransferDashboardPage.findATransferModalSubmit)
+    .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId));
   await t.click(TransferDashboardPage.transferDetailsModalTechnicalDetailsTab);
-  await t.expect(await TransferDashboardPage.homeTransferIdField().value).eql('5105')
+  await t.expect(await TransferDashboardPage.homeTransferIdField().value).eql('5105');
 });
 
 test.meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
-})
-('Recipient Name should NOT have undefined when first name is not provided', async (t) => {
-
+})('Recipient Name should NOT have undefined when first name is not provided', async (t) => {
   var precision = 100; // 2 decimals
-  var randomnum = Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
+  var randomnum =
+    Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1 * precision);
   var homeTransactionId = uuidv4();
   var transferRequest = {
     from: {
-      firstName: "PayerFirst",
-      middleName: "PayerMiddle",
-      lastName: "PayerLast",
+      firstName: 'PayerFirst',
+      middleName: 'PayerMiddle',
+      lastName: 'PayerLast',
       idType: 'MSISDN',
       idValue: `${config.senderpartyID}`,
-      extensionList:
-        [
-          {
-            key: 4,
-            value: 2
-          }
-        ]
+      extensionList: [
+        {
+          key: 4,
+          value: 2,
+        },
+      ],
     },
     to: {
       displayName: 'Payeemiddle Payeelast',
       idType: 'MSISDN',
-      idValue: `${config.receiverpartyID}`
+      idValue: `${config.receiverpartyID}`,
     },
 
     amountType: 'SEND',
@@ -802,24 +1055,42 @@ test.meta({
     amount: randomnum,
     transactionType: 'TRANSFER',
     note: 'test payment - Success transfer initiated by Automation',
-    homeTransactionId: homeTransactionId
-  }
+    homeTransactionId: homeTransactionId,
+  };
   var payloadHeaders = { 'Content-Type': 'application/json' };
-  var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-  await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-  transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+  var transferResponse = await apiHelper.getResponseBody(
+    'POST',
+    `${config.simCoreConnectorEndpoint}/sendmoney`,
+    JSON.stringify(transferRequest),
+    payloadHeaders
+  );
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptParty: true }),
+    payloadHeaders
+  );
+  transferResponse = await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptQuote: true }),
+    payloadHeaders
+  );
 
-
-
-  await t.maximizeWindow()
+  await t.maximizeWindow();
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
 
-  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
-      .click(TransferDashboardPage.findATransferModalSubmit)
-      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
+  await t
+    .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+      paste: true,
+      replace: false,
+    })
+    .wait(10000)
+    .click(TransferDashboardPage.findATransferModalSubmit)
+    .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId));
 
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeemiddle Payeelast')
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeemiddle Payeelast');
 });
 
 test.meta({
@@ -828,27 +1099,27 @@ test.meta({
   description: 'Recipient Name should not have "undefined"',
 })('Recipient Name should NOT have undefined when middle name is not provided', async (t) => {
   var precision = 100; // 2 decimals
-  var randomnum = Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
+  var randomnum =
+    Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1 * precision);
   var homeTransactionId = uuidv4();
   var transferRequest = {
     from: {
-      firstName: "PayerFirst",
-      middleName: "PayerMiddle",
-      lastName: "PayerLast",
+      firstName: 'PayerFirst',
+      middleName: 'PayerMiddle',
+      lastName: 'PayerLast',
       idType: 'MSISDN',
       idValue: `${config.senderpartyID}`,
-      extensionList:
-        [
-          {
-            key: 4,
-            value: 2
-          }
-        ]
+      extensionList: [
+        {
+          key: 4,
+          value: 2,
+        },
+      ],
     },
     to: {
       displayName: 'Payeefirst Payeelast',
       idType: 'MSISDN',
-      idValue: `${config.receiverpartyID}`
+      idValue: `${config.receiverpartyID}`,
     },
 
     amountType: 'SEND',
@@ -856,23 +1127,42 @@ test.meta({
     amount: randomnum,
     transactionType: 'TRANSFER',
     note: 'test payment - Success transfer initiated by Automation',
-    homeTransactionId: homeTransactionId
-  }
+    homeTransactionId: homeTransactionId,
+  };
   var payloadHeaders = { 'Content-Type': 'application/json' };
-  var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-  await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-  transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+  var transferResponse = await apiHelper.getResponseBody(
+    'POST',
+    `${config.simCoreConnectorEndpoint}/sendmoney`,
+    JSON.stringify(transferRequest),
+    payloadHeaders
+  );
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptParty: true }),
+    payloadHeaders
+  );
+  transferResponse = await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptQuote: true }),
+    payloadHeaders
+  );
 
-  await t.maximizeWindow()
+  await t.maximizeWindow();
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
 
-  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
-      .click(TransferDashboardPage.findATransferModalSubmit)
-      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeelast')
+  await t
+    .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+      paste: true,
+      replace: false,
+    })
+    .wait(10000)
+    .click(TransferDashboardPage.findATransferModalSubmit)
+    .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId));
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeelast');
 });
-
 
 test.meta({
   ID: '',
@@ -880,27 +1170,27 @@ test.meta({
   description: 'Recipient Name should not have "undefined"',
 })('Recipient Name should NOT have undefined when last name is not provided', async (t) => {
   var precision = 100; // 2 decimals
-  var randomnum = Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
+  var randomnum =
+    Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1 * precision);
   var homeTransactionId = uuidv4();
   var transferRequest = {
     from: {
-      firstName: "PayerFirst",
-      middleName: "PayerMiddle",
-      lastName: "PayerLast",
+      firstName: 'PayerFirst',
+      middleName: 'PayerMiddle',
+      lastName: 'PayerLast',
       idType: 'MSISDN',
       idValue: `${config.senderpartyID}`,
-      extensionList:
-        [
-          {
-            key: 4,
-            value: 2
-          }
-        ]
+      extensionList: [
+        {
+          key: 4,
+          value: 2,
+        },
+      ],
     },
     to: {
       displayName: 'Payeefirst Payeemiddle',
       idType: 'MSISDN',
-      idValue: `${config.receiverpartyID}`
+      idValue: `${config.receiverpartyID}`,
     },
 
     amountType: 'SEND',
@@ -908,106 +1198,161 @@ test.meta({
     amount: randomnum,
     transactionType: 'TRANSFER',
     note: 'test payment - Success transfer initiated by Automation',
-    homeTransactionId: homeTransactionId
-  }
+    homeTransactionId: homeTransactionId,
+  };
   var payloadHeaders = { 'Content-Type': 'application/json' };
-  var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-  await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-  transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+  var transferResponse = await apiHelper.getResponseBody(
+    'POST',
+    `${config.simCoreConnectorEndpoint}/sendmoney`,
+    JSON.stringify(transferRequest),
+    payloadHeaders
+  );
+  await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptParty: true }),
+    payloadHeaders
+  );
+  transferResponse = await apiHelper.getResponseBody(
+    'PUT',
+    `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+    JSON.stringify({ acceptQuote: true }),
+    payloadHeaders
+  );
 
-
-
-  await t.maximizeWindow()
+  await t.maximizeWindow();
   await t.click(TransferDashboardPage.findATransferButton);
   await t.wait(18000);
 
-  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
-      .click(TransferDashboardPage.findATransferModalSubmit)
-      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeemiddle')
+  await t
+    .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+      paste: true,
+      replace: false,
+    })
+    .wait(10000)
+    .click(TransferDashboardPage.findATransferModalSubmit)
+    .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId));
+  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeefirst Payeemiddle');
 });
 
 test.timeouts({ pageLoadTimeout: 45000 }).meta({
   ID: '',
   STORY: 'MMD-2093',
   description: 'Recipient Name should not have "undefined"',
-})('Recipient Name should NOT have undefined when first and middle name is not provided', async (t) => {
-  var precision = 100; // 2 decimals
-  var randomnum = Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
-  var homeTransactionId = uuidv4();
-  var transferRequest = {
-    from: {
-      firstName: "PayerFirst",
-      middleName: "PayerMiddle",
-      lastName: "PayerLast",
-      idType: 'MSISDN',
-      idValue: `${config.senderpartyID}`,
-      extensionList:
-        [
+})(
+  'Recipient Name should NOT have undefined when first and middle name is not provided',
+  async (t) => {
+    var precision = 100; // 2 decimals
+    var randomnum =
+      Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) /
+      (1 * precision);
+    var homeTransactionId = uuidv4();
+    var transferRequest = {
+      from: {
+        firstName: 'PayerFirst',
+        middleName: 'PayerMiddle',
+        lastName: 'PayerLast',
+        idType: 'MSISDN',
+        idValue: `${config.senderpartyID}`,
+        extensionList: [
           {
             key: 4,
-            value: 2
-          }
-        ]
-    },
-    to: {
-      displayName: 'Payeelast',
-      idType: 'MSISDN',
-      idValue: `${config.receiverpartyID}`
-    },
+            value: 2,
+          },
+        ],
+      },
+      to: {
+        displayName: 'Payeelast',
+        idType: 'MSISDN',
+        idValue: `${config.receiverpartyID}`,
+      },
 
-    amountType: 'SEND',
-    currency: `${config.simcurrency}`,
-    amount: randomnum,
-    transactionType: 'TRANSFER',
-    note: 'test payment - Success transfer initiated by Automation',
-    homeTransactionId: homeTransactionId
-  }
-  var payloadHeaders = { 'Content-Type': 'application/json' };
-  var transferResponse = await apiHelper.getResponseBody('POST', `${config.simCoreConnectorEndpoint}/sendmoney`, JSON.stringify(transferRequest), payloadHeaders);
-  await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptParty: true }), payloadHeaders);
-  transferResponse = await apiHelper.getResponseBody('PUT', `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`, JSON.stringify({ acceptQuote: true }), payloadHeaders);
+      amountType: 'SEND',
+      currency: `${config.simcurrency}`,
+      amount: randomnum,
+      transactionType: 'TRANSFER',
+      note: 'test payment - Success transfer initiated by Automation',
+      homeTransactionId: homeTransactionId,
+    };
+    var payloadHeaders = { 'Content-Type': 'application/json' };
+    var transferResponse = await apiHelper.getResponseBody(
+      'POST',
+      `${config.simCoreConnectorEndpoint}/sendmoney`,
+      JSON.stringify(transferRequest),
+      payloadHeaders
+    );
+    await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptParty: true }),
+      payloadHeaders
+    );
+    transferResponse = await apiHelper.getResponseBody(
+      'PUT',
+      `${config.simCoreConnectorEndpoint}/sendmoney/${transferResponse.transferId}`,
+      JSON.stringify({ acceptQuote: true }),
+      payloadHeaders
+    );
 
-  await t.maximizeWindow();
-  await t.setTestSpeed(0.5);
-  await t.click(TransferDashboardPage.findATransferButton);
-  await t.wait(18000);
+    await t.maximizeWindow();
+    await t.setTestSpeed(0.5);
+    await t.click(TransferDashboardPage.findATransferButton);
+    await t.wait(18000);
 
-  await t.typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, { paste: true, replace: false }).wait(10000)
+    await t
+      .typeText(TransferDashboardPage.transferIDTextBox, transferResponse.transferId, {
+        paste: true,
+        replace: false,
+      })
+      .wait(10000)
       .click(TransferDashboardPage.findATransferModalSubmit)
       .wait(2000)
-      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId))
-  await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast')
-});
+      .click(TransferDashboardPage.transferIdList.withText(transferResponse.transferId));
+    await t.expect(await TransferDashboardPage.recipientField().value).eql('Payeelast');
+  }
+);
 
 test.meta({
   ID: '',
   STORY: 'MMD-1463',
   description: 'Improved filtering of transactions in advanced filtering screen',
 })('Advanced Filtering by direction of funds and payee alias', async (t) => {
-  await t.maximizeWindow()
+  await t.maximizeWindow();
   await t.click(TransferDashboardPage.findATransferButton);
   await t.click(TransferDashboardPage.findATransferModalAdvancedFiltering);
 
   // Set direction of funds and payee alias
   await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsField);
-  await t.click(TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('Outbound').parent());
-  await t.typeText(TransferDashboardPage.findATransferModalPayeeAliasField, `${config.receiverpartyID}`);
+  await t.click(
+    TransferDashboardPage.findATransferModalDirectionOfFundsOption.withText('Outbound').parent()
+  );
+  await t.typeText(
+    TransferDashboardPage.findATransferModalPayeeAliasField,
+    `${config.receiverpartyID}`
+  );
   await t.click(TransferDashboardPage.findATransferModalAliasTypeField);
-  await t.click(TransferDashboardPage.findATransferModalAliasTypeOption.withText('Msisdn').parent());
+  await t.click(
+    TransferDashboardPage.findATransferModalAliasTypeOption.withText('Msisdn').parent()
+  );
 
   await t.click(TransferDashboardPage.findATransferModalSubmit);
 
   const transferRows: TransferRow[] = await TransferDashboardPage.getFindATransferRows();
 
   // Open Details Modal
-  for (let i = 0 ; i < transferRows.length; i++) {
-    if((transferRows[i].status.value).toString() === "Success" ){
-    await t.click(transferRows[i].transferId);
-    await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField().value).eql('MSISDN '+`${config.receiverpartyID}`);
-    await t.expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value).eql('OUTBOUND');
-    await t.click(TransferDashboardPage.findATransferModalCloseButton);
+  for (let i = 0; i < transferRows.length; i++) {
+    if (transferRows[i].status.value.toString() === 'Success') {
+      await t.click(transferRows[i].transferId);
+      await t
+        .expect(
+          await TransferDashboardPage.transferDetailsModalTechnicalDetailsRecipientDetailsField()
+            .value
+        )
+        .eql('MSISDN ' + `${config.receiverpartyID}`);
+      await t
+        .expect(await TransferDashboardPage.transferDetailsModalTechnicalDetailsDirection().value)
+        .eql('OUTBOUND');
+      await t.click(TransferDashboardPage.findATransferModalCloseButton);
+    }
   }
-  }
-
 });

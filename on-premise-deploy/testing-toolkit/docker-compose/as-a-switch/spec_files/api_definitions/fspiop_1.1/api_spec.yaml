@@ -1,6 +1,6 @@
-openapi: "3.0.2"
+openapi: '3.0.2'
 info:
-  version: "1.1"
+  version: '1.1'
   title: Open API for FSP Interoperability (FSPIOP)
   description:
     Based on [API Definition updated on 2020-05-19 Version 1.1](https://github.com/mojaloop/mojaloop-specification/blob/master/documents/v1.1-document-set/API%20Definition_v1.1.pdf).
@@ -11,10 +11,10 @@ info:
     name: CC BY-ND 4.0
     url: https://github.com/mojaloop/mojaloop-specification/blob/master/LICENSE.md
   contact:
-    name: "Sam Kummary"
+    name: 'Sam Kummary'
     url: https://github.com/mojaloop/mojaloop-specification/issues
 servers:
-  - url: "{protocol}://hostname:<port>/switch/"
+  - url: '{protocol}://hostname:<port>/switch/'
     variables:
       protocol:
         enum:
@@ -27,18 +27,18 @@ paths:
   /participants/{Type}/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/Type"
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/Type'
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     post:
       description: The HTTP request `POST /participants/{Type}/{ID}` (or `POST /participants/{Type}/{ID}/{SubId}`) is used to create information in the server regarding the provided identity, defined by `{Type}`, `{ID}`, and optionally `{SubId}` (for example, `POST /participants/MSISDN/123456789` or `POST /participants/BUSINESS/shoecompany/employee1`). An ExtensionList element has been added to this reqeust in version v1.1
       summary: Create participant information
@@ -47,34 +47,34 @@ paths:
       operationId: ParticipantsByIDAndType
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Participant information to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ParticipantsTypeIDSubIDPostRequest"
+              $ref: '#/components/schemas/ParticipantsTypeIDSubIDPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     get:
       description: The HTTP request `GET /participants/{Type}/{ID}` (or `GET /participants/{Type}/{ID}/{SubId}`) is used to find out in which FSP the requested Party, defined by `{Type}`, `{ID}` and optionally `{SubId}`, is located (for example, `GET /participants/MSISDN/123456789`, or `GET /participants/BUSINESS/shoecompany/employee1`). This HTTP request should support a query string for filtering of currency. To use filtering of currency, the HTTP request `GET /participants/{Type}/{ID}?currency=XYZ` should be used, where `XYZ` is the requested currency.
       summary: Look up participant information
@@ -83,26 +83,26 @@ paths:
       operationId: ParticipantsByTypeAndID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /participants/{Type}/{ID}` (or `PUT /participants/{Type}/{ID}/{SubId}`) is used to inform the client of a successful result of the lookup, creation, or deletion of the FSP information related to the Party. If the FSP information is deleted, the fspId element should be empty; otherwise the element should include the FSP information for the Party.
       summary: Return participant information
@@ -111,33 +111,33 @@ paths:
       operationId: ParticipantsByTypeAndID3
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Participant information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ParticipantsTypeIDPutResponse"
+              $ref: '#/components/schemas/ParticipantsTypeIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     delete:
       description:
         The HTTP request `DELETE /participants/{Type}/{ID}` (or `DELETE /participants/{Type}/{ID}/{SubId}`) is used to delete information in the server regarding the provided identity, defined by `{Type}` and `{ID}`) (for example, `DELETE /participants/MSISDN/123456789`), and optionally `{SubId}`. This HTTP request should support a query string to delete FSP information regarding a specific currency only. To delete a specific currency only, the HTTP request `DELETE /participants/{Type}/{ID}?currency=XYZ` should be used, where `XYZ` is the requested currency.
@@ -150,26 +150,26 @@ paths:
       operationId: ParticipantsByTypeAndID2
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /participants/{Type}/{ID}/error:
     put:
       description: If the server is unable to find, create or delete the associated FSP of the provided identity, or another processing error occurred, the error callback `PUT /participants/{Type}/{ID}/error` (or `PUT /participants/{Type}/{ID}/{SubId}/error`) is used.
@@ -179,61 +179,61 @@ paths:
       operationId: ParticipantsErrorByTypeAndID
       parameters:
         #Path
-        - $ref: "#/components/parameters/Type"
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /participants/{Type}/{ID}/{SubId}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/Type"
-      - $ref: "#/components/parameters/ID"
-      - $ref: "#/components/parameters/SubId"
+      - $ref: '#/components/parameters/Type'
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/SubId'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     post:
       description: The HTTP request `POST /participants/{Type}/{ID}` (or `POST /participants/{Type}/{ID}/{SubId}`) is used to create information in the server regarding the provided identity, defined by `{Type}`, `{ID}`, and optionally `{SubId}` (for example, `POST /participants/MSISDN/123456789` or `POST /participants/BUSINESS/shoecompany/employee1`). An ExtensionList element has been added to this reqeust in version v1.1
       summary: Create participant information
@@ -242,34 +242,34 @@ paths:
       operationId: ParticipantsSubIdByTypeAndIDPost
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Participant information to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ParticipantsTypeIDSubIDPostRequest"
+              $ref: '#/components/schemas/ParticipantsTypeIDSubIDPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     get:
       description: The HTTP request `GET /participants/{Type}/{ID}` (or `GET /participants/{Type}/{ID}/{SubId}`) is used to find out in which FSP the requested Party, defined by `{Type}`, `{ID}` and optionally `{SubId}`, is located (for example, `GET /participants/MSISDN/123456789`, or `GET /participants/BUSINESS/shoecompany/employee1`). This HTTP request should support a query string for filtering of currency. To use filtering of currency, the HTTP request `GET /participants/{Type}/{ID}?currency=XYZ` should be used, where `XYZ` is the requested currency.
       summary: Look up participant information
@@ -278,26 +278,26 @@ paths:
       operationId: ParticipantsSubIdByTypeAndID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /participants/{Type}/{ID}` (or `PUT /participants/{Type}/{ID}/{SubId}`) is used to inform the client of a successful result of the lookup, creation, or deletion of the FSP information related to the Party. If the FSP information is deleted, the fspId element should be empty; otherwise the element should include the FSP information for the Party.
       summary: Return participant information
@@ -306,33 +306,33 @@ paths:
       operationId: ParticipantsSubIdByTypeAndID3
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Participant information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ParticipantsTypeIDPutResponse"
+              $ref: '#/components/schemas/ParticipantsTypeIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     delete:
       description:
         The HTTP request `DELETE /participants/{Type}/{ID}` (or `DELETE /participants/{Type}/{ID}/{SubId}`) is used to delete information in the server regarding the provided identity, defined by `{Type}` and `{ID}`) (for example, `DELETE /participants/MSISDN/123456789`), and optionally `{SubId}`. This HTTP request should support a query string to delete FSP information regarding a specific currency only. To delete a specific currency only, the HTTP request `DELETE /participants/{Type}/{ID}?currency=XYZ` should be used, where `XYZ` is the requested currency.
@@ -345,26 +345,26 @@ paths:
       operationId: ParticipantsSubIdByTypeAndID2
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /participants/{Type}/{ID}/{SubId}/error:
     put:
       description: If the server is unable to find, create or delete the associated FSP of the provided identity, or another processing error occurred, the error callback `PUT /participants/{Type}/{ID}/error` (or `PUT /participants/{Type}/{ID}/{SubId}/error`) is used.
@@ -374,46 +374,46 @@ paths:
       operationId: ParticipantsSubIdErrorByTypeAndID
       parameters:
         #Path
-        - $ref: "#/components/parameters/Type"
-        - $ref: "#/components/parameters/ID"
-        - $ref: "#/components/parameters/SubId"
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/SubId'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /participants:
     post:
       description: The HTTP request `POST /participants` is used to create information in the server regarding the provided list of identities. This request should be used for bulk creation of FSP information for more than one Party. The optional currency parameter should indicate that each provided Party supports the currency.
@@ -423,43 +423,43 @@ paths:
       operationId: Participants1
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Participant information to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ParticipantsPostRequest"
+              $ref: '#/components/schemas/ParticipantsPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /participants/{ID}:
     put:
       description: The callback `PUT /participants/{ID}` is used to inform the client of the result of the creation of the provided list of identities.
@@ -469,44 +469,44 @@ paths:
       operationId: putParticipantsByID
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Participant information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ParticipantsIDPutResponse"
+              $ref: '#/components/schemas/ParticipantsIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /participants/{ID}/error:
     put:
       description: If there is an error during FSP information creation in the server, the error callback `PUT /participants/{ID}/error` is used. The `{ID}` in the URI should contain the requestId that was used for the creation of the participant information.
@@ -516,61 +516,61 @@ paths:
       operationId: ParticipantsByIDAndError
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Parties
   /parties/{Type}/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/Type"
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/Type'
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /parties/{Type}/{ID}` (or `GET /parties/{Type}/{ID}/{SubId}`) is used to look up information regarding the requested Party, defined by `{Type}`, `{ID}` and optionally `{SubId}` (for example, `GET /parties/MSISDN/123456789`, or `GET /parties/BUSINESS/shoecompany/employee1`).
       summary: Look up party information
@@ -579,26 +579,26 @@ paths:
       operationId: PartiesByTypeAndID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /parties/{Type}/{ID}` (or `PUT /parties/{Type}/{ID}/{SubId}`) is used to inform the client of a successful result of the Party information lookup.
       summary: Return party information
@@ -607,33 +607,33 @@ paths:
       operationId: PartiesByTypeAndID2
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Party information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PartiesTypeIDPutResponse"
+              $ref: '#/components/schemas/PartiesTypeIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /parties/{Type}/{ID}/error:
     put:
       description: If the server is unable to find Party information of the provided identity, or another processing error occurred, the error callback `PUT /parties/{Type}/{ID}/error` (or `PUT /parties/{Type}/{ID}/{SubI}/error`) is used.
@@ -643,61 +643,61 @@ paths:
       operationId: PartiesErrorByTypeAndID
       parameters:
         #Path
-        - $ref: "#/components/parameters/Type"
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /parties/{Type}/{ID}/{SubId}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/Type"
-      - $ref: "#/components/parameters/ID"
-      - $ref: "#/components/parameters/SubId"
+      - $ref: '#/components/parameters/Type'
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/SubId'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /parties/{Type}/{ID}` (or `GET /parties/{Type}/{ID}/{SubId}`) is used to look up information regarding the requested Party, defined by `{Type}`, `{ID}` and optionally `{SubId}` (for example, `GET /parties/MSISDN/123456789`, or `GET /parties/BUSINESS/shoecompany/employee1`).
       summary: Look up party information
@@ -706,26 +706,26 @@ paths:
       operationId: PartiesSubIdByTypeAndID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /parties/{Type}/{ID}` (or `PUT /parties/{Type}/{ID}/{SubId}`) is used to inform the client of a successful result of the Party information lookup.
       summary: Return party information
@@ -734,33 +734,33 @@ paths:
       operationId: PartiesSubIdByTypeAndIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Party information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PartiesTypeIDPutResponse"
+              $ref: '#/components/schemas/PartiesTypeIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /parties/{Type}/{ID}/{SubId}/error:
     put:
       description: If the server is unable to find Party information of the provided identity, or another processing error occurred, the error callback `PUT /parties/{Type}/{ID}/error` (or `PUT /parties/{Type}/{ID}/{SubId}/error`) is used.
@@ -770,46 +770,46 @@ paths:
       operationId: PartiesSubIdErrorByTypeAndID
       parameters:
         #Path
-        - $ref: "#/components/parameters/Type"
-        - $ref: "#/components/parameters/ID"
-        - $ref: "#/components/parameters/SubId"
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/SubId'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Transaction requests
   /transactionRequests:
@@ -821,57 +821,57 @@ paths:
       operationId: TransactionRequests
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Transaction request to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TransactionRequestsPostRequest"
+              $ref: '#/components/schemas/TransactionRequestsPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /transactionRequests/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /transactionRequests/{ID}` is used to get information regarding a transaction request created or requested earlier. The `{ID}` in the URI should contain the `transactionRequestId` that was used for the creation of the transaction request.
       summary: Retrieve transaction request information
@@ -880,26 +880,26 @@ paths:
       operationId: TransactionRequestsByID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /transactionRequests/{ID}` is used to inform the client of a requested or created transaction request. The `{ID}` in the URI should contain the `transactionRequestId` that was used for the creation of the transaction request, or the `{ID}` that was used in the `GET /transactionRequests/{ID}`.
       summary: Return transaction request information
@@ -908,33 +908,33 @@ paths:
       operationId: TransactionRequestsByIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Transaction request information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TransactionRequestsIDPutResponse"
+              $ref: '#/components/schemas/TransactionRequestsIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /transactionRequests/{ID}/error:
     put:
       description: If the server is unable to find or create a transaction request, or another processing error occurs, the error callback `PUT /transactionRequests/{ID}/error` is used. The `{ID}` in the URI should contain the `transactionRequestId` that was used for the creation of the transaction request, or the `{ID}` that was used in the `GET /transactionRequests/{ID}`.
@@ -944,44 +944,44 @@ paths:
       operationId: TransactionRequestsErrorByID
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Quotes
   /quotes:
@@ -993,57 +993,57 @@ paths:
       operationId: Quotes
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the quote to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/QuotesPostRequest"
+              $ref: '#/components/schemas/QuotesPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /quotes/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /quotes/{ID}` is used to get information regarding a quote created or requested earlier. The `{ID}` in the URI should contain the `quoteId` that was used for the creation of the quote.
       summary: Retrieve quote information
@@ -1052,26 +1052,26 @@ paths:
       operationId: QuotesByID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /quotes/{ID}` is used to inform the client of a requested or created quote. The `{ID}` in the URI should contain the `quoteId` that was used for the creation of the quote, or the `{ID}` that was used in the `GET /quotes/{ID}` request.
       summary: Return quote information
@@ -1080,33 +1080,33 @@ paths:
       operationId: QuotesByID1
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Quote information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/QuotesIDPutResponse"
+              $ref: '#/components/schemas/QuotesIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /quotes/{ID}/error:
     put:
       description: If the server is unable to find or create a quote, or some other processing error occurs, the error callback `PUT /quotes/{ID}/error` is used. The `{ID}` in the URI should contain the `quoteId` that was used for the creation of the quote, or the `{ID}` that was used in the `GET /quotes/{ID}` request.
@@ -1116,60 +1116,60 @@ paths:
       operationId: QuotesByIDAndError
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Authorizations
   /authorizations/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description:
         The HTTP request `GET /authorizations/{ID}` is used to request the Payer to enter the applicable credentials in the Payee FSP system. The `{ID}` in the URI should contain the `transactionRequestID`, received from the `POST /transactionRequests` service earlier in the process. This request requires a query string to be included in the URI, with the following key-value pairs*:*
@@ -1197,26 +1197,26 @@ paths:
       operationId: AuthorizationsByIDGet
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /authorizations/{ID}` is used to inform the client of the result of a previously-requested authorization. The `{ID}` in the URI should contain the `{ID}` that was used in the `GET /authorizations/{ID}` request.
       summary: Return authorization result
@@ -1225,33 +1225,33 @@ paths:
       operationId: AuthorizationsByIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Authorization result returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthorizationsIDPutResponse"
+              $ref: '#/components/schemas/AuthorizationsIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /authorizations/{ID}/error:
     put:
       description: If the server is unable to find the transaction request, or another processing error occurs, the error callback `PUT /authorizations/{ID}/error` is used. The `{ID}` in the URI should contain the `{ID}` that was used in the `GET /authorizations/{ID}`.
@@ -1261,44 +1261,44 @@ paths:
       operationId: AuthorizationsByIDAndError
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Transfers
   /transfers:
@@ -1310,57 +1310,57 @@ paths:
       operationId: transfers
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the transfer to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TransfersPostRequest"
+              $ref: '#/components/schemas/TransfersPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /transfers/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /transfers/{ID}` is used to get information regarding a transfer created or requested earlier. The `{ID}` in the URI should contain the `transferId` that was used for the creation of the transfer.
       summary: Retrieve transfer information
@@ -1369,26 +1369,26 @@ paths:
       operationId: TransfersByIDGet
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     patch:
       description: The HTTP request PATCH /transfers/<ID> is used by a Switch to update the state of a previously reserved transfer, if the Payee FSP has requested a commit notification when the Switch has completed processing of the transfer. The <ID> in the URI should contain the transferId that was used for the creation of the transfer. Please note that this request does not generate a callback.
       summary: Return transfer information
@@ -1397,33 +1397,33 @@ paths:
       operationId: TransfersByIDPatch
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Transfer notification upon completion.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TransfersIDPatchResponse"
+              $ref: '#/components/schemas/TransfersIDPatchResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /transfers/{ID}` is used to inform the client of a requested or created transfer. The `{ID}` in the URI should contain the `transferId` that was used for the creation of the transfer, or the `{ID}` that was used in the `GET /transfers/{ID}` request.
       summary: Return transfer information
@@ -1432,33 +1432,33 @@ paths:
       operationId: TransfersByIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Transfer information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TransfersIDPutResponse"
+              $ref: '#/components/schemas/TransfersIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /transfers/{ID}/error:
     put:
       description: If the server is unable to find or create a transfer, or another processing error occurs, the error callback `PUT /transfers/{ID}/error` is used. The `{ID}` in the URI should contain the `transferId` that was used for the creation of the transfer, or the `{ID}` that was used in the `GET /transfers/{ID}`.
@@ -1468,59 +1468,59 @@ paths:
       operationId: TransfersByIDAndError
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Transactions
   /transactions/{ID}:
     parameters:
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /transactions/{ID}` is used to get transaction information regarding a financial transaction created earlier. The `{ID}` in the URI should contain the `transactionId` that was used for the creation of the quote, as the transaction is created as part of another process (the transfer process).
       summary: Retrieve transaction information
@@ -1529,26 +1529,26 @@ paths:
       operationId: TransactionsByID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /transactions/{ID}` is used to inform the client of a requested transaction. The `{ID}` in the URI should contain the `{ID}` that was used in the `GET /transactions/{ID}` request.
       summary: Return transaction information
@@ -1557,33 +1557,33 @@ paths:
       operationId: TransactionsByID1
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Transaction information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TransactionsIDPutResponse"
+              $ref: '#/components/schemas/TransactionsIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /transactions/{ID}/error:
     put:
       description: If the server is unable to find or create a transaction, or another processing error occurs, the error callback `PUT /transactions/{ID}/error` is used. The `{ID}` in the URI should contain the `{ID}` that was used in the `GET /transactions/{ID}` request.
@@ -1593,44 +1593,44 @@ paths:
       operationId: TransactionsErrorByID
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Bulk Quotes
   /bulkQuotes:
@@ -1642,57 +1642,57 @@ paths:
       operationId: BulkQuotes
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the bulk quote to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BulkQuotesPostRequest"
+              $ref: '#/components/schemas/BulkQuotesPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /bulkQuotes/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /bulkQuotes/{ID}` is used to get information regarding a bulk quote created or requested earlier. The `{ID}` in the URI should contain the `bulkQuoteId` that was used for the creation of the bulk quote.
       summary: Retrieve bulk quote information
@@ -1701,26 +1701,26 @@ paths:
       operationId: BulkQuotesByID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /bulkQuotes/{ID}` is used to inform the client of a requested or created bulk quote. The `{ID}` in the URI should contain the `bulkQuoteId` that was used for the creation of the bulk quote, or the `{ID}` that was used in the `GET /bulkQuotes/{ID}` request.
       summary: Return bulk quote information
@@ -1729,33 +1729,33 @@ paths:
       operationId: BulkQuotesByID1
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Bulk quote information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BulkQuotesIDPutResponse"
+              $ref: '#/components/schemas/BulkQuotesIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /bulkQuotes/{ID}/error:
     put:
       description: If the server is unable to find or create a bulk quote, or another processing error occurs, the error callback `PUT /bulkQuotes/{ID}/error` is used. The `{ID}` in the URI should contain the `bulkQuoteId` that was used for the creation of the bulk quote, or the `{ID}` that was used in the `GET /bulkQuotes/{ID}` request.
@@ -1765,44 +1765,44 @@ paths:
       operationId: BulkQuotesErrorByID
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Bulk transfers
   /bulkTransfers:
@@ -1814,57 +1814,57 @@ paths:
       operationId: BulkTransfers
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the bulk transfer to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BulkTransfersPostRequest"
+              $ref: '#/components/schemas/BulkTransfersPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /bulkTransfers/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /bulkTransfers/{ID}` is used to get information regarding a bulk transfer created or requested earlier. The `{ID}` in the URI should contain the `bulkTransferId` that was used for the creation of the bulk transfer.
       summary: Retrieve bulk transfer information
@@ -1873,26 +1873,26 @@ paths:
       operationId: BulkTransferByID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /bulkTransfers/{ID}` is used to inform the client of a requested or created bulk transfer. The `{ID}` in the URI should contain the `bulkTransferId` that was used for the creation of the bulk transfer (`POST /bulkTransfers`), or the `{ID}` that was used in the `GET /bulkTransfers/{ID}` request.
       summary: Return bulk transfer information
@@ -1901,33 +1901,33 @@ paths:
       operationId: BulkTransfersByIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Bulk transfer information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BulkTransfersIDPutResponse"
+              $ref: '#/components/schemas/BulkTransfersIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /bulkTransfers/{ID}/error:
     put:
       description: If the server is unable to find or create a bulk transfer, or another processing error occurs, the error callback `PUT /bulkTransfers/{ID}/error` is used. The `{ID}` in the URI should contain the `bulkTransferId` that was used for the creation of the bulk transfer (`POST /bulkTransfers`), or the `{ID}` that was used in the `GET /bulkTransfers/{ID}` request.
@@ -1937,44 +1937,44 @@ paths:
       operationId: BulkTransfersErrorByID
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
 components:
   schemas:
@@ -2001,8 +2001,7 @@ components:
       enum:
         - OTP
         - QRCODE
-      description:
-        Below are the allowed values for the enumeration AuthenticationType.
+      description: Below are the allowed values for the enumeration AuthenticationType.
 
         - OTP - One-time password generated by the Payer FSP.
 
@@ -2010,8 +2009,8 @@ components:
     AuthenticationValue:
       title: AuthenticationValue
       oneOf:
-        - $ref: "#/components/schemas/OtpValue"
-        - $ref: "#/components/schemas/QRCODE"
+        - $ref: '#/components/schemas/OtpValue'
+        - $ref: '#/components/schemas/QRCODE'
       pattern: ^\d{3,10}$|^\S{1,64}$
       description: Contains the authentication value. The format depends on the authentication type used in the AuthenticationInfo complex type.
     AuthorizationResponse:
@@ -2392,14 +2391,14 @@ components:
     PartyName:
       title: PartyName
       allOf:
-        - $ref: "#/components/schemas/Name"
+        - $ref: '#/components/schemas/Name'
         - description: Name of the Party. Could be a real name or a nickname.
     PartySubIdOrType:
       title: PartySubIdOrType
       description: Either a sub-identifier of a PartyIdentifier, or a sub-type of the PartyIdType, normally a PersonalIdentifierType.
       oneOf:
-        - $ref: "#/components/schemas/PersonalIdentifierType"
-        - $ref: "#/components/schemas/PartyIdentifier"
+        - $ref: '#/components/schemas/PersonalIdentifierType'
+        - $ref: '#/components/schemas/PartyIdentifier'
     PersonalIdentifierType:
       title: PersonalIdentifierType
       type: string
@@ -2569,12 +2568,12 @@ components:
       properties:
         authentication:
           allOf:
-            - $ref: "#/components/schemas/AuthenticationType"
+            - $ref: '#/components/schemas/AuthenticationType'
             - description: Type of authentication.
             - example: OTP
         authenticationValue:
           allOf:
-            - $ref: "#/components/schemas/AuthenticationValue"
+            - $ref: '#/components/schemas/AuthenticationValue'
             - description: Authentication value.
             - example: 1234
       required:
@@ -2587,12 +2586,12 @@ components:
       properties:
         authenticationInfo:
           allOf:
-            - $ref: "#/components/schemas/AuthenticationInfo"
+            - $ref: '#/components/schemas/AuthenticationInfo'
             - description: OTP or QR Code if entered, otherwise empty.
             - example: OTP
         responseType:
           allOf:
-            - $ref: "#/components/schemas/AuthorizationResponse"
+            - $ref: '#/components/schemas/AuthorizationResponse'
             - description: Enum containing response information; if the customer entered the authentication value, rejected the transaction, or requested a resend of the authentication value.
             - example: ENTERED
       required:
@@ -2606,16 +2605,16 @@ components:
           type: array
           maxItems: 1000
           items:
-            $ref: "#/components/schemas/IndividualQuoteResult"
+            $ref: '#/components/schemas/IndividualQuoteResult'
           description: Fees for each individual transaction, if any of them are charged per transaction.
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Date and time until when the quotation is valid and can be honored when used in the subsequent transaction request.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - expiration
@@ -2626,32 +2625,32 @@ components:
       properties:
         bulkQuoteId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Common ID between the FSPs for the bulk quote object, decided by the Payer FSP. The ID should be reused for resends of the same bulk quote. A new ID should be generated for each new bulk quote.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         payer:
           allOf:
-            - $ref: "#/components/schemas/Party"
+            - $ref: '#/components/schemas/Party'
             - description: Information about the Payer in the proposed financial transaction.
         geoCode:
           allOf:
-            - $ref: "#/components/schemas/GeoCode"
+            - $ref: '#/components/schemas/GeoCode'
             - description: Longitude and Latitude of the initiating Party. Can be used to detect fraud.
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Expiration is optional to let the Payee FSP know when a quote no longer needs to be returned.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         individualQuotes:
           type: array
           minItems: 1
           maxItems: 1000
           items:
-            $ref: "#/components/schemas/IndividualQuote"
+            $ref: '#/components/schemas/IndividualQuote'
           description: List of quotes elements.
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - bulkQuoteId
@@ -2664,23 +2663,23 @@ components:
       properties:
         completedTimestamp:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Time and date when the bulk transaction was completed.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         individualTransferResults:
           type: array
           maxItems: 1000
           items:
-            $ref: "#/components/schemas/IndividualTransferResult"
+            $ref: '#/components/schemas/IndividualTransferResult'
           description: List of IndividualTransferResult elements.
         bulkTransferState:
           allOf:
-            - $ref: "#/components/schemas/BulkTransferState"
+            - $ref: '#/components/schemas/BulkTransferState'
             - description: The state of the bulk transfer.
             - example: RECEIVED
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - bulkTransferState
@@ -2691,22 +2690,22 @@ components:
       properties:
         bulkTransferId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Common ID between the FSPs and the optional Switch for the bulk transfer object, decided by the Payer FSP. The ID should be reused for resends of the same bulk transfer. A new ID should be generated for each new bulk transfer.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         bulkQuoteId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: ID of the related bulk quote.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         payerFsp:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: Payer FSP identifier.
             - example: 5678
         payeeFsp:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: Payee FSP identifier.
             - example: 1234
         individualTransfers:
@@ -2714,16 +2713,16 @@ components:
           minItems: 1
           maxItems: 1000
           items:
-            $ref: "#/components/schemas/IndividualTransfer"
+            $ref: '#/components/schemas/IndividualTransfer'
           description: List of IndividualTransfer elements.
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Expiration time of the transfers.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - bulkTransferId
@@ -2739,16 +2738,16 @@ components:
       properties:
         errorCode:
           allOf:
-            - $ref: "#/components/schemas/ErrorCode"
+            - $ref: '#/components/schemas/ErrorCode'
             - description: Specific error number.
             - example: 5100
         errorDescription:
           allOf:
-            - $ref: "#/components/schemas/ErrorDescription"
+            - $ref: '#/components/schemas/ErrorDescription'
             - description: Error description string.
             - example: This is an error description.
         extensionList:
-          $ref: "#/components/schemas/ExtensionList"
+          $ref: '#/components/schemas/ExtensionList'
       required:
         - errorCode
         - errorDescription
@@ -2758,7 +2757,7 @@ components:
       description: Data model for the complex type object that contains ErrorInformation.
       properties:
         errorInformation:
-          $ref: "#/components/schemas/ErrorInformation"
+          $ref: '#/components/schemas/ErrorInformation'
       required:
         - errorInformation
     ErrorInformationResponse:
@@ -2767,7 +2766,7 @@ components:
       description: Data model for the complex type object that contains an optional element ErrorInformation used along with 4xx and 5xx responses.
       properties:
         errorInformation:
-          $ref: "#/components/schemas/ErrorInformation"
+          $ref: '#/components/schemas/ErrorInformation'
     Extension:
       title: Extension
       type: object
@@ -2775,11 +2774,11 @@ components:
       properties:
         key:
           allOf:
-            - $ref: "#/components/schemas/ExtensionKey"
+            - $ref: '#/components/schemas/ExtensionKey'
             - description: Extension key.
         value:
           allOf:
-            - $ref: "#/components/schemas/ExtensionValue"
+            - $ref: '#/components/schemas/ExtensionValue'
             - description: Extension value.
       required:
         - key
@@ -2792,7 +2791,7 @@ components:
         extension:
           type: array
           items:
-            $ref: "#/components/schemas/Extension"
+            $ref: '#/components/schemas/Extension'
           minItems: 1
           maxItems: 16
           description: Number of Extension elements.
@@ -2805,14 +2804,14 @@ components:
       properties:
         latitude:
           allOf:
-            - $ref: "#/components/schemas/Latitude"
+            - $ref: '#/components/schemas/Latitude'
             - description: Latitude of the Party.
-            - example: "+45.4215"
+            - example: '+45.4215'
         longitude:
           allOf:
-            - $ref: "#/components/schemas/Longitude"
+            - $ref: '#/components/schemas/Longitude'
             - description: Longitude of the Party.
-            - example: "+75.6972"
+            - example: '+75.6972'
       required:
         - latitude
         - longitude
@@ -2823,47 +2822,47 @@ components:
       properties:
         quoteId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies the quote message.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         transactionId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies the transaction message.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         payee:
           allOf:
-            - $ref: "#/components/schemas/Party"
+            - $ref: '#/components/schemas/Party'
             - description: Information about the Payee in the proposed financial transaction.
         amountType:
           allOf:
-            - $ref: "#/components/schemas/AmountType"
+            - $ref: '#/components/schemas/AmountType'
             - description: SEND for sendAmount, RECEIVE for receiveAmount.
             - example: RECEIVE
         amount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Depending on amountType
                 If SEND - The amount the Payer would like to send, that is, the amount that should be withdrawn from the Payer account including any fees. The amount is updated by each participating entity in the transaction.
                 If RECEIVE - The amount the Payee should receive, that is, the amount that should be sent to the receiver exclusive of any fees. The amount is not updated by any of the participating entities.
         fees:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The fees in the transaction.
                 The fees element should be empty if fees should be non-disclosed.
                 The fees element should be non-empty if fees should be disclosed.
         transactionType:
           allOf:
-            - $ref: "#/components/schemas/TransactionType"
+            - $ref: '#/components/schemas/TransactionType'
             - description: Type of transaction that the quote is requested for.
         note:
           allOf:
-            - $ref: "#/components/schemas/Note"
+            - $ref: '#/components/schemas/Note'
             - description: Memo that will be attached to the transaction.
             - example: Note sent to Payee.
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - quoteId
@@ -2879,46 +2878,46 @@ components:
       properties:
         quoteId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies the quote message.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         payee:
-          allOf:  
-            - $ref: "#/components/schemas/Party"
+          allOf:
+            - $ref: '#/components/schemas/Party'
             - description: Information about the Payee in the proposed financial transaction.
         transferAmount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The amount of money that the Payee FSP should receive.
         payeeReceiveAmount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The amount of Money that the Payee should receive in the end-to-end transaction. Optional as the Payee FSP might not want to disclose any optional Payee fees.
         payeeFspFee:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Payee FSP’s part of the transaction fee.
         payeeFspCommission:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Transaction commission from the Payee FSP.
         ilpPacket:
           allOf:
-            - $ref: "#/components/schemas/IlpPacket"
+            - $ref: '#/components/schemas/IlpPacket'
             - description: The ILP Packet that must be attached to the transfer by the Payer.
             - example: AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
         condition:
           allOf:
-            - $ref: "#/components/schemas/IlpCondition"
+            - $ref: '#/components/schemas/IlpCondition'
             - description: The condition that must be attached to the transfer by the Payer.
             - example: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA
         errorInformation:
           allOf:
-            - $ref: "#/components/schemas/ErrorInformation"
+            - $ref: '#/components/schemas/ErrorInformation'
             - description: Error code, category description. **Note:** receiveAmount, payeeFspFee, payeeFspCommission, expiration, ilpPacket, condition should not be set if errorInformation is set.
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - quoteId
@@ -2929,26 +2928,26 @@ components:
       properties:
         transferId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies messages related to the same /transfers sequence.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         transferAmount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Transaction amount to be sent.
         ilpPacket:
           allOf:
-            - $ref: "#/components/schemas/IlpPacket"
+            - $ref: '#/components/schemas/IlpPacket'
             - description: ILP Packet containing the amount delivered to the Payee and the ILP Address of the Payee and any other end-to-end data.
             - example: AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
         condition:
           allOf:
-            - $ref: "#/components/schemas/IlpCondition"
+            - $ref: '#/components/schemas/IlpCondition'
             - description: Condition that must be fulfilled to commit the transfer.
             - example: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transferId
@@ -2962,21 +2961,21 @@ components:
       properties:
         transferId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies messages related to the same /transfers sequence.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         fulfilment:
           allOf:
-            - $ref: "#/components/schemas/IlpFulfilment"
+            - $ref: '#/components/schemas/IlpFulfilment'
             - description: Fulfilment of the condition specified with the transaction. **Note:** Either fulfilment or errorInformation should be set, not both.
             - example: WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8
         errorInformation:
           allOf:
-            - $ref: "#/components/schemas/ErrorInformation"
+            - $ref: '#/components/schemas/ErrorInformation'
             - description: If transfer is REJECTED, error information may be provided. **Note:** Either fulfilment or errorInformation should be set, not both.
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transferId
@@ -2987,14 +2986,14 @@ components:
       properties:
         currency:
           allOf:
-            - $ref: "#/components/schemas/Currency"
+            - $ref: '#/components/schemas/Currency'
             - description: Currency of the amount.
             - example: USD
         amount:
           allOf:
-            - $ref: "#/components/schemas/Amount"
+            - $ref: '#/components/schemas/Amount'
             - description: Amount of Money.
-            - example: "123.45"
+            - example: '123.45'
       required:
         - currency
         - amount
@@ -3006,13 +3005,13 @@ components:
         partyList:
           type: array
           items:
-            $ref: "#/components/schemas/PartyResult"
+            $ref: '#/components/schemas/PartyResult'
           minItems: 1
           maxItems: 10000
           description: List of PartyResult elements that were either created or failed to be created.
         currency:
           allOf:
-            - $ref: "#/components/schemas/Currency"
+            - $ref: '#/components/schemas/Currency'
             - description: Indicate that the provided Currency was set to be supported by each successfully added PartyIdInfo.
             - example: USD
       required:
@@ -3024,19 +3023,19 @@ components:
       properties:
         requestId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: The ID of the request, decided by the client. Used for identification of the callback from the server.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         partyList:
           type: array
           items:
-            $ref: "#/components/schemas/PartyIdInfo"
+            $ref: '#/components/schemas/PartyIdInfo'
           minItems: 1
           maxItems: 10000
           description: List of PartyIdInfo elements that the client would like to update or create FSP information about.
         currency:
           allOf:
-            - $ref: "#/components/schemas/Currency"
+            - $ref: '#/components/schemas/Currency'
             - description: Indicate that the provided Currency is supported by each PartyIdInfo in the list.
             - example: USD
       required:
@@ -3049,7 +3048,7 @@ components:
       properties:
         fspId:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: FSP Identifier that the Party belongs to.
             - example: 1234
     ParticipantsTypeIDSubIDPostRequest:
@@ -3059,17 +3058,17 @@ components:
       properties:
         fspId:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: FSP Identifier that the Party belongs to.
             - example: 1234
         currency:
           allOf:
-            - $ref: "#/components/schemas/Currency"
+            - $ref: '#/components/schemas/Currency'
             - description: Indicate that the provided Currency is supported by the Party.
             - example: USD
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - fspId
@@ -3080,7 +3079,7 @@ components:
       properties:
         party:
           allOf:
-            - $ref: "#/components/schemas/Party"
+            - $ref: '#/components/schemas/Party'
             - description: Information regarding the requested Party.
       required:
         - party
@@ -3091,21 +3090,21 @@ components:
       properties:
         partyIdInfo:
           allOf:
-            - $ref: "#/components/schemas/PartyIdInfo"
+            - $ref: '#/components/schemas/PartyIdInfo'
             - description: Party Id type, id, sub ID or type, and FSP Id.
         merchantClassificationCode:
           allOf:
-            - $ref: "#/components/schemas/MerchantClassificationCode"
+            - $ref: '#/components/schemas/MerchantClassificationCode'
             - description: Used in the context of Payee Information, where the Payee happens to be a merchant accepting merchant payments.
             - example: 4321
         name:
           allOf:
-            - $ref: "#/components/schemas/PartyName"
+            - $ref: '#/components/schemas/PartyName'
             - description: Display name of the Party, could be a real name or a nick name.
             - example: Henrik Karlsson
         personalInfo:
           allOf:
-            - $ref: "#/components/schemas/PartyPersonalInfo"
+            - $ref: '#/components/schemas/PartyPersonalInfo'
             - description: Personal information used to verify identity of Party such as first, middle, last name and date of birth.
       required:
         - partyIdInfo
@@ -3116,17 +3115,17 @@ components:
       properties:
         firstName:
           allOf:
-            - $ref: "#/components/schemas/FirstName"
+            - $ref: '#/components/schemas/FirstName'
             - description: Party’s first name.
             - example: Henrik
         middleName:
           allOf:
-            - $ref: "#/components/schemas/MiddleName"
+            - $ref: '#/components/schemas/MiddleName'
             - description: Party’s middle name.
             - example: Johannes
         lastName:
           allOf:
-            - $ref: "#/components/schemas/LastName"
+            - $ref: '#/components/schemas/LastName'
             - description: Party’s last name.
             - example: Karlsson
     PartyIdInfo:
@@ -3136,27 +3135,27 @@ components:
       properties:
         partyIdType:
           allOf:
-            - $ref: "#/components/schemas/PartyIdType"
+            - $ref: '#/components/schemas/PartyIdType'
             - description: Type of the identifier.
             - example: PERSONAL_ID
         partyIdentifier:
           allOf:
-            - $ref: "#/components/schemas/PartyIdentifier"
+            - $ref: '#/components/schemas/PartyIdentifier'
             - description: An identifier for the Party.
             - example: 16135551212
         partySubIdOrType:
           allOf:
-            - $ref: "#/components/schemas/PartySubIdOrType"
+            - $ref: '#/components/schemas/PartySubIdOrType'
             - description: A sub-identifier or sub-type for the Party.
             - example: DRIVING_LICENSE
         fspId:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: FSP ID (if known).
             - example: 1234
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - partyIdType
@@ -3168,13 +3167,13 @@ components:
       properties:
         complexName:
           allOf:
-            - $ref: "#/components/schemas/PartyComplexName"
+            - $ref: '#/components/schemas/PartyComplexName'
             - description: First, middle and last name for the Party.
         dateOfBirth:
           allOf:
-            - $ref: "#/components/schemas/DateOfBirth"
+            - $ref: '#/components/schemas/DateOfBirth'
             - description: Date of birth for the Party.
-            - example: "1966-06-16"
+            - example: '1966-06-16'
     PartyResult:
       title: PartyResult
       type: object
@@ -3182,11 +3181,11 @@ components:
       properties:
         partyId:
           allOf:
-            - $ref: "#/components/schemas/PartyIdInfo"
+            - $ref: '#/components/schemas/PartyIdInfo'
             - description: Party Id type, id, sub ID or type, and FSP Id.
         errorInformation:
           allOf:
-            - $ref: "#/components/schemas/ErrorInformation"
+            - $ref: '#/components/schemas/ErrorInformation'
             - description: If the Party failed to be added, error information should be provided. Otherwise, this parameter should be empty to indicate success.
       required:
         - partyId
@@ -3197,42 +3196,42 @@ components:
       properties:
         transferAmount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The amount of money that the Payee FSP should receive.
         payeeReceiveAmount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The amount of Money that the Payee should receive in the end-to-end transaction. Optional as the Payee FSP might not want to disclose any optional Payee fees.
         payeeFspFee:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Payee FSP’s part of the transaction fee.
         payeeFspCommission:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Transaction commission from the Payee FSP.
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Date and time until when the quotation is valid and can be honored when used in the subsequent transaction.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         geoCode:
           allOf:
-            - $ref: "#/components/schemas/GeoCode"
+            - $ref: '#/components/schemas/GeoCode'
             - description: Longitude and Latitude of the Payee. Can be used to detect fraud.
         ilpPacket:
           allOf:
-            - $ref: "#/components/schemas/IlpPacket"
+            - $ref: '#/components/schemas/IlpPacket'
             - description: The ILP Packet that must be attached to the transfer by the Payer.
             - example: “AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA”
         condition:
           allOf:
-            - $ref: "#/components/schemas/IlpCondition"
+            - $ref: '#/components/schemas/IlpCondition'
             - description: The condition that must be attached to the transfer by the Payer.
             - example: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transferAmount
@@ -3246,65 +3245,65 @@ components:
       properties:
         quoteId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Common ID between the FSPs for the quote object, decided by the Payer FSP. The ID should be reused for resends of the same quote for a transaction. A new ID should be generated for each new quote for a transaction.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         transactionId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Common ID (decided by the Payer FSP) between the FSPs for the future transaction object. The actual transaction will be created as part of a successful transfer process. The ID should be reused for resends of the same quote for a transaction. A new ID should be generated for each new quote for a transaction.
             - example: a8323bc6-c228-4df2-ae82-e5a997baf899
         transactionRequestId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies an optional previously-sent transaction request.
             - example: a8323bc6-c228-4df2-ae82-e5a997baf890
         payee:
           allOf:
-            - $ref: "#/components/schemas/Party"
+            - $ref: '#/components/schemas/Party'
             - description: Information about the Payee in the proposed financial transaction.
         payer:
           allOf:
-            - $ref: "#/components/schemas/Party"
+            - $ref: '#/components/schemas/Party'
             - description: Information about the Payer in the proposed financial transaction.
         amountType:
           allOf:
-            - $ref: "#/components/schemas/AmountType"
+            - $ref: '#/components/schemas/AmountType'
             - description: SEND for send amount, RECEIVE for receive amount.
             - example: SEND
         amount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Depending on amountType -
                 If SEND - The amount the Payer would like to send, that is, the amount that should be withdrawn from the Payer account including any fees. The amount is updated by each participating entity in the transaction.
                 If RECEIVE - The amount the Payee should receive, that is, the amount that should be sent to the receiver exclusive any fees. The amount is not updated by any of the participating entities.
         fees:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The fees in the transaction.
                 The fees element should be empty if fees should be non-disclosed.
                 The fees element should be non-empty if fees should be disclosed.
         transactionType:
           allOf:
-            - $ref: "#/components/schemas/TransactionType"
+            - $ref: '#/components/schemas/TransactionType'
             - description: Type of transaction for which the quote is requested.
         geoCode:
           allOf:
-            - $ref: "#/components/schemas/GeoCode"
+            - $ref: '#/components/schemas/GeoCode'
             - description: Longitude and Latitude of the initiating Party. Can be used to detect fraud.
         note:
           allOf:
-            - $ref: "#/components/schemas/Note"
+            - $ref: '#/components/schemas/Note'
             - description: A memo that will be attached to the transaction.
             - example: Free-text memo.
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Expiration is optional. It can be set to get a quick failure in case the peer FSP takes too long to respond. Also, it may be beneficial for Consumer, Agent, and Merchant to know that their request has a time limit.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - quoteId
@@ -3321,12 +3320,12 @@ components:
       properties:
         originalTransactionId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Reference to the original transaction ID that is requested to be refunded.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         refundReason:
           allOf:
-            - $ref: "#/components/schemas/RefundReason"
+            - $ref: '#/components/schemas/RefundReason'
             - description: Free text indicating the reason for the refund.
             - example: Free text indicating reason for the refund.
       required:
@@ -3338,17 +3337,17 @@ components:
       properties:
         transactionId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Identifies a related transaction (if a transaction has been created).
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         transactionRequestState:
           allOf:
-            - $ref: "#/components/schemas/TransactionRequestState"
+            - $ref: '#/components/schemas/TransactionRequestState'
             - description: State of the transaction request.
             - example: RECEIVED
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transactionRequestState
@@ -3359,47 +3358,47 @@ components:
       properties:
         transactionRequestId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: Common ID between the FSPs for the transaction request object, decided by the Payee FSP. The ID should be reused for resends of the same transaction request. A new ID should be generated for each new transaction request.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         payee:
           allOf:
-            - $ref: "#/components/schemas/Party"
+            - $ref: '#/components/schemas/Party'
             - description: Information about the Payee in the proposed financial transaction.
         payer:
           allOf:
-            - $ref: "#/components/schemas/PartyIdInfo"
+            - $ref: '#/components/schemas/PartyIdInfo'
             - description: Information about the Payer type, id, sub-type/id, FSP Id in the proposed financial transaction.
         amount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: Requested amount to be transferred from the Payer to Payee.
         transactionType:
           allOf:
-            - $ref: "#/components/schemas/TransactionType"
+            - $ref: '#/components/schemas/TransactionType'
             - description: Type of transaction.
         note:
           allOf:
-            - $ref: "#/components/schemas/Note"
+            - $ref: '#/components/schemas/Note'
             - description: Reason for the transaction request, intended to the Payer.
             - example: Free-text memo.
         geoCode:
           allOf:
-            - $ref: "#/components/schemas/GeoCode"
+            - $ref: '#/components/schemas/GeoCode'
             - description: Longitude and Latitude of the initiating Party. Can be used to detect fraud.
         authenticationType:
           allOf:
-            - $ref: "#/components/schemas/AuthenticationType"
+            - $ref: '#/components/schemas/AuthenticationType'
             - description: OTP or QR Code, otherwise empty.
             - example: OTP
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Can be set to get a quick failure in case the peer FSP takes too long to respond. Also, it may be beneficial for Consumer, Agent, Merchant to know that their request has a time limit.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transactionRequestId
@@ -3414,22 +3413,22 @@ components:
       properties:
         completedTimestamp:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Time and date when the transaction was completed.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         transactionState:
           allOf:
-            - $ref: "#/components/schemas/TransactionState"
+            - $ref: '#/components/schemas/TransactionState'
             - description: State of the transaction.
             - example: RECEIVED
         code:
           allOf:
-            - $ref: "#/components/schemas/Code"
+            - $ref: '#/components/schemas/Code'
             - description: Optional redemption information provided to Payer after transaction has been completed.
             - example: Test-Code
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transactionState
@@ -3440,31 +3439,31 @@ components:
       properties:
         scenario:
           allOf:
-            - $ref: "#/components/schemas/TransactionScenario"
+            - $ref: '#/components/schemas/TransactionScenario'
             - description: Deposit, withdrawal, refund, …
             - example: DEPOSIT
         subScenario:
           allOf:
-            - $ref: "#/components/schemas/TransactionSubScenario"
+            - $ref: '#/components/schemas/TransactionSubScenario'
             - description: Possible sub-scenario, defined locally within the scheme.
             - example: Locally defined sub-scenario.
         initiator:
           allOf:
-            - $ref: "#/components/schemas/TransactionInitiator"
+            - $ref: '#/components/schemas/TransactionInitiator'
             - description: Who is initiating the transaction - Payer or Payee.
             - example: PAYEE
         initiatorType:
           allOf:
-            - $ref: "#/components/schemas/TransactionInitiatorType"
+            - $ref: '#/components/schemas/TransactionInitiatorType'
             - description: Consumer, agent, business, …
             - example: CONSUMER
         refundInfo:
           allOf:
-            - $ref: "#/components/schemas/Refund"
+            - $ref: '#/components/schemas/Refund'
             - description: Extra information specific to a refund scenario. Should only be populated if scenario is REFUND.
         balanceOfPayments:
           allOf:
-            - $ref: "#/components/schemas/BalanceOfPayments"
+            - $ref: '#/components/schemas/BalanceOfPayments'
             - description: Balance of Payments code.
             - example: 123
       required:
@@ -3478,17 +3477,17 @@ components:
       properties:
         completedTimestamp:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Time and date when the transaction was completed.
-            - example: "2020-05-19T08:38:08.699-04:00"
+            - example: '2020-05-19T08:38:08.699-04:00'
         transferState:
           allOf:
-            - $ref: "#/components/schemas/TransferState"
+            - $ref: '#/components/schemas/TransferState'
             - description: State of the transfer.
             - example: RESERVED
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - completedTimestamp
@@ -3500,22 +3499,22 @@ components:
       properties:
         fulfilment:
           allOf:
-            - $ref: "#/components/schemas/IlpFulfilment"
+            - $ref: '#/components/schemas/IlpFulfilment'
             - description: Fulfilment of the condition specified with the transaction. Mandatory if transfer has completed successfully.
             - example: WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8
         completedTimestamp:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Time and date when the transaction was completed.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         transferState:
           allOf:
-            - $ref: "#/components/schemas/TransferState"
+            - $ref: '#/components/schemas/TransferState'
             - description: State of the transfer.
             - example: COMMITTED
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transferState
@@ -3526,41 +3525,41 @@ components:
       properties:
         transferId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: The common ID between the FSPs and the optional Switch for the transfer object, decided by the Payer FSP. The ID should be reused for resends of the same transfer. A new ID should be generated for each new transfer.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         payeeFsp:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: Payee FSP in the proposed financial transaction.
             - example: 1234
         payerFsp:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: Payer FSP in the proposed financial transaction.
             - example: 5678
         amount:
           allOf:
-            - $ref: "#/components/schemas/Money"
+            - $ref: '#/components/schemas/Money'
             - description: The transfer amount to be sent.
         ilpPacket:
           allOf:
-            - $ref: "#/components/schemas/IlpPacket"
+            - $ref: '#/components/schemas/IlpPacket'
             - description: The ILP Packet containing the amount delivered to the Payee and the ILP Address of the Payee and any other end-to-end data.
             - example: AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
         condition:
           allOf:
-            - $ref: "#/components/schemas/IlpCondition"
+            - $ref: '#/components/schemas/IlpCondition'
             - description: The condition that must be fulfilled to commit the transfer.
             - example: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Expiration can be set to get a quick failure expiration of the transfer. The transfer should be rolled back if no fulfilment is delivered before this time.
-            - example: "2016-05-24T08:38:08.699-04:00"
+            - example: '2016-05-24T08:38:08.699-04:00'
         extensionList:
           allOf:
-            - $ref: "#/components/schemas/ExtensionList"
+            - $ref: '#/components/schemas/ExtensionList'
             - description: Optional extension, specific to deployment.
       required:
         - transferId
@@ -3572,98 +3571,98 @@ components:
         - expiration
 
   responses:
-    "200":
+    '200':
       description: OK
-    "202":
+    '202':
       description: Accepted
-    "400":
+    '400':
       description: Bad Request
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "401":
+          $ref: '#/components/parameters/Content-Type'
+    '401':
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "403":
+          $ref: '#/components/parameters/Content-Type'
+    '403':
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "404":
+          $ref: '#/components/parameters/Content-Type'
+    '404':
       description: Not Found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "405":
+          $ref: '#/components/parameters/Content-Type'
+    '405':
       description: Method Not Allowed
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "406":
+          $ref: '#/components/parameters/Content-Type'
+    '406':
       description: Not Acceptable
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "501":
+          $ref: '#/components/parameters/Content-Type'
+    '501':
       description: Not Implemented
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "503":
+          $ref: '#/components/parameters/Content-Type'
+    '503':
       description: Service Unavailable
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
+          $ref: '#/components/parameters/Content-Type'
 
   parameters:
     #Header parameters

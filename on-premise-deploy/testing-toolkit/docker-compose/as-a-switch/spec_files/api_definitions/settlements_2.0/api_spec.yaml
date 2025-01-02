@@ -2,14 +2,14 @@ openapi: 3.0.1
 info:
   title: MOJALOOP Central Settlements
   description: Mojaloop API for Settlements.
-  version: "2.0"
+  version: '2.0'
 servers:
-- url: /v2
+  - url: /v2
 paths:
   /health:
     get:
       tags:
-      - getHealth
+        - getHealth
       summary: getHealth
       description: Gets the health of the service and sub-services (i.e. database).
       operationId: getHealth
@@ -24,18 +24,18 @@ paths:
   /settlementWindows/{id}:
     get:
       tags:
-      - getSettlementWindowById
+        - getSettlementWindowById
       summary: getSettlementWindowById
       description: Returns a Settlement Window by id.
       operationId: getSettlementWindowById
       parameters:
-      - name: id
-        in: path
-        description: |
-          A valid settlement window id to be supplied in the query.
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: |
+            A valid settlement window id to be supplied in the query.
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: A settlement window's data returned.
@@ -76,16 +76,16 @@ paths:
       deprecated: false
     post:
       tags:
-      - closeSettlementWindow
+        - closeSettlementWindow
       summary: closeSettlementWindow
       description: Closes requested window and opens a new one.
       operationId: closeSettlementWindow
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       requestBody:
         description: A JSON object containing settlement window closure info.
         content:
@@ -135,49 +135,49 @@ paths:
   /settlementWindows:
     get:
       tags:
-      - getSettlementWindowsByParams
+        - getSettlementWindowsByParams
       summary: getSettlementWindowsByParams
       description: Returns Settlement Windows as per parameter(s).
       operationId: getSettlementWindowsByParams
       parameters:
-      - name: participantId
-        in: query
-        description: |
-          A valid participant Id to filter on.
-        schema:
-          type: integer
-      - name: state
-        in: query
-        description: |
-          A settlement window state to filter on.
-        schema:
-          type: string
-          enum:
-          - OPEN
-          - CLOSED
-          - PENDING_SETTLEMENT
-          - SETTLED
-          - ABORTED
-      - name: fromDateTime
-        in: query
-        description: |
-          The start date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `toDateTime'. eg 2017-07-20T17:32:28Z
-        schema:
-          type: string
-          format: date-time
-      - name: toDateTime
-        in: query
-        description: |
-          The end date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `fromDateTime'. eg 2017-07-21T17:32:28Z
-        schema:
-          type: string
-          format: date-time
-      - name: currency
-        in: query
-        description: |
-          A valid currency to filter on.
-        schema:
-          type: string
+        - name: participantId
+          in: query
+          description: |
+            A valid participant Id to filter on.
+          schema:
+            type: integer
+        - name: state
+          in: query
+          description: |
+            A settlement window state to filter on.
+          schema:
+            type: string
+            enum:
+              - OPEN
+              - CLOSED
+              - PENDING_SETTLEMENT
+              - SETTLED
+              - ABORTED
+        - name: fromDateTime
+          in: query
+          description: |
+            The start date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `toDateTime'. eg 2017-07-20T17:32:28Z
+          schema:
+            type: string
+            format: date-time
+        - name: toDateTime
+          in: query
+          description: |
+            The end date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `fromDateTime'. eg 2017-07-21T17:32:28Z
+          schema:
+            type: string
+            format: date-time
+        - name: currency
+          in: query
+          description: |
+            A valid currency to filter on.
+          schema:
+            type: string
       responses:
         200:
           description: Settlement window(s) returned by the filtering parameters.
@@ -219,76 +219,76 @@ paths:
   /settlements:
     get:
       tags:
-      - getSettlementsByParams
+        - getSettlementsByParams
       summary: getSettlementsByParams
       description: Returns Settlements as per parameter(s).
       operationId: getSettlementsByParams
       parameters:
-      - name: currency
-        in: query
-        description: |
-          A valid currency to filter on.
-        schema:
-          type: string
-      - name: participantId
-        in: query
-        description: |
-          A valid participant Id to filter on.
-        schema:
-          type: integer
-      - name: settlementWindowId
-        in: query
-        description: |
-          A valid Settlement Window Id to filter on.
-        schema:
-          type: number
-      - name: accountId
-        in: query
-        description: |
-          A valid Account Id to filter on.
-        schema:
-          type: number
-      - name: state
-        in: query
-        description: "A settlement state to filter on.  \n"
-        schema:
-          type: string
-          enum:
-          - PENDING_SETTLEMENT
-          - PS_TRANSFERS_RECORDED
-          - PS_TRANSFERS_RESERVED
-          - PS_TRANSFERS_COMMITTED
-          - SETTLING
-          - SETTLED
-          - ABORTED
-      - name: fromDateTime
-        in: query
-        description: |
-          The start date for query (relates to central-ledger.settlement.createdDate). Can be used together with `toDateTime'. eg 2017-07-20T17:32:28Z
-        schema:
-          type: string
-          format: date-time
-      - name: toDateTime
-        in: query
-        description: |
-          The end date for query (relates to central-ledger.settlement.createdDate). Can be used together with `fromDateTime'. eg 2017-07-21T17:32:28Z
-        schema:
-          type: string
-          format: date-time
-      - name: fromSettlementWindowDateTime
-        in: query
-        description: |
-          The start date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `toDateTime'. eg 2017-07-20T17:32:28Z
-        schema:
-          type: string
-          format: date-time
-      - name: toSettlementWindowDateTime
-        in: query
-        description: |
-          The end date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `fromDateTime'. eg 2017-07-21T17:32:28Z
-        schema:
-          type: string
-          format: date-time
+        - name: currency
+          in: query
+          description: |
+            A valid currency to filter on.
+          schema:
+            type: string
+        - name: participantId
+          in: query
+          description: |
+            A valid participant Id to filter on.
+          schema:
+            type: integer
+        - name: settlementWindowId
+          in: query
+          description: |
+            A valid Settlement Window Id to filter on.
+          schema:
+            type: number
+        - name: accountId
+          in: query
+          description: |
+            A valid Account Id to filter on.
+          schema:
+            type: number
+        - name: state
+          in: query
+          description: "A settlement state to filter on.  \n"
+          schema:
+            type: string
+            enum:
+              - PENDING_SETTLEMENT
+              - PS_TRANSFERS_RECORDED
+              - PS_TRANSFERS_RESERVED
+              - PS_TRANSFERS_COMMITTED
+              - SETTLING
+              - SETTLED
+              - ABORTED
+        - name: fromDateTime
+          in: query
+          description: |
+            The start date for query (relates to central-ledger.settlement.createdDate). Can be used together with `toDateTime'. eg 2017-07-20T17:32:28Z
+          schema:
+            type: string
+            format: date-time
+        - name: toDateTime
+          in: query
+          description: |
+            The end date for query (relates to central-ledger.settlement.createdDate). Can be used together with `fromDateTime'. eg 2017-07-21T17:32:28Z
+          schema:
+            type: string
+            format: date-time
+        - name: fromSettlementWindowDateTime
+          in: query
+          description: |
+            The start date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `toDateTime'. eg 2017-07-20T17:32:28Z
+          schema:
+            type: string
+            format: date-time
+        - name: toSettlementWindowDateTime
+          in: query
+          description: |
+            The end date for query (relates to central-ledger.settlementWindow.createdDate). Can be used together with `fromDateTime'. eg 2017-07-21T17:32:28Z
+          schema:
+            type: string
+            format: date-time
       responses:
         200:
           description: Settlement window(s) returned by the filtering parameters.
@@ -329,7 +329,7 @@ paths:
       deprecated: false
     post:
       tags:
-      - createSettlement
+        - createSettlement
       summary: createSettlement
       description: Triggers settlement creation. Returns settlement report.
       operationId: createSettlement
@@ -382,18 +382,18 @@ paths:
   /settlements/{id}:
     get:
       tags:
-      - getSettlementById
+        - getSettlementById
       summary: getSettlementById
       description: Returns Settlement(s) as per parameters/filter criteria.
       operationId: getSettlementById
       parameters:
-      - name: id
-        in: path
-        description: |
-          A valid Settlement Id.
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: |
+            A valid Settlement Id.
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: Settlement successfully returned by the filtering/Query parameters.
@@ -434,17 +434,17 @@ paths:
       deprecated: false
     put:
       tags:
-      - updateSettlementById
+        - updateSettlementById
       summary: updateSettlementById
       description: Acknowledgement of settlement by updating with Settlement Id.
       operationId: updateSettlementById
       parameters:
-      - name: id
-        in: path
-        description: A valid Settlement Id.
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: A valid Settlement Id.
+          required: true
+          schema:
+            type: integer
       requestBody:
         description: A JSON object containing settlement update info.
         content:
@@ -494,25 +494,25 @@ paths:
   /settlements/{sid}/participants/{pid}:
     get:
       tags:
-      - getSettlementBySettlementParticipant
+        - getSettlementBySettlementParticipant
       summary: getSettlementBySettlementParticipant
       description: Returns Settlement(s) as per filter criteria.
       operationId: getSettlementBySettlementParticipant
       parameters:
-      - name: sid
-        in: path
-        description: |
-          A valid Settlement Id.
-        required: true
-        schema:
-          type: integer
-      - name: pid
-        in: path
-        description: |
-          A valid Participant Id.
-        required: true
-        schema:
-          type: integer
+        - name: sid
+          in: path
+          description: |
+            A valid Settlement Id.
+          required: true
+          schema:
+            type: integer
+        - name: pid
+          in: path
+          description: |
+            A valid Participant Id.
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: Settlement, settlement windows and settlement accounts returned
@@ -554,24 +554,24 @@ paths:
       deprecated: false
     put:
       tags:
-      - updateSettlementBySettlementParticipant
+        - updateSettlementBySettlementParticipant
       summary: updateSettlementBySettlementParticipant
       description: Acknowledgement of settlement by updating the reason and state
         by SP.
       operationId: updateSettlementBySettlementParticipant
       parameters:
-      - name: sid
-        in: path
-        description: A valid Settlement Id.
-        required: true
-        schema:
-          type: integer
-      - name: pid
-        in: path
-        description: A valid Participant Id.
-        required: true
-        schema:
-          type: integer
+        - name: sid
+          in: path
+          description: A valid Settlement Id.
+          required: true
+          schema:
+            type: integer
+        - name: pid
+          in: path
+          description: A valid Participant Id.
+          required: true
+          schema:
+            type: integer
       requestBody:
         description: A JSON object containing settlement update info.
         content:
@@ -621,32 +621,32 @@ paths:
   /settlements/{sid}/participants/{pid}/accounts/{aid}:
     get:
       tags:
-      - getSettlementBySettlementParticipantAccount
+        - getSettlementBySettlementParticipantAccount
       summary: getSettlementBySettlementParticipantAccount
       description: Returns Settlement(s) as per filter criteria.
       operationId: getSettlementBySettlementParticipantAccount
       parameters:
-      - name: sid
-        in: path
-        description: |
-          A valid Settlement Id.
-        required: true
-        schema:
-          type: integer
-      - name: pid
-        in: path
-        description: |
-          A valid Participant Id.
-        required: true
-        schema:
-          type: integer
-      - name: aid
-        in: path
-        description: |
-          A valid Account Id.
-        required: true
-        schema:
-          type: integer
+        - name: sid
+          in: path
+          description: |
+            A valid Settlement Id.
+          required: true
+          schema:
+            type: integer
+        - name: pid
+          in: path
+          description: |
+            A valid Participant Id.
+          required: true
+          schema:
+            type: integer
+        - name: aid
+          in: path
+          description: |
+            A valid Account Id.
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: Settlement, settlement windows and settlement accounts returned
@@ -688,30 +688,30 @@ paths:
       deprecated: false
     put:
       tags:
-      - updateSettlementBySettlementParticipantAccount
+        - updateSettlementBySettlementParticipantAccount
       summary: updateSettlementBySettlementParticipantAccount
       description: Acknowledgement of settlement by updating the reason and state
         by SPA.
       operationId: updateSettlementBySettlementParticipantAccount
       parameters:
-      - name: sid
-        in: path
-        description: A valid Settlement Id.
-        required: true
-        schema:
-          type: integer
-      - name: pid
-        in: path
-        description: A valid Participant Id.
-        required: true
-        schema:
-          type: integer
-      - name: aid
-        in: path
-        description: A valid Account Id.
-        required: true
-        schema:
-          type: integer
+        - name: sid
+          in: path
+          description: A valid Settlement Id.
+          required: true
+          schema:
+            type: integer
+        - name: pid
+          in: path
+          description: A valid Participant Id.
+          required: true
+          schema:
+            type: integer
+        - name: aid
+          in: path
+          description: A valid Account Id.
+          required: true
+          schema:
+            type: integer
       requestBody:
         description: A JSON object containing settlement update info.
         content:
@@ -766,8 +766,8 @@ components:
         state:
           type: string
           enum:
-          - ABORTED
-          - INVALID
+            - ABORTED
+            - INVALID
         reason:
           type: string
         externalReference:
@@ -799,11 +799,11 @@ components:
           type: string
           example: SETTLED
           enum:
-          - PENDING_SETTLEMENT
-          - PS_TRANSFERS_RECORDED
-          - PS_TRANSFERS_RESERVED
-          - PS_TRANSFERS_COMMITTED
-          - SETTLED
+            - PENDING_SETTLEMENT
+            - PS_TRANSFERS_RECORDED
+            - PS_TRANSFERS_RESERVED
+            - PS_TRANSFERS_COMMITTED
+            - SETTLED
         externalReference:
           type: string
           example: external-reference-abc123
@@ -830,33 +830,33 @@ components:
           $ref: '#/components/schemas/netSettlementAmount'
     SettlementWindowClosurePayload:
       required:
-      - reason
-      - state
+        - reason
+        - state
       type: object
       properties:
         state:
           type: string
           example: CLOSED
           enum:
-          - CLOSED
+            - CLOSED
         reason:
           type: string
           example: string
     SettlementUpdateBySettlementParticipantAccount:
       required:
-      - reason
-      - state
+        - reason
+        - state
       type: object
       properties:
         state:
           type: string
           example: SETTLED
           enum:
-          - PENDING_SETTLEMENT
-          - PS_TRANSFERS_RECORDED
-          - PS_TRANSFERS_RESERVED
-          - PS_TRANSFERS_COMMITTED
-          - SETTLED
+            - PENDING_SETTLEMENT
+            - PS_TRANSFERS_RECORDED
+            - PS_TRANSFERS_RESERVED
+            - PS_TRANSFERS_COMMITTED
+            - SETTLED
         reason:
           type: string
           example: string
@@ -865,9 +865,9 @@ components:
           example: external-reference-abc123
     SettlementEventPayload:
       required:
-      - reason
-      - settlementModel
-      - settlementWindows
+        - reason
+        - settlementModel
+        - settlementWindows
       type: object
       properties:
         settlementModel:
@@ -882,16 +882,16 @@ components:
             $ref: '#/components/schemas/SettlementWindowId'
     SettlementWindowId:
       required:
-      - id
+        - id
       type: object
       properties:
         id:
           type: integer
     SettlementWindow:
       required:
-      - createdDate
-      - id
-      - state
+        - createdDate
+        - id
+        - state
       type: object
       properties:
         id:
@@ -910,11 +910,11 @@ components:
             $ref: '#/components/schemas/SettlementWindowContent'
     SettlementWindowContent:
       required:
-      - createdDate
-      - currencyId
-      - id
-      - ledgerAccountType
-      - state
+        - createdDate
+        - currencyId
+        - id
+        - ledgerAccountType
+        - state
       type: object
       properties:
         id:
@@ -972,7 +972,7 @@ components:
             $ref: '#/components/schemas/Participant'
     Error:
       required:
-      - errorInformation
+        - errorInformation
       type: object
       properties:
         errorInformation:
@@ -991,8 +991,8 @@ components:
                     $ref: '#/components/schemas/Extension'
     Extension:
       required:
-      - key
-      - value
+        - key
+        - value
       type: object
       properties:
         key:

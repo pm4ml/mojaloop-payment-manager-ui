@@ -1,6 +1,6 @@
-openapi: "3.0.2"
+openapi: '3.0.2'
 info:
-  version: "2.0"
+  version: '2.0'
   title: Mojaloop API for Currency conversion
   description:
     Based on "Currency conversion support in Mojaloop" document version 2.0 updated on 2020-09-28.
@@ -11,10 +11,10 @@ info:
     name: CC BY-ND 4.0
     url: https://github.com/mojaloop/mojaloop-specification/blob/master/LICENSE.md
   contact:
-    name: "SK or MR"
+    name: 'SK or MR'
     url: https://github.com/mojaloop/mojaloop-specification/issues
 servers:
-  - url: "{protocol}://hostname:<port>/switch/"
+  - url: '{protocol}://hostname:<port>/switch/'
     variables:
       protocol:
         enum:
@@ -23,24 +23,23 @@ servers:
         default: https
 
 paths:
-
   #Parties
   #This resource is part of the FSPIOP API but the /parties resource is listed here only to show the changes needed
   /fxParties/{Type}/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/Type"
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/Type'
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /fxParties/{Type}/{ID}` (or `GET /fxParties/{Type}/{ID}/{SubId}`) is used to look up information regarding the requested Party, defined by `{Type}`, `{ID}` and optionally `{SubId}` (for example, `GET /fxParties/MSISDN/123456789`, or `GET /fxParties/BUSINESS/shoecompany/employee1`).
       summary: Look up party information
@@ -49,26 +48,26 @@ paths:
       operationId: FxPartiesByTypeAndID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /fxParties/{Type}/{ID}` (or `PUT /fxParties/{Type}/{ID}/{SubId}`) is used to inform the client of a successful result of the Party information lookup.
       summary: Return party information
@@ -77,33 +76,33 @@ paths:
       operationId: FxPartiesByTypeAndID2
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Party information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PartiesTypeIDPutResponse"
+              $ref: '#/components/schemas/PartiesTypeIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxParties/{Type}/{ID}/error:
     put:
       description: If the server is unable to find Party information of the provided identity, or another processing error occurred, the error callback `PUT /fxParties/{Type}/{ID}/error` (or `PUT /fxParties/{Type}/{ID}/{SubI}/error`) is used.
@@ -113,61 +112,61 @@ paths:
       operationId: FxPartiesErrorByTypeAndID
       parameters:
         #Path
-        - $ref: "#/components/parameters/Type"
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxParties/{Type}/{ID}/{SubId}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/Type"
-      - $ref: "#/components/parameters/ID"
-      - $ref: "#/components/parameters/SubId"
+      - $ref: '#/components/parameters/Type'
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/SubId'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request `GET /fxParties/{Type}/{ID}` (or `GET /fxParties/{Type}/{ID}/{SubId}`) is used to look up information regarding the requested Party, defined by `{Type}`, `{ID}` and optionally `{SubId}` (for example, `GET /fxParties/MSISDN/123456789`, or `GET /fxParties/BUSINESS/shoecompany/employee1`).
       summary: Look up party information
@@ -176,26 +175,26 @@ paths:
       operationId: FxPartiesSubIdByTypeAndID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback `PUT /parties/{Type}/{ID}` (or `PUT /parties/{Type}/{ID}/{SubId}`) is used to inform the client of a successful result of the Party information lookup.
       summary: Return party information
@@ -204,33 +203,33 @@ paths:
       operationId: PartiesSubIdByTypeAndIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Party information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PartiesTypeIDPutResponse"
+              $ref: '#/components/schemas/PartiesTypeIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxParties/{Type}/{ID}/{SubId}/error:
     put:
       description: If the server is unable to find Party information of the provided identity, or another processing error occurred, the error callback `PUT /fxParties/{Type}/{ID}/error` (or `PUT /fxParties/{Type}/{ID}/{SubId}/error`) is used.
@@ -240,46 +239,46 @@ paths:
       operationId: FxPartiesSubIdErrorByTypeAndID
       parameters:
         #Path
-        - $ref: "#/components/parameters/Type"
-        - $ref: "#/components/parameters/ID"
-        - $ref: "#/components/parameters/SubId"
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/SubId'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #Services
   /services/FXP:
@@ -291,36 +290,36 @@ paths:
       operationId: servicesRequest
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback PUT /services/FXP is used to inform the requester about up to 16 participants in a scheme who offer currency conversion services. If no participants offer these services, the return object will be blank.
       summary: Return transaction request information
@@ -329,33 +328,33 @@ paths:
       operationId: servicesPutResponse
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: FXP Services information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ServicesFXPPutResponse"
+              $ref: '#/components/schemas/ServicesFXPPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /services/FXP/error:
     put:
       description: If the server is unable to find or create a services request, or another processing error occurs, the error callback `PUT /services/FXP/error` is used.
@@ -365,42 +364,42 @@ paths:
       operationId: ServicesFXPRequestsError
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #FxQuotes
   /fxQuotes:
@@ -412,55 +411,55 @@ paths:
       operationId: FxQuotes
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the fx quote to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FxQuotesPostRequest"
+              $ref: '#/components/schemas/FxQuotesPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxQuotes/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request GET /fxQuotes/{ID} is used to request information regarding a request for quotation for a currency conversion which the sender has previously issued. The {ID} in the URI should contain the conversionRequestId that was used to request the quotation.
       summary: Retrieve quote information
@@ -469,26 +468,26 @@ paths:
       operationId: FxQuotesByID
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback PUT /fxQuotes/{ID} is used to inform the requester about the outcome of a request for quotation for a currency conversion. The {ID} field in the URI should contain the conversionRequestId that was used when the quotation for the currency conversion was requested.
       summary: Return fxQuote information
@@ -497,80 +496,80 @@ paths:
       operationId: PutFxQuotesById
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: FxQuote information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FxQuotesIDPutResponse"
+              $ref: '#/components/schemas/FxQuotesIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxQuotes/{ID}/error:
     put:
-      description: If the FXP is unable to find or create a currency conversion execution, or another processing error occurs, the error callback PUT /fxQuotes/<ID>/error is used. The <ID> in the URI should contain the conversionRequestId that was used for the creation of the quotation request, or the <ID> that was used in the GET /fxQuotes/<ID>. 
+      description: If the FXP is unable to find or create a currency conversion execution, or another processing error occurs, the error callback PUT /fxQuotes/<ID>/error is used. The <ID> in the URI should contain the conversionRequestId that was used for the creation of the quotation request, or the <ID> that was used in the GET /fxQuotes/<ID>.
       summary: Return fxQuote information error
       tags:
         - fxQuotes
       operationId: FxQuotesByIDAndError
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
   #FxTransfers
   /fxTransfers:
@@ -582,57 +581,57 @@ paths:
       operationId: fxTransfers
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the fxtransfer to be created.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FxTransfersPostRequest"
+              $ref: '#/components/schemas/FxTransfersPostRequest'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxTransfers/{ID}:
     parameters:
       #Path
-      - $ref: "#/components/parameters/ID"
+      - $ref: '#/components/parameters/ID'
       #Headers
-      - $ref: "#/components/parameters/Content-Type"
-      - $ref: "#/components/parameters/Date"
-      - $ref: "#/components/parameters/X-Forwarded-For"
-      - $ref: "#/components/parameters/FSPIOP-Source"
-      - $ref: "#/components/parameters/FSPIOP-Destination"
-      - $ref: "#/components/parameters/FSPIOP-Encryption"
-      - $ref: "#/components/parameters/FSPIOP-Signature"
-      - $ref: "#/components/parameters/FSPIOP-URI"
-      - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
     get:
       description: The HTTP request GET /fxTransfers/{ID} is used to request information regarding a request for confirmation of a currency conversion which the sender has previously issued. The {{ID} in the URI should contain the commitRequestId that was used to request the confirmation.
       summary: Callback to an fxtransfer request
@@ -641,26 +640,26 @@ paths:
       operationId: FxTransfersByIDGet
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Accept"
+        - $ref: '#/components/parameters/Accept'
       responses:
         202:
-          $ref: "#/components/responses/202"
+          $ref: '#/components/responses/202'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     patch:
       description: The callback PATCH /fxTransfers/{ID} is used to inform the requester about the final determination by the switch of the transfer related to a request for execution of a currency conversion. The {ID} field in the URI should contain the commitRequestId that was used when the execution of the currency conversion was requested.
       summary: FxTransfer notification
@@ -669,33 +668,33 @@ paths:
       operationId: FxTransfersByIDPatch
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: Transfer notification upon completion.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FxTransfersIDPatchResponse"
+              $ref: '#/components/schemas/FxTransfersIDPatchResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
     put:
       description: The callback PUT /fxTransfers/{ID} is used to inform the requester about the outcome of a request for execution of a currency conversion. The {ID} field in the URI should contain the commitRequestId that was used when the execution of the currency conversion was requested.
       summary: Return fxtransfer information
@@ -704,80 +703,80 @@ paths:
       operationId: FxTransfersByIDPut
       parameters:
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
+        - $ref: '#/components/parameters/Content-Length'
       requestBody:
         description: FxTransfer information returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FxTransfersIDPutResponse"
+              $ref: '#/components/schemas/FxTransfersIDPutResponse'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
   /fxTransfers/{ID}/error:
     put:
-      description: If the FXP is unable to find or create a currency conversion execution, or another processing error occurs, the error callback PUT /fxTransfers/<ID>/error is used. The <ID> in the URI should contain the commitRequestId that was used for the creation of the execution request, or the <ID> that was used in the GET /fxTransfers/<ID>. 
+      description: If the FXP is unable to find or create a currency conversion execution, or another processing error occurs, the error callback PUT /fxTransfers/<ID>/error is used. The <ID> in the URI should contain the commitRequestId that was used for the creation of the execution request, or the <ID> that was used in the GET /fxTransfers/<ID>.
       summary: Return fxtransfer information error
       tags:
         - fxTransfers
       operationId: FxTransfersByIDAndError
       parameters:
         #Path
-        - $ref: "#/components/parameters/ID"
+        - $ref: '#/components/parameters/ID'
         #Headers
-        - $ref: "#/components/parameters/Content-Length"
-        - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Date"
-        - $ref: "#/components/parameters/X-Forwarded-For"
-        - $ref: "#/components/parameters/FSPIOP-Source"
-        - $ref: "#/components/parameters/FSPIOP-Destination"
-        - $ref: "#/components/parameters/FSPIOP-Encryption"
-        - $ref: "#/components/parameters/FSPIOP-Signature"
-        - $ref: "#/components/parameters/FSPIOP-URI"
-        - $ref: "#/components/parameters/FSPIOP-HTTP-Method"
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
       requestBody:
         description: Details of the error returned.
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ErrorInformationObject"
+              $ref: '#/components/schemas/ErrorInformationObject'
       responses:
         200:
-          $ref: "#/components/responses/200"
+          $ref: '#/components/responses/200'
         400:
-          $ref: "#/components/responses/400"
+          $ref: '#/components/responses/400'
         401:
-          $ref: "#/components/responses/401"
+          $ref: '#/components/responses/401'
         403:
-          $ref: "#/components/responses/403"
+          $ref: '#/components/responses/403'
         404:
-          $ref: "#/components/responses/404"
+          $ref: '#/components/responses/404'
         405:
-          $ref: "#/components/responses/405"
+          $ref: '#/components/responses/405'
         406:
-          $ref: "#/components/responses/406"
+          $ref: '#/components/responses/406'
         501:
-          $ref: "#/components/responses/501"
+          $ref: '#/components/responses/501'
         503:
-          $ref: "#/components/responses/503"
+          $ref: '#/components/responses/503'
 
 components:
   schemas:
@@ -1095,8 +1094,8 @@ components:
     PartySubIdOrType:
       title: PartySubIdOrType
       oneOf:
-        - $ref: "#/components/schemas/PersonalIdentifierType"
-        - $ref: "#/components/schemas/PartyIdentifier"
+        - $ref: '#/components/schemas/PersonalIdentifierType'
+        - $ref: '#/components/schemas/PartyIdentifier'
     PersonalIdentifierType:
       title: PersonalIdentifierType
       type: string
@@ -1172,14 +1171,14 @@ components:
           description: A description of the charge which is being levied.
         sourceAmount:
           allOf:
-            - $ref: "#/components/schemas/Amount"
+            - $ref: '#/components/schemas/Amount'
             - description: The amount of the charge which is being levied, expressed in the source currency.
-            - example: "1310.5"
+            - example: '1310.5'
         targetAmount:
           allOf:
-            - $ref: "#/components/schemas/Amount"
+            - $ref: '#/components/schemas/Amount'
             - description: The amount of the charge which is being levied, expressed in the target currency.
-            - example: "1310.5"
+            - example: '1310.5'
       required:
         - chargeType
     Conversion:
@@ -1189,42 +1188,42 @@ components:
       properties:
         conversionId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: An end-to-end identifier for the conversion request.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         fxpId:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: The ID of the FXP performing the conversion.
             - example: 1234
         amountType:
           allOf:
-            - $ref: "#/components/schemas/AmountType"
+            - $ref: '#/components/schemas/AmountType'
             - description: This is the AmountType for the base transaction -
                 If SEND - then any charges levied by the FXP as part of the transaction will be deducted by the FXP from the amount shown for the target party in the conversion.
                 If RECEIVE - then any charges levied by the FXP as part of the transaction will be added by the FXP to the amount shown for the source party in the conversion.
         source:
           allOf:
-            - $ref: "#/components/schemas/FxParticipant"
+            - $ref: '#/components/schemas/FxParticipant'
             - description: The source currency party
         target:
           allOf:
-            - $ref: "#/components/schemas/FxParticipant"
+            - $ref: '#/components/schemas/FxParticipant'
             - description: The target currency party
         validity:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: The end of the period for which the currency conversion is required to remain valid.
-            - example: "2021-09-28T08:38:08.699-04:00"
+            - example: '2021-09-28T08:38:08.699-04:00'
         charges:
           type: array
           items:
-            $ref: "#/components/schemas/Charge"
+            $ref: '#/components/schemas/Charge'
           minItems: 1
           maxItems: 16
           description: One or more charges which the FXP intends to levy as part of the currency conversion, or which the payee DFSP intends to add to the amount transferred.
         extensionList:
-          $ref: "#/components/schemas/ExtensionList"
+          $ref: '#/components/schemas/ExtensionList'
       required:
         - conversionId
         - fxpId
@@ -1238,11 +1237,11 @@ components:
       description: Data model for the complex type ErrorInformation.
       properties:
         errorCode:
-          $ref: "#/components/schemas/ErrorCode"
+          $ref: '#/components/schemas/ErrorCode'
         errorDescription:
-          $ref: "#/components/schemas/ErrorDescription"
+          $ref: '#/components/schemas/ErrorDescription'
         extensionList:
-          $ref: "#/components/schemas/ExtensionList"
+          $ref: '#/components/schemas/ExtensionList'
       required:
         - errorCode
         - errorDescription
@@ -1252,7 +1251,7 @@ components:
       description: Data model for the complex type object that contains ErrorInformation.
       properties:
         errorInformation:
-          $ref: "#/components/schemas/ErrorInformation"
+          $ref: '#/components/schemas/ErrorInformation'
       required:
         - errorInformation
     ErrorInformationResponse:
@@ -1261,16 +1260,16 @@ components:
       description: Data model for the complex type object that contains an optional element ErrorInformation used along with 4xx and 5xx responses.
       properties:
         errorInformation:
-          $ref: "#/components/schemas/ErrorInformation"
+          $ref: '#/components/schemas/ErrorInformation'
     Extension:
       title: Extension
       type: object
       description: Data model for the complex type Extension.
       properties:
         key:
-          $ref: "#/components/schemas/ExtensionKey"
+          $ref: '#/components/schemas/ExtensionKey'
         value:
-          $ref: "#/components/schemas/ExtensionValue"
+          $ref: '#/components/schemas/ExtensionValue'
       required:
         - key
         - value
@@ -1282,7 +1281,7 @@ components:
         extension:
           type: array
           items:
-            $ref: "#/components/schemas/Extension"
+            $ref: '#/components/schemas/Extension'
           minItems: 1
           maxItems: 16
           description: Number of Extension elements.
@@ -1294,9 +1293,9 @@ components:
       description: Data model for the complex type FxMoney; This is based on the type Money but allows the amount to be optional to support FX quotations.
       properties:
         currency:
-          $ref: "#/components/schemas/Currency"
+          $ref: '#/components/schemas/Currency'
         amount:
-          $ref: "#/components/schemas/Amount"
+          $ref: '#/components/schemas/Amount'
       required:
         - currency
     FxParticipant:
@@ -1305,10 +1304,10 @@ components:
       description: Data model for the complex type FxMoney; allows the amount to be optional to support quotations
       properties:
         fspId:
-          $ref: "#/components/schemas/FspId"
+          $ref: '#/components/schemas/FspId'
         principalAmount:
           allOf:
-            - $ref: "#/components/schemas/FxMoney"
+            - $ref: '#/components/schemas/FxMoney'
             - description: The amount that the party will send or receive.
       required:
         - fspId
@@ -1318,8 +1317,8 @@ components:
       description: The object sent in the PUT /parties/{Type}/{ID} callback.
       properties:
         party:
-            allOf:
-            - $ref: "#/components/schemas/Party"
+          allOf:
+            - $ref: '#/components/schemas/Party'
             - description: Information regarding the requested Party.
       required:
         - party
@@ -1330,26 +1329,26 @@ components:
       properties:
         partyIdInfo:
           allOf:
-            - $ref: "#/components/schemas/PartyIdInfo"
+            - $ref: '#/components/schemas/PartyIdInfo'
             - description: Party Id type, id, sub ID or type, and FSP Id.
         merchantClassificationCode:
           allOf:
-            - $ref: "#/components/schemas/MerchantClassificationCode"
+            - $ref: '#/components/schemas/MerchantClassificationCode'
             - description: Used in the context of Payee Information, where the Payee happens to be a merchant accepting merchant payments.
             - example: 4321
         name:
           allOf:
-            - $ref: "#/components/schemas/PartyName"
+            - $ref: '#/components/schemas/PartyName'
             - description: Display name of the Party, could be a real name or a nick name.
             - example: Henrik Karlsson
         personalInfo:
           allOf:
-            - $ref: "#/components/schemas/PartyPersonalInfo"
+            - $ref: '#/components/schemas/PartyPersonalInfo'
             - description: Personal information used to verify identity of Party such as first, middle, last name and date of birth.
         receiveCurrency:
           type: array
           items:
-            $ref: "#/components/schemas/Currency"
+            $ref: '#/components/schemas/Currency'
           minItems: 0
           maxItems: 16
           description: Up to 16 currencies in which the party can receive funds.
@@ -1362,17 +1361,17 @@ components:
       properties:
         firstName:
           allOf:
-            - $ref: "#/components/schemas/FirstName"
+            - $ref: '#/components/schemas/FirstName'
             - description: Party’s first name.
             - example: Henrik
         middleName:
           allOf:
-            - $ref: "#/components/schemas/MiddleName"
+            - $ref: '#/components/schemas/MiddleName'
             - description: Party’s middle name.
             - example: Johannes
         lastName:
           allOf:
-            - $ref: "#/components/schemas/LastName"
+            - $ref: '#/components/schemas/LastName'
             - description: Party’s last name.
             - example: Karlsson
     PartyIdInfo:
@@ -1382,26 +1381,26 @@ components:
       properties:
         partyIdType:
           allOf:
-            - $ref: "#/components/schemas/PartyIdType"
+            - $ref: '#/components/schemas/PartyIdType'
             - description: Type of the identifier.
             - example: PERSONAL_ID
         partyIdentifier:
           allOf:
-            - $ref: "#/components/schemas/PartyIdentifier"
+            - $ref: '#/components/schemas/PartyIdentifier'
             - description: An identifier for the Party.
             - example: 16135551212
         partySubIdOrType:
           allOf:
-            - $ref: "#/components/schemas/PartySubIdOrType"
+            - $ref: '#/components/schemas/PartySubIdOrType'
             - description: A sub-identifier or sub-type for the Party.
             - example: DRIVING_LICENSE
         fspId:
           allOf:
-            - $ref: "#/components/schemas/FspId"
+            - $ref: '#/components/schemas/FspId'
             - description: FSP ID (if known).
             - example: 1234
         extensionList:
-          $ref: "#/components/schemas/ExtensionList"
+          $ref: '#/components/schemas/ExtensionList'
       required:
         - partyIdType
         - partyIdentifier
@@ -1412,13 +1411,13 @@ components:
       properties:
         complexName:
           allOf:
-            - $ref: "#/components/schemas/PartyComplexName"
+            - $ref: '#/components/schemas/PartyComplexName'
             - description: First, middle and last name for the Party.
         dateOfBirth:
           allOf:
-            - $ref: "#/components/schemas/DateOfBirth"
+            - $ref: '#/components/schemas/DateOfBirth'
             - description: Date of birth for the Party.
-            - example: "1966-06-16"
+            - example: '1966-06-16'
     FxQuotesIDPutResponse:
       title: FxQuotesIDPutResponse
       type: object
@@ -1426,7 +1425,7 @@ components:
       properties:
         agreedConversion:
           allOf:
-            - $ref: "#/components/schemas/SignedConversion"
+            - $ref: '#/components/schemas/SignedConversion'
             - description: The amount of money that the Payee FSP should receivThe signed version of the terms under which the FXP will undertake the currency conversion proposed by the requester.
       required:
         - agreedConversion
@@ -1437,12 +1436,12 @@ components:
       properties:
         fxQuoteId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: An end-to-end identifier for the FxQuote request.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         conversion:
           allOf:
-            - $ref: "#/components/schemas/Conversion"
+            - $ref: '#/components/schemas/Conversion'
             - description: The terms of the currency conversion for which a quotation is sought.
       required:
         - fxQuoteId
@@ -1455,7 +1454,7 @@ components:
         fxpProviders:
           type: array
           items:
-            $ref: "#/components/schemas/FspId"
+            $ref: '#/components/schemas/FspId'
           minItems: 0
           maxItems: 16
           description: The FSP Id(s) of the participant(s) who offer currency conversion services.
@@ -1468,21 +1467,21 @@ components:
       properties:
         conversionRequestId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: An end-to-end identifier for the signed conversion.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         conversionTerms:
           allOf:
-            - $ref: "#/components/schemas/Conversion"
+            - $ref: '#/components/schemas/Conversion'
             - description: The content of the conversion to which the FXP has agreed.
         expiration:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: The date and time at which the conversion offer will expire (as specified in Section 7.2.14 of the FSPIOP API definition v1.1).
-            - example: "2021-09-28T08:38:08.699-04:00"
+            - example: '2021-09-28T08:38:08.699-04:00'
         condition:
           allOf:
-            - $ref: "#/components/schemas/IlpCondition"
+            - $ref: '#/components/schemas/IlpCondition'
             - description: The condition attached to the agreed conversion.
             - example: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA.
       required:
@@ -1496,20 +1495,20 @@ components:
       properties:
         completedTimestamp:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Time and date when the conversion was executed.
-            - example: "2020-05-19T08:38:08.699-04:00"
+            - example: '2020-05-19T08:38:08.699-04:00'
         fulfilment:
           allOf:
-            - $ref: "#/components/schemas/IlpFulfilment"
+            - $ref: '#/components/schemas/IlpFulfilment'
             - description: The fulfilment of the condition specified for the currency conversion. Mandatory if the conversion has been executed successfully.
             - example: WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8
         conversionState:
           allOf:
-            - $ref: "#/components/schemas/TransactionState"
+            - $ref: '#/components/schemas/TransactionState'
             - description: The current status of the conversion request.
         extensionList:
-          $ref: "#/components/schemas/ExtensionList"
+          $ref: '#/components/schemas/ExtensionList'
       required:
         - conversionState
     FxTransfersIDPutResponse:
@@ -1519,20 +1518,20 @@ components:
       properties:
         completedTimestamp:
           allOf:
-            - $ref: "#/components/schemas/DateTime"
+            - $ref: '#/components/schemas/DateTime'
             - description: Time and date when the conversion was executed.
-            - example: "2020-05-19T08:38:08.699-04:00"
+            - example: '2020-05-19T08:38:08.699-04:00'
         fulfilment:
           allOf:
-            - $ref: "#/components/schemas/IlpFulfilment"
+            - $ref: '#/components/schemas/IlpFulfilment'
             - description: The fulfilment of the condition specified for the currency conversion. Mandatory if the conversion has been executed successfully.
             - example: WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8
         conversionState:
           allOf:
-            - $ref: "#/components/schemas/TransactionState"
+            - $ref: '#/components/schemas/TransactionState'
             - description: The current status of the conversion request.
         extensionList:
-          $ref: "#/components/schemas/ExtensionList"
+          $ref: '#/components/schemas/ExtensionList'
       required:
         - conversionState
     FxTransfersPostRequest:
@@ -1542,115 +1541,115 @@ components:
       properties:
         commitRequestId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: An end-to-end identifier for the confirmation request.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         relatedTransferId:
           allOf:
-            - $ref: "#/components/schemas/CorrelationId"
+            - $ref: '#/components/schemas/CorrelationId'
             - description: The transfer ID of the transfer to which this currency conversion relates, if the conversion is part of a transfer. If the conversion is a currency purchase, this field should be omitted.
             - example: b51ec534-ee48-4575-b6a9-ead2955b8069
         conversion:
           allOf:
-            - $ref: "#/components/schemas/SignedConversion"
+            - $ref: '#/components/schemas/SignedConversion'
             - description: The agreed currency conversion for which confirmation is sought.
       required:
         - commitRequestId
         - conversion
 
   responses:
-    "200":
+    '200':
       description: OK
-    "202":
+    '202':
       description: Accepted
-    "400":
+    '400':
       description: Bad Request
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "401":
+          $ref: '#/components/parameters/Content-Type'
+    '401':
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "403":
+          $ref: '#/components/parameters/Content-Type'
+    '403':
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "404":
+          $ref: '#/components/parameters/Content-Type'
+    '404':
       description: Not Found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "405":
+          $ref: '#/components/parameters/Content-Type'
+    '405':
       description: Method Not Allowed
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "406":
+          $ref: '#/components/parameters/Content-Type'
+    '406':
       description: Not Acceptable
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "501":
+          $ref: '#/components/parameters/Content-Type'
+    '501':
       description: Not Implemented
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
-    "503":
+          $ref: '#/components/parameters/Content-Type'
+    '503':
       description: Service Unavailable
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInformationResponse"
+            $ref: '#/components/schemas/ErrorInformationResponse'
       headers:
         Content-Length:
-          $ref: "#/components/parameters/Content-Length"
+          $ref: '#/components/parameters/Content-Length'
         Content-Type:
-          $ref: "#/components/parameters/Content-Type"
+          $ref: '#/components/parameters/Content-Type'
 
   parameters:
     #Header parameters

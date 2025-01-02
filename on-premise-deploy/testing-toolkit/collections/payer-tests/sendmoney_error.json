@@ -40,9 +40,7 @@
               {
                 "id": 1,
                 "description": "Status is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
+                "exec": ["expect(response.status).to.equal(200)"]
               },
               {
                 "id": 2,
@@ -54,10 +52,7 @@
               {
                 "id": 3,
                 "description": "Should get incoming parties",
-                "exec": [
-                  "expect(requestVariables.partiesRequest).to.not.equal(null)",
-                  ""
-                ]
+                "exec": ["expect(requestVariables.partiesRequest).to.not.equal(null)", ""]
               }
             ]
           },
@@ -101,9 +96,7 @@
               {
                 "id": 1,
                 "description": "Status is 500",
-                "exec": [
-                  "expect(response.status).to.equal(500)"
-                ]
+                "exec": ["expect(response.status).to.equal(500)"]
               },
               {
                 "id": 2,
@@ -115,8 +108,7 @@
             ]
           },
           "scriptingEngine": "javascript",
-          "scripts": {
-          }
+          "scripts": {}
         },
         {
           "id": 3,
@@ -142,9 +134,7 @@
               {
                 "id": 1,
                 "description": "Status is 500",
-                "exec": [
-                  "expect(response.status).to.equal(500)"
-                ]
+                "exec": ["expect(response.status).to.equal(500)"]
               }
             ]
           }

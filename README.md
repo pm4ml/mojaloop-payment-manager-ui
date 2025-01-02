@@ -21,6 +21,7 @@ The UI is configured to use a proxy so that real apis deployed online can be use
 ### Pushing to the repo
 
 Before merging any PR, make sure that:
+
 - the version is incremented. the command `yarn version` should be used for this purpose.
 - every changed line followes the styleguide pattern; the command `yarn prettier` should be used for this purpose.
 - there are no linting issues; the command `yarn lint` should be used for this purpose.
@@ -55,7 +56,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `yarn proxy`
 
 Runs the proxy to connect to online apispac
-
 
 ### `yarn eject` - DON'T DO THIS
 

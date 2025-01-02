@@ -12,4 +12,4 @@ services:
       - REACT_APP_COUNTRY_LOGO=https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png
       - REACT_APP_SUBTITLE=Airtel
     ports:
-      - "3000:3000"
+      - '3000:3000'

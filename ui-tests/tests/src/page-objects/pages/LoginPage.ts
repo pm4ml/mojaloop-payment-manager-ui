@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { Selector } from 'testcafe';
 
 export const LoginPage = {
   usernameField: Selector('#username', { timeout: 25000 }),

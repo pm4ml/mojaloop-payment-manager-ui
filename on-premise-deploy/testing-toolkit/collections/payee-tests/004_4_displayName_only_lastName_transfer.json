@@ -37,30 +37,22 @@
               {
                 "id": 1,
                 "description": "Response status to be 202",
-                "exec": [
-                  "expect(response.status).to.equal(202)"
-                ]
+                "exec": ["expect(response.status).to.equal(202)"]
               },
               {
                 "id": 2,
                 "description": "Response statusText be Accepted",
-                "exec": [
-                  "expect(response.statusText).to.equal('Accepted')"
-                ]
+                "exec": ["expect(response.statusText).to.equal('Accepted')"]
               },
               {
                 "id": 3,
                 "description": "Callback Content Length not 0",
-                "exec": [
-                  "expect(callback.headers['Content-Length']).to.not.equal('0')"
-                ]
+                "exec": ["expect(callback.headers['Content-Length']).to.not.equal('0')"]
               },
               {
                 "id": 4,
                 "description": "Callback body should contain party",
-                "exec": [
-                  "expect(callback.body).to.have.property('party')"
-                ]
+                "exec": ["expect(callback.body).to.have.property('party')"]
               },
               {
                 "id": 5,
@@ -161,23 +153,17 @@
               {
                 "id": 1,
                 "description": "Response status to be 202",
-                "exec": [
-                  "expect(response.status).to.equal(202)"
-                ]
+                "exec": ["expect(response.status).to.equal(202)"]
               },
               {
                 "id": 2,
                 "description": "Response statusText be Accepted",
-                "exec": [
-                  "expect(response.statusText).to.equal('Accepted')"
-                ]
+                "exec": ["expect(response.statusText).to.equal('Accepted')"]
               },
               {
                 "id": 3,
                 "description": "Callback Content Length not 0",
-                "exec": [
-                  "expect(callback.headers['Content-Length']).to.not.equal('0')"
-                ]
+                "exec": ["expect(callback.headers['Content-Length']).to.not.equal('0')"]
               },
               {
                 "id": 4,
@@ -189,9 +175,7 @@
               {
                 "id": 5,
                 "description": "Callback body should contain transferAmount",
-                "exec": [
-                  "expect(callback.body).to.have.property('transferAmount')"
-                ]
+                "exec": ["expect(callback.body).to.have.property('transferAmount')"]
               },
               {
                 "id": 6,
@@ -211,23 +195,17 @@
               {
                 "id": 8,
                 "description": "Request amountType to be SEND",
-                "exec": [
-                  "expect('{$request.body.amountType}').to.equal('SEND')"
-                ]
+                "exec": ["expect('{$request.body.amountType}').to.equal('SEND')"]
               },
               {
                 "id": 9,
                 "description": "Request transactionType scenario to be TRANSFER",
-                "exec": [
-                  "expect('{$request.body.transactionType.scenario}').to.equal('TRANSFER')"
-                ]
+                "exec": ["expect('{$request.body.transactionType.scenario}').to.equal('TRANSFER')"]
               },
               {
                 "id": 10,
                 "description": "Request transactionType initiator to be PAYER",
-                "exec": [
-                  "expect('{$request.body.transactionType.initiator}').to.equal('PAYER')"
-                ]
+                "exec": ["expect('{$request.body.transactionType.initiator}').to.equal('PAYER')"]
               },
               {
                 "id": 11,
@@ -276,23 +254,17 @@
               {
                 "id": 1,
                 "description": "Response status to be 202",
-                "exec": [
-                  "expect(response.status).to.equal(202)"
-                ]
+                "exec": ["expect(response.status).to.equal(202)"]
               },
               {
                 "id": 2,
                 "description": "Response statusText be Accepted",
-                "exec": [
-                  "expect(response.statusText).to.equal('Accepted')"
-                ]
+                "exec": ["expect(response.statusText).to.equal('Accepted')"]
               },
               {
                 "id": 3,
                 "description": "Callback Content Length not 0",
-                "exec": [
-                  "expect(callback.headers['Content-Length']).to.not.equal('0')"
-                ]
+                "exec": ["expect(callback.headers['Content-Length']).to.not.equal('0')"]
               },
               {
                 "id": 4,
@@ -304,9 +276,7 @@
               {
                 "id": 5,
                 "description": "Callback transferState to be COMMITTED",
-                "exec": [
-                  "expect(callback.body.transferState).to.equal('COMMITTED')"
-                ]
+                "exec": ["expect(callback.body.transferState).to.equal('COMMITTED')"]
               },
               {
                 "id": 6,

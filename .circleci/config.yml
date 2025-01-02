@@ -57,10 +57,10 @@ jobs:
       - run:
           name: Run unit tests
           command: yarn test
-#      - slack/status:
-#          success_message: Linting passed in branch $CIRCLE_BRANCH
-#          failure_message: Linting failed in branch $CIRCLE_BRANCH
-#          webhook: $SLACK_WEBHOOK
+  #      - slack/status:
+  #          success_message: Linting passed in branch $CIRCLE_BRANCH
+  #          failure_message: Linting failed in branch $CIRCLE_BRANCH
+  #          webhook: $SLACK_WEBHOOK
 
   test-unit:
     executor: default-docker

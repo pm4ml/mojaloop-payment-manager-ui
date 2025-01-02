@@ -17,8 +17,7 @@
   "/settlements": {
     "post": {
       "response": {
-        "bodyOverride": {
-        }
+        "bodyOverride": {}
       }
     }
   },
