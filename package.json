@@ -71,6 +71,7 @@
     "sass-loader": "^12.0.0",
     "serve": "^11.3.2",
     "svg-sprite-loader": "^5.0.0",
+    "testcafe": "^3.7.1",
     "typescript": "~3.7.2",
     "xlsx": "^0.17.5"
   },

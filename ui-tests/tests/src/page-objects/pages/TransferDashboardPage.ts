@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import './customStyles.css';
 
 export type Error = {
   id: string;
@@ -81,8 +82,8 @@ export const TransferDashboardPage = {
       .parent()
       .parent('.el-modal__container'),
 
-  findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-items').child(0), //.withText('Basic Find a Transfer'),XPathSelector('//input[@type="checkbox"]').nth(1);
-  findATransferModalAdvancedFiltering: Selector('.el-tabs__tab-items')
+  findATransferModalBasicFindTransferTab: Selector('.el-tabs__tab-item').child(0), //.withText('Basic Find a Transfer'),XPathSelector('//input[@type="checkbox"]').nth(1);
+  findATransferModalAdvancedFiltering: Selector('.el-tabs__tab-item')
     .child('div')
     .withText('Advanced Filtering'),
   backtoFilteringSubmitButton: Selector('span.input-button__label').withText('Back to filtering'),
@@ -104,9 +105,11 @@ export const TransferDashboardPage = {
   findATransferModalTransferStatusField: Selector('.find-transfer-modal__transfer-status input'),
   findATransferModalSubmit: Selector('button').withAttribute('label', 'Find Transfers'), //Selector('div.el-modal__footer-right').child(1),Selector('.el-modal__submit'),
   findATransferModalCloseButton: Selector('.input-button__content').child('span').withText('Close'),
+  
 
   //Find a Transfer results Page objects
   noresults: Selector('span').withText('No items'),
+  
   transferDetailsModalBasicInformationTab: Selector('.el-tabs__tab-item').withText(
     'Basic Information'
   ),
@@ -124,7 +127,7 @@ export const TransferDashboardPage = {
 
   //Individual Transfer Details Page objects
   transferDetailTitle: Selector('div.el-modal__header-title').withText('Transfer Details'),
-  basicInfomationTab: Selector('div.el-tabs__tab-items').child(0),
+  basicInfomationTab: Selector('div.el-tabs__tab-item').child(0),
 
   //Basic Information Page Objects - Labels
   transferIDLabel: Selector('div').withText('Transfer ID'),
@@ -139,6 +142,7 @@ export const TransferDashboardPage = {
   transferRecipientDetailsLabel: Selector('div').withText('Recipient Details'),
   transferInstitutionLabel: Selector('div').withText('Institution'),
   transferDirectionLabel: Selector('div').withText('Direction'),
+  
 
   //Basic Information Page Objects - TextBoxes
   transferID: Selector('div.input-textfield__value__tokens').nth(0).child(0),

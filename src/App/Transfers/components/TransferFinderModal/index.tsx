@@ -48,7 +48,7 @@ const dispatchProps = (dispatch: Dispatch) => ({
     dispatch(actions.requestTransferDetails({ transferId: transferError.id }));
   },
 });
-
+const legendColor = process.env.REACT_APP_UI_COLOR || '#02182b';
 interface TransferFinderModalProps {
   model: TransferFilter;
   transfers: Transfer[];
@@ -161,6 +161,7 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
     <Modal
       title="Find a Transfer"
       width="1200px"
+      color= {legendColor}
       onClose={onModalCloseClick}
       onSubmit={onSubmit}
       allowSubmit

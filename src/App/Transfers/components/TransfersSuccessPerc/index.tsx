@@ -8,7 +8,7 @@ interface TransfersSuccessPercProps {
   data?: XYCoordinate[];
   error: ErrorMessage;
 }
-
+const legendColor = process.env.REACT_APP_UI_COLOR || '#02182b';
 const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, error }) => {
   let content = null;
   if (isPending || !data) {
@@ -23,7 +23,7 @@ const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, 
     content = (
       <ChartLayout
         title="Successful Transfers"
-        legend={[{ label: 'Percent / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Percent / Min', color: /*'#4fc7e7'*/legendColor }]}
         Graph={() => <SuccessfulTransferGraph data={data} />}
       />
     );
@@ -66,7 +66,7 @@ const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => 
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [/*'#4fc7e7'*/legendColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

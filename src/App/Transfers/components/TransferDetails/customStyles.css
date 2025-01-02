@@ -1,0 +1,11 @@
+.el-tabs__tab-item {
+    color: rgb(238, 54, 8) !important;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .el-tabs__tab-item.active {
+    color: rgb(238, 54, 8) !important;
+    border-bottom-color: rgb(0, 255, 98) !important;
+  }

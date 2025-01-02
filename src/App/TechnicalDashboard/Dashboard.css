@@ -57,7 +57,8 @@
   margin: 5px;
 }
 .dashboard__overview-status--open {
-  background: #4fc7e7;
+  background: #e7a54f;
+  
 }
 .dashboard__overview-status--on-track {
   background: #12d670;

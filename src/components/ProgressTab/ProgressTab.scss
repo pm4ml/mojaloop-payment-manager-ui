@@ -62,7 +62,8 @@
   cursor: pointer;
 }
 .progress-tab--primary {
-  $color: #4fc7e7;
+  // $color: #4fc7e7;
+  $color: #912222;
   color: $color;
   border-color: $color;
   .progress-tab__status-circle {
@@ -191,7 +192,7 @@
 }
 
 .progress-tab__last-tab {
-  background-color: #4fc7e7;
+  background-color: #912222;
   width: 30px;
 
   display: flex;
