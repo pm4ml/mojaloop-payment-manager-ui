@@ -161,7 +161,7 @@ const TransferFinderModal: FC<TransferFinderModalProps> = ({
     <Modal
       title="Find a Transfer"
       width="1200px"
-      color= {legendColor}
+      color={legendColor}
       onClose={onModalCloseClick}
       onSubmit={onSubmit}
       allowSubmit

@@ -23,7 +23,7 @@ const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, 
     content = (
       <ChartLayout
         title="Successful Transfers"
-        legend={[{ label: 'Percent / Min', color: /*'#4fc7e7'*/legendColor }]}
+        legend={[{ label: 'Percent / Min', color: /*'#4fc7e7'*/ legendColor }]}
         Graph={() => <SuccessfulTransferGraph data={data} />}
       />
     );
@@ -66,7 +66,7 @@ const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => 
       width: [2],
       curve: 'smooth',
     },
-    colors: [/*'#4fc7e7'*/legendColor],
+    colors: [/*'#4fc7e7'*/ legendColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

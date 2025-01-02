@@ -27,8 +27,8 @@ const Flow: FC<FlowProps> = ({ isPending, items, error }) => {
       <ChartLayout
         title="Outflow vs Inflow"
         legend={[
-          { label: 'Average Inflow / Minute', color: /*'#4fc7e7'*/'#e80002' },
-          { label: 'Average Outflow / Minute', color: /*'#e23a54'*/'#e80002' },
+          { label: 'Average Inflow / Minute', color: /*'#4fc7e7'*/ '#e80002' },
+          { label: 'Average Outflow / Minute', color: /*'#e23a54'*/ '#e80002' },
         ]}
         Graph={() => <FlowGraph lines={items} />}
         Recap={() => <div style={{ width: '200px' }} />}
