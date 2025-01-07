@@ -1,11 +1,11 @@
 @import 'src/styles/_env.scss';
 
-  :root {
-    --primary-color: #{$primary-color};
-    --secondary-color: #{$secondary-color};
-    --accent-color: #{$accent-color};
-    --shadow-color: #{$shadow-color};
-  }
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+  --shadow-color: #{$shadow-color};
+}
 
 #navbar {
   flex: 0 0 55px;
