@@ -26,6 +26,6 @@ RUN cp -r /app/build /app/server/
 WORKDIR /app/server
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD [ "npm", "start" ]

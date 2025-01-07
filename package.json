@@ -33,6 +33,7 @@
     "color-scheme": "^1.0.1",
     "connected-react-router": "^6.8.0",
     "d3": "^5.16.0",
+    "dotenv": "^16.4.7",
     "eslint": "^7.3.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-typescript": "^8.0.2",
@@ -76,6 +77,8 @@
     "xlsx": "^0.17.5"
   },
   "scripts": {
+    "prestart": "node ./scripts/generate-env-scss.js",
+    "prebuild": "node ./scripts/generate-env-scss.js",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
@@ -105,6 +108,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.1.0",
     "redux-mock-store": "^1.5.4",
     "standard-version": "^9.5.0"
   },

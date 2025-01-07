@@ -48,7 +48,7 @@ const dispatchProps = (dispatch: Dispatch) => ({
     dispatch(actions.requestTransferDetails({ transferId: transferError.id }));
   },
 });
-const legendColor = process.env.REACT_APP_UI_COLOR || '#02182b';
+const legendColor = process.env.REACT_APP_PRIMARY_COLOR || '#02182b';
 interface TransferFinderModalProps {
   model: TransferFilter;
   transfers: Transfer[];

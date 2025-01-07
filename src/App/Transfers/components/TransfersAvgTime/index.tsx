@@ -8,7 +8,7 @@ interface TransfersChartsProps {
   data?: XYCoordinate[];
   error: ErrorMessage;
 }
-const legendColor = process.env.REACT_APP_UI_COLOR || '#02182b';
+const legendColor = process.env.REACT_APP_PRIMARY_COLOR || '#02182b';
 const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) => {
   let content = null;
   if (isPending || !data) {
@@ -23,7 +23,7 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) =
     content = (
       <ChartLayout
         title="Average Transfer Time (E2E)"
-        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: /*'#4fc7e7'*/ legendColor }]}
+        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: legendColor }]}
         Graph={() => <AverageTransferTimeGraph data={data} />}
       />
     );
@@ -66,7 +66,7 @@ const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) =
       width: [2],
       curve: 'smooth',
     },
-    colors: [/*'#4fc7e7'*/ legendColor],
+    colors: [/* '#4fc7e7' */ legendColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

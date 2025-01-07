@@ -9,6 +9,7 @@ interface FxpConversionsChartsProps {
   error: ErrorMessage;
 }
 
+const legendColor = process.env.REACT_APP_PRIMARY_COLOR || '#4fc7e7';
 const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, error }) => {
   let content = null;
   if (isPending || !data) {
@@ -23,7 +24,7 @@ const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, 
     content = (
       <ChartLayout
         title="Average FxpConversion Time (E2E)"
-        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: legendColor }]}
         Graph={() => <AverageFxpConversionTimeGraph data={data} />}
       />
     );
@@ -66,7 +67,7 @@ const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [legendColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { FC, useMemo } from 'react';
 import { Icon } from 'components';
-import './Navbar.css';
+import './Navbar.scss';
 
 type NavbarProps = {
   username?: string;
@@ -21,7 +21,7 @@ const Navbar: FC<NavbarProps> = ({
   const dfspSubtitle = process.env.REACT_APP_SUBTITLE || 'CBC';
   const countryLogo = process.env.REACT_APP_COUNTRY_LOGO || '/Comesa-logo.png';
   const dfspLogo = process.env.REACT_APP_DFSP_LOGO || '/cbs_logo.jpg';
-  const navbarColor = process.env.REACT_APP_NAVBAR_COLOR || '#02182b';
+  const navbarColor = process.env.REACT_APP_SECONDARY_COLOR || '#02182b';
 
   document.documentElement.style.setProperty('--navbarColor', navbarColor);
 

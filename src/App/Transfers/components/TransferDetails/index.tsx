@@ -22,7 +22,7 @@ import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { TransferDetails } from '../../types';
-import './customStyles.css';
+import './customStyles.scss';
 
 const stateProps = (state: State) => ({
   model: selectors.getTransferDetails(state),
@@ -81,7 +81,7 @@ const TransferDetailsModal: FC<TransferDetailsModalProps> = ({
 interface TransferDetailsProps {
   model: TransferDetails;
 }
-const legendColor = process.env.REACT_APP_UI_COLOR || '#02182b';
+// const legendColor = process.env.REACT_APP_UI_COLOR || '#02182b';
 const TransferDetailsView: FC<TransferDetailsProps> = ({ model }) => {
   const [isRequestDetailsVisible, setIsRequestDetailsVisible] = useState(false);
   const [requestModel, setRequestModel] = useState(null);

@@ -1,15 +1,33 @@
 # This is configuration template
-version: '0.0'
+# version: '0.0'
+
+# services:
+#   react-app-atl:
+#     image: your-react-app-image
+#     container_name: react_app_atl
+#     environment:
+#       - REACT_APP_COUNTRY_LOGO=https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png
+#       - REACT_APP_SUBTITLE=Airtel
+#       # - REACT_APP_SUBTITLE="MTN"
+#       - REACT_APP_PRIMARY_COLOR="#fdde5a"
+#       - REACT_APP_SECONDARY_COLOR="#E3C751"
+#       - REACT_APP_ACCENT_COLOR="#fdde5a"
+#     ports:
+#       - '3000:3000'
+version: '3.8'
 
 services:
-  react-app-atl:
-    image: your-react-app-image
-    container_name: react_app_atl
+  mojaloop-payment-manager-ui:
+    build:
+      context: .
+      args:
+        API_BASE_URL: http://backend-url:3000
+    container_name: mojaloop_payment_manager_ui
     environment:
-      - REACT_APP_UI_COLOR=#e90000
-      - REACT_APP_NAVBAR_COLOR=#9B0315
-      - REACT_APP_DFSP_LOGO=
       - REACT_APP_COUNTRY_LOGO=https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png
       - REACT_APP_SUBTITLE=Airtel
+      - REACT_APP_PRIMARY_COLOR=#fdde5a
+      - REACT_APP_SECONDARY_COLOR=#E3C751
+      - REACT_APP_ACCENT_COLOR=#fdde5a
     ports:
       - '3000:3000'

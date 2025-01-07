@@ -8,7 +8,7 @@ interface FxpConversionsSuccessPercProps {
   data?: XYCoordinate[];
   error: ErrorMessage;
 }
-
+const legendColor = process.env.REACT_APP_PRIMARY_COLOR || '#4fc7e7';
 const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
   isPending,
   data,
@@ -27,7 +27,7 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
     content = (
       <ChartLayout
         title="Successful FxpConversions"
-        legend={[{ label: 'Percent / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Percent / Min', color: legendColor }]}
         Graph={() => <SuccessfulFxpConversionGraph data={data} />}
       />
     );
@@ -70,7 +70,7 @@ const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ d
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [legendColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {
