@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Log environment variables to verify they're being passed correctly
+# echo "REACT_APP_COUNTRY_LOGO: $REACT_APP_COUNTRY_LOGO"
+# echo "REACT_APP_SUBTITLE: $REACT_APP_SUBTITLE"
+# echo "REACT_APP_PRIMARY_COLOR: $REACT_APP_PRIMARY_COLOR"
+# echo "REACT_APP_SECONDARY_COLOR: $REACT_APP_SECONDARY_COLOR"
+# echo "REACT_APP_ACCENT_COLOR: $REACT_APP_ACCENT_COLOR"
+# echo "REACT_APP_VERSION: $REACT_APP_VERSION"
+# echo "REACT_APP_COMMIT: $REACT_APP_COMMIT"
+
+# Ensure the target directory exists
+mkdir -p /app
+
+# Write the environment variables to the .env file in the correct directory
+cat <<EOF > /app/.env
+REACT_APP_COUNTRY_LOGO=$REACT_APP_COUNTRY_LOGO
+REACT_APP_SUBTITLE=$REACT_APP_SUBTITLE
+REACT_APP_PRIMARY_COLOR=$REACT_APP_PRIMARY_COLOR
+REACT_APP_SECONDARY_COLOR=$REACT_APP_SECONDARY_COLOR
+REACT_APP_ACCENT_COLOR=$REACT_APP_ACCENT_COLOR
+REACT_APP_VERSION=$REACT_APP_VERSION
+REACT_APP_COMMIT=$REACT_APP_COMMIT
+EOF
+#log the .env file
+echo "Generated .env file:"
+cat /app/.env
+# Start the app
+exec "$@"

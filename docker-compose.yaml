@@ -1,19 +1,32 @@
-# This is configuration template
-# version: '0.0'
+# version: '3.8'
 
 # services:
-#   react-app-atl:
-#     image: your-react-app-image
-#     container_name: react_app_atl
+#   mojaloop-payment-manager-ui:
+#     build:
+#       context: .
+#       args:
+#         API_BASE_URL: http://backend-url:3000
+#     container_name: mojaloop_payment_manager_ui
 #     environment:
+#       # Airtel Configuration
 #       - REACT_APP_COUNTRY_LOGO=https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png
 #       - REACT_APP_SUBTITLE=Airtel
-#       # - REACT_APP_SUBTITLE="MTN"
 #       - REACT_APP_PRIMARY_COLOR="#fdde5a"
 #       - REACT_APP_SECONDARY_COLOR="#E3C751"
 #       - REACT_APP_ACCENT_COLOR="#fdde5a"
+
+#       # Uncomment below for MTN Configuration
+#       # - REACT_APP_SUBTITLE=MTN
+#       # - REACT_APP_PRIMARY_COLOR="#e80002"
+#       # - REACT_APP_SECONDARY_COLOR="#9b0214"
+#       # - REACT_APP_ACCENT_COLOR="#e80002"
+
+#     env_file:
+#       - .env
+
 #     ports:
 #       - '3000:3000'
+
 version: '3.8'
 
 services:
@@ -25,17 +38,13 @@ services:
     container_name: mojaloop_payment_manager_ui
     environment:
       - REACT_APP_COUNTRY_LOGO=https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png
-      # - REACT_APP_SUBTITLE=Airtel
-      # - REACT_APP_PRIMARY_COLOR="#e80002"
-      # - REACT_APP_SECONDARY_COLOR="#9b0214"
-      # - REACT_APP_ACCENT_COLOR="#e80002"
-    env_file:
-      - .env
-  ##MTN
-      # - REACT_APP_SUBTITLE="MTN"
-      # - REACT_APP_PRIMARY_COLOR=#fdde5a
-      # - REACT_APP_SECONDARY_COLOR=#E3C751
-      # - REACT_APP_ACCENT_COLOR=#fdde5a
+      - REACT_APP_SUBTITLE=Airtel
+      - REACT_APP_PRIMARY_COLOR="#fdde5a"
+      - REACT_APP_SECONDARY_COLOR="#E3C751"
+      - REACT_APP_ACCENT_COLOR="#fdde5a"
 
     ports:
       - '3000:3000'
+    entrypoint: ["/app/entrypoint.sh"]
+    command: ["npm", "start"]
+
