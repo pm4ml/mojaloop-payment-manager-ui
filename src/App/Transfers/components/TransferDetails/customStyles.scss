@@ -4,7 +4,7 @@
   --primary-color: #{$primary-color};
   --secondary-color: #{$secondary-color};
   --accent-color: #{$accent-color};
-  --shadow-color: #{$shadow-color};
+  // --shadow-color: #{$shadow-color};
 }
 
 .mb-input * {
@@ -120,7 +120,7 @@
 }
 
 .mb-input__borders--invalid {
-  border-bottom-color: #d1344e;
+  border-bottom-color: $primary-color;
 }
 
 /** COMPONENT BLOCKS */
@@ -346,7 +346,7 @@
 }
 .input-button__mb-input--primary:active,
 .input-button__mb-input--primary:focus {
-  box-shadow: 0px 0px 0px 3px $shadow-color;
+  box-shadow: 0px 0px 0px 3px $primary-color;
 }
 .input-button__mb-input--primary:hover,
 .input-button__mb-input--primary:focus {
@@ -372,7 +372,7 @@
 }
 .input-button__mb-input--secondary:active,
 .input-button__mb-input--secondary:focus {
-  box-shadow: 0px 0px 0px 3px $shadow-color;
+  box-shadow: 0px 0px 0px 3px $primary-color;
 }
 .input-button__mb-input--secondary:hover,
 .input-button__mb-input--secondary:focus {
@@ -401,7 +401,7 @@
 }
 .input-button__mb-input--success:active,
 .input-button__mb-input--success:focus {
-  box-shadow: 0px 0px 0px 3px $shadow-color;
+  box-shadow: 0px 0px 0px 3px $primary-color;
 }
 .input-button__mb-input--success:hover,
 .input-button__mb-input--success:focus {
@@ -416,26 +416,26 @@
 }
 
 .input-button__mb-input--danger {
-  background-color: #d1344e;
-  border-color: #d1344e;
+  background-color: $primary-color;
+  border-color: $primary-color;
   color: #ffffff;
   fill: #ffffff;
   stroke: #ffffff;
 }
 .input-button__mb-input--danger.noFill {
   background: transparent;
-  color: #d1344e;
-  fill: #d1344e;
-  stroke: #d1344e;
+  color: $primary-color;
+  fill: $primary-color;
+  stroke: $primary-color;
 }
 .input-button__mb-input--danger:active,
 .input-button__mb-input--danger:focus {
-  box-shadow: 0px 0px 0px 3px #edb1bb;
+  box-shadow: 0 0 10px lighten($primary-color, 20%);
 }
 .input-button__mb-input--danger:hover,
 .input-button__mb-input--danger:focus {
-  background-color: #e23955;
-  border-color: #e23955;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
 .input-button__mb-input--danger:hover.noFill,
 .input-button__mb-input--danger:focus.noFill {
@@ -516,7 +516,7 @@
 }
 .input-button__mb-input--light:active,
 .input-button__mb-input--light:focus {
-  box-shadow: 0px 0px 0px 3px #d6f2f9;
+  box-shadow: 0px 0px 0px 3px 0 0 10px lighten($primary-color, 20%);
 }
 .input-button__mb-input--light:hover,
 .input-button__mb-input--light:focus {
@@ -767,7 +767,7 @@
 }
 
 .el-tooltip__handle--error {
-  background: #d1344e;
+  background: $primary-color;
 }
 
 .el-tooltip__handle--info {
@@ -1046,7 +1046,7 @@
   padding: 0px;
 }
 .input-checkbox__input:focus + label:before {
-  box-shadow: 0px 0px 0px 3px rgba(0, 175, 255, 0.5);
+  box-shadow: 0px 0px 0px 3px $primary-color;
 }
 .input-checkbox__input + label {
   max-width: 100%;
@@ -1097,12 +1097,13 @@
   box-shadow: none;
 }
 .input-checkbox__input:disabled:checked + label:before {
-  border-color: #60d2fd;
-  background: #60d2fd;
+  border-color: $primary-color;
+  background: $primary-color;
+  // 0 0 10px lighten($primary-color, 20%); #60d2fd
 }
 .input-checkbox__input:checked + label:before {
-  border-color: #00a2df;
-  background: linear-gradient(#10b2ef, #00a2df);
+  border-color: $primary-color;
+  background: linear-gradient($primary-color, 0 0 10px darken($primary-color, 20%));
 }
 .input-checkbox__input:checked + label:after {
   content: '';
@@ -1174,7 +1175,7 @@
 
 .hljs-comment,
 .hljs-quote {
-  color: #800;
+  color: $secondary-color;
 }
 
 .hljs-keyword,
@@ -1443,7 +1444,7 @@
   fill: $secondary-color;
 }
 .control__icon--secondary::before {
-  background-color: #6faedd;
+  background-color: $primary-color;
 }
 
 .control__icon--tertiary {
@@ -1590,12 +1591,14 @@
 .el-datalist__header-cell--sortable {
   cursor: pointer;
 }
-.el-datalist__header-cell--sortable:not(.el-datalist__header-cell--sorting):not(.el-datalist__header-cell--filtering):hover {
+.el-datalist__header-cell--sortable:not(.el-datalist__header-cell--sorting):not(
+    .el-datalist__header-cell--filtering
+  ):hover {
   border-bottom-color: #aaa;
 }
 
 .el-datalist__header-cell--sorting {
-  color: #2fafd1;
+  color: $primary-color;
   border-bottom-color: $primary-color;
 }
 
@@ -1680,8 +1683,8 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;
-  color: #2fafd1;
-  fill: #2fafd1;
+  color: $primary-color;
+  fill: $primary-color;
 }
 
 .el-datalist__link__icon {
@@ -1779,8 +1782,8 @@
 }
 
 .el-paginator__page--selected {
-  border-bottom: 4px solid #55c8e6;
-  color: #55c8e6;
+  border-bottom: 4px solid $primary-color;
+  color: $primary-color;
 }
 
 .el-paginator__page--disabled {
@@ -2024,7 +2027,7 @@
 }
 
 .DayPicker-Day--today {
-  color: #00a2df;
+  color: $primary-color;
   font-weight: bold;
 }
 
@@ -2050,7 +2053,7 @@
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
   color: #fff;
-  background-color: #00a2df;
+  background-color: $primary-color;
 }
 
 .DayPicker-Day:hover:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected) {
@@ -2336,12 +2339,12 @@
 }
 .input-dropdown__mb-input--secondary:active,
 .input-dropdown__mb-input--secondary:focus {
-  box-shadow: 0px 0px 0px 3px #6faedd;
+  box-shadow: 0px 0px 0px 3px $primary-color;
 }
 .input-dropdown__mb-input--secondary:hover,
 .input-dropdown__mb-input--secondary:focus {
-  background-color: #1676bc;
-  border-color: #1676bc;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
 .input-dropdown__mb-input--secondary:hover.noFill,
 .input-dropdown__mb-input--secondary:focus.noFill {
@@ -2785,7 +2788,7 @@
 }
 
 .forminput__field-info__url {
-  color: #39f;
+  color: $primary-color;
   font-size: 13px;
   text-decoration: underline;
   padding: 10px;
@@ -2885,8 +2888,8 @@
   background: #60d2fd;
 }
 .input-radio__input.checked + label:before {
-  border-color: #00a2df;
-  background: linear-gradient(0deg, #20c2ff, #00a2df);
+  border-color: $primary-color;
+  background: linear-gradient(0deg, $primary-color, $primary-color);
 }
 .input-radio__input.checked + label:after {
   content: '';
@@ -2974,7 +2977,7 @@
   color: #3a3b3c;
 }
 .input-select__value.has-filter {
-  color: #2fafd1;
+  color: $primary-color;
 }
 
 .input-select__icon {
@@ -3085,8 +3088,8 @@
 
 .input-select__options-item--selected,
 .input-select__options-item--selected:hover {
-  background: #1676bc;
-  border-color: #1676bc;
+  background: $primary-color;
+  border-color: $primary-color;
   color: #fff;
   fill: #fff;
 }

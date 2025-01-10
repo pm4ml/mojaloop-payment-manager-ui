@@ -15,10 +15,10 @@ module.exports = {
             loader: 'sass-loader', // Compiles Sass to CSS
             options: {
               additionalData: `
-                $primary-color: ${JSON.stringify(process.env.REACT_APP_PRIMARY_COLOR || '#e80002')};
-                $secondary-color: ${JSON.stringify(process.env.REACT_APP_SECONDARY_COLOR || '#d1344e')};
-                $accent-color: ${JSON.stringify(process.env.REACT_APP_ACCENT_COLOR || '#39cff7')};
-                $shadow-color: ${JSON.stringify(process.env.REACT_APP_SHADOW_COLOR || '#6faedd')};
+                $primary-color: ${JSON.stringify(process.env.REACT_APP_PRIMARY_COLOR || '#60d2fd')};
+                $secondary-color: ${JSON.stringify(process.env.REACT_APP_SECONDARY_COLOR || '#60d2fd')};
+                $accent-color: ${JSON.stringify(process.env.REACT_APP_ACCENT_COLOR || '#60d2fd')};
+                $shadow-color: ${JSON.stringify(process.env.REACT_APP_SHADOW_COLOR || '#60d2fd')};
               `,
             },
           },

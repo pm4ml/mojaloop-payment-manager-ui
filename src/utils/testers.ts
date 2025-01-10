@@ -20,10 +20,14 @@ const isNotNilNorEmpty = (value: AnyValue): boolean =>
 
 const isNotEmptyCollection = (collection: AnyValue[]): boolean => collection.length > 0;
 
-const getAnyIs = (value: AnyValue) => (...args: AnyValue[]): boolean =>
-  args.some((arg) => arg === value);
-const getAllAre = (value: AnyValue) => (...args: AnyValue[]): boolean =>
-  args.every((arg) => arg === value);
+const getAnyIs =
+  (value: AnyValue) =>
+  (...args: AnyValue[]): boolean =>
+    args.some((arg) => arg === value);
+const getAllAre =
+  (value: AnyValue) =>
+  (...args: AnyValue[]): boolean =>
+    args.every((arg) => arg === value);
 const getAnyIsDefined = (...args: AnyValue[]): boolean => args.some(isDefined);
 const getAnyIsNotNil = (...args: AnyValue[]): boolean => args.some(isNotNil);
 

@@ -36,6 +36,63 @@
 #method 2
 
 # Use a lightweight Node.js base image
+# FROM node:16.14.2-alpine3.14
+# FROM node:18-alpine
+
+# # Set the working directory
+# WORKDIR /app
+
+# # Copy package.json and yarn.lock for dependency installation
+# COPY package.json yarn.lock ./
+
+# # Install dependencies
+# RUN yarn install
+
+# # Copy the application source code
+# COPY ./ ./
+
+# # Set NODE_OPTIONS to use the legacy OpenSSL provider
+# ENV NODE_OPTIONS=--openssl-legacy-provider
+# # Set up the entrypoint script
+# COPY entrypoint.sh /app/entrypoint.sh
+# RUN chmod +x /app/entrypoint.sh
+
+# # Build the React app
+# ARG API_BASE_URL
+# ENV API_BASE_URL=$API_BASE_URL
+# ENV REACT_APP_PRIMARY_COLOR=#fdde5a
+# ENV REACT_APP_SECONDARY_COLOR=#E3C751
+# ENV REACT_APP_ACCENT_COLOR=#fdde5a
+
+# RUN yarn run build
+
+# # Copy the build files to a new directory
+# RUN cp -r /app/build /app/server/
+
+# # Set up the entrypoint script
+# # COPY entrypoint.sh /app/entrypoint.sh
+
+# # Verify the entrypoint script was copied
+# # RUN echo "Contents of entrypoint.sh:" && cat /app/entrypoint.sh && ls -l /app/entrypoint.sh
+
+# # RUN chmod +x /app/entrypoint.sh
+
+# # Move to the server directory
+# # WORKDIR /app/server
+
+# # Install server dependencies
+# # RUN npm install
+
+# # Expose the application port
+# EXPOSE 3000
+
+# # Set the entrypoint script to dynamically create .env and start the app
+# ENTRYPOINT ["/app/entrypoint.sh"]
+# CMD ["npm", "start"]
+
+
+# method 3
+
 FROM node:16.14.2-alpine3.14
 
 # Set the working directory
@@ -50,28 +107,18 @@ RUN yarn install
 # Copy the application source code
 COPY ./ ./
 
+# Set NODE_OPTIONS to use the legacy OpenSSL provider
+# ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# Copy the entrypoint script and make it executable
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
 # Build the React app
 ARG API_BASE_URL
 ENV API_BASE_URL=$API_BASE_URL
 
 RUN yarn run build
-
-# Copy the build files to a new directory
-RUN cp -r /app/build /app/server/
-
-# Set up the entrypoint script
-COPY entrypoint.sh /app/entrypoint.sh
-
-# Verify the entrypoint script was copied
-RUN echo "Contents of entrypoint.sh:" && cat /app/entrypoint.sh && ls -l /app/entrypoint.sh
-
-RUN chmod +x /app/entrypoint.sh
-
-# Move to the server directory
-WORKDIR /app/server
-
-# Install server dependencies
-RUN npm install
 
 # Expose the application port
 EXPOSE 3000
