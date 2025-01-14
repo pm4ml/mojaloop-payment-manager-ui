@@ -11,6 +11,7 @@ app.get('/config', function (req, res) {
     LOGIN_URL: process.env.LOGIN_URL,
     LOGIN_PROVIDER: process.env.LOGIN_PROVIDER,
     LOGOUT_URL: process.env.LOGOUT_URL,
+    ENABLE_AUTHENTICATION: process.env.ENABLE_AUTHENTICATION,
   });
 });
 
