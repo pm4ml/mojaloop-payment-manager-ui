@@ -7,8 +7,7 @@ const isPort = isNumberBetween(0, 65535);
 
 // Tests for a valida Host
 // eslint-disable-next-line max-len
-const hostRegex =
-  /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$/;
+const hostRegex = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$/;
 const hostValidator = createValidator(
   'It must be a valid Host',
   (value: string | undefined) => value !== undefined && hostRegex.test(value)
@@ -16,8 +15,7 @@ const hostValidator = createValidator(
 
 // Tests for a valid DNS address
 // eslint-disable-next-line max-len
-const DNSRegex =
-  /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$/;
+const DNSRegex = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$/;
 const DNSValidator = createValidator(
   'It must be a valid DNS',
   (value: string | undefined) => value !== undefined && DNSRegex.test(value)
@@ -25,8 +23,7 @@ const DNSValidator = createValidator(
 
 // Tests for a valid HTTP / HTTPS URL
 // eslint-disable-next-line max-len
-const URLRegex =
-  /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+const URLRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 const URLValidator = createValidator(
   'It must be a valid URL',
   (value: string | undefined) => value !== undefined && URLRegex.test(value)

@@ -1591,9 +1591,7 @@
 .el-datalist__header-cell--sortable {
   cursor: pointer;
 }
-.el-datalist__header-cell--sortable:not(.el-datalist__header-cell--sorting):not(
-    .el-datalist__header-cell--filtering
-  ):hover {
+.el-datalist__header-cell--sortable:not(.el-datalist__header-cell--sorting):not(.el-datalist__header-cell--filtering):hover {
   border-bottom-color: #aaa;
 }
 

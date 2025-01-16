@@ -28,11 +28,13 @@ const stateProps = (state: State) => ({
   certificateModalContent: getDfspHubCsrsCertificateModalContent(state),
   certificateModalTitle: getDfspHubCsrsCertificateModalTitle(state),
   isPending: getIsDfspHubCsrsPending(state),
-  isCertificateSigningPendingByEnrollmentId:
-    getIsDfspHubCsrCertificateSigningPendingByEnrollmentId(state),
+  isCertificateSigningPendingByEnrollmentId: getIsDfspHubCsrCertificateSigningPendingByEnrollmentId(
+    state
+  ),
   // eslint-disable-next-line max-len
-  isCertificateAutoSigningPendingByEnrollmentId:
-    getIsDfspHubCsrCertificateAutoSigningPendingByEnrollmentId(state),
+  isCertificateAutoSigningPendingByEnrollmentId: getIsDfspHubCsrCertificateAutoSigningPendingByEnrollmentId(
+    state
+  ),
 });
 
 const actionProps = (dispatch: Dispatch) => ({
