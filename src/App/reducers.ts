@@ -10,6 +10,7 @@ import {
   SET_METRIC,
   MetricsData,
   MetricData,
+  SET_APP_UI_CONFIG,
 } from './types';
 
 const initialState = {
@@ -20,6 +21,13 @@ const initialState = {
   isErrorModalVisible: false,
   errorModalPayload: undefined,
   metricsData: {} as MetricsData<MetricData>,
+  uiConfig: {
+    primaryColor: '',
+    secondaryColor: '',
+    accentColor: '',
+    appTitle: '',
+    appLogo: '',
+  },
   // user: null,
 };
 
@@ -68,6 +76,12 @@ export default function appReducer(state = initialState, action: AppActionTypes)
       return {
         ...state,
         user: action.data,
+      };
+    }
+    case SET_APP_UI_CONFIG: {
+      return {
+        ...state,
+        uiConfig: action.uiConfig,
       };
     }
     default:

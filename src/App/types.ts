@@ -12,8 +12,11 @@ export const REQUEST_METRIC = 'App / Request Metric';
 export const SET_METRIC = 'App / Set Metric';
 export const SET_METRIC_ERROR = 'App / Set Metric Error';
 
+export const SET_APP_UI_CONFIG = 'App / Set UI Config';
+
 export interface AppState {
   config: AppConfig;
+  uiConfig: AppUiConfig;
   isSuccessToastVisible: boolean;
   isErrorModalVisible: boolean;
   errorModalPayload?: ErrorPayload;
@@ -65,6 +68,11 @@ export interface SetAppConfigAction {
   config: AppConfig;
 }
 
+export interface SetAppUiConfigAction {
+  type: typeof SET_APP_UI_CONFIG;
+  uiConfig: AppUiConfig;
+}
+
 export interface ShowToastAction {
   type: typeof SHOW_TOAST;
 }
@@ -97,7 +105,8 @@ export type AppActionTypes =
   | RequestMetricAction
   | SetMetricAction
   | SetUserAction
-  | SetMetricErrorAction;
+  | SetMetricErrorAction
+  | SetAppUiConfigAction;
 
 // Generic data structure for line charts
 export interface LinesConfig {
@@ -211,4 +220,12 @@ export interface User {
   email: string;
   logoutUrl: string;
   kratos: boolean;
+}
+
+export interface AppUiConfig {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  appTitle: string;
+  appLogo: string;
 }

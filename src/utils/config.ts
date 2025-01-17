@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getConfig = async () => {
+export const getConfig = async () => {
   const { protocol, host } = window.location;
   const configURL = `${protocol}//${host}/config`;
   let apiBaseUrl = 'http://localhost:3000';
@@ -29,4 +29,14 @@ const getConfig = async () => {
   return { apiBaseUrl, checkSession, loginUrl, loginProvider, logoutUrl };
 };
 
-export default getConfig;
+export const getUiConfig = async () => {
+  // Default values set for now will be changed later.
+  const primaryColor = '#e80002';
+  const secondaryColor = '#9b0214';
+  const accentColor = '#e80002';
+  const appTitle = 'Airtel';
+  const appLogo =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';
+
+  return { primaryColor, secondaryColor, accentColor, appTitle, appLogo };
+};
