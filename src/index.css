@@ -1,3 +1,11 @@
+:root {
+  --primary-color: #e80002;
+  --navbar-color: #9B0315;
+  --secondary-color: #9b0214;
+  --accent-color: #e80002;
+  --shadow-color: pink;
+}
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
