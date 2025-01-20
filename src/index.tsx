@@ -4,7 +4,7 @@ import { Provider, ReactReduxContext } from 'react-redux';
 import { createBrowserHistory, History } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import { getUiConfig, getConfig } from 'utils/config';
-import setupStyles from 'utils/setupStyles'
+import setupStyles from 'utils/setupStyles';
 import getUserInfo from 'utils/authentication';
 import { User } from './App/types';
 import './icons';
