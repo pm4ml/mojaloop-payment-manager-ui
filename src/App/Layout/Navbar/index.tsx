@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import { Icon } from 'components';
 import './Navbar.css';
+import { useSelector } from 'react-redux';
+import { getUiConfig } from '../../selectors';
 
-type Navbar = {
+type NavbarProps = {
   username?: string;
   logoutUrl?: string;
   activeConnectionName: string;
@@ -10,44 +12,44 @@ type Navbar = {
   kratos?: boolean;
 };
 
-const Navbar: FC<Navbar> = ({
+const Navbar: FC<NavbarProps> = ({
   username,
   activeConnectionName,
   activeConnectionStatusColor,
   logoutUrl,
   kratos,
 }) => {
-  const dfspSubtitle = process.env.REACT_APP_SUBTITLE || 'CBC';
-  const countryLogo = process.env.REACT_APP_COUNTRY_LOGO || '/Comesa-logo.png';
-  const dfspLogo = process.env.REACT_APP_DFSP_LOGO || '/cbs_logo.jpg';
-  const navbarColor = process.env.REACT_APP_NAVBAR_COLOR || '#02182b';
+  const uiConfig = useSelector(getUiConfig);
+  const appTitle = uiConfig.appTitle || 'CBC';
+  const countryLogo = uiConfig.countryLogo || '/Comesa-logo.png';
+  const appLogo = uiConfig.appLogo || '/cbs_logo.jpg';
 
-  document.documentElement.style.setProperty('--navbarColor', navbarColor);
-
-  const clickFunc = () => {
+  const handleLogout = () => {
     if (logoutUrl) {
       if (kratos) {
-        fetch(`${logoutUrl}`, {
-          headers: {
-            accept: 'application/json',
-          },
+        fetch(logoutUrl, {
+          headers: { accept: 'application/json' },
         })
           .then((response) => response.json())
           .then(({ logout_url }) => {
             if (logout_url) window.location.assign(logout_url);
           });
-      } else window.location.href = logoutUrl;
+      } else {
+        window.location.href = logoutUrl;
+      }
     }
   };
 
   return (
-    <div id="navbar" style={{ backgroundColor: navbarColor }}>
-      <img src={dfspLogo} alt="DFSP Logo" className="navbar__dfsp-logo" />
+    <div id="navbar">
+      <img src={appLogo} alt="DFSP Logo" className="navbar__dfsp-logo" />
+
       <div id="navbar__controls">
         <a id="navbar__link" href="/">
-          {dfspSubtitle} Payment Manager
+          {appTitle} Payment Manager
         </a>
       </div>
+
       <div id="navbar__active__connection">
         Connected to: {activeConnectionName}
         <div
@@ -55,6 +57,7 @@ const Navbar: FC<Navbar> = ({
           style={{ backgroundColor: activeConnectionStatusColor }}
         />
       </div>
+
       <div id="navbar__user">
         <img src={countryLogo} alt="Country Flag" className="navbar__country-logo" />
         <div id="navbar__user__icon">
@@ -62,7 +65,14 @@ const Navbar: FC<Navbar> = ({
         </div>
         <div id="navbar__user__name">{username || ''}</div>
       </div>
-      <div id="navbar__logout" role="button" tabIndex={0} onClick={clickFunc} onKeyUp={clickFunc}>
+
+      <div
+        id="navbar__logout"
+        role="button"
+        tabIndex={0}
+        onClick={handleLogout}
+        onKeyUp={handleLogout}
+      >
         Logout
       </div>
     </div>

@@ -1,8 +1,5 @@
 #navbar {
   flex: 0 0 55px;
-  width: 100%;
-  background: #987;
-  webkit-user-select: none;
   user-select: none;
   height: 55px;
   width: 100%;
