@@ -6,8 +6,8 @@
   user-select: none;
   height: 55px;
   width: 100%;
-  background: linear-gradient(269.81deg, var(--navbarColor));
-  border-bottom: 5px solid #4fc7e7;
+  background: linear-gradient(269.81deg, var(--primary-color) 0.01%, var(--navbar-color) 100%);
+  border-bottom: 5px solid var(--primary-color);
   display: flex;
   align-items: center;
 }

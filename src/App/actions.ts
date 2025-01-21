@@ -20,8 +20,17 @@ import {
   SetMetricErrorAction,
   MetricDataWrapper,
   MetricData,
+  AppUiConfig,
+  SetAppUiConfigAction,
+  SET_APP_UI_CONFIG,
 } from './types';
 
+export function setAppUiConfig({ uiConfig }: { uiConfig: AppUiConfig }): SetAppUiConfigAction {
+  return {
+    type: SET_APP_UI_CONFIG,
+    uiConfig,
+  };
+}
 export function setAppConfig({ config }: { config: AppConfig }): SetAppConfigAction {
   return {
     type: SET_APP_CONFIG,
