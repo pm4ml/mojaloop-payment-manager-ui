@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import { Icon } from 'components';
 import './Navbar.css';
-import {
-  getUiConfig
-} from '../../selectors';
-
 import { useSelector } from 'react-redux';
+import { getUiConfig } from '../../selectors';
+
 type NavbarProps = {
   username?: string;
   logoutUrl?: string;
@@ -21,7 +19,6 @@ const Navbar: FC<NavbarProps> = ({
   logoutUrl,
   kratos,
 }) => {
-
   const uiConfig = useSelector(getUiConfig);
   const appTitle = uiConfig.appTitle || 'CBC';
   const countryLogo = uiConfig.countryLogo || '/Comesa-logo.png';
@@ -46,7 +43,7 @@ const Navbar: FC<NavbarProps> = ({
   return (
     <div id="navbar">
       <img src={appLogo} alt="DFSP Logo" className="navbar__dfsp-logo" />
-      
+
       <div id="navbar__controls">
         <a id="navbar__link" href="/">
           {appTitle} Payment Manager

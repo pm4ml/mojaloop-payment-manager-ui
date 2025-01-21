@@ -37,8 +37,10 @@ export const getUiConfig = async () => {
   let secondaryColor = '#9b0214';
   let accentColor = '#e80002';
   let appTitle = 'Airtel';
-  let appLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';
-  let countryLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png';
+  let appLogo =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';
+  let countryLogo =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png';
 
   try {
     const { headers, data } = await axios(configURL);
