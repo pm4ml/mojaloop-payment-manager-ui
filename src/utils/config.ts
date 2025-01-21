@@ -36,9 +36,9 @@ export const getUiConfig = async () => {
   let primaryColor = '#e80002';
   let secondaryColor = '#9b0214';
   let accentColor = '#e80002';
-  const appTitle = 'Airtel';
-  const appLogo =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';
+  let appTitle = 'Airtel';
+  let appLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';
+  let countryLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png';
 
   try {
     const { headers, data } = await axios(configURL);
@@ -51,10 +51,13 @@ export const getUiConfig = async () => {
       primaryColor = data.REACT_APP_PRIMARY_COLOR;
       secondaryColor = data.REACT_APP_SECONDARY_COLOR;
       accentColor = data.REACT_APP_ACCENT_COLOR;
+      appTitle = data.REACT_APP_TITLE;
+      appLogo = data.REACT_APP_LOGO;
+      countryLogo = data.REACT_APP_COUNTRY_LOGO;
     }
   } catch (err) {
     // eslint-disable-next-line
     console.info('UI Config not found. Falling back to default values for the UI');
   }
-  return { primaryColor, secondaryColor, accentColor, appTitle, appLogo };
+  return { primaryColor, secondaryColor, accentColor, appTitle, appLogo, countryLogo };
 };

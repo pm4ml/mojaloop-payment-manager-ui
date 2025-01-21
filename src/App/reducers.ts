@@ -27,6 +27,7 @@ const initialState = {
     accentColor: '',
     appTitle: '',
     appLogo: '',
+    countryLogo: '',
   },
   // user: null,
 };
