@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Button, Heading, Row } from 'components';
 import { State, Dispatch } from 'store/types';
 import { loadFxpConversions } from './hocs';
@@ -15,6 +15,8 @@ import FxpConversionsSuccessPerc from './components/FxpConversionSuccessPerc';
 import FxpConversionsAvgTime from './components/FxpConversionAvgTime';
 import FxpConversionsStatuses from './components/FxpConversionStatuses';
 import './FxpConversions.css';
+
+import { getUiConfig } from '../selectors';
 
 const stateProps = (state: State) => ({
   fxpConversionsErrors: selectors.getFxpConversionsErrors(state),
@@ -87,6 +89,8 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
   onFxpConversionFinderButtonClick,
   onFxpConversionRowClick,
 }) => {
+  const uiConfig = useSelector(getUiConfig);
+  const { primaryColor } = uiConfig;
   return (
     <div className="fxpfxpConversions">
       <Heading size="3">FXP Conversions Overview</Heading>
@@ -101,11 +105,13 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
         data={fxpConversionsSuccessPerc}
         error={fxpConversionsSuccessPercError}
         isPending={isFxpConversionsSuccessPercPending}
+        legendColor={primaryColor}
       />
       <FxpConversionsAvgTime
         data={fxpConversionsAvgTime}
         error={fxpConversionsAvgTimeError}
         isPending={isFxpConversionsAvgTimePending}
+        legendColor={primaryColor}
       />
       <FxpConversionsStatuses
         isPending={isFxpConversionsStatusesPending}

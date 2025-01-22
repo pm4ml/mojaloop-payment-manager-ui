@@ -7,9 +7,15 @@ interface FxpConversionsChartsProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
+  legendColor: string;
 }
 
-const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, error }) => {
+const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({
+  isPending,
+  data,
+  error,
+  legendColor,
+}) => {
   let content = null;
   if (isPending || !data) {
     content = (
@@ -23,8 +29,8 @@ const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, 
     content = (
       <ChartLayout
         title="Average FxpConversion Time (E2E)"
-        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: '#4fc7e7' }]}
-        Graph={() => <AverageFxpConversionTimeGraph data={data} />}
+        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: legendColor }]}
+        Graph={() => <AverageFxpConversionTimeGraph data={data} chartColor={legendColor} />}
       />
     );
   }
@@ -33,9 +39,13 @@ const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, 
 
 interface AverageFxpConversionTimeGraphProps {
   data: XYCoordinate[];
+  chartColor: string;
 }
 
-const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({ data }) => {
+const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({
+  data,
+  chartColor,
+}) => {
   const series = {
     name: 'Average Response Time',
     data,
@@ -66,7 +76,7 @@ const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [chartColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {
