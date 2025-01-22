@@ -228,4 +228,5 @@ export interface AppUiConfig {
   accentColor: string;
   appTitle: string;
   appLogo: string;
+  countryLogo: string;
 }

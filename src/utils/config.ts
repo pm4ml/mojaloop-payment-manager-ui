@@ -33,12 +33,14 @@ export const getUiConfig = async () => {
   // Default values set for now will be changed later.
   const { protocol, host } = window.location;
   const configURL = `${protocol}//${host}/uiConfig`;
-  let primaryColor = '';
-  let secondaryColor = '';
-  let accentColor = '';
+  let primaryColor = '#e80002';
+  let secondaryColor = '#9b0214';
+  let accentColor = '#e80002';
   let appTitle = 'Airtel';
   let appLogo =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';
+  let countryLogo =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/125px-Flag_of_Zambia.svg.png';
 
   try {
     const { headers, data } = await axios(configURL);
@@ -51,6 +53,9 @@ export const getUiConfig = async () => {
       primaryColor = data.REACT_APP_PRIMARY_COLOR;
       secondaryColor = data.REACT_APP_SECONDARY_COLOR;
       accentColor = data.REACT_APP_ACCENT_COLOR;
+      appTitle = data.REACT_APP_TITLE;
+      appLogo = data.REACT_APP_LOGO;
+      countryLogo = data.REACT_APP_COUNTRY_LOGO;
     }
   } catch (err) {
     // eslint-disable-next-line
@@ -62,9 +67,9 @@ export const getUiConfig = async () => {
   secondaryColor = sanitizeColorValue(secondaryColor);
   accentColor = sanitizeColorValue(accentColor);
   appTitle = sanitizeInput(appTitle);
-  appLogo = sanitizeInput(appLogo);
-  console.log(primaryColor, secondaryColor, accentColor, appTitle, appLogo);
-  return { primaryColor, secondaryColor, accentColor, appTitle, appLogo };
+  // appLogo = sanitizeInput(appLogo);
+  // countryLogo = sanitizeInput(countryLogo);
+  return { primaryColor, secondaryColor, accentColor, appTitle, appLogo, countryLogo };
 };
 
 /*
@@ -72,6 +77,7 @@ export const getUiConfig = async () => {
  * Removes anything outside alphanumeric characters, spaces, and common symbols used in typical input
  * Trims excess whitespace to clean up input from careless user input or malicious attempts.
  * Limits input length to 255 characters to prevent buffer overflow attacks or excessive resource usage.
+ * Allowed characters 1234567890!@#$%^&*()a-zA-Z
  * */
 function sanitizeInput(input: unknown): string {
   // Ensure the input is a string
