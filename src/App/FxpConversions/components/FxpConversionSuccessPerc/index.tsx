@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
-
+import { useSelector } from 'react-redux';
+import { getUiConfig } from '../../../selectors';
 interface FxpConversionsSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
@@ -14,6 +15,8 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
   data,
   error,
 }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   let content = null;
   if (isPending || !data) {
     content = (
@@ -27,7 +30,7 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
     content = (
       <ChartLayout
         title="Successful FxpConversions"
-        legend={[{ label: 'Percent / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Percent / Min', color: primaryColor }]}
         Graph={() => <SuccessfulFxpConversionGraph data={data} />}
       />
     );
@@ -40,6 +43,8 @@ interface SuccessfulFxpConversionGraphProps {
 }
 
 const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ data }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   const series = {
     name: 'Success Percentage',
     data,
@@ -70,7 +75,7 @@ const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ d
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [primaryColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

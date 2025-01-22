@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
-
+import { useSelector } from 'react-redux';
+import { getUiConfig } from '../../../selectors';
 interface FxpConversionsChartsProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
@@ -10,6 +11,8 @@ interface FxpConversionsChartsProps {
 }
 
 const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, error }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   let content = null;
   if (isPending || !data) {
     content = (
@@ -23,7 +26,7 @@ const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, 
     content = (
       <ChartLayout
         title="Average FxpConversion Time (E2E)"
-        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Avg. FxpConversion Time in ms / Min', color: primaryColor }]}
         Graph={() => <AverageFxpConversionTimeGraph data={data} />}
       />
     );
@@ -36,6 +39,8 @@ interface AverageFxpConversionTimeGraphProps {
 }
 
 const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({ data }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   const series = {
     name: 'Average Response Time',
     data,
@@ -66,7 +71,7 @@ const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [primaryColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {
