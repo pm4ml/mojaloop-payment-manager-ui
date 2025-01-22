@@ -2,18 +2,16 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
-import { useSelector } from 'react-redux';
-import { getUiConfig } from '../../../selectors';
 
 interface TransfersChartsProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
+  legendColor: string;
+
 }
 
-const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) => {
-  const uiConfig = useSelector(getUiConfig);
-  let primaryColor = uiConfig.primaryColor;
+const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error, legendColor }) => {
   let content = null;
   if (isPending || !data) {
     content = (
@@ -27,8 +25,8 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) =
     content = (
       <ChartLayout
         title="Average Transfer Time (E2E)"
-        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: primaryColor }]}
-        Graph={() => <AverageTransferTimeGraph data={data} />}
+        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: legendColor }]}
+        Graph={() => <AverageTransferTimeGraph data={data} chartColor={legendColor} />}
       />
     );
   }
@@ -37,11 +35,11 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) =
 
 interface AverageTransferTimeGraphProps {
   data: XYCoordinate[];
+  chartColor: string;
+
 }
 
-const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) => {
-  const uiConfig = useSelector(getUiConfig);
-  let primaryColor = uiConfig.primaryColor;
+const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data, chartColor }) => {
   const series = {
     name: 'Average Response Time',
     data,
@@ -72,7 +70,7 @@ const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) =
       width: [2],
       curve: 'smooth',
     },
-    colors: [primaryColor],
+    colors: [chartColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

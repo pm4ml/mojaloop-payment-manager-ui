@@ -16,6 +16,9 @@ import TransfersAvgTime from './components/TransfersAvgTime';
 import TransfersStatuses from './components/TransfersStatuses';
 import './Transfers.css';
 
+import { useSelector } from 'react-redux';
+import { getUiConfig } from '../selectors';
+
 const stateProps = (state: State) => ({
   transfersErrors: selectors.getTransfersErrors(state),
   transfersErrorsError: selectors.getTransfersErrorsError(state),
@@ -84,6 +87,8 @@ const Transfers: FC<TransfersProps> = ({
   onTransferFinderButtonClick,
   onTransferRowClick,
 }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   return (
     <div className="transfers">
       <Heading size="3">Transfers Overview</Heading>
@@ -94,11 +99,13 @@ const Transfers: FC<TransfersProps> = ({
         data={transfersSuccessPerc}
         error={transfersSuccessPercError}
         isPending={isTransfersSuccessPercPending}
+        legendColor={primaryColor}
       />
       <TransfersAvgTime
         data={transfersAvgTime}
         error={transfersAvgTimeError}
         isPending={isTransfersAvgTimePending}
+        legendColor={primaryColor}
       />
       <TransfersStatuses
         isPending={isTransfersStatusesPending}

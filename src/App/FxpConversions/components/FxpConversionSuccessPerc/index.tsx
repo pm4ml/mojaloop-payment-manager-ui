@@ -2,21 +2,19 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
-import { useSelector } from 'react-redux';
-import { getUiConfig } from '../../../selectors';
 interface FxpConversionsSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
+  legendColor: string;
 }
 
 const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
   isPending,
   data,
   error,
+  legendColor
 }) => {
-  const uiConfig = useSelector(getUiConfig);
-  let primaryColor = uiConfig.primaryColor;
   let content = null;
   if (isPending || !data) {
     content = (
@@ -30,8 +28,8 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
     content = (
       <ChartLayout
         title="Successful FxpConversions"
-        legend={[{ label: 'Percent / Min', color: primaryColor }]}
-        Graph={() => <SuccessfulFxpConversionGraph data={data} />}
+        legend={[{ label: 'Percent / Min', color: legendColor }]}
+        Graph={() => <SuccessfulFxpConversionGraph data={data} chartColor={legendColor} />}
       />
     );
   }
@@ -40,11 +38,10 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
 
 interface SuccessfulFxpConversionGraphProps {
   data: XYCoordinate[];
+  chartColor: string;
 }
 
-const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ data }) => {
-  const uiConfig = useSelector(getUiConfig);
-  let primaryColor = uiConfig.primaryColor;
+const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ data, chartColor }) => {
   const series = {
     name: 'Success Percentage',
     data,
@@ -75,7 +72,7 @@ const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ d
       width: [2],
       curve: 'smooth',
     },
-    colors: [primaryColor],
+    colors: [chartColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {
