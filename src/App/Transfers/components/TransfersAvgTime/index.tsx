@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
+import { useSelector } from 'react-redux';
+import { getUiConfig } from '../../../selectors';
 
 interface TransfersChartsProps {
   isPending: boolean | undefined;
@@ -10,6 +12,8 @@ interface TransfersChartsProps {
 }
 
 const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   let content = null;
   if (isPending || !data) {
     content = (
@@ -23,7 +27,7 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) =
     content = (
       <ChartLayout
         title="Average Transfer Time (E2E)"
-        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: primaryColor }]}
         Graph={() => <AverageTransferTimeGraph data={data} />}
       />
     );
@@ -36,6 +40,8 @@ interface AverageTransferTimeGraphProps {
 }
 
 const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   const series = {
     name: 'Average Response Time',
     data,
@@ -66,7 +72,7 @@ const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) =
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [primaryColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

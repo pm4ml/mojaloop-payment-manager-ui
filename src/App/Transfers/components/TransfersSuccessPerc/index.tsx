@@ -3,13 +3,19 @@ import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
 
+import { useSelector } from 'react-redux';
+import { getUiConfig } from '../../../selectors';
+
 interface TransfersSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
 }
 
+
 const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, error }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   let content = null;
   if (isPending || !data) {
     content = (
@@ -23,7 +29,7 @@ const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, 
     content = (
       <ChartLayout
         title="Successful Transfers"
-        legend={[{ label: 'Percent / Min', color: '#4fc7e7' }]}
+        legend={[{ label: 'Percent / Min', color: primaryColor }]}
         Graph={() => <SuccessfulTransferGraph data={data} />}
       />
     );
@@ -36,6 +42,8 @@ interface SuccessfulTransferGraphProps {
 }
 
 const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => {
+  const uiConfig = useSelector(getUiConfig);
+  let primaryColor = uiConfig.primaryColor;
   const series = {
     name: 'Success Percentage',
     data,
@@ -66,7 +74,7 @@ const SuccessfulTransferGraph: FC<SuccessfulTransferGraphProps> = ({ data }) => 
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [primaryColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {
