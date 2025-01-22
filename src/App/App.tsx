@@ -12,6 +12,9 @@ import FxpTechnicalDashboard from './FxpTechnicalDashboard';
 // import FxpTransfers from './FxpConversions';
 import FxpConversions from './FxpConversions';
 
+import { useSelector } from 'react-redux';
+import { getUiConfig } from './selectors';
+
 interface AppProps {
   isSuccessToastVisible: boolean;
   isErrorModalVisible: boolean;
@@ -28,6 +31,12 @@ const App: FC<AppProps> = ({
   onCloseErrorModal,
   userInfo,
 }) => {
+  const uiConfig = useSelector(getUiConfig);
+  const appTitle = uiConfig.appTitle || 'CBC';
+  const countryLogo = uiConfig.countryLogo || '/Comesa-logo.png';
+  const appLogo = uiConfig.appLogo || '/cbs_logo.jpg';
+  let activeConnectionName = 'Modusbox & Mojaloop Labs';
+  let activeConnectionStatusColor = '#12d670';
   return (
     <div className="App">
       <Layout.Container>
@@ -37,8 +46,11 @@ const App: FC<AppProps> = ({
           }
           logoutUrl={userInfo ? userInfo.logoutUrl : undefined}
           kratos={userInfo?.kratos}
-          activeConnectionName="Modusbox & Mojaloop Labs"
-          activeConnectionStatusColor="#12d670"
+          activeConnectionName={activeConnectionName}
+          activeConnectionStatusColor={activeConnectionStatusColor}
+          appTitle={appTitle}
+          appLogo={appLogo}
+          countryLogo={countryLogo}
         />
         <Layout.Content>
           <Layout.SideMenu />

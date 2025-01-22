@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { Icon } from 'components';
 import './Navbar.css';
-import { useSelector } from 'react-redux';
-import { getUiConfig } from '../../selectors';
 
 type NavbarProps = {
   username?: string;
@@ -10,6 +8,9 @@ type NavbarProps = {
   activeConnectionName: string;
   activeConnectionStatusColor: string;
   kratos?: boolean;
+  appTitle: string;
+  appLogo: string;
+  countryLogo: string;
 };
 
 const Navbar: FC<NavbarProps> = ({
@@ -18,11 +19,11 @@ const Navbar: FC<NavbarProps> = ({
   activeConnectionStatusColor,
   logoutUrl,
   kratos,
+  appTitle,
+  appLogo,
+  countryLogo
 }) => {
-  const uiConfig = useSelector(getUiConfig);
-  const appTitle = uiConfig.appTitle || 'CBC';
-  const countryLogo = uiConfig.countryLogo || '/Comesa-logo.png';
-  const appLogo = uiConfig.appLogo || '/cbs_logo.jpg';
+  
 
   const handleLogout = () => {
     if (logoutUrl) {
