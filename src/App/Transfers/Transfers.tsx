@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Button, Heading, Row } from 'components';
 import { State, Dispatch } from 'store/types';
 import { loadTransfers } from './hocs';
@@ -16,7 +16,6 @@ import TransfersAvgTime from './components/TransfersAvgTime';
 import TransfersStatuses from './components/TransfersStatuses';
 import './Transfers.css';
 
-import { useSelector } from 'react-redux';
 import { getUiConfig } from '../selectors';
 
 const stateProps = (state: State) => ({
@@ -88,7 +87,7 @@ const Transfers: FC<TransfersProps> = ({
   onTransferRowClick,
 }) => {
   const uiConfig = useSelector(getUiConfig);
-  let primaryColor = uiConfig.primaryColor;
+  const { primaryColor } = uiConfig;
   return (
     <div className="transfers">
       <Heading size="3">Transfers Overview</Heading>

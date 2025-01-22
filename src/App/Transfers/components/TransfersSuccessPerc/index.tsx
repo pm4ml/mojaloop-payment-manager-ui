@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
+
 interface TransfersSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
@@ -9,7 +10,12 @@ interface TransfersSuccessPercProps {
   legendColor: string;
 }
 
-const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({ isPending, data, error, legendColor }) => {
+const TransfersSuccessPerc: FC<TransfersSuccessPercProps> = ({
+  isPending,
+  data,
+  error,
+  legendColor,
+}) => {
   let content = null;
   if (isPending || !data) {
     content = (

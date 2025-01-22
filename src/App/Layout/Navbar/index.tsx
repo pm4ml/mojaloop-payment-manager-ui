@@ -21,10 +21,8 @@ const Navbar: FC<NavbarProps> = ({
   kratos,
   appTitle,
   appLogo,
-  countryLogo
+  countryLogo,
 }) => {
-  
-
   const handleLogout = () => {
     if (logoutUrl) {
       if (kratos) {

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
+
 interface FxpConversionsSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
@@ -13,7 +14,7 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
   isPending,
   data,
   error,
-  legendColor
+  legendColor,
 }) => {
   let content = null;
   if (isPending || !data) {
@@ -41,7 +42,10 @@ interface SuccessfulFxpConversionGraphProps {
   chartColor: string;
 }
 
-const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ data, chartColor }) => {
+const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({
+  data,
+  chartColor,
+}) => {
   const series = {
     name: 'Success Percentage',
     data,

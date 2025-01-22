@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { FC } from 'react';
 import './App.css';
+import { useSelector } from 'react-redux';
 import Layout from './Layout';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
@@ -12,7 +13,6 @@ import FxpTechnicalDashboard from './FxpTechnicalDashboard';
 // import FxpTransfers from './FxpConversions';
 import FxpConversions from './FxpConversions';
 
-import { useSelector } from 'react-redux';
 import { getUiConfig } from './selectors';
 
 interface AppProps {
@@ -35,8 +35,8 @@ const App: FC<AppProps> = ({
   const appTitle = uiConfig.appTitle || 'CBC';
   const countryLogo = uiConfig.countryLogo || '/Comesa-logo.png';
   const appLogo = uiConfig.appLogo || '/cbs_logo.jpg';
-  let activeConnectionName = 'Modusbox & Mojaloop Labs';
-  let activeConnectionStatusColor = '#12d670';
+  const activeConnectionName = 'Modusbox & Mojaloop Labs';
+  const activeConnectionStatusColor = '#12d670';
   return (
     <div className="App">
       <Layout.Container>

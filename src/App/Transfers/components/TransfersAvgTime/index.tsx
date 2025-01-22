@@ -8,7 +8,6 @@ interface TransfersChartsProps {
   data?: XYCoordinate[];
   error: ErrorMessage;
   legendColor: string;
-
 }
 
 const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error, legendColor }) => {
@@ -36,7 +35,6 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error, leg
 interface AverageTransferTimeGraphProps {
   data: XYCoordinate[];
   chartColor: string;
-
 }
 
 const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data, chartColor }) => {

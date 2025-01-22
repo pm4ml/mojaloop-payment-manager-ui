@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Button, Heading, Row } from 'components';
 import { State, Dispatch } from 'store/types';
 import { loadFxpConversions } from './hocs';
@@ -16,7 +16,6 @@ import FxpConversionsAvgTime from './components/FxpConversionAvgTime';
 import FxpConversionsStatuses from './components/FxpConversionStatuses';
 import './FxpConversions.css';
 
-import { useSelector } from 'react-redux';
 import { getUiConfig } from '../selectors';
 
 const stateProps = (state: State) => ({
@@ -91,7 +90,7 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
   onFxpConversionRowClick,
 }) => {
   const uiConfig = useSelector(getUiConfig);
-  let primaryColor = uiConfig.primaryColor;
+  const { primaryColor } = uiConfig;
   return (
     <div className="fxpfxpConversions">
       <Heading size="3">FXP Conversions Overview</Heading>

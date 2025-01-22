@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { ChartLayout, ErrorBox, Spinner } from 'components';
 import { ErrorMessage, XYCoordinate } from 'App/types';
 import Chart from 'react-apexcharts';
+
 interface FxpConversionsChartsProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
@@ -9,7 +10,12 @@ interface FxpConversionsChartsProps {
   legendColor: string;
 }
 
-const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({ isPending, data, error, legendColor }) => {
+const FxpConversionsCharts: FC<FxpConversionsChartsProps> = ({
+  isPending,
+  data,
+  error,
+  legendColor,
+}) => {
   let content = null;
   if (isPending || !data) {
     content = (
@@ -36,7 +42,10 @@ interface AverageFxpConversionTimeGraphProps {
   chartColor: string;
 }
 
-const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({ data, chartColor}) => {
+const AverageFxpConversionTimeGraph: FC<AverageFxpConversionTimeGraphProps> = ({
+  data,
+  chartColor,
+}) => {
   const series = {
     name: 'Average Response Time',
     data,
