@@ -65,7 +65,7 @@ type TransfersProps = {
   onViewAllReconcilationErrorsButtonClick: () => void;
   onTransferFinderButtonClick: () => void;
   onTransferRowClick: (transferError: TransferError) => void;
-  uiConfig: any;
+  uiConfig: { primaryColor: string };
 };
 
 const Transfers: FC<TransfersProps> = ({

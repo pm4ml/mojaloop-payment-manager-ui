@@ -68,7 +68,7 @@ type FxpFxpConversionsProps = {
   onViewAllReconcilationErrorsButtonClick: () => void;
   onFxpConversionFinderButtonClick: () => void;
   onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
-  uiConfig: any;
+  uiConfig: { primaryColor: string };
 };
 
 const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({

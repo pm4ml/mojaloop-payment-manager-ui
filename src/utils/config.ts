@@ -46,7 +46,7 @@ export const getUiConfig = async () => {
   // // YELLOW THEME
   // let primaryColor = '#f9d342';
   // let secondaryColor = '#f1b92a';
-  // let accentColor = '#a77e07'; 
+  // let accentColor = '#a77e07';
 
   let appTitle = 'Airtel';
   let appLogo =
