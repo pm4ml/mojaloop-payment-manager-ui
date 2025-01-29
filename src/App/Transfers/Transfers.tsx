@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button, Heading, Row } from 'components';
 import { State, Dispatch } from 'store/types';
 import { loadTransfers } from './hocs';
@@ -34,6 +34,7 @@ const stateProps = (state: State) => ({
   transfersAvgTimeError: selectors.getTransfersAvgTimeError(state),
   isTransfersAvgTimePending: selectors.getIsTransfersAvgTimePending(state),
   isTransferDetailsModalVisible: selectors.getIsTransferDetailsModalVisible(state),
+  uiConfig: getUiConfig(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
@@ -64,6 +65,7 @@ type TransfersProps = {
   onViewAllReconcilationErrorsButtonClick: () => void;
   onTransferFinderButtonClick: () => void;
   onTransferRowClick: (transferError: TransferError) => void;
+  uiConfig: any;
 };
 
 const Transfers: FC<TransfersProps> = ({
@@ -85,8 +87,8 @@ const Transfers: FC<TransfersProps> = ({
   onViewAllReconcilationErrorsButtonClick,
   onTransferFinderButtonClick,
   onTransferRowClick,
+  uiConfig,
 }) => {
-  const uiConfig = useSelector(getUiConfig);
   const { primaryColor } = uiConfig;
   return (
     <div className="transfers">

@@ -33,9 +33,21 @@ export const getUiConfig = async () => {
   // Default values set for now will be changed later.
   const { protocol, host } = window.location;
   const configURL = `${protocol}//${host}/uiConfig`;
-  let primaryColor = '#e80002';
-  let secondaryColor = '#9b0214';
-  let accentColor = '#e80002';
+  // // RED THEME
+  // let primaryColor = '#e80002';
+  // let secondaryColor = '#e80002';
+  // let accentColor = '#9b0214';
+
+  // BLUE THEME
+  let primaryColor = '#4fc7e7';
+  let secondaryColor = '#043865';
+  let accentColor = '#02182b';
+
+  // // YELLOW THEME
+  // let primaryColor = '#f9d342';
+  // let secondaryColor = '#f1b92a';
+  // let accentColor = '#a77e07'; 
+
   let appTitle = 'Airtel';
   let appLogo =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bharti_Airtel_Logo.svg/150px-Bharti_Airtel_Logo.svg.png';

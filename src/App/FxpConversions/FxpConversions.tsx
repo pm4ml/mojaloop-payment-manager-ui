@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button, Heading, Row } from 'components';
 import { State, Dispatch } from 'store/types';
 import { loadFxpConversions } from './hocs';
@@ -34,6 +34,7 @@ const stateProps = (state: State) => ({
   fxpConversionsAvgTimeError: selectors.getFxpConversionsAvgTimeError(state),
   isFxpConversionsAvgTimePending: selectors.getIsFxpConversionsAvgTimePending(state),
   isFxpConversionDetailsModalVisible: selectors.getIsFxpConversionDetailsModalVisible(state),
+  uiConfig: getUiConfig(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
@@ -67,6 +68,7 @@ type FxpFxpConversionsProps = {
   onViewAllReconcilationErrorsButtonClick: () => void;
   onFxpConversionFinderButtonClick: () => void;
   onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
+  uiConfig: any;
 };
 
 const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
@@ -88,8 +90,8 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
   onViewAllReconcilationErrorsButtonClick,
   onFxpConversionFinderButtonClick,
   onFxpConversionRowClick,
+  uiConfig,
 }) => {
-  const uiConfig = useSelector(getUiConfig);
   const { primaryColor } = uiConfig;
   return (
     <div className="fxpfxpConversions">

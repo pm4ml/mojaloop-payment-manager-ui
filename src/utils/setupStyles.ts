@@ -4,7 +4,7 @@ const setupStyles = (uiConfigurations: AppUiConfig) => {
   setPrimaryColor(uiConfigurations.primaryColor);
   setSecondaryColor(uiConfigurations.secondaryColor);
   setAccentColor(uiConfigurations.accentColor);
-  setNavbarColor(uiConfigurations.secondaryColor);
+  // setNavbarColor(uiConfigurations.secondaryColor);
 };
 
 const setPrimaryColor = (primaryColor: string) => {
@@ -19,8 +19,8 @@ const setAccentColor = (accentColor: string) => {
   document.documentElement.style.setProperty('--accent-color', accentColor);
 };
 
-const setNavbarColor = (navbarColor: string) => {
-  document.documentElement.style.setProperty('--navbar-color', navbarColor);
-};
+// const setNavbarColor = (navbarColor: string) => {
+//   document.documentElement.style.setProperty('--navbar-color', navbarColor);
+// };
 
 export default setupStyles;

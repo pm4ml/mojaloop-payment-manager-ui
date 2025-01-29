@@ -370,6 +370,7 @@
   background-color: var(--secondary-color);
   border-color: var(--secondary-color);
 }
+
 .input-button__mb-input--secondary:hover.noFill,
 .input-button__mb-input--secondary:focus.noFill {
   color: #ffffff;
@@ -4369,10 +4370,10 @@ h6 {
   color: var(--primary-color);
   cursor: pointer;
 }
-.el-tabs__tab-item.el-tabs__tab-item--focused {
+/* .el-tabs__tab-item.el-tabs__tab-item--focused {
   border-bottom-color: var(--accent-color);
   color: var(--accent-color);
-}
+} */
 .el-tabs__tab-item.el-tabs__tab-item--disabled {
   color: #d2d1d1;
   cursor: default;
