@@ -48,14 +48,10 @@ export function sanitizeImageInput(imageInput: unknown): string {
 
   const sanitizedInput = imageInput.trim().replace(/^["']|["']$/g, '');
 
-  if (isValidUrl(sanitizedInput)) {
-    return sanitizeUrl(sanitizedInput);
-  } else if (isValidBase64(sanitizedInput)) {
-    return sanitizeBase64(sanitizedInput);
-  } else {
-    return '';
-    // throw new Error('Input is not a valid URL or base64-encoded string');
-  }
+  if (isValidUrl(sanitizedInput)) return sanitizeUrl(sanitizedInput);
+  if (isValidBase64(sanitizedInput)) return sanitizeBase64(sanitizedInput);
+  return '';
+  // throw new Error('Input is not a valid URL or base64-encoded string');
 }
 
 /**
@@ -63,6 +59,7 @@ export function sanitizeImageInput(imageInput: unknown): string {
  */
 function isValidUrl(url: string): boolean {
   try {
+    // eslint-disable-next-line no-new
     new URL(url); // Attempt to parse the URL
     return validator.isURL(url, {
       protocols: ['https'],
