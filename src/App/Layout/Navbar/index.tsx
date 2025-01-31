@@ -45,7 +45,7 @@ const Navbar: FC<NavbarProps> = ({
 
       <div id="navbar__controls">
         <a id="navbar__link" href="/">
-          {appTitle} Payment Manager
+          {appTitle}
         </a>
       </div>
 

@@ -39,7 +39,7 @@ export const getUiConfig = async () => {
   let primaryColor = '';
   let secondaryColor = '';
   let accentColor = '';
-  let appTitle = '';
+  let appTitle = 'Payment Manager';
   let appLogo = '';
   let countryLogo = '';
 
