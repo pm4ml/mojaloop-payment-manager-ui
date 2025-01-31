@@ -50,7 +50,6 @@ export const getUiConfig = async () => {
       console.info('Config was invalid. Falling back to default values');
     } else {
       // eslint-disable-next-line
-      console.log(data);
       primaryColor = data.REACT_APP_PRIMARY_COLOR;
       secondaryColor = data.REACT_APP_SECONDARY_COLOR;
       accentColor = data.REACT_APP_ACCENT_COLOR;

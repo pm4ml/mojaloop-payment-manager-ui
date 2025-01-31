@@ -59,14 +59,16 @@ export function sanitizeColorValue(value: unknown): string {
 }
 
 export function sanitizeImageInput(imageInput: string): string {
+  // Remove leading and trailing quotes (if any)
+  const sanitizedInput = imageInput.replace(/^["']|["']$/g, '');
   // Check if the input is a valid URL
-  if (isValidUrl(imageInput)) {
-    return imageInput; // Return the URL as is
+  if (isValidUrl(sanitizedInput)) {
+    return sanitizedInput; // Return the URL as is
   }
 
   // Check if the input is a valid base64-encoded string
-  else if (isValidBase64(imageInput)) {
-    return imageInput; // Return the base64 string as is
+  else if (isValidBase64(sanitizedInput)) {
+    return sanitizedInput; // Return the base64 string as is
   }
 
   // If neither, throw an error
