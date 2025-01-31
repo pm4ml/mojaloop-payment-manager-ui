@@ -79,8 +79,8 @@ export const getUiConfig = async () => {
   secondaryColor = sanitizeColorValue(secondaryColor);
   accentColor = sanitizeColorValue(accentColor);
   appTitle = sanitizeInput(appTitle);
-  // appLogo = sanitizeInput(appLogo);
-  // countryLogo = sanitizeInput(countryLogo);
+  appLogo = sanitizeImageInput(appLogo);
+  countryLogo = sanitizeImageInput(countryLogo);
   return { primaryColor, secondaryColor, accentColor, appTitle, appLogo, countryLogo };
 };
 
@@ -142,4 +142,49 @@ function sanitizeColorValue(value: unknown): string {
   }
 
   return ''; // Return an empty string for invalid color inputs
+}
+
+function sanitizeImageInput(imageInput: string): string {
+  // Check if the input is a valid URL
+  if (isValidUrl(imageInput)) {
+    return imageInput; // Return the URL as is
+  }
+
+  // Check if the input is a valid base64-encoded string
+  else if (isValidBase64(imageInput)) {
+    return imageInput; // Return the base64 string as is
+  }
+
+  // If neither, throw an error
+  else {
+    throw new Error('Input is not a valid URL or base64-encoded string');
+  }
+}
+
+function isValidUrl(url: string): boolean {
+  try {
+    // Use the URL constructor to validate the URL
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function isValidBase64(str: string): boolean {
+  // Base64 regex to check if the string is a valid base64-encoded string
+  const base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/;
+
+  // Check if the string matches the base64 pattern
+  if (!base64Regex.test(str)) {
+    return false;
+  }
+
+  // Try decoding the string to ensure it's valid base64
+  try {
+    atob(str); // Decode the base64 string
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
