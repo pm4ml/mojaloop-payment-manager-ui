@@ -42,7 +42,8 @@ export function sanitizeColorValue(value: unknown): string {
  */
 export function sanitizeImageInput(imageInput: unknown): string {
   if (typeof imageInput !== 'string' || imageInput.length > 5000) {
-    throw new Error('Invalid input: Exceeds size limits');
+    return '';
+    // throw new Error('Invalid input: Exceeds size limits');
   }
 
   const sanitizedInput = imageInput.trim().replace(/^["']|["']$/g, '');

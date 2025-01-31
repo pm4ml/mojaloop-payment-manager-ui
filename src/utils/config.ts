@@ -50,12 +50,14 @@ export const getUiConfig = async () => {
       console.info('Config was invalid. Falling back to default values');
     } else {
       // eslint-disable-next-line
-      primaryColor = data.REACT_APP_PRIMARY_COLOR;
-      secondaryColor = data.REACT_APP_SECONDARY_COLOR;
-      accentColor = data.REACT_APP_ACCENT_COLOR;
-      appTitle = data.REACT_APP_TITLE;
-      appLogo = data.REACT_APP_LOGO;
-      countryLogo = data.REACT_APP_COUNTRY_LOGO;
+      primaryColor = data.REACT_APP_PRIMARY_COLOR ? data.REACT_APP_PRIMARY_COLOR : primaryColor;
+      secondaryColor = data.REACT_APP_SECONDARY_COLOR
+        ? data.REACT_APP_SECONDARY_COLOR
+        : secondaryColor;
+      accentColor = data.REACT_APP_ACCENT_COLOR ? data.REACT_APP_ACCENT_COLOR : accentColor;
+      appTitle = data.REACT_APP_TITLE ? data.REACT_APP_TITLE : appTitle;
+      appLogo = data.REACT_APP_LOGO ? data.REACT_APP_LOGO : appLogo;
+      countryLogo = data.REACT_APP_COUNTRY_LOGO ? data.REACT_APP_LOGO : countryLogo;
     }
   } catch (err) {
     // eslint-disable-next-line
