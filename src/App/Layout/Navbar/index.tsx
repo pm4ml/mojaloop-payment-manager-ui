@@ -41,7 +41,7 @@ const Navbar: FC<NavbarProps> = ({
 
   return (
     <div id="navbar">
-      <img src={appLogo} alt="DFSP Logo" className="navbar__dfsp-logo" />
+      {appLogo ? <img src={appLogo} alt="DFSP Logo" className="navbar__dfsp-logo" /> : null}
 
       <div id="navbar__controls">
         <a id="navbar__link" href="/">
@@ -58,7 +58,10 @@ const Navbar: FC<NavbarProps> = ({
       </div>
 
       <div id="navbar__user">
-        <img src={countryLogo} alt="Country Flag" className="navbar__country-logo" />
+        {countryLogo ? (
+          <img src={countryLogo} alt="Country Flag" className="navbar__country-logo" />
+        ) : null}
+
         <div id="navbar__user__icon">
           <Icon name="user-small" fill="#fff" />
         </div>

@@ -1,9 +1,7 @@
 :root {
-  --primary-color: #e80002;
-  --navbar-color: #9b0315;
-  --secondary-color: #9b0214;
-  --accent-color: #e80002;
-  --shadow-color: pink;
+  --primary-color: #4fc7e7;
+  --secondary-color: #043865;
+  --accent-color: #02182b;
 }
 
 /* set apex charts toolbar color to primary-color */

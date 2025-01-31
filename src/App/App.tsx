@@ -32,9 +32,7 @@ const App: FC<AppProps> = ({
   userInfo,
 }) => {
   const uiConfig = useSelector(getUiConfig);
-  const appTitle = uiConfig.appTitle || 'CBC';
-  const countryLogo = uiConfig.countryLogo || '/Comesa-logo.png';
-  const appLogo = uiConfig.appLogo || '/cbs_logo.jpg';
+  const { appTitle, countryLogo, appLogo } = uiConfig;
   const activeConnectionName = 'Modusbox & Mojaloop Labs';
   const activeConnectionStatusColor = '#12d670';
   return (
