@@ -67,7 +67,7 @@ export const getUiConfig = async () => {
   secondaryColor = sanitizeColorValue(secondaryColor);
   accentColor = sanitizeColorValue(accentColor);
   appTitle = sanitizeInput(appTitle);
-  appLogo = sanitizeImageInput(appLogo);
-  countryLogo = sanitizeImageInput(countryLogo);
+  if (appLogo !== '') appLogo = sanitizeImageInput(appLogo);
+  if (countryLogo !== '') countryLogo = sanitizeImageInput(countryLogo);
   return { primaryColor, secondaryColor, accentColor, appTitle, appLogo, countryLogo };
 };

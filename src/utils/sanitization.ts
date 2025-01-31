@@ -1,108 +1,119 @@
-/*
- * Ensures the input is a string. If not, it safely returns an empty string
- * Removes anything outside alphanumeric characters, spaces, and common symbols used in typical input
- * Trims excess whitespace to clean up input from careless user input or malicious attempts.
- * Limits input length to 255 characters to prevent buffer overflow attacks or excessive resource usage.
- * Allowed characters 1234567890!@#$%^&*()a-zA-Z
- * */
+import * as validator from 'validator';
+
+/**
+ * Ensures the input is a valid string, removes unwanted characters, and restricts length.
+ */
 export function sanitizeInput(input: unknown): string {
-  // Ensure the input is a string
-  if (typeof input !== 'string') {
-    return ''; // Return a safe default for non-string inputs
+  if (typeof input !== 'string' || !input.trim()) {
+    return '';
   }
 
-  // Trim excess whitespace and normalize the string
-  const trimmed = input.trim();
+  const sanitized = input.trim().replace(/[^\w\s\-._@!#$%^&*()+=,;:]/g, '');
 
-  // Remove harmful characters, allowing only alphanumeric, spaces, and safe symbols
-  const sanitized = trimmed.replace(/[^\w\s\-._@!#$%^&*()+=]/g, '');
-
-  // Restrict the length to prevent overflow attacks
-  const maxLength = 255;
-  return sanitized.substring(0, maxLength);
+  // Restrict length to prevent buffer overflows
+  return sanitized.substring(0, 255);
 }
-/*
- * Validates the input whether it is a valid color value or not.
- * If invalid then returns a empty string.
+
+/**
+ * Validates if the input is a valid color value.
  */
 export function sanitizeColorValue(value: unknown): string {
-  // Ensure the input is a string
-  if (typeof value !== 'string') {
-    return ''; // Return an empty string for non-string inputs
+  if (typeof value !== 'string' || value.length > 30) {
+    return '';
   }
 
   const trimmed = value.trim();
 
-  // Define regex patterns for valid color formats
-  const hexColorRegex = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
-  const rgbColorRegex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
-  // eslint-disable-next-line
-  const rgbaColorRegex = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(0|0?\.\d+|1)\s*\)$/;
-  const hslColorRegex = /^hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%\s*\)$/;
-  // eslint-disable-next-line
-  const hslaColorRegex = /^hsla\(\s*(\d{1,3})\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%\s*,\s*(0|0?\.\d+|1)\s*\)$/;
-  const colorNameRegex = /^(transparent|inherit|initial|unset|[a-zA-Z]+)$/;
+  // Define secure regex patterns for common color formats
+  const colorPatterns = [
+    /^#([0-9a-fA-F]{3,8})$/,
+    /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/,
+    /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(0|0?\.\d+|1)\s*\)$/,
+    /^hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3}%)\s*,\s*(\d{1,3}%)\s*\)$/,
+    /^hsla\(\s*(\d{1,3})\s*,\s*(\d{1,3}%)\s*,\s*(\d{1,3}%)\s*,\s*(0|0?\.\d+|1)\s*\)$/,
+    /^(transparent|inherit|initial|unset|[a-z]+)$/i,
+  ];
 
-  // Validate against each pattern
-  if (
-    hexColorRegex.test(trimmed) ||
-    rgbColorRegex.test(trimmed) ||
-    rgbaColorRegex.test(trimmed) ||
-    hslColorRegex.test(trimmed) ||
-    hslaColorRegex.test(trimmed) ||
-    colorNameRegex.test(trimmed)
-  ) {
-    return trimmed; // Return the sanitized color value
-  }
-
-  return ''; // Return an empty string for invalid color inputs
+  return colorPatterns.some((pattern) => pattern.test(trimmed)) ? trimmed : '';
 }
 
-export function sanitizeImageInput(imageInput: string): string {
-  // Remove leading and trailing quotes (if any)
+/**
+ * Validates and sanitizes an image input, which can be a URL or a base64-encoded string.
+ */
+export function sanitizeImageInput(imageInput: unknown): string {
+  if (typeof imageInput !== 'string' || imageInput.length > 5000) {
+    throw new Error('Invalid input: Exceeds size limits');
+  }
+
   const sanitizedInput = imageInput.trim().replace(/^["']|["']$/g, '');
-  // Check if the input is a valid URL
+
   if (isValidUrl(sanitizedInput)) {
-    return sanitizedInput; // Return the URL as is
-  }
-
-  // Check if the input is a valid base64-encoded string
-  else if (isValidBase64(sanitizedInput)) {
-    return sanitizedInput; // Return the base64 string as is
-  }
-
-  // If neither, throw an error
-  else {
-    throw new Error('Input is not a valid URL or base64-encoded string');
+    return sanitizeUrl(sanitizedInput);
+  } else if (isValidBase64(sanitizedInput)) {
+    return sanitizeBase64(sanitizedInput);
+  } else {
+    return '';
+    // throw new Error('Input is not a valid URL or base64-encoded string');
   }
 }
 
+/**
+ * Validates if a string is a secure URL.
+ */
 function isValidUrl(url: string): boolean {
   try {
-    // Use the URL constructor to validate the URL
-    new URL(url);
-    return true;
-  } catch (error) {
+    new URL(url); // Attempt to parse the URL
+    return validator.isURL(url, {
+      protocols: ['https'],
+      require_protocol: true,
+      require_valid_protocol: true,
+      disallow_auth: true,
+      allow_fragments: false,
+      allow_query_components: true,
+    });
+  } catch {
     return false;
   }
 }
 
-function isValidBase64(str: string): boolean {
-  // Base64 regex to check if the string is a valid base64-encoded string
-  const base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/;
-
-  // Check if the string matches the base64 pattern
-  if (!base64Regex.test(str)) {
-    return false;
-  }
-
-  // Try decoding the string to ensure it's valid base64
+/**
+ * Sanitizes a URL, ensuring no dangerous input is present.
+ */
+function sanitizeUrl(url: string): string {
   try {
-    atob(str); // Decode the base64 string
-    return true;
-  } catch (error) {
-    return false;
+    const parsedUrl = new URL(url);
+
+    // Enforce HTTPS
+    if (parsedUrl.protocol !== 'https:') {
+      throw new Error('Only HTTPS URLs are allowed');
+    }
+
+    // Remove fragments and unnecessary query parameters
+    parsedUrl.hash = '';
+
+    return parsedUrl.toString();
+  } catch {
+    return '';
   }
+}
+
+/**
+ * Validates if a string is a safe base64-encoded string.
+ */
+function isValidBase64(str: string): boolean {
+  return /^data:image\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(str);
+}
+
+/**
+ * Sanitizes a base64-encoded string.
+ */
+function sanitizeBase64(base64: string): string {
+  if (!isValidBase64(base64)) {
+    throw new Error('Invalid base64 string');
+  }
+
+  // Remove any non-base64 characters (just in case)
+  return base64.replace(/[^A-Za-z0-9+/=]/g, '');
 }
 
 export default {
