@@ -16,12 +16,12 @@ app.get('/config', function(req, res) {
 
 app.get('/uiConfig', function(req, res) {
   res.send({
-    REACT_APP_PRIMARY_COLOR: process.env.REACT_APP_PRIMARY_COLOR,
-    REACT_APP_SECONDARY_COLOR: process.env.REACT_APP_SECONDARY_COLOR,
-    REACT_APP_ACCENT_COLOR: process.env.REACT_APP_ACCENT_COLOR,
-    REACT_APP_LOGO: process.env.REACT_APP_LOGO,
-    REACT_APP_TITLE: process.env.REACT_APP_TITLE,
-    REACT_APP_COUNTRY_LOGO: process.env.REACT_APP_COUNTRY_LOGO,
+    PRIMARY_COLOR: process.env.PRIMARY_COLOR,
+    SECONDARY_COLOR: process.env.SECONDARY_COLOR,
+    ACCENT_COLOR: process.env.ACCENT_COLOR,
+    LOGO: process.env.LOGO,
+    TITLE: process.env.TITLE,
+    COUNTRY_LOGO: process.env.COUNTRY_LOGO,
   });
 });
 

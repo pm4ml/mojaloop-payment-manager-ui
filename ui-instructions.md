@@ -8,25 +8,25 @@ To customise the payment manager, follow these steps:
 ## Step 2: Customize Configuration Variables
 You can customize the following variables in the configuration file based on your requirements:
 
-- **REACT_APP_PRIMARY_COLOR**: The primary color of the payment manager. (Applies to charts, modals and buttons)
-- **REACT_APP_SECONDARY_COLOR**: The secondary color of the payment manager. (Applies to navbar and borders.) 
-- **REACT_APP_ACCENT_COLOR**: The accent color of the payment manager. (Applies to navbar and borders.) 
-- **REACT_APP_TITLE**: The title of the payment manager.
-- **REACT_APP_COUNTRY_LOGO**: The DFSP logo/Country Logo, specified as a URL or base64-encoded string.
-- **REACT_APP_LOGO**: 
+- **PRIMARY_COLOR**: The primary color of the payment manager. (Applies to charts, modals and buttons)
+- **SECONDARY_COLOR**: The secondary color of the payment manager. (Applies to navbar and borders.) 
+- **ACCENT_COLOR**: The accent color of the payment manager. (Applies to navbar and borders.) 
+- **TITLE**: The title of the payment manager.
+- **COUNTRY_LOGO**: The DFSP logo/Country Logo, specified as a URL or base64-encoded string.
+- **LOGO**: 
 -   The logo or image for the title, specified as a URL or base64-encoded string.
 
 ### Note on Image Dimensions:
 Ensure the images meet the following dimensions:
 
-- **REACT_APP_LOGO**:  126x45 pixels
-- **REACT_APP_COUTNRY_LOGO**: 50x50 pixels
+- **LOGO**:  126x45 pixels
+- **COUTNRY_LOGO**: 50x50 pixels
 
 You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
 
 ## Step 3: Convert Images to Base64
 
-If you want to use base64-encoded images for REACT_APP_LOGO or REACT_APP_COUNTRY_LOGO, follow these steps:
+If you want to use base64-encoded images for LOGO or COUNTRY_LOGO, follow these steps:
 
 - Convert the Image to WebP Format:	
 	- Use the website [CloudConvert](https://cloudconvert.com/) to convert your image to WebP format.
