@@ -7,12 +7,14 @@ interface FxpConversionsSuccessPercProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
+  legendColor: string;
 }
 
 const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
   isPending,
   data,
   error,
+  legendColor,
 }) => {
   let content = null;
   if (isPending || !data) {
@@ -27,8 +29,8 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
     content = (
       <ChartLayout
         title="Successful FxpConversions"
-        legend={[{ label: 'Percent / Min', color: '#4fc7e7' }]}
-        Graph={() => <SuccessfulFxpConversionGraph data={data} />}
+        legend={[{ label: 'Percent / Min', color: legendColor }]}
+        Graph={() => <SuccessfulFxpConversionGraph data={data} chartColor={legendColor} />}
       />
     );
   }
@@ -37,9 +39,13 @@ const FxpConversionsSuccessPerc: FC<FxpConversionsSuccessPercProps> = ({
 
 interface SuccessfulFxpConversionGraphProps {
   data: XYCoordinate[];
+  chartColor: string;
 }
 
-const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ data }) => {
+const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({
+  data,
+  chartColor,
+}) => {
   const series = {
     name: 'Success Percentage',
     data,
@@ -70,7 +76,7 @@ const SuccessfulFxpConversionGraph: FC<SuccessfulFxpConversionGraphProps> = ({ d
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [chartColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

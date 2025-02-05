@@ -23,6 +23,7 @@ import { TransferPartyDetailsModal } from './PartyDetailsModal';
 import * as actions from '../../actions';
 import * as selectors from '../../selectors';
 import { TransferDetails } from '../../types';
+import './custom.css';
 
 const stateProps = (state: State) => ({
   model: selectors.getTransferDetails(state),

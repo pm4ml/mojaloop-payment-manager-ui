@@ -1,3 +1,18 @@
+:root {
+  --primary-color: #4fc7e7;
+  --secondary-color: #043865;
+  --accent-color: #02182b;
+}
+
+/* set apex charts toolbar color to primary-color */
+.apexcharts-zoom-icon.apexcharts-selected svg {
+  fill: var(--primary-color) !important;
+}
+
+.apexcharts-pan-icon.apexcharts-selected svg {
+  stroke: var(--primary-color) !important;
+}
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;

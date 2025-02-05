@@ -7,9 +7,10 @@ interface TransfersChartsProps {
   isPending: boolean | undefined;
   data?: XYCoordinate[];
   error: ErrorMessage;
+  legendColor: string;
 }
 
-const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) => {
+const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error, legendColor }) => {
   let content = null;
   if (isPending || !data) {
     content = (
@@ -23,8 +24,8 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) =
     content = (
       <ChartLayout
         title="Average Transfer Time (E2E)"
-        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: '#4fc7e7' }]}
-        Graph={() => <AverageTransferTimeGraph data={data} />}
+        legend={[{ label: 'Avg. Transfer Time in ms / Min', color: legendColor }]}
+        Graph={() => <AverageTransferTimeGraph data={data} chartColor={legendColor} />}
       />
     );
   }
@@ -33,9 +34,10 @@ const TransfersCharts: FC<TransfersChartsProps> = ({ isPending, data, error }) =
 
 interface AverageTransferTimeGraphProps {
   data: XYCoordinate[];
+  chartColor: string;
 }
 
-const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) => {
+const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data, chartColor }) => {
   const series = {
     name: 'Average Response Time',
     data,
@@ -66,7 +68,7 @@ const AverageTransferTimeGraph: FC<AverageTransferTimeGraphProps> = ({ data }) =
       width: [2],
       curve: 'smooth',
     },
-    colors: ['#4fc7e7'],
+    colors: [chartColor],
     tooltip: {
       x: {
         formatter: (val: string | number) => {

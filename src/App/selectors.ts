@@ -34,3 +34,5 @@ export const getErrorModalContent = createSelector(getErrorModalPayload, (payloa
 });
 
 export const getMetrics = (state: State) => state.app.metricsData;
+
+export const getUiConfig = (state: State) => state.app.uiConfig;

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider, ReactReduxContext } from 'react-redux';
 import { createBrowserHistory, History } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-import getConfig from 'utils/config';
+import { getUiConfig, getConfig } from 'utils/config';
+import setupStyles from 'utils/setupStyles';
 import getUserInfo from 'utils/authentication';
 import { User } from './App/types';
 import './icons';
@@ -25,6 +26,8 @@ const ConnectedApp = () => (
 
 async function bootstrap() {
   const config = await getConfig();
+  const uiConfigurations = await getUiConfig();
+  setupStyles(uiConfigurations);
 
   // we make a blocking call to getUserInfo before rendering as this will tell
   // us if we are authenticated or not. we should not render anything if we are
@@ -49,6 +52,7 @@ async function bootstrap() {
     // only render if we got user info i.e. we are authenticated
     store.dispatch({ type: 'App / Set Config', config });
     store.dispatch({ type: 'App / Set User', data: user });
+    store.dispatch({ type: 'App / Set UI Config', uiConfig: uiConfigurations });
     ReactDOM.render(
       <React.StrictMode>
         <ConnectedApp />

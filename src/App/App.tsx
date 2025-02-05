@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { FC } from 'react';
 import './App.css';
+import { useSelector } from 'react-redux';
 import Layout from './Layout';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
@@ -11,6 +12,8 @@ import { User } from './types';
 import FxpTechnicalDashboard from './FxpTechnicalDashboard';
 // import FxpTransfers from './FxpConversions';
 import FxpConversions from './FxpConversions';
+
+import { getUiConfig } from './selectors';
 
 interface AppProps {
   isSuccessToastVisible: boolean;
@@ -28,6 +31,10 @@ const App: FC<AppProps> = ({
   onCloseErrorModal,
   userInfo,
 }) => {
+  const uiConfig = useSelector(getUiConfig);
+  const { appTitle, countryLogo, appLogo } = uiConfig;
+  const activeConnectionName = 'Modusbox & Mojaloop Labs';
+  const activeConnectionStatusColor = '#12d670';
   return (
     <div className="App">
       <Layout.Container>
@@ -37,8 +44,11 @@ const App: FC<AppProps> = ({
           }
           logoutUrl={userInfo ? userInfo.logoutUrl : undefined}
           kratos={userInfo?.kratos}
-          activeConnectionName="Modusbox & Mojaloop Labs"
-          activeConnectionStatusColor="#12d670"
+          activeConnectionName={activeConnectionName}
+          activeConnectionStatusColor={activeConnectionStatusColor}
+          appTitle={appTitle}
+          appLogo={appLogo}
+          countryLogo={countryLogo}
         />
         <Layout.Content>
           <Layout.SideMenu />
