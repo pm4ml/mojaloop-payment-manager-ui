@@ -22,7 +22,7 @@ export function sanitizeColorValue(value: unknown): string {
     return '';
   }
 
-  const trimmed = value.trim();
+  const trimmed = value.trim().replace(/^["']|["']$/g, '');
 
   // Define secure regex patterns for common color formats
   const colorPatterns = [
