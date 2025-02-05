@@ -55,7 +55,7 @@ export const getUiConfig = async () => {
       accentColor = data.ACCENT_COLOR ? data.ACCENT_COLOR : accentColor;
       appTitle = data.TITLE ? data.TITLE : appTitle;
       appLogo = data.LOGO ? data.LOGO : appLogo;
-      countryLogo = data.COUNTRY_LOGO ? data.LOGO : countryLogo;
+      countryLogo = data.COUNTRY_LOGO ? data.COUNTRY_LOGO : countryLogo;
     }
   } catch (err) {
     // eslint-disable-next-line
