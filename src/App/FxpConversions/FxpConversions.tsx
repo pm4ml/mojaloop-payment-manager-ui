@@ -16,6 +16,8 @@ import FxpConversionsAvgTime from './components/FxpConversionAvgTime';
 import FxpConversionsStatuses from './components/FxpConversionStatuses';
 import './FxpConversions.css';
 
+import { getUiConfig } from '../selectors';
+
 const stateProps = (state: State) => ({
   fxpConversionsErrors: selectors.getFxpConversionsErrors(state),
   fxpConversionsErrorsError: selectors.getFxpConversionsErrorsError(state),
@@ -32,6 +34,7 @@ const stateProps = (state: State) => ({
   fxpConversionsAvgTimeError: selectors.getFxpConversionsAvgTimeError(state),
   isFxpConversionsAvgTimePending: selectors.getIsFxpConversionsAvgTimePending(state),
   isFxpConversionDetailsModalVisible: selectors.getIsFxpConversionDetailsModalVisible(state),
+  uiConfig: getUiConfig(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
@@ -65,6 +68,7 @@ type FxpFxpConversionsProps = {
   onViewAllReconcilationErrorsButtonClick: () => void;
   onFxpConversionFinderButtonClick: () => void;
   onFxpConversionRowClick: (fxpConversionError: FxpConversionError) => void;
+  uiConfig: { primaryColor: string };
 };
 
 const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
@@ -86,7 +90,9 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
   onViewAllReconcilationErrorsButtonClick,
   onFxpConversionFinderButtonClick,
   onFxpConversionRowClick,
+  uiConfig,
 }) => {
+  const { primaryColor } = uiConfig;
   return (
     <div className="fxpfxpConversions">
       <Heading size="3">FXP Conversions Overview</Heading>
@@ -101,11 +107,13 @@ const FxpFxpConversions: FC<FxpFxpConversionsProps> = ({
         data={fxpConversionsSuccessPerc}
         error={fxpConversionsSuccessPercError}
         isPending={isFxpConversionsSuccessPercPending}
+        legendColor={primaryColor}
       />
       <FxpConversionsAvgTime
         data={fxpConversionsAvgTime}
         error={fxpConversionsAvgTimeError}
         isPending={isFxpConversionsAvgTimePending}
+        legendColor={primaryColor}
       />
       <FxpConversionsStatuses
         isPending={isFxpConversionsStatusesPending}

@@ -16,6 +16,8 @@ import TransfersAvgTime from './components/TransfersAvgTime';
 import TransfersStatuses from './components/TransfersStatuses';
 import './Transfers.css';
 
+import { getUiConfig } from '../selectors';
+
 const stateProps = (state: State) => ({
   transfersErrors: selectors.getTransfersErrors(state),
   transfersErrorsError: selectors.getTransfersErrorsError(state),
@@ -32,6 +34,7 @@ const stateProps = (state: State) => ({
   transfersAvgTimeError: selectors.getTransfersAvgTimeError(state),
   isTransfersAvgTimePending: selectors.getIsTransfersAvgTimePending(state),
   isTransferDetailsModalVisible: selectors.getIsTransferDetailsModalVisible(state),
+  uiConfig: getUiConfig(state),
 });
 
 const dispatchProps = (dispatch: Dispatch) => ({
@@ -62,6 +65,7 @@ type TransfersProps = {
   onViewAllReconcilationErrorsButtonClick: () => void;
   onTransferFinderButtonClick: () => void;
   onTransferRowClick: (transferError: TransferError) => void;
+  uiConfig: { primaryColor: string };
 };
 
 const Transfers: FC<TransfersProps> = ({
@@ -83,7 +87,9 @@ const Transfers: FC<TransfersProps> = ({
   onViewAllReconcilationErrorsButtonClick,
   onTransferFinderButtonClick,
   onTransferRowClick,
+  uiConfig,
 }) => {
+  const { primaryColor } = uiConfig;
   return (
     <div className="transfers">
       <Heading size="3">Transfers Overview</Heading>
@@ -94,11 +100,13 @@ const Transfers: FC<TransfersProps> = ({
         data={transfersSuccessPerc}
         error={transfersSuccessPercError}
         isPending={isTransfersSuccessPercPending}
+        legendColor={primaryColor}
       />
       <TransfersAvgTime
         data={transfersAvgTime}
         error={transfersAvgTimeError}
         isPending={isTransfersAvgTimePending}
+        legendColor={primaryColor}
       />
       <TransfersStatuses
         isPending={isTransfersStatusesPending}

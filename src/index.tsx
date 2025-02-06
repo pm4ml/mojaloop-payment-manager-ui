@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider, ReactReduxContext } from 'react-redux';
 import { createBrowserHistory, History } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-import getConfig from 'utils/config';
+import { getUiConfig, getConfig } from 'utils/config';
+import setupStyles from 'utils/setupStyles';
 import getUserInfo from 'utils/authentication';
 import { User } from './App/types';
 import './icons';
@@ -25,6 +26,8 @@ const ConnectedApp = () => (
 
 async function bootstrap() {
   const config = await getConfig();
+  const uiConfigurations = await getUiConfig();
+  setupStyles(uiConfigurations);
 
   // If the authentication is not enabled don't check for the user
   // authentication and render the pages
@@ -53,6 +56,7 @@ async function bootstrap() {
       // only render if we got user info i.e. we are authenticated
       store.dispatch({ type: 'App / Set Config', config });
       store.dispatch({ type: 'App / Set User', data: user });
+      store.dispatch({ type: 'App / Set UI Config', uiConfig: uiConfigurations });
       ReactDOM.render(
         <React.StrictMode>
           <ConnectedApp />
@@ -64,6 +68,7 @@ async function bootstrap() {
     // render without authentication
     store.dispatch({ type: 'App / Set Config', config });
     store.dispatch({ type: 'App / Set User', data: null });
+    store.dispatch({ type: 'App / Set UI Config', uiConfig: uiConfigurations });
     ReactDOM.render(
       <React.StrictMode>
         <ConnectedApp />
