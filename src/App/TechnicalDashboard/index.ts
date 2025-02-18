@@ -1,6 +1,7 @@
 import withErrorBoundary from 'utils/hocs/withErrorBoundary';
 import { ComponentType } from 'react';
-import TechnicalDashboard from './Dashboard';
+// import TechnicalDashboard from './Dashboard';
+import TechnicalDashboard from './OnboardStatus/OnboardDashboard';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import reducer from './reducers';
