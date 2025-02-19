@@ -19,7 +19,7 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import { TechnicalDashboardFilters } from './types';
 import './Dashboard.css';
-import ConnectionHealthDropdown from './ConnectionHealthDropdown';
+import ConnectionHealthDropdown from './ConnectionHealth'
 
 
 const stateProps = (state: State) => ({

@@ -1,0 +1,53 @@
+.accordion__indicator__color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .connection-status-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .connection-status-message {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .connection-status-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .connection-dropdown {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .connection-dropdown-content {
+    border: none;
+    max-width: 100%;
+    margin-top: 8px;
+    background-color: white;
+    padding: 8px;
+  }
+  
+  .connection-state-item {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .connection-state-text {
+    min-width: 180px;
+    display: inline-block;
+  }
+  
+  .connection-state-description {
+    margin-left: 20px;
+  }
+  
