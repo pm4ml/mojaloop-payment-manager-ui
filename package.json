@@ -87,7 +87,9 @@
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}'",
     "proxy": "npm start --prefix proxy",
     "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
-    "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
+    "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
+    "test:coverage": "CI=true npx nyc --reporter=lcov --reporter=text  --reporter=text-summary npm run test -- --coverage --watchAll=false",
+    "test:coverage-check": "npm run test:coverage && nyc check-coverage"
   },
   "eslintConfig": {
     "extends": "react-app"
