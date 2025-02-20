@@ -151,6 +151,69 @@ export function isPending(api: string): (apiState: LocalApiState) => boolean {
   };
 }
 
+
+let lastUpdated = new Date().toISOString();
+
+export const getStates = async () => {
+  return {
+    fetchingHubCA: {
+      status: 'completed',
+      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    creatingDFSPCA: {
+      status: 'completed',
+      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    creatingDfspClientCert: {
+      status: 'completed',
+      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    creatingDfspServerCert: {
+      status: 'completed',
+      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    creatingHubClientCert: {
+      status: 'completed',
+      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    pullingPeerJWS: {
+      status: 'inProgress',
+      stateDescription: `In Progress (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    uploadingPeerJWS: {
+      status: 'inProgress',
+      stateDescription: `In Progress (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    creatingJWS: {
+      status: 'inError',
+      stateDescription: 'Connection Error',
+      errorDescription: `Error writing JWS key to vault - Access Denied (Last Updated: ${lastUpdated})`,
+    },
+    endpointConfig: {
+      status: 'pending',
+      stateDescription: `Pending (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    connectorConfig: {
+      status: 'pending',
+      stateDescription: `Pending (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+    progressMonitor: {
+      status: 'completed',
+      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
+      errorDescription: '',
+    },
+  };
+};
+
 export interface ApiState extends LocalApiState {}
 export interface ApiAction extends LocalApiAction {}
 export { buildApis };

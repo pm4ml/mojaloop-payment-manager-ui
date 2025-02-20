@@ -9,6 +9,7 @@ import { reducer as transfersReducer } from 'App/Transfers';
 import { reducer as wizardReducer } from 'App/ConnectionWizard';
 import fxpConversionsReducer from '../App/FxpConversions/reducers';
 
+import { statesReducer } from 'App/TechnicalDashboard/ConnectionHealth/reducers';
 const getReducer = (history: History): Reducer =>
   combineReducers({
     api: apiReducer,
@@ -19,6 +20,7 @@ const getReducer = (history: History): Reducer =>
     transfers: transfersReducer,
     wizard: wizardReducer,
     fxpConversions: fxpConversionsReducer,
+    states: statesReducer,
   });
 
 export default getReducer;

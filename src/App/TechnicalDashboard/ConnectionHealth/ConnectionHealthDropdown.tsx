@@ -3,6 +3,10 @@ import { Row, Button } from 'components';
 import { indicatorColor, connectionStates, ConnectionStatus } from './helpers';
 import './ConnectionHealthDropdown.css';
 
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStatesRequest } from './actions';
+
 const arrowDownUrl = 'https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000';
 const arrowUpUrl = 'https://img.icons8.com/?size=100&id=60662&format=png&color=000000';
 
@@ -30,6 +34,15 @@ const ConnectionHealthDropdown: React.FC = () => {
     { state: 'Connector Config', color: indicatorColor.pending, description: `Pending (Last Updated: ${lastUpdated})` },
     { state: 'Progress Monitor', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
   ];
+
+  const dispatch = useDispatch();
+  const connectionStateListApiResponse = useSelector((state: any) => state.states.data);
+
+  useEffect(() => {
+    dispatch(fetchStatesRequest());
+  }, [dispatch]);
+
+  console.log('connectionStateListApiResponse', connectionStateListApiResponse);
 
   const connectionStatus: ConnectionStatus = 'inError';
 
