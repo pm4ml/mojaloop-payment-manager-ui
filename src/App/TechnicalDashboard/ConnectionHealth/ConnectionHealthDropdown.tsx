@@ -16,24 +16,8 @@ interface ConnectionStateOption {
   description: string;
 }
 
-let lastUpdated = new Date().toISOString();
-
 const ConnectionHealthDropdown: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-
-  const connectionStateList: ConnectionStateOption[] = [
-    { state: 'Fetching Hub CA', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
-    { state: 'Creating DFSP CA', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
-    { state: 'Creating DFSP Client Cert', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
-    { state: 'Creating DFSP Server Cert', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
-    { state: 'Creating Hub Client Cert', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
-    { state: 'Pulling Peer JWS', color: indicatorColor.completed, description: `In Progress (Last Updated: ${lastUpdated})` },
-    { state: 'Uploading Peer JWS', color: indicatorColor.inProgress, description: `In Progress (Last Updated: ${lastUpdated})` },
-    { state: 'Creating JWS', color: indicatorColor.inError, description: `Connection Error: Error writing JWS key to vault - Access Denied (Last Updated: ${lastUpdated})` },
-    { state: 'Endpoint Config', color: indicatorColor.pending, description: `Pending (Last Updated: ${lastUpdated})` },
-    { state: 'Connector Config', color: indicatorColor.pending, description: `Pending (Last Updated: ${lastUpdated})` },
-    { state: 'Progress Monitor', color: indicatorColor.completed, description: `Completed (Last Updated: ${lastUpdated})` },
-  ];
 
   const dispatch = useDispatch();
   const connectionStateListApiResponse = useSelector((state: any) => state.states.data);
@@ -42,9 +26,23 @@ const ConnectionHealthDropdown: React.FC = () => {
     dispatch(fetchStatesRequest());
   }, [dispatch]);
 
-  console.log('connectionStateListApiResponse', connectionStateListApiResponse);
-
   const connectionStatus: ConnectionStatus = 'inError';
+  const connectionStateList: ConnectionStateOption[] = [];
+
+  if (connectionStateListApiResponse) {
+    for (const key in connectionStateListApiResponse) {
+      if (Object.prototype.hasOwnProperty.call(connectionStateListApiResponse, key)) {
+        const stateData: { status: keyof typeof indicatorColor; errorDescription: string; stateDescription: string } = connectionStateListApiResponse[key];
+        connectionStateList.push({
+          state: key,
+          color: indicatorColor[stateData.status] ?? indicatorColor.unknown,
+          description: stateData.errorDescription
+            ? `${stateData.stateDescription} : ${stateData.errorDescription}`
+            : stateData.stateDescription,
+        });
+      }
+    }
+  }
 
   const toggleDropdown = () => {
     setShowDropdown((prev) => !prev);
@@ -55,6 +53,15 @@ const ConnectionHealthDropdown: React.FC = () => {
       color: indicatorColor.unknown,
       message: 'Unknown Status',
     };
+
+
+  const handleRecreateOutboundTLS = () => {
+    console.log('Recreate Outbound TLS Button Clicked');
+  };
+  const handleRecreateJWS = () => {
+    console.log('Recreate JWS Button Clicked');
+  };
+
 
   const formatDescription = (description: string) => {
     const match = description.match(/\(Last Updated: .*?\)/);
@@ -102,8 +109,8 @@ const ConnectionHealthDropdown: React.FC = () => {
       {showDropdown && (
         <>
           <Row align="left top" padding="8px" style={{ marginLeft: '20px', marginBottom: '10px', display: 'flex', gap: '50px' }}>
-            <Button onClick={() => console.log('Recreate Outbound TLS')} label="Recreate Outbound TLS" kind="secondary" />
-            <Button onClick={() => console.log('Recreate JWS')} label="Recreate JWS" kind="secondary" />
+            <Button onClick={() => handleRecreateOutboundTLS()} label="Recreate Outbound TLS" kind="secondary" />
+            <Button onClick={() => handleRecreateJWS()} label="Recreate JWS" kind="secondary" />
           </Row>
           <div className="connection-dropdown">
             <div className="connection-dropdown-content">
