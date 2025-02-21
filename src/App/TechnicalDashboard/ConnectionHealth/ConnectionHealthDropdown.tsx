@@ -29,12 +29,20 @@ const ConnectionHealthDropdown: React.FC = () => {
   const connectionStatus: ConnectionStatus = 'inError';
   const connectionStateList: ConnectionStateOption[] = [];
 
+  function formatTitleCase(str: string): string {
+    return str
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+      .replace(/^./, match => match.toUpperCase());
+  }
+
   if (connectionStateListApiResponse) {
     for (const key in connectionStateListApiResponse) {
       if (Object.prototype.hasOwnProperty.call(connectionStateListApiResponse, key)) {
         const stateData: { status: keyof typeof indicatorColor; errorDescription: string; stateDescription: string } = connectionStateListApiResponse[key];
+        let formattedStateTitle = formatTitleCase(key);
         connectionStateList.push({
-          state: key,
+          state: formattedStateTitle,
           color: indicatorColor[stateData.status] ?? indicatorColor.unknown,
           description: stateData.errorDescription
             ? `${stateData.stateDescription} : ${stateData.errorDescription}`
