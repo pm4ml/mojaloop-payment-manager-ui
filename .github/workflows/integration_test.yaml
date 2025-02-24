@@ -74,11 +74,11 @@ jobs:
       run: kubectl port-forward -n ingress-nginx --address 0.0.0.0 svc/ingress-nginx-controller 3000:80 &
 
     - name: Install test dependencies
-      working-directory: integration_test/tests
+      working-directory: ui-tests/tests
       run: |-
         npm ci
     - name: Run tests
-      working-directory: integration_test/tests
+      working-directory: ui-tests/tests
       run: |-
         PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless
 
@@ -87,7 +87,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test-report
-        path: integration_test/tests/report.html
+        path: ui-tests/tests/report.html
 
     - name: Print docker containers to check any issues with the cluster
       if: ${{ failure() }}
