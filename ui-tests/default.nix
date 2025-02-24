@@ -1,7 +1,7 @@
 # Want to update dependencies? Go to https://github.com/NixOS/nixpkgs/tree/nixpkgs-unstable and
 # replace the commit ref in the following line with the one you're interested in (probably the
 # latest).
-{ nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/refs/tags/23.11.tar.gz) { config = { allowUnfree = true; }; } }:
+{ nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/refs/tags/24.05.tar.gz) { config = { allowUnfree = true; }; } }:
 
 let
   k3d = nixpkgs.stdenv.mkDerivation rec {
