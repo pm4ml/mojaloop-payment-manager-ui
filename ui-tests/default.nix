@@ -25,10 +25,10 @@ let
   };
 
   skaffold = nixpkgs.stdenv.mkDerivation rec {
-    version = "1.36.1";  # Updated version
+    version = "2.13.0";  # Updated version
     pname = "skaffold";
     src = builtins.fetchurl {
-      url = "https://github.com/GoogleContainerTools/skaffold/releases/download/v1.36.0/skaffold-linux-amd64";  # Updated URL
+      url = "https://github.com/GoogleContainerTools/skaffold/releases/download/v2.13.0/skaffold-linux-amd64";  # Updated URL
       sha256 = "14e5545d5d9b69e3eff1fbfacaf5a9f5e8f33ceca4392bceb81eb27c69966c1a";
     };
     dontUnpack = true;
