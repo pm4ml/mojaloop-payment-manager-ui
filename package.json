@@ -79,6 +79,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
+    "test:xunit": "react-app-rewired test --watchAll",
     "test:nowatch": "CI=true react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
     "serve": "npm start --prefix server",
@@ -89,7 +90,8 @@
     "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
     "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
     "test:coverage": "CI=true npx nyc --reporter=lcov --reporter=text  --reporter=text-summary npm run test -- --coverage --watchAll=false",
-    "test:coverage-check": "npm run test:coverage && nyc check-coverage"
+    "test:coverage-check": "npm run test:coverage && nyc check-coverage",
+    "audit:check": "npx audit-ci --config ./audit-ci.jsonc"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -109,7 +111,8 @@
   "devDependencies": {
     "@types/validator": "^13.12.2",
     "redux-mock-store": "^1.5.4",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "audit-ci": "^7.1.0"
   },
   "husky": {
     "hooks": {
