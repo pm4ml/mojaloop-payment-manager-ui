@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:10000",
   "engines": {
-    "node": "=16.x"
+    "node": ">=16.x"
   },
   "dependencies": {
     "@modusbox/modusbox-ui-components": "^1.23.0",
