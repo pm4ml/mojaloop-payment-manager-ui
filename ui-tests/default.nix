@@ -1,7 +1,7 @@
 # Want to update dependencies? Go to https://github.com/NixOS/nixpkgs/tree/nixpkgs-unstable and
 # replace the commit ref in the following line with the one you're interested in (probably the
 # latest).
-{ nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/refs/tags/24.05.tar.gz) { config = { allowUnfree = true; }; } }:
+{ nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/refs/tags/23.11.tar.gz) { config = { allowUnfree = true; }; } }:
 
 let
   k3d = nixpkgs.stdenv.mkDerivation rec {
@@ -25,10 +25,10 @@ let
   };
 
   skaffold = nixpkgs.stdenv.mkDerivation rec {
-    version = "2.13.0";  # Updated version
+    version = "1.36.1";  # Updated version
     pname = "skaffold";
     src = builtins.fetchurl {
-      url = "https://github.com/GoogleContainerTools/skaffold/releases/download/v2.13.0/skaffold-linux-amd64";  # Updated URL
+      url = "https://github.com/GoogleContainerTools/skaffold/releases/download/v1.36.1/skaffold-linux-amd64";  # Updated URL
       sha256 = "14e5545d5d9b69e3eff1fbfacaf5a9f5e8f33ceca4392bceb81eb27c69966c1a";
     };
     dontUnpack = true;
