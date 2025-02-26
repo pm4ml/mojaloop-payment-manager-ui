@@ -1,6 +1,13 @@
 import { State } from 'store/types';
 import { buildApis } from './api';
 import { Config } from './api/types';
+import {
+  mockStateInErrorResponse,
+  mockStateCompletedResponse,
+  mockStateOtherResponse,
+  mockStatePendingResponse,
+  mockStateAllErrorResponse
+} from '../App/TechnicalDashboard/ConnectionHealth/mockResponse';
 
 const services = {
   localNode: {
@@ -8,11 +15,40 @@ const services = {
   },
 };
 
-// const mockServices = {
-//   localNode: {
-//     baseUrl: 'http://localhost:4040/exp',
-//   },
-// };
+// mockService
+const mockServices = {
+  localNode: {
+    baseUrl: 'http://mockHost:9000/mock',
+  },
+};
+
+// Mock API for getStates
+const getStatesMockInCompleted: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/states',
+  mockResponse: () => mockStateCompletedResponse,
+};
+const getStatesMockPending: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/states',
+  mockResponse: () => mockStatePendingResponse,
+};
+const getStatesMockInError: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/states',
+  mockResponse: () => mockStateInErrorResponse,
+};
+const getStatesMockAllError: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/states',
+  mockResponse: () => mockStateAllErrorResponse,
+};
+const getStatesMockOther: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/states',
+  mockResponse: () => mockStateOtherResponse,
+};
+
 interface Todo {
   title: string;
 }
@@ -234,6 +270,13 @@ const metric: Config<Todo, State> = {
 const endpoints = {
   dfsps,
   // mockServices,
+  getStatesMockInCompleted,
+  getStatesMockPending,
+  getStatesMockInError,
+  getStatesMockOther,
+  getStatesMockAllError,
+  
+  //
   environmentStatus,
   monetaryZones,
   batches,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Button } from 'components';
-import { indicatorColor, connectionStates, ConnectionStatus } from './helpers';
+import { indicatorColor, connectionStates, ConnectionStatus, formatTitleCase, formatDescription } from './helpers';
 import './ConnectionHealthDropdown.css';
 
 import { useEffect } from 'react';
@@ -20,27 +20,25 @@ const ConnectionHealthDropdown: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const dispatch = useDispatch();
-  const connectionStateListApiResponse = useSelector((state: any) => state.states.data);
+  const connectionStateListApiResponse = useSelector((state: any) => state.states.data.data);
 
   useEffect(() => {
     dispatch(fetchStatesRequest());
   }, [dispatch]);
-
-  const connectionStatus: ConnectionStatus = 'inError';
+  let connectionStatus: ConnectionStatus = 'pending';
   const connectionStateList: ConnectionStateOption[] = [];
-
-  function formatTitleCase(str: string): string {
-    return str
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
-      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-      .replace(/^./, match => match.toUpperCase());
-  }
+  let statuses = new Set<keyof typeof indicatorColor>();
+  let errorsList = new Array<string>();
 
   if (connectionStateListApiResponse) {
     for (const key in connectionStateListApiResponse) {
       if (Object.prototype.hasOwnProperty.call(connectionStateListApiResponse, key)) {
         const stateData: { status: keyof typeof indicatorColor; errorDescription: string; stateDescription: string } = connectionStateListApiResponse[key];
+        statuses.add(stateData.status);
         let formattedStateTitle = formatTitleCase(key);
+        if (stateData.status === 'inError') {
+          errorsList.push(stateData.errorDescription);
+        }
         connectionStateList.push({
           state: formattedStateTitle,
           color: indicatorColor[stateData.status] ?? indicatorColor.unknown,
@@ -51,17 +49,19 @@ const ConnectionHealthDropdown: React.FC = () => {
       }
     }
   }
+  if (statuses.has('inError')) {
+    connectionStatus = 'inError';
+  } else if (statuses.size === 1 && statuses.has('completed')) {
+    connectionStatus = 'completed';
+  } else if (statuses.size === 1 && statuses.has('pending')) {
+    connectionStatus = 'pending';
+  } else {
+    connectionStatus = 'inProgress';
+  }
 
   const toggleDropdown = () => {
     setShowDropdown((prev) => !prev);
   };
-
-  let { color: connectionIndicatorColor, message: connectionMessage } =
-    connectionStates[connectionStatus] ?? {
-      color: indicatorColor.unknown,
-      message: 'Unknown Status',
-    };
-
 
   const handleRecreateOutboundTLS = () => {
     console.log('Recreate Outbound TLS Button Clicked');
@@ -70,33 +70,14 @@ const ConnectionHealthDropdown: React.FC = () => {
     console.log('Recreate JWS Button Clicked');
   };
 
-
-  const formatDescription = (description: string) => {
-    const match = description.match(/\(Last Updated: .*?\)/);
-    if (match) {
-      const mainText = description.replace(match[0], '').trim();
-      const splitTextArray = mainText.split(':');
-      if (splitTextArray.length > 1) {
-        return (
-          <>
-            <span style={{ fontWeight: 'bold' }}>{splitTextArray[0]} :</span>{' '}
-            <span style={{ fontWeight: 'normal' }}>{splitTextArray[1]}</span>
-            <span style={{ fontWeight: 'normal' }}> {match[0]}</span>
-          </>
-        );
-      }
-      return (
-        <>
-          <span style={{ fontWeight: 'bold' }}>{mainText}</span>{' '}
-          <span style={{ fontWeight: 'normal' }}>{match[0]}</span>
-        </>
-      );
-    }
-    return <span style={{ fontWeight: 'bold' }}>{description}</span>;
-  };
+  let { color: connectionIndicatorColor, message: connectionMessage } =
+    connectionStates[connectionStatus] ?? {
+      color: indicatorColor.unknown,
+      message: 'Unknown Status',
+    };
 
   if (connectionStatus === 'inError') {
-    connectionMessage = connectionMessage + 'Error writing JWS key to vault - Access Denied';
+    connectionMessage = connectionMessage + errorsList.at(0);
   }
   return (
     <div>

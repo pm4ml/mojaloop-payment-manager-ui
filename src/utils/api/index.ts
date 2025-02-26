@@ -51,23 +51,30 @@ function run<State>(endpointName: string, methodName: MethodName, config: Config
   return function* dispatcher(data: BaseObject) {
     try {
       const state: State = yield select();
-
-      const { url: rurl, transformResponse } = config;
+      // mockresponse is a function that returns the mock response
+      const { url: rurl, transformResponse, mockResponse } = config;
       const method = methodMaps[methodName];
       const url = getUrl<State>(config.service.baseUrl, state, data, rurl);
       const headers = { 'Content-Type': 'application/json' };
 
       yield put(setRequestPending(endpointName, methodName));
 
-      const response: AxiosResponse = yield axios({
-        method,
-        url,
-        params: data.params,
-        data: data.body,
-        headers,
-        validateStatus: () => true,
-        withCredentials: true,
-      });
+      let response: AxiosResponse | { status: number; data: any };
+
+      if (mockResponse) {
+        // Temporary mock response handling - REMOVE when integrating real API
+        response = { status: 200, data: mockResponse() };
+      } else {
+        response = yield axios({
+          method,
+          url,
+          params: data.params,
+          data: data.body,
+          headers,
+          validateStatus: () => true,
+          withCredentials: true,
+        });
+      }
 
       const transformedResponse = transformResponse
         ? transformResponse(response.data)
@@ -76,7 +83,7 @@ function run<State>(endpointName: string, methodName: MethodName, config: Config
       yield put(unsetRequestPending(endpointName, methodName));
 
       // if we get an unauthorised response status then redirect the browser to our backend login resource
-      if (response.status === 401) {
+      if (!mockResponse && response.status === 401) {
         const redirectRurl = `/login?redirect=${window.location.href}`;
         const redirectUrl = getUrl<State>(config.service.baseUrl, state, {}, redirectRurl);
         window.location.href = redirectUrl;
@@ -150,69 +157,6 @@ export function isPending(api: string): (apiState: LocalApiState) => boolean {
     return apiState[endpoint] && apiState[endpoint][name] === true;
   };
 }
-
-
-let lastUpdated = new Date().toISOString();
-
-export const getStates = async () => {
-  return {
-    fetchingHubCA: {
-      status: 'completed',
-      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    creatingDFSPCA: {
-      status: 'completed',
-      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    creatingDfspClientCert: {
-      status: 'completed',
-      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    creatingDfspServerCert: {
-      status: 'completed',
-      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    creatingHubClientCert: {
-      status: 'completed',
-      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    pullingPeerJWS: {
-      status: 'inProgress',
-      stateDescription: `In Progress (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    uploadingPeerJWS: {
-      status: 'inProgress',
-      stateDescription: `In Progress (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    creatingJWS: {
-      status: 'inError',
-      stateDescription: 'Connection Error',
-      errorDescription: `Error writing JWS key to vault - Access Denied (Last Updated: ${lastUpdated})`,
-    },
-    endpointConfig: {
-      status: 'pending',
-      stateDescription: `Pending (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    connectorConfig: {
-      status: 'pending',
-      stateDescription: `Pending (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-    progressMonitor: {
-      status: 'completed',
-      stateDescription: `Completed (Last Updated: ${lastUpdated})`,
-      errorDescription: '',
-    },
-  };
-};
 
 export interface ApiState extends LocalApiState {}
 export interface ApiAction extends LocalApiAction {}

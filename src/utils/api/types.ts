@@ -30,6 +30,8 @@ export interface Config<S, State> {
   service: Service<State>;
   url: UrlConfig<State>;
   transformResponse?: (data: S) => AnyPrimitive;
+  // mockResponse for testing
+  mockResponse?: () => S;
 }
 
 export type Generic<T> = T;
