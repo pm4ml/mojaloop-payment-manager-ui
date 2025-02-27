@@ -5,7 +5,7 @@ import './ConnectionHealthDropdown.css';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStatesRequest } from './actions';
+import { fetchStatesRequest, recreateJwsCertRequest, recreateOutboundTlsCertRequest } from './actions';
 
 const arrowDownUrl = 'https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000';
 const arrowUpUrl = 'https://img.icons8.com/?size=100&id=60662&format=png&color=000000';
@@ -20,7 +20,12 @@ const ConnectionHealthDropdown: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const dispatch = useDispatch();
-  const connectionStateListApiResponse = useSelector((state: any) => state.states.data.data);
+  const connectionStateListApiResponse = useSelector((state: any) => state.states.data?.data);
+  const jwsCertResponse = useSelector((state: any) => state.jwsCert.data?.data);
+  const outboundTlsCertResponse = useSelector((state: any) => state.outboundTlsCert.data?.data);
+  console.log('connectionStateListApiResponse', connectionStateListApiResponse);
+  console.log('jwsCertResponse', jwsCertResponse);
+  console.log('outboundTlsCertResponse', outboundTlsCertResponse);
 
   useEffect(() => {
     dispatch(fetchStatesRequest());
@@ -64,10 +69,12 @@ const ConnectionHealthDropdown: React.FC = () => {
   };
 
   const handleRecreateOutboundTLS = () => {
+    dispatch(recreateOutboundTlsCertRequest());
     console.log('Recreate Outbound TLS Button Clicked');
   };
   const handleRecreateJWS = () => {
     console.log('Recreate JWS Button Clicked');
+    dispatch(recreateJwsCertRequest());
   };
 
   let { color: connectionIndicatorColor, message: connectionMessage } =

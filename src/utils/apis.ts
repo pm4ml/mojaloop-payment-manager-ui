@@ -6,7 +6,9 @@ import {
   mockStateCompletedResponse,
   mockStateOtherResponse,
   mockStatePendingResponse,
-  mockStateAllErrorResponse
+  mockStateAllErrorResponse,
+  mockRecreateJwsCertResponse,
+  mockRecreateOutboundTlsCertResponse
 } from '../App/TechnicalDashboard/ConnectionHealth/mockResponse';
 
 const services = {
@@ -47,6 +49,17 @@ const getStatesMockOther: Config<Record<string, any>, State> = {
   service: mockServices.localNode,
   url: () => '/states',
   mockResponse: () => mockStateOtherResponse,
+};
+
+const recreateJwsCertMock: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/recreateJwsCert',
+  mockResponse: () => mockRecreateJwsCertResponse,
+};
+const recreateOutboundTlsCertMock: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: () => '/recreateOutboundTlsCert',
+  mockResponse: () => mockRecreateOutboundTlsCertResponse,
 };
 
 interface Todo {
@@ -275,6 +288,8 @@ const endpoints = {
   getStatesMockInError,
   getStatesMockOther,
   getStatesMockAllError,
+  recreateJwsCertMock,
+  recreateOutboundTlsCertMock,
   
   //
   environmentStatus,

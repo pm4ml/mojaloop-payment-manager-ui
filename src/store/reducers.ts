@@ -9,7 +9,7 @@ import { reducer as transfersReducer } from 'App/Transfers';
 import { reducer as wizardReducer } from 'App/ConnectionWizard';
 import fxpConversionsReducer from '../App/FxpConversions/reducers';
 
-import { statesReducer } from 'App/TechnicalDashboard/ConnectionHealth/reducers';
+import { statesReducer, jwsCertReducer, OutboundTlsCertReducer } from 'App/TechnicalDashboard/ConnectionHealth/reducers';
 const getReducer = (history: History): Reducer =>
   combineReducers({
     api: apiReducer,
@@ -21,6 +21,8 @@ const getReducer = (history: History): Reducer =>
     wizard: wizardReducer,
     fxpConversions: fxpConversionsReducer,
     states: statesReducer,
+    jwsCert: jwsCertReducer,
+    outboundTlsCert: OutboundTlsCertReducer,
   });
 
 export default getReducer;

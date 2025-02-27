@@ -289,3 +289,10 @@ export const mockStateOtherResponse = {
     errorDescription: '',
   },
 };
+
+export const mockRecreateJwsCertResponse = {
+  mockResponse: 'Jws Cert Recreated',
+};
+export const mockRecreateOutboundTlsCertResponse = {
+  mockResponse: 'Outbound TLS Cert Recreated',
+};
