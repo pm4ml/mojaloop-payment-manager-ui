@@ -290,9 +290,15 @@ export const mockStateOtherResponse = {
   },
 };
 
-export const mockRecreateJwsCertResponse = {
-  mockResponse: 'Jws Cert Recreated',
+export const mockRecreateJwsCertSuccessResponse = {
+  status: 'SUCCESS',
 };
-export const mockRecreateOutboundTlsCertResponse = {
-  mockResponse: 'Outbound TLS Cert Recreated',
+export const mockRecreateJwsCertSecurityTypeErrorResponse = {
+  error: 'Security Type Not Found',
+};
+export const mockRecreateJwsCertUnauthorisedResponse = {
+  error: 'Unauthorized',
+};
+export const mockRecreateJwsCertErrorResponse = {
+  error: 'Internal Server Error',
 };

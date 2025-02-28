@@ -5,7 +5,7 @@ import './ConnectionHealthDropdown.css';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStatesRequest, recreateJwsCertRequest, recreateOutboundTlsCertRequest } from './actions';
+import { fetchStatesRequest, recreateCertRequest } from './actions';
 
 const arrowDownUrl = 'https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000';
 const arrowUpUrl = 'https://img.icons8.com/?size=100&id=60662&format=png&color=000000';
@@ -21,15 +21,14 @@ const ConnectionHealthDropdown: React.FC = () => {
 
   const dispatch = useDispatch();
   const connectionStateListApiResponse = useSelector((state: any) => state.states.data?.data);
-  const jwsCertResponse = useSelector((state: any) => state.jwsCert.data?.data);
-  const outboundTlsCertResponse = useSelector((state: any) => state.outboundTlsCert.data?.data);
-  console.log('connectionStateListApiResponse', connectionStateListApiResponse);
-  console.log('jwsCertResponse', jwsCertResponse);
-  console.log('outboundTlsCertResponse', outboundTlsCertResponse);
+  // const recreateCertResponse = useSelector((state: any) => state.recreateCert.data?.data);
 
+
+  // Fetch states on mount
   useEffect(() => {
     dispatch(fetchStatesRequest());
   }, [dispatch]);
+
   let connectionStatus: ConnectionStatus = 'pending';
   const connectionStateList: ConnectionStateOption[] = [];
   let statuses = new Set<keyof typeof indicatorColor>();
@@ -68,13 +67,9 @@ const ConnectionHealthDropdown: React.FC = () => {
     setShowDropdown((prev) => !prev);
   };
 
-  const handleRecreateOutboundTLS = () => {
-    dispatch(recreateOutboundTlsCertRequest());
-    console.log('Recreate Outbound TLS Button Clicked');
-  };
-  const handleRecreateJWS = () => {
-    console.log('Recreate JWS Button Clicked');
-    dispatch(recreateJwsCertRequest());
+  const handleRecreate = (securityType: "JWS" | "outboundTLS") => {
+    const reason = 'Dummy reason for recreating cert and keys';
+    dispatch(recreateCertRequest(securityType, reason));
   };
 
   let { color: connectionIndicatorColor, message: connectionMessage } =
@@ -105,8 +100,8 @@ const ConnectionHealthDropdown: React.FC = () => {
       {showDropdown && (
         <>
           <Row align="left top" padding="8px" style={{ marginLeft: '20px', marginBottom: '10px', display: 'flex', gap: '50px' }}>
-            <Button onClick={() => handleRecreateOutboundTLS()} label="Recreate Outbound TLS" kind="secondary" />
-            <Button onClick={() => handleRecreateJWS()} label="Recreate JWS" kind="secondary" />
+            <Button onClick={() => handleRecreate("outboundTLS")} label="Recreate Outbound TLS" kind="secondary" />
+            <Button onClick={() => handleRecreate("JWS")} label="Recreate JWS" kind="secondary" />
           </Row>
           <div className="connection-dropdown">
             <div className="connection-dropdown-content">

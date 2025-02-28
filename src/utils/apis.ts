@@ -7,8 +7,10 @@ import {
   mockStateOtherResponse,
   mockStatePendingResponse,
   mockStateAllErrorResponse,
-  mockRecreateJwsCertResponse,
-  mockRecreateOutboundTlsCertResponse
+  mockRecreateJwsCertErrorResponse,
+  mockRecreateJwsCertSecurityTypeErrorResponse,
+  mockRecreateJwsCertSuccessResponse,
+  mockRecreateJwsCertUnauthorisedResponse,
 } from '../App/TechnicalDashboard/ConnectionHealth/mockResponse';
 
 const services = {
@@ -51,15 +53,26 @@ const getStatesMockOther: Config<Record<string, any>, State> = {
   mockResponse: () => mockStateOtherResponse,
 };
 
-const recreateJwsCertMock: Config<Record<string, any>, State> = {
+// Mock api for recreateCert
+const recreateCertMockSuccess: Config<Record<string, any>, State> = {
   service: mockServices.localNode,
-  url: () => '/recreateJwsCert',
-  mockResponse: () => mockRecreateJwsCertResponse,
+  url: (_, data) => `/recreate/${data.securityType}`,
+  mockResponse: () => mockRecreateJwsCertSuccessResponse,
 };
-const recreateOutboundTlsCertMock: Config<Record<string, any>, State> = {
+const recreateCertMockError: Config<Record<string, any>, State> = {
   service: mockServices.localNode,
-  url: () => '/recreateOutboundTlsCert',
-  mockResponse: () => mockRecreateOutboundTlsCertResponse,
+  url: (_, data) => `/recreate/${data.securityType}`,
+  mockResponse: () => mockRecreateJwsCertErrorResponse,
+};
+const recreateCertMOCKSecurityTypeError: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: (_, data) => `/recreate/${data.securityType}`,
+  mockResponse: () => mockRecreateJwsCertSecurityTypeErrorResponse,
+};
+const recreateCertMockUnauthorised: Config<Record<string, any>, State> = {
+  service: mockServices.localNode,
+  url: (_, data) => `/recreate/${data.securityType}`,
+  mockResponse: () => mockRecreateJwsCertUnauthorisedResponse,
 };
 
 interface Todo {
@@ -281,17 +294,18 @@ const metric: Config<Todo, State> = {
 };
 
 const endpoints = {
-  dfsps,
   // mockServices,
   getStatesMockInCompleted,
   getStatesMockPending,
   getStatesMockInError,
   getStatesMockOther,
   getStatesMockAllError,
-  recreateJwsCertMock,
-  recreateOutboundTlsCertMock,
-  
-  //
+  recreateCertMockSuccess,
+  recreateCertMOCKSecurityTypeError,
+  recreateCertMockUnauthorised,
+  recreateCertMockError,
+  // mockServices end
+  dfsps,
   environmentStatus,
   monetaryZones,
   batches,

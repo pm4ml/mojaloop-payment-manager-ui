@@ -3,18 +3,10 @@ import {
   FETCH_STATES_REQUEST,
   FETCH_STATES_SUCCESS,
   FETCH_STATES_FAILURE,
-  RECREATE_JWS_CERT_REQUEST,
-  RECREATE_JWS_CERT_SUCCESS,
-  RECREATE_JWS_CERT_FAILURE,
-  RECREATE_OUTBOUND_TLS_CERT_REQUEST,
-  RECREATE_OUTBOUND_TLS_CERT_SUCCESS,
-  RECREATE_OUTBOUND_TLS_CERT_FAILURE,
-
+  RECREATE_CERT_REQUEST,
+  RECREATE_CERT_SUCCESS,
+  RECREATE_CERT_FAILURE,
 } from './actions';
-interface CertAction {
-  type: string;
-  payload?: any;
-}
 
 interface State {
   status: 'pending' | 'inProgress' | 'completed' | 'inError';
@@ -61,55 +53,49 @@ export const statesReducer: Reducer<StatesState, StatesAction> = (
   }
 };
 
-interface JwsCertState {
+interface CertState {
   data: any | null;
   isLoading: boolean;
   errorMessage: string | null;
 }
 
-const initialJwsCertState: JwsCertState = {
+const initialCertState: CertState = {
   data: null,
   isLoading: false,
   errorMessage: null,
 };
 
-export const jwsCertReducer: Reducer<JwsCertState, CertAction> = (state = initialJwsCertState, action) => {
-  switch (action.type) {
-    case RECREATE_JWS_CERT_REQUEST:
-      return { ...state, isLoading: true, errorMessage: null };
-
-    case RECREATE_JWS_CERT_SUCCESS:
-      return { ...state, isLoading: false, data: action.payload };
-
-    case RECREATE_JWS_CERT_FAILURE:
-      return { ...state, isLoading: false, errorMessage: action.payload as string };
-
-    default:
-      return state;
-  }
-};
-interface OutboundTlsCertState {
-  data: any | null;
-  isLoading: boolean;
-  errorMessage: string | null;
+interface CertAction {
+  type: string;
+  payload?: {
+    response?: any;
+    error?: string;
+  };
 }
 
-const initialOutboundTlsCertState: OutboundTlsCertState = {
-  data: null,
-  isLoading: false,
-  errorMessage: null,
-};
-
-export const OutboundTlsCertReducer: Reducer<OutboundTlsCertState, CertAction> = (state = initialOutboundTlsCertState, action) => {
+export const recreateCertReducer: Reducer<CertState, CertAction> = (
+  state = initialCertState,
+  action
+) => {
   switch (action.type) {
-    case RECREATE_OUTBOUND_TLS_CERT_REQUEST:
+    case RECREATE_CERT_REQUEST:
       return { ...state, isLoading: true, errorMessage: null };
 
-    case RECREATE_OUTBOUND_TLS_CERT_SUCCESS:
-      return { ...state, isLoading: false, data: action.payload };
+    case RECREATE_CERT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload?.response,
+        errorMessage: null,
+      };
 
-    case RECREATE_OUTBOUND_TLS_CERT_FAILURE:
-      return { ...state, isLoading: false, errorMessage: action.payload as string };
+    case RECREATE_CERT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        data: null,
+        errorMessage: action.payload?.error || 'Unknown error',
+      };
 
     default:
       return state;

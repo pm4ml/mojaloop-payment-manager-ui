@@ -4,23 +4,19 @@ import {
   FETCH_STATES_REQUEST,
   fetchStatesSuccess,
   fetchStatesFailure,
-  RECREATE_JWS_CERT_REQUEST,
-  recreateJwsCertSuccess,
-  recreateJwsCertFailure,
-  RECREATE_OUTBOUND_TLS_CERT_REQUEST,
-  recreateOutboundTlsCertSuccess,
-  recreateOutboundTlsCertFailure
+  RECREATE_CERT_REQUEST,
+  recreateCertSuccess,
+  recreateCertFailure,
 } from './actions';
 
 function* fetchStatesSaga(): Generator<any, void, any> {
   try {
     // mock response of comleted, pending, in error and other states
-    // const states = yield call(apis.getStatesMockInCompleted.read, {});
+    const states = yield call(apis.getStatesMockInCompleted.read, {});
     // const states = yield call(apis.getStatesMockPending.read, {});
-    const states = yield call(apis.getStatesMockInError.read, {});
-    // const states = yield call(apis.getStatesMockAllError.read, {});
+    // const states = yield call(apis.getStatesMockInError.read, {});
     // const states = yield call(apis.getStatesMockOther.read, {});
-    console.log('states', states);
+    // const states = yield call(apis.getStatesMockAllError.read, {});
     yield put(fetchStatesSuccess(states));
   } catch (error) {
     console.error('Error fetching states:', error);
@@ -32,36 +28,30 @@ export function* watchFetchStatesSaga() {
   yield takeLatest(FETCH_STATES_REQUEST, fetchStatesSaga);
 }
 
-function* recreateJwsCertSaga(): Generator<any, void, any> {
+function* recreateCertSaga(action: any): Generator<any, void, any> {
+  const { securityType, reason } = action.payload || {};
   try {
-    const jwsCert = yield call(apis.recreateJwsCertMock.read, {});
-    console.log('recreateJwsCertSaga', jwsCert);
-    yield put(recreateJwsCertSuccess(jwsCert));
+    const response = yield call(apis.recreateCertMockSuccess.create, {
+      securityType,
+      body: { reason },
+      headers: { 'X-User': 'mockUser' },
+    });
+    console.log(`Recreate cert response for ${securityType}`, response.data);
+    yield put(recreateCertSuccess(response));
   } catch (error) {
-    console.error('Error recreating JWS certificate:', error);
-    yield put(recreateJwsCertFailure(error));
+    console.error('Error recreating cert:', error);
+    yield put(
+      recreateCertFailure(
+        error instanceof Error ? error.message : 'Request failed'
+      )
+    );
   }
 }
 
-export function* watchRecreateJwsCertSaga() {
-  yield takeLatest(RECREATE_JWS_CERT_REQUEST, recreateJwsCertSaga);
-}
-
-function* recreateOutboundTlsCertSaga(): Generator<any, void, any> {
-  try {
-    const outboundTlsCert = yield call(apis.recreateOutboundTlsCertMock.read, {});
-    console.log('recreateOutboundTlsCertSaga', outboundTlsCert);
-    yield put(recreateOutboundTlsCertSuccess(outboundTlsCert));
-  } catch (error) {
-    console.error('Error recreating Outbound TLS certificate:', error);
-    yield put(recreateOutboundTlsCertFailure(error));
-  }
-}
-
-export function* watchRecreateOutboundTlsCertSaga() {
-  yield takeLatest(RECREATE_OUTBOUND_TLS_CERT_REQUEST, recreateOutboundTlsCertSaga);
+export function* watchRecreateCertSaga() {
+  yield takeLatest(RECREATE_CERT_REQUEST, recreateCertSaga);
 }
 
 export default function* rootSaga() {
-  yield all([watchFetchStatesSaga(), watchRecreateJwsCertSaga(), watchRecreateOutboundTlsCertSaga()]);
+  yield all([watchFetchStatesSaga(), watchRecreateCertSaga()]);
 }
