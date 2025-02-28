@@ -75,7 +75,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired --openssl-legacy-provider build",
     "test": "react-app-rewired test",
     "test:nowatch": "CI=true react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
@@ -111,8 +111,7 @@
   "devDependencies": {
     "@types/validator": "^13.12.2",
     "redux-mock-store": "^1.5.4",
-    "standard-version": "^9.5.0",
-    "eslint-plugin-jsx-a11y": "6.10.2"
+    "standard-version": "^9.5.0"
   },
   "husky": {
     "hooks": {
