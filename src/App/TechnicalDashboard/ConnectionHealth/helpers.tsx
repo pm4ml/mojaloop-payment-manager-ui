@@ -11,7 +11,7 @@ export const indicatorColor = {
 export let connectionStates = {
   pending: {
     color: indicatorColor.pending,
-    message: 'Connecting ...',
+    message: 'Pending',
   },
   inError: {
     color: indicatorColor.inError,
