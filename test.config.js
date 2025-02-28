@@ -23,7 +23,7 @@ module.exports = {
     collectCoverage: true,
     coverageDirectory: 'coverage',
     coverageProvider: 'v8',
-    coverageReporters: ['json', 'text', 'lcov', 'text-summary'],
+    coverageReporters: ['json', 'text', 'lcov', 'text-summary', 'clover'],
   
     // An object that configures minimum threshold enforcement for coverage results
     coverageThreshold: {
