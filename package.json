@@ -91,7 +91,10 @@
     "test:coverage-check": "yarn test:coverage && npx nyc check-coverage",
     "audit:check": "npx audit-ci --config ./audit-ci.jsonc",
     "dep:check": "npx ncu -e 2",
-    "dep:update": "npx ncu -u"
+    "dep:update": "npx ncu -u",
+    "test:int": "jest --ci --reporters=default --reporters=jest-junit --env=node ui-tests/integration --forceExit --detectOpenHandles",
+    "test:integration": "yarn run test:int",
+    "test:functional": "./ui-tests/scripts/test-functional.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
