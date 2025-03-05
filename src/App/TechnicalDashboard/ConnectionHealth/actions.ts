@@ -52,3 +52,19 @@ export const recreateCertFailure = (error: string): RecreateCertFailureAction =>
   type: RECREATE_CERT_FAILURE,
   payload: { error: error || 'Unknown error' },
 });
+
+export const SET_CONNECTION_STATUS = 'SET_CONNECTION_STATUS';
+
+export type ConnectionStatus = 'pending' | 'inError' | 'completed' | 'inProgress';
+
+interface SetConnectionStatusAction {
+  type: typeof SET_CONNECTION_STATUS;
+  payload: ConnectionStatus;
+}
+
+export type ConnectionStatusActionTypes = SetConnectionStatusAction;
+
+export const setConnectionStatus = (status: ConnectionStatus): SetConnectionStatusAction => ({
+  type: SET_CONNECTION_STATUS,
+  payload: status,
+});

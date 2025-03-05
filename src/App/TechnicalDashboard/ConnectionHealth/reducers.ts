@@ -6,6 +6,7 @@ import {
   RECREATE_CERT_REQUEST,
   RECREATE_CERT_SUCCESS,
   RECREATE_CERT_FAILURE,
+  SET_CONNECTION_STATUS,
 } from './actions';
 
 interface State {
@@ -18,13 +19,16 @@ interface StatesState {
   data: Record<string, State>;
   isLoading: boolean;
   errorMessage: string | null;
+  connectionStatus: 'pending' | 'inProgress' | 'completed' | 'inError';
 }
 
 const initialStatesState: StatesState = {
   data: {},
   isLoading: false,
   errorMessage: null,
+  connectionStatus: 'pending', // Default state
 };
+
 interface StatesAction {
   type: string;
   payload?: Record<string, State> | string;
@@ -47,6 +51,9 @@ export const statesReducer: Reducer<StatesState, StatesAction> = (
 
     case FETCH_STATES_FAILURE:
       return { ...state, isLoading: false, errorMessage: action.payload as string };
+
+    case SET_CONNECTION_STATUS:
+      return { ...state, connectionStatus: action.payload as 'pending' | 'inProgress' | 'completed' | 'inError' };
 
     default:
       return state;

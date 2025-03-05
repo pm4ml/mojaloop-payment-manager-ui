@@ -11,12 +11,9 @@ import {
 
 function* fetchStatesSaga(): Generator<any, void, any> {
   try {
-    // mock response of comleted, pending, in error and other states
-    const states = yield call(apis.getStatesMockInCompleted.read, {});
-    // const states = yield call(apis.getStatesMockPending.read, {});
-    // const states = yield call(apis.getStatesMockInError.read, {});
-    // const states = yield call(apis.getStatesMockOther.read, {});
-    // const states = yield call(apis.getStatesMockAllError.read, {});
+    // [getStates, getStatesMockInCompleted, getStatesMockPending, getStatesMockInError, getStatesMockOther, getStatesMockAllError]
+    const states = yield call(apis.getStatesMockInError.read, {});
+    console.log('Fetched states:', states);
     yield put(fetchStatesSuccess(states));
   } catch (error) {
     console.error('Error fetching states:', error);
@@ -31,10 +28,10 @@ export function* watchFetchStatesSaga() {
 function* recreateCertSaga(action: any): Generator<any, void, any> {
   const { securityType, reason } = action.payload || {};
   try {
+    // recreateCert
     const response = yield call(apis.recreateCertMockSuccess.create, {
       securityType,
-      body: { reason },
-      headers: { 'X-User': 'mockUser' },
+      body: { reason }
     });
     console.log(`Recreate cert response for ${securityType}`, response.data);
     yield put(recreateCertSuccess(response));

@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Row, Button } from "components";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStatesRequest, recreateCertRequest } from "./actions";
+import { fetchStatesRequest, recreateCertRequest, setConnectionStatus } from "./actions";
 import { indicatorColor, connectionStates, ConnectionStatus, formatTitleCase, formatDescription } from "./helpers";
 import RecreateModal from "./RecreateModal";
 import "./ConnectionHealthDropdown.css";
 
-const arrowDownUrl =
-  "https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000";
-const arrowUpUrl =
-  "https://img.icons8.com/?size=100&id=60662&format=png&color=000000";
+const arrowDownUrl = "https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000";
+const arrowUpUrl = "https://img.icons8.com/?size=100&id=60662&format=png&color=000000";
 
 interface ConnectionStateOption {
   state: string;
@@ -26,48 +24,61 @@ const ConnectionHealthDropdown: React.FC = () => {
 
   const dispatch = useDispatch();
   const connectionStateListApiResponse = useSelector((state: any) => state.states.data?.data);
+  const connectionStatusFromRedux = useSelector((state: any) => state.states.connectionStatus);
 
   useEffect(() => {
     dispatch(fetchStatesRequest());
   }, [dispatch]);
 
-  let connectionStatus: ConnectionStatus = "pending";
-  const connectionStateList: ConnectionStateOption[] = [];
-  let statuses = new Set<keyof typeof indicatorColor>();
-  let errorsList: string[] = [];
 
-  if (connectionStateListApiResponse) {
-    for (const key in connectionStateListApiResponse) {
-      if (Object.prototype.hasOwnProperty.call(connectionStateListApiResponse, key)) {
-        const stateData = connectionStateListApiResponse[key] as {
-          status: keyof typeof indicatorColor;
-          errorDescription: string;
-          stateDescription: string;
-        };
-        statuses.add(stateData.status);
-        if (stateData.status === "inError") {
-          errorsList.push(stateData.errorDescription);
+  const { connectionStateList, connectionStatus, errorsList } = useMemo(() => {
+    let status: ConnectionStatus = "pending";
+    const statuses = new Set<keyof typeof indicatorColor>();
+    const errors: string[] = [];
+    const stateList: ConnectionStateOption[] = [];
+
+    if (connectionStateListApiResponse) {
+      for (const key in connectionStateListApiResponse) {
+        if (Object.prototype.hasOwnProperty.call(connectionStateListApiResponse, key)) {
+          const stateData = connectionStateListApiResponse[key] as {
+            status: keyof typeof indicatorColor;
+            errorDescription: string;
+            stateDescription: string;
+          };
+          statuses.add(stateData.status);
+          if (stateData.status === "inError") {
+            errors.push(stateData.errorDescription);
+          }
+          stateList.push({
+            state: formatTitleCase(key),
+            color: indicatorColor[stateData.status] ?? indicatorColor.unknown,
+            description: stateData.errorDescription
+              ? `${stateData.stateDescription} : ${stateData.errorDescription}`
+              : stateData.stateDescription,
+          });
         }
-        connectionStateList.push({
-          state: formatTitleCase(key),
-          color: indicatorColor[stateData.status] ?? indicatorColor.unknown,
-          description: stateData.errorDescription
-            ? `${stateData.stateDescription} : ${stateData.errorDescription}`
-            : stateData.stateDescription,
-        });
+      }
+
+      if (statuses.has("inError")) {
+        status = "inError";
+      } else if (statuses.size === 1 && statuses.has("completed")) {
+        status = "completed";
+      } else if (statuses.size === 1 && statuses.has("pending")) {
+        status = "pending";
+      } else {
+        status = "inProgress";
       }
     }
-  }
 
-  if (statuses.has("inError")) {
-    connectionStatus = "inError";
-  } else if (statuses.size === 1 && statuses.has("completed")) {
-    connectionStatus = "completed";
-  } else if (statuses.size === 1 && statuses.has("pending")) {
-    connectionStatus = "pending";
-  } else {
-    connectionStatus = "inProgress";
-  }
+    return { connectionStateList: stateList, connectionStatus: status, errorsList: errors };
+  }, [connectionStateListApiResponse]);
+
+  // Dispatch connection status update only when necessary
+  useEffect(() => {
+    if (connectionStatusFromRedux !== connectionStatus) {
+      dispatch(setConnectionStatus(connectionStatus));
+    }
+  }, [connectionStatus, connectionStatusFromRedux, dispatch]);
 
   const toggleDropdown = () => {
     setShowDropdown((prev) => !prev);

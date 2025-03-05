@@ -25,6 +25,17 @@ const mockServices = {
     baseUrl: 'http://mockHost:9000/mock',
   },
 };
+// const managementServices = {
+//   localNode: {
+//     baseUrl: 'http://localhost:9000',
+//   },
+// };
+
+// API for getStates
+// const getStates: Config<Record<string, any>, State> = {
+//   service: managementServices.localNode,
+//   url: () => '/states',
+// };
 
 // Mock API for getStates
 const getStatesMockInCompleted: Config<Record<string, any>, State> = {
@@ -53,6 +64,11 @@ const getStatesMockOther: Config<Record<string, any>, State> = {
   mockResponse: () => mockStateOtherResponse,
 };
 
+// API for recreateCert
+// const recreateCert: Config<Record<string, any>, State> = {
+//   service: managementServices.localNode,
+//   url: (_, data) => `/recreate/${data.securityType}`,
+// };
 // Mock api for recreateCert
 const recreateCertMockSuccess: Config<Record<string, any>, State> = {
   service: mockServices.localNode,
