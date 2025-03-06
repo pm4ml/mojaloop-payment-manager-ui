@@ -1,11 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
 import { Modal, FormInput } from "components";
+import {RecreateSecurtityType} from "../ConnectionHealth/helpers";
 
 interface RecreateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  securityType: "JWS" | "outboundTLS";
-  onSubmit: (securityType: "JWS" | "outboundTLS", reason: string) => void;
+  securityType: RecreateSecurtityType;
+  onSubmit: (securityType: RecreateSecurtityType , reason: string) => void;
 }
 
 const RecreateModal: FC<RecreateModalProps> = ({ isOpen, onClose, onSubmit, securityType }) => {

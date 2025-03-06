@@ -1,7 +1,9 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStatesRequest, setConnectionStatus } from "./TechnicalDashboard/ConnectionHealth/actions";
+import { getConnectionStateData } from "./TechnicalDashboard/ConnectionHealth/helpers";
 import Layout from './Layout';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
@@ -14,6 +16,8 @@ import FxpTechnicalDashboard from './FxpTechnicalDashboard';
 import FxpConversions from './FxpConversions';
 
 import { getUiConfig } from './selectors';
+
+import { ConnectionStatusEnum, indicatorColor, getNavbarConnectionStatus } from "./TechnicalDashboard/ConnectionHealth/helpers";
 
 interface AppProps {
   isSuccessToastVisible: boolean;
@@ -33,8 +37,27 @@ const App: FC<AppProps> = ({
 }) => {
   const uiConfig = useSelector(getUiConfig);
   const { appTitle, countryLogo, appLogo } = uiConfig;
-  const activeConnectionName = 'Modusbox & Mojaloop Labs';
-  const activeConnectionStatusColor = '#12d670';
+  const connectionName = 'Modusbox & Mojaloop Labs';
+
+  const dispatch = useDispatch();
+  const connectionStateData = useSelector((state: any) => state.states.data?.data);
+  const storedConnectionStatus = useSelector((state: any) => state.states.connectionStatus) as ConnectionStatusEnum;
+
+  useEffect(() => {
+    dispatch(fetchStatesRequest());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!connectionStateData || storedConnectionStatus === getConnectionStateData(connectionStateData).connectionStatus) {
+      return;
+    }
+
+    dispatch(setConnectionStatus(getConnectionStateData(connectionStateData).connectionStatus));
+  }, [connectionStateData, storedConnectionStatus, dispatch]);
+
+  const connectionText = getNavbarConnectionStatus(storedConnectionStatus, connectionName);
+  const connectionIndicatorColor = indicatorColor[storedConnectionStatus] || indicatorColor.pending;
+
   return (
     <div className="App">
       <Layout.Container>
@@ -44,8 +67,8 @@ const App: FC<AppProps> = ({
           }
           logoutUrl={userInfo ? userInfo.logoutUrl : undefined}
           kratos={userInfo?.kratos}
-          activeConnectionName={activeConnectionName}
-          activeConnectionStatusColor={activeConnectionStatusColor}
+          connectionStatusTitle={connectionText}
+          connectionStatusColor={connectionIndicatorColor}
           appTitle={appTitle}
           appLogo={appLogo}
           countryLogo={countryLogo}

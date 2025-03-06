@@ -1,14 +1,12 @@
-import React, { FC} from 'react';
+import React, { FC } from 'react';
 import { Icon } from 'components';
 import './Navbar.css';
-import { useSelector } from "react-redux";
-import { indicatorColor} from "../../TechnicalDashboard/ConnectionHealth/helpers";
 
 type NavbarProps = {
   username?: string;
   logoutUrl?: string;
-  activeConnectionName: string;
-  activeConnectionStatusColor: string;
+  connectionStatusTitle: string;
+  connectionStatusColor: string ;
   kratos?: boolean;
   appTitle: string;
   appLogo: string;
@@ -17,8 +15,8 @@ type NavbarProps = {
 
 const Navbar: FC<NavbarProps> = ({
   username,
-  activeConnectionName,
-  activeConnectionStatusColor,
+  connectionStatusTitle,
+  connectionStatusColor,
   logoutUrl,
   kratos,
   appTitle,
@@ -41,9 +39,6 @@ const Navbar: FC<NavbarProps> = ({
     }
   };
 
-  const connectionStatusFromRedux = useSelector((state: any) => state.states.connectionStatus) as keyof typeof indicatorColor;
-  const connectionColor = indicatorColor[connectionStatusFromRedux] || indicatorColor.unknown;
-  activeConnectionStatusColor = connectionColor;
   return (
     <div id="navbar">
       {appLogo ? <img src={appLogo} alt="DFSP Logo" className="navbar__dfsp-logo" /> : null}
@@ -55,10 +50,10 @@ const Navbar: FC<NavbarProps> = ({
       </div>
 
       <div id="navbar__active__connection">
-        Connected to: {activeConnectionName}
+        {connectionStatusTitle}
         <div
           className="navbar__connection-led"
-          style={{ backgroundColor: activeConnectionStatusColor }}
+          style={{ backgroundColor: connectionStatusColor }}
         />
       </div>
 
