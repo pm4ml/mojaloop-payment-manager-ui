@@ -12,7 +12,8 @@ import {
 function* fetchStatesSaga(): Generator<any, void, any> {
   try {
     // [getStates, getStatesMockInCompleted, getStatesMockPending, getStatesMockInError, getStatesMockOther, getStatesMockAllError]
-    const states = yield call(apis.getStatesMockInError.read, {});
+    const states = yield call(apis.getStatesMockAllError.read, {});
+    console.log('states:', states);
     yield put(fetchStatesSuccess(states));
   } catch (error) {
     console.error('Error fetching states:', error);
@@ -32,6 +33,7 @@ function* recreateCertSaga(action: any): Generator<any, void, any> {
       securityType,
       body: { reason }
     });
+    console.log('response:', response);
     yield put(recreateCertSuccess(response));
   } catch (error) {
     console.error('Error recreating cert:', error);

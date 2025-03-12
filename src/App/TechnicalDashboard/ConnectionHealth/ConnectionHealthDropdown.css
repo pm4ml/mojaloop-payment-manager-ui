@@ -1,7 +1,13 @@
-.accordion__indicator__color {
+.connection-status-indicator-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+.connection-state-indicator-color {
     width: 12px;
     height: 12px;
-    border-radius: 50%;
+    border-radius: 10px;
     margin-right: 10px;
   }
   

@@ -25,17 +25,17 @@ const mockServices = {
     baseUrl: 'http://mockHost:9000/mock',
   },
 };
-// const managementServices = {
-//   localNode: {
-//     baseUrl: 'http://localhost:9000',
-//   },
-// };
+const managementServices = {
+  localNode: {
+    baseUrl: 'http://localhost:9000',
+  },
+};
 
 // API for getStates
-// const getStates: Config<Record<string, any>, State> = {
-//   service: managementServices.localNode,
-//   url: () => '/states',
-// };
+const getStates: Config<Record<string, any>, State> = {
+  service: managementServices.localNode,
+  url: () => '/states',
+};
 
 // Mock API for getStates
 const getStatesMockInCompleted: Config<Record<string, any>, State> = {
@@ -65,10 +65,10 @@ const getStatesMockOther: Config<Record<string, any>, State> = {
 };
 
 // API for recreateCert
-// const recreateCert: Config<Record<string, any>, State> = {
-//   service: managementServices.localNode,
-//   url: (_, data) => `/recreate/${data.securityType}`,
-// };
+const recreateCert: Config<Record<string, any>, State> = {
+  service: managementServices.localNode,
+  url: (_, data) => `/recreate/${data.securityType}`,
+};
 // Mock api for recreateCert
 const recreateCertMockSuccess: Config<Record<string, any>, State> = {
   service: mockServices.localNode,
@@ -311,11 +311,13 @@ const metric: Config<Todo, State> = {
 
 const endpoints = {
   // mockServices,
+  getStates,
   getStatesMockInCompleted,
   getStatesMockPending,
   getStatesMockInError,
   getStatesMockOther,
   getStatesMockAllError,
+  recreateCert,
   recreateCertMockSuccess,
   recreateCertMOCKSecurityTypeError,
   recreateCertMockUnauthorised,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Row, Button } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStatesRequest, recreateCertRequest, setConnectionStatus } from "./actions";
-import { getConnectionStateData, connectionStates, formatDescription, RecreateSecurtityType } from "./helpers";
+import { getConnectionStateData, connectionStates, formatDescription, RecreateSecurtityType, ConnectionStatusEnum } from "./helpers";
 import RecreateModal from "./RecreateModal";
 import "./ConnectionHealthDropdown.css";
 
@@ -18,7 +18,7 @@ const ConnectionHealthDropdown: React.FC = () => {
 
   const dispatch = useDispatch();
   const connectionStateData = useSelector((state: any) => state.states.data?.data);
-  const storedConnectionStatus = useSelector((state: any) => state.states.connectionStatus);
+  const storedConnectionStatus = useSelector((state: any) => state.states.connectionStatus) as ConnectionStatusEnum;
 
   useEffect(() => {
     dispatch(fetchStatesRequest());
@@ -61,11 +61,11 @@ const ConnectionHealthDropdown: React.FC = () => {
   return (
     <div>
       <Row align="left top" className="connection-status-container">
-        <div className="accordion__indicator__color" style={{ background: connectionIndicatorColor }} />
+        <div className="connection-status-indicator-color" style={{ backgroundColor: connectionIndicatorColor }} />
         <div>
           <span className="connection-status-message">
             {connectionMessage.split(":")[0]}
-            {connectionMessage.includes(":") && " :"}
+            {connectionMessage.includes(":") && " : "}
           </span>
           {connectionMessage.includes(":") && <span>{connectionMessage.split(":")[1]}</span>}
         </div>
@@ -84,7 +84,7 @@ const ConnectionHealthDropdown: React.FC = () => {
             <div className="connection-dropdown-content">
               {connectionStateList.map((option) => (
                 <div key={option.state} className="connection-state-item">
-                  <div className="accordion__indicator__color" style={{ background: option.color }} />
+                  <div className="connection-state-indicator-color" style={{ backgroundColor: option.color }} />
                   <span className="connection-state-text">{option.state}</span>
                   <span>:</span>
                   <span className="connection-state-description">{formatDescription(option.description)}</span>
