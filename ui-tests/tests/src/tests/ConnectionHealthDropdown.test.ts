@@ -1,6 +1,7 @@
 import { ConnectionHealthDropdownComponent } from '../page-objects/pages/ConnectionHealthDropdownComponent';
 import { LoginPage } from '../page-objects/pages/LoginPage';
 import { t, ClientFunction } from 'testcafe';
+import { config } from '../config';
 import {
   getConnectionStateData,
   connectionStates
@@ -14,12 +15,12 @@ declare global {
 
 async function login() {
   await t
-    .typeText(LoginPage.usernameField, 'test')
-    .typeText(LoginPage.passwordField, 'test')
+    .typeText(LoginPage.usernameField, config.credentials.test.username)
+    .typeText(LoginPage.passwordField, config.credentials.test.password)
     .click(LoginPage.loginButton);
 }
 
-fixture`Connection Health Dropdown Feature`.page`http://localhost:8083/techdashboard`.beforeEach(
+fixture`Connection Health Dropdown Feature`.page`${config.pm4mlEndpoint}/techdashboard`.beforeEach(
   async () => {
     await login();
   }
