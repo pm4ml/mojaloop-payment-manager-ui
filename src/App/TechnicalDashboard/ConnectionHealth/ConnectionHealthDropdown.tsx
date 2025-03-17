@@ -1,24 +1,35 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Row, Button } from "components";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchStatesRequest, recreateCertRequest, setConnectionStatus } from "./actions";
-import { getConnectionStateData, connectionStates, formatDescription, RecreateSecurtityType, ConnectionStatusEnum } from "./helpers";
-import RecreateModal from "./RecreateModal";
-import "./ConnectionHealthDropdown.css";
+import React, { useState, useEffect, useMemo } from 'react';
+import { Row, Button } from 'components';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStatesRequest, recreateCertRequest, setConnectionStatus } from './actions';
+import {
+  getConnectionStateData,
+  connectionStates,
+  formatDescription,
+  RecreateSecurtityType,
+  ConnectionStatusEnum,
+} from './helpers';
+import RecreateModal from './RecreateModal';
+import './ConnectionHealthDropdown.css';
 
-const arrowDownUrl = "https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000";
-const arrowUpUrl = "https://img.icons8.com/?size=100&id=60662&format=png&color=000000";
+const arrowDownUrl = 'https://img.icons8.com/?size=100&id=ZOUx9tGqWHny&format=png&color=000000';
+const arrowUpUrl = 'https://img.icons8.com/?size=100&id=60662&format=png&color=000000';
 
 const ConnectionHealthDropdown: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [modalState, setModalState] = useState<{ isOpen: boolean; securityType: RecreateSecurtityType | null }>({
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    securityType: RecreateSecurtityType | null;
+  }>({
     isOpen: false,
     securityType: null,
   });
 
   const dispatch = useDispatch();
   const connectionStateData = useSelector((state: any) => state.states.data?.data);
-  const storedConnectionStatus = useSelector((state: any) => state.states.connectionStatus) as ConnectionStatusEnum;
+  const storedConnectionStatus = useSelector(
+    (state: any) => state.states.connectionStatus
+  ) as ConnectionStatusEnum;
 
   useEffect(() => {
     dispatch(fetchStatesRequest());
@@ -46,48 +57,73 @@ const ConnectionHealthDropdown: React.FC = () => {
     setModalState({ isOpen: false, securityType: null });
   };
 
-  const handleRecreate = (securityType: "JWS" | "outboundTLS", reason: string) => {
+  const handleRecreate = (securityType: 'JWS' | 'outboundTLS', reason: string) => {
     dispatch(recreateCertRequest(securityType, reason));
     closeModal();
   };
 
-  let { color: connectionIndicatorColor, message: connectionMessage } =
-    connectionStates[connectionStatus]
+  let { color: connectionIndicatorColor, message: connectionMessage } = connectionStates[
+    connectionStatus
+  ];
 
-  if (connectionStatus === "inError") {
-    connectionMessage = connectionMessage + errorsList.at(0);
+  if (connectionStatus === 'inError') {
+    connectionMessage += errorsList.at(0);
   }
 
   return (
     <div>
       <Row align="left top" className="connection-status-container">
-        <div className="connection-status-indicator-color" style={{ backgroundColor: connectionIndicatorColor }} />
+        <div
+          className="connection-status-indicator-color"
+          style={{ backgroundColor: connectionIndicatorColor }}
+        />
         <div>
           <span className="connection-status-message">
-            {connectionMessage.split(":")[0]}
-            {connectionMessage.includes(":") && " : "}
+            {connectionMessage.split(':')[0]}
+            {connectionMessage.includes(':') && ' : '}
           </span>
-          {connectionMessage.includes(":") && <span>{connectionMessage.split(":")[1]}</span>}
+          {connectionMessage.includes(':') && <span>{connectionMessage.split(':')[1]}</span>}
         </div>
         <button onClick={toggleDropdown} className="connection-status-button">
-          <img src={showDropdown ? arrowDownUrl : arrowUpUrl} alt="Dropdown Arrow" style={{ width: "12px", height: "12px" }} />
+          <img
+            src={showDropdown ? arrowDownUrl : arrowUpUrl}
+            alt="Dropdown Arrow"
+            style={{ width: '12px', height: '12px' }}
+          />
         </button>
       </Row>
 
       {showDropdown && (
         <>
-          <Row align="left top" padding="8px" style={{ marginLeft: "20px", marginBottom: "10px", display: "flex", gap: "50px" }}>
-            <Button onClick={() => openModal(RecreateSecurtityType.OUTBOUND_TLS)} label="Recreate Outbound TLS" kind="secondary" />
-            <Button onClick={() => openModal(RecreateSecurtityType.JWS)} label="Recreate JWS" kind="secondary" />
+          <Row
+            align="left top"
+            padding="8px"
+            style={{ marginLeft: '20px', marginBottom: '10px', display: 'flex', gap: '50px' }}
+          >
+            <Button
+              onClick={() => openModal(RecreateSecurtityType.OUTBOUND_TLS)}
+              label="Recreate Outbound TLS"
+              kind="secondary"
+            />
+            <Button
+              onClick={() => openModal(RecreateSecurtityType.JWS)}
+              label="Recreate JWS"
+              kind="secondary"
+            />
           </Row>
           <div className="connection-dropdown">
             <div className="connection-dropdown-content">
               {connectionStateList.map((option) => (
                 <div key={option.state} className="connection-state-item">
-                  <div className="connection-state-indicator-color" style={{ backgroundColor: option.color }} />
+                  <div
+                    className="connection-state-indicator-color"
+                    style={{ backgroundColor: option.color }}
+                  />
                   <span className="connection-state-text">{option.state}</span>
                   <span>:</span>
-                  <span className="connection-state-description">{formatDescription(option.description)}</span>
+                  <span className="connection-state-description">
+                    {formatDescription(option.description)}
+                  </span>
                 </div>
               ))}
             </div>
@@ -107,6 +143,5 @@ const ConnectionHealthDropdown: React.FC = () => {
     </div>
   );
 };
-
 
 export default ConnectionHealthDropdown;

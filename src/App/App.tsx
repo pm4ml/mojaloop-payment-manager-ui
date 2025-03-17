@@ -1,9 +1,17 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { FC, useEffect } from 'react';
 import './App.css';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchStatesRequest, setConnectionStatus } from "./TechnicalDashboard/ConnectionHealth/actions";
-import { getConnectionStateData } from "./TechnicalDashboard/ConnectionHealth/helpers";
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchStatesRequest,
+  setConnectionStatus,
+} from './TechnicalDashboard/ConnectionHealth/actions';
+import {
+  getConnectionStateData,
+  ConnectionStatusEnum,
+  indicatorColor,
+  getNavbarConnectionStatus,
+} from './TechnicalDashboard/ConnectionHealth/helpers';
 import Layout from './Layout';
 import TechnicalDashboard from './TechnicalDashboard';
 import Transfers from './Transfers';
@@ -16,8 +24,6 @@ import FxpTechnicalDashboard from './FxpTechnicalDashboard';
 import FxpConversions from './FxpConversions';
 
 import { getUiConfig } from './selectors';
-
-import { ConnectionStatusEnum, indicatorColor, getNavbarConnectionStatus } from "./TechnicalDashboard/ConnectionHealth/helpers";
 
 interface AppProps {
   isSuccessToastVisible: boolean;
@@ -41,14 +47,19 @@ const App: FC<AppProps> = ({
 
   const dispatch = useDispatch();
   const connectionStateData = useSelector((state: any) => state.states.data?.data);
-  const storedConnectionStatus = useSelector((state: any) => state.states.connectionStatus) as ConnectionStatusEnum;
+  const storedConnectionStatus = useSelector(
+    (state: any) => state.states.connectionStatus
+  ) as ConnectionStatusEnum;
 
   useEffect(() => {
     dispatch(fetchStatesRequest());
   }, [dispatch]);
 
   useEffect(() => {
-    if (!connectionStateData || storedConnectionStatus === getConnectionStateData(connectionStateData).connectionStatus) {
+    if (
+      !connectionStateData ||
+      storedConnectionStatus === getConnectionStateData(connectionStateData).connectionStatus
+    ) {
       return;
     }
 

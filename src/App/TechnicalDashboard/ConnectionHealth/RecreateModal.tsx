@@ -1,20 +1,20 @@
-import React, { FC, useState, useEffect } from "react";
-import { Modal, FormInput } from "components";
-import {RecreateSecurtityType} from "../ConnectionHealth/helpers";
+import React, { FC, useState, useEffect } from 'react';
+import { Modal, FormInput } from 'components';
+import { RecreateSecurtityType } from './helpers';
 
 interface RecreateModalProps {
   isOpen: boolean;
   onClose: () => void;
   securityType: RecreateSecurtityType;
-  onSubmit: (securityType: RecreateSecurtityType , reason: string) => void;
+  onSubmit: (securityType: RecreateSecurtityType, reason: string) => void;
 }
 
 const RecreateModal: FC<RecreateModalProps> = ({ isOpen, onClose, onSubmit, securityType }) => {
-  const [reason, setReason] = useState<string>("");
+  const [reason, setReason] = useState<string>('');
 
   useEffect(() => {
     if (isOpen) {
-      setReason("");
+      setReason('');
     }
   }, [isOpen]);
 

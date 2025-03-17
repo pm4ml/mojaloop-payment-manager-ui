@@ -7,12 +7,12 @@ import { reducer as dashboardReducer } from 'App/Dashboard';
 import { reducer as technicalDashboardReducer } from 'App/TechnicalDashboard';
 import { reducer as transfersReducer } from 'App/Transfers';
 import { reducer as wizardReducer } from 'App/ConnectionWizard';
-import fxpConversionsReducer from '../App/FxpConversions/reducers';
-
 import {
   statesReducer,
   recreateCertReducer,
 } from 'App/TechnicalDashboard/ConnectionHealth/reducers';
+import fxpConversionsReducer from '../App/FxpConversions/reducers';
+
 const getReducer = (history: History): Reducer =>
   combineReducers({
     api: apiReducer,

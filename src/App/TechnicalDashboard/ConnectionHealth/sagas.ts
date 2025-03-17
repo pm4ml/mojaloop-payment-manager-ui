@@ -12,7 +12,7 @@ import {
 function* fetchStatesSaga(): Generator<any, void, any> {
   try {
     // [getStates, getStatesMockInCompleted, getStatesMockPending, getStatesMockInError, getStatesMockOther, getStatesMockAllError]
-    const states = yield call(apis.getStatesMockAllError.read, {});
+    const states = yield call(apis.getStatesMockInCompleted.read, {});
     console.log('states:', states);
     yield put(fetchStatesSuccess(states));
   } catch (error) {
@@ -31,17 +31,13 @@ function* recreateCertSaga(action: any): Generator<any, void, any> {
     // recreateCert
     const response = yield call(apis.recreateCertMockSuccess.create, {
       securityType,
-      body: { reason }
+      body: { reason },
     });
     console.log('response:', response);
     yield put(recreateCertSuccess(response));
   } catch (error) {
     console.error('Error recreating cert:', error);
-    yield put(
-      recreateCertFailure(
-        error instanceof Error ? error.message : 'Request failed'
-      )
-    );
+    yield put(recreateCertFailure(error instanceof Error ? error.message : 'Request failed'));
   }
 }
 

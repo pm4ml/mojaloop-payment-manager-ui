@@ -6,7 +6,7 @@ type NavbarProps = {
   username?: string;
   logoutUrl?: string;
   connectionStatusTitle: string;
-  connectionStatusColor: string ;
+  connectionStatusColor: string;
   kratos?: boolean;
   appTitle: string;
   appLogo: string;

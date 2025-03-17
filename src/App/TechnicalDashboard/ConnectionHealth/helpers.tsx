@@ -1,31 +1,41 @@
-import * as React from "react";
+import * as React from 'react';
 
 export enum ConnectionStatusEnum {
-  COMPLETED = "completed",
-  IN_PROGRESS = "inProgress",
-  IN_ERROR = "inError",
-  PENDING = "pending",
+  COMPLETED = 'completed',
+  IN_PROGRESS = 'inProgress',
+  IN_ERROR = 'inError',
+  PENDING = 'pending',
 }
 export enum RecreateSecurtityType {
-  JWS = "JWS",
-  OUTBOUND_TLS = "outboundTLS",
+  JWS = 'JWS',
+  OUTBOUND_TLS = 'outboundTLS',
 }
 
 export const indicatorColor: Record<ConnectionStatusEnum, string> = {
-  [ConnectionStatusEnum.COMPLETED]: "#12d670",
-  [ConnectionStatusEnum.IN_PROGRESS]: "#ff9933",
-  [ConnectionStatusEnum.IN_ERROR]: "#f44336",
-  [ConnectionStatusEnum.PENDING]: "#DDDDDD",
+  [ConnectionStatusEnum.COMPLETED]: '#12d670',
+  [ConnectionStatusEnum.IN_PROGRESS]: '#ff9933',
+  [ConnectionStatusEnum.IN_ERROR]: '#f44336',
+  [ConnectionStatusEnum.PENDING]: '#DDDDDD',
 };
-
 
 export const connectionStates: Record<ConnectionStatusEnum, { color: string; message: string }> = {
-  [ConnectionStatusEnum.COMPLETED]: { color: indicatorColor[ConnectionStatusEnum.COMPLETED], message: "Connected" },
-  [ConnectionStatusEnum.IN_PROGRESS]: { color: indicatorColor[ConnectionStatusEnum.IN_PROGRESS], message: "Connecting ..." },
-  [ConnectionStatusEnum.IN_ERROR]: { color: indicatorColor[ConnectionStatusEnum.IN_ERROR], message: "Connection Error : " },
-  [ConnectionStatusEnum.PENDING]: { color: indicatorColor[ConnectionStatusEnum.PENDING], message: "Pending" },
+  [ConnectionStatusEnum.COMPLETED]: {
+    color: indicatorColor[ConnectionStatusEnum.COMPLETED],
+    message: 'Connected',
+  },
+  [ConnectionStatusEnum.IN_PROGRESS]: {
+    color: indicatorColor[ConnectionStatusEnum.IN_PROGRESS],
+    message: 'Connecting ...',
+  },
+  [ConnectionStatusEnum.IN_ERROR]: {
+    color: indicatorColor[ConnectionStatusEnum.IN_ERROR],
+    message: 'Connection Error : ',
+  },
+  [ConnectionStatusEnum.PENDING]: {
+    color: indicatorColor[ConnectionStatusEnum.PENDING],
+    message: 'Pending',
+  },
 };
-
 
 export function getNavbarConnectionStatus(
   status: ConnectionStatusEnum,
@@ -41,37 +51,35 @@ export function getNavbarConnectionStatus(
   return messages[status] ?? `Connecting to: ${activeConnectionName}...`;
 }
 
-
-
 export function formatTitleCase(str: string): string {
   return str
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
     .replace(/^./, (match) => match.toUpperCase());
 }
 
 export function formatDescription(description: string): JSX.Element {
   const match = description.match(/\(Last Updated: .*?\)/);
   if (match) {
-    const mainText = description.replace(match[0], "").trim();
-    const splitTextArray = mainText.split(":");
+    const mainText = description.replace(match[0], '').trim();
+    const splitTextArray = mainText.split(':');
     if (splitTextArray.length > 1) {
       return (
         <>
-          <span style={{ fontWeight: "bold" }}>{splitTextArray[0]} :</span>{" "}
-          <span style={{ fontWeight: "normal" }}>{splitTextArray[1]}</span>
-          <span style={{ fontWeight: "normal" }}> {match[0]}</span>
+          <span style={{ fontWeight: 'bold' }}>{splitTextArray[0]} :</span>{' '}
+          <span style={{ fontWeight: 'normal' }}>{splitTextArray[1]}</span>
+          <span style={{ fontWeight: 'normal' }}> {match[0]}</span>
         </>
       );
     }
     return (
       <>
-        <span style={{ fontWeight: "bold" }}>{mainText}</span>{" "}
-        <span style={{ fontWeight: "normal" }}>{match[0]}</span>
+        <span style={{ fontWeight: 'bold' }}>{mainText}</span>{' '}
+        <span style={{ fontWeight: 'normal' }}>{match[0]}</span>
       </>
     );
   }
-  return <span style={{ fontWeight: "bold" }}>{description}</span>;
+  return <span style={{ fontWeight: 'bold' }}>{description}</span>;
 }
 
 export type ConnectionStatus = keyof typeof connectionStates;
@@ -124,4 +132,3 @@ export function getConnectionStateData(connectionStateListApiResponse: any) {
 
   return { connectionStateList: stateList, connectionStatus: status, errorsList: errors };
 }
-

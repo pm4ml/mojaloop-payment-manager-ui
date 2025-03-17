@@ -53,7 +53,10 @@ export const statesReducer: Reducer<StatesState, StatesAction> = (
       return { ...state, isLoading: false, errorMessage: action.payload as string };
 
     case SET_CONNECTION_STATUS:
-      return { ...state, connectionStatus: action.payload as 'pending' | 'inProgress' | 'completed' | 'inError' };
+      return {
+        ...state,
+        connectionStatus: action.payload as 'pending' | 'inProgress' | 'completed' | 'inError',
+      };
 
     default:
       return state;
