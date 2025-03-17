@@ -26,7 +26,11 @@ fixture`Connection Health Dropdown Feature`.page`http://localhost:8083/techdashb
 );
 
 function hexToRgb(hex: string): string {
-  hex = hex.replace(/^#/, ''); 
+  if (!/^#?[0-9A-Fa-f]{3,6}$/.test(hex)) {
+    throw new Error(`Invalid hex color: ${hex}`);
+  }
+
+  hex = hex.replace(/^#/, '');
   if (hex.length === 3) {
     hex = hex.split('').map((char) => char + char).join('');
   }
@@ -39,32 +43,35 @@ function hexToRgb(hex: string): string {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-const getReduxConnectionHealthStateData = ClientFunction(() =>
-  window.store ? window.store().getState().states.data?.data : undefined
-);
-
-test('Connection health display correct name and color indicator', async () => {
-  const state = await getReduxConnectionHealthStateData();
-  const data = getConnectionStateData(state);
-  const connectionStatus = data.connectionStatus;
-  const errorList = data.errorsList;
-  let connectionStatesData = connectionStates[connectionStatus];
-  let connecionColor = connectionStatesData.color;
-  let connectionMessage = connectionStatesData.message;
-  console.log('errorList:', errorList);
-  console.log('connectionStatesData', connectionStatesData);
-  const rgbColor = hexToRgb((connecionColor).toUpperCase());
-  console.log('ConnectionHealthDropdownComponent.connectionStatusMessage.innerText ', ConnectionHealthDropdownComponent.connectionStatusMessage.innerText);
-  await t
-  .expect(ConnectionHealthDropdownComponent.connectionStatusMessage.exists)
-  .ok('Connection status container not found') 
-  .expect(ConnectionHealthDropdownComponent.connectionStatusMessage.innerText)
-  .eql(connectionMessage, 'Connection status message does not match')
-  .expect(ConnectionHealthDropdownComponent.connectionStatusIndicatorColor.getStyleProperty('background-color'))
-  .eql(rgbColor, 'Connection status color does not match');
-
+const getReduxConnectionHealthStateData = ClientFunction(() => {
+  return window.store ? window.store().getState().states.data?.data || {} : {};
 });
 
+test('Connection health displays correct status summary and color indicator', async () => {
+  const state = await getReduxConnectionHealthStateData();
+  if (!state) {
+    throw new Error('Redux state is undefined. Ensure the store is initialized.');
+  }
+
+  const data = getConnectionStateData(state);
+  const connectionStatus = data.connectionStatus;
+  const connectionStatesData = connectionStates[connectionStatus];
+
+  if (!connectionStatesData) {
+    throw new Error(`Invalid connection status: ${connectionStatus}`);
+  }
+
+  const connectionColor = connectionStatesData.color;
+  const connectionMessage = connectionStatesData.message;
+  const rgbColor = hexToRgb(connectionColor.toUpperCase());
+  await t
+    .expect(ConnectionHealthDropdownComponent.connectionStatusMessage.exists)
+    .ok('Connection status container not found')
+    .expect(ConnectionHealthDropdownComponent.connectionStatusMessage.innerText)
+    .eql(connectionMessage, 'Connection status message does not match')
+    .expect(ConnectionHealthDropdownComponent.connectionStatusIndicatorColor.getStyleProperty('background-color'))
+    .eql(rgbColor, 'Connection status color does not match');
+});
 
 test('User can log in and see the connection status container', async () => {
   await t
