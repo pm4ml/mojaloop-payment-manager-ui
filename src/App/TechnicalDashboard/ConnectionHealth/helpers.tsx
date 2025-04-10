@@ -51,13 +51,6 @@ export function getNavbarConnectionStatus(
   return messages[status] ?? `Connecting to: ${activeConnectionName}...`;
 }
 
-export function formatTitleCase(str: string): string {
-  return str
-    .replace(/([a-z])([A-Z])/g, '$1 $2')
-    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-    .replace(/^./, (match) => match.toUpperCase());
-}
-
 export function formatDescription(description: string): JSX.Element {
   const match = description.match(/\(Last Updated: .*?\)/);
   if (match) {
@@ -90,33 +83,51 @@ interface ConnectionStateOption {
   description: string;
 }
 
-export function getConnectionStateData(connectionStateListApiResponse: any) {
+export type ConnectionStateApiResponse = {
+  status: ConnectionStatusEnum;
+  errorDescription: string;
+  stateDescription: string;
+};
+
+export type ConnectionStateDataResponse = {
+  fetchingHubCA: ConnectionStateApiResponse;
+  creatingDFSPCA: ConnectionStateApiResponse;
+  creatingDfspClientCert: ConnectionStateApiResponse;
+  creatingDfspServerCert: ConnectionStateApiResponse;
+  creatingHubClientCert: ConnectionStateApiResponse;
+  pullingPeerJWS: ConnectionStateApiResponse;
+  uploadingPeerJWS: ConnectionStateApiResponse;
+  creatingJWS: ConnectionStateApiResponse;
+  endpointConfig: ConnectionStateApiResponse;
+  connectorConfig: ConnectionStateApiResponse;
+  progressMonitor: ConnectionStateApiResponse;
+};
+
+export function getConnectionStateData(
+  connectionStateListApiResponse: ConnectionStateDataResponse
+) {
   let status: ConnectionStatusEnum = ConnectionStatusEnum.PENDING;
   const statuses = new Set<ConnectionStatusEnum>();
   const errors: string[] = [];
   const stateList: ConnectionStateOption[] = [];
 
   if (connectionStateListApiResponse) {
-    for (const key in connectionStateListApiResponse) {
-      if (Object.prototype.hasOwnProperty.call(connectionStateListApiResponse, key)) {
-        const stateData = connectionStateListApiResponse[key] as {
-          status: ConnectionStatusEnum;
-          errorDescription: string;
-          stateDescription: string;
-        };
+    for (const key of Object.keys(connectionStateListApiResponse) as Array<
+      keyof ConnectionStateDataResponse
+    >) {
+      const stateData = connectionStateListApiResponse[key];
 
-        statuses.add(stateData.status);
-        if (stateData.status === ConnectionStatusEnum.IN_ERROR) {
-          errors.push(stateData.errorDescription);
-        }
-        stateList.push({
-          state: formatTitleCase(key),
-          color: indicatorColor[stateData.status],
-          description: stateData.errorDescription
-            ? `${stateData.stateDescription} : ${stateData.errorDescription}`
-            : stateData.stateDescription,
-        });
+      statuses.add(stateData.status);
+      if (stateData.status === ConnectionStatusEnum.IN_ERROR) {
+        errors.push(stateData.errorDescription);
       }
+      stateList.push({
+        state: key,
+        color: indicatorColor[stateData.status],
+        description: stateData.errorDescription
+          ? `${stateData.stateDescription} : ${stateData.errorDescription}`
+          : stateData.stateDescription,
+      });
     }
 
     if (statuses.has(ConnectionStatusEnum.IN_ERROR)) {

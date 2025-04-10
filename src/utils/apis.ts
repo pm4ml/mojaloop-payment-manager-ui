@@ -1,17 +1,6 @@
 import { State } from 'store/types';
 import { buildApis } from './api';
 import { Config } from './api/types';
-import {
-  mockStateInErrorResponse,
-  mockStateCompletedResponse,
-  mockStateOtherResponse,
-  mockStatePendingResponse,
-  mockStateAllErrorResponse,
-  mockRecreateJwsCertErrorResponse,
-  mockRecreateJwsCertSecurityTypeErrorResponse,
-  mockRecreateJwsCertSuccessResponse,
-  mockRecreateJwsCertUnauthorisedResponse,
-} from '../App/TechnicalDashboard/ConnectionHealth/mockResponse';
 
 const services = {
   localNode: {
@@ -20,75 +9,26 @@ const services = {
 };
 
 // mockService
-const mockServices = {
-  localNode: {
-    baseUrl: 'http://mockHost:9000/mock',
-  },
-};
+// const mockServices = {
+//   localNode: {
+//     baseUrl: 'http://localhost:4040/exp',
+//   },
+// };
+
 const managementServices = {
   localNode: {
     baseUrl: 'http://localhost:9000',
   },
 };
 
-// API for getStates
-const getStates: Config<Record<string, any>, State> = {
+const getStates: Config<Todo, State> = {
   service: managementServices.localNode,
   url: () => '/states',
 };
 
-// Mock API for getStates
-const getStatesMockInCompleted: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: () => '/states',
-  mockResponse: () => mockStateCompletedResponse,
-};
-const getStatesMockPending: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: () => '/states',
-  mockResponse: () => mockStatePendingResponse,
-};
-const getStatesMockInError: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: () => '/states',
-  mockResponse: () => mockStateInErrorResponse,
-};
-const getStatesMockAllError: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: () => '/states',
-  mockResponse: () => mockStateAllErrorResponse,
-};
-const getStatesMockOther: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: () => '/states',
-  mockResponse: () => mockStateOtherResponse,
-};
-
-// API for recreateCert
-const recreateCert: Config<Record<string, any>, State> = {
+const recreateCert: Config<Todo, State> = {
   service: managementServices.localNode,
   url: (_, data) => `/recreate/${data.securityType}`,
-};
-// Mock api for recreateCert
-const recreateCertMockSuccess: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: (_, data) => `/recreate/${data.securityType}`,
-  mockResponse: () => mockRecreateJwsCertSuccessResponse,
-};
-const recreateCertMockError: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: (_, data) => `/recreate/${data.securityType}`,
-  mockResponse: () => mockRecreateJwsCertErrorResponse,
-};
-const recreateCertMOCKSecurityTypeError: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: (_, data) => `/recreate/${data.securityType}`,
-  mockResponse: () => mockRecreateJwsCertSecurityTypeErrorResponse,
-};
-const recreateCertMockUnauthorised: Config<Record<string, any>, State> = {
-  service: mockServices.localNode,
-  url: (_, data) => `/recreate/${data.securityType}`,
-  mockResponse: () => mockRecreateJwsCertUnauthorisedResponse,
 };
 
 interface Todo {
@@ -310,19 +250,8 @@ const metric: Config<Todo, State> = {
 };
 
 const endpoints = {
-  // mockServices,
   getStates,
-  getStatesMockInCompleted,
-  getStatesMockPending,
-  getStatesMockInError,
-  getStatesMockOther,
-  getStatesMockAllError,
   recreateCert,
-  recreateCertMockSuccess,
-  recreateCertMOCKSecurityTypeError,
-  recreateCertMockUnauthorised,
-  recreateCertMockError,
-  // mockServices end
   dfsps,
   environmentStatus,
   monetaryZones,

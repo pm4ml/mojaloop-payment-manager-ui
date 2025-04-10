@@ -7,17 +7,19 @@ import {
   RECREATE_CERT_REQUEST,
   recreateCertSuccess,
   recreateCertFailure,
+  RecreateCertRequestAction,
+  RecreateCertActionTypes,
 } from './actions';
+import { ConnectionStateDataResponse } from './helpers';
 
-function* fetchStatesSaga(): Generator<any, void, any> {
+type RecreateCertResponse = { status: string };
+
+function* fetchStatesSaga() {
   try {
-    // [getStates, getStatesMockInCompleted, getStatesMockPending, getStatesMockInError, getStatesMockOther, getStatesMockAllError]
-    const states = yield call(apis.getStatesMockInCompleted.read, {});
-    console.log('states:', states);
-    yield put(fetchStatesSuccess(states));
+    const response: ConnectionStateDataResponse = yield call(apis.getStates.read, {});
+    yield put(fetchStatesSuccess(response));
   } catch (error) {
-    console.error('Error fetching states:', error);
-    yield put(fetchStatesFailure(error));
+    yield put(fetchStatesFailure(error instanceof Error ? error.message : 'Request failed'));
   }
 }
 
@@ -25,18 +27,23 @@ export function* watchFetchStatesSaga() {
   yield takeLatest(FETCH_STATES_REQUEST, fetchStatesSaga);
 }
 
-function* recreateCertSaga(action: any): Generator<any, void, any> {
-  const { securityType, reason } = action.payload || {};
+function isRecreateCertRequestAction(
+  action: RecreateCertActionTypes
+): action is RecreateCertRequestAction {
+  return action.type === RECREATE_CERT_REQUEST;
+}
+
+function* recreateCertSaga(action: RecreateCertActionTypes) {
+  if (!isRecreateCertRequestAction(action)) return;
+
+  const { securityType, reason } = action.payload;
   try {
-    // recreateCert
-    const response = yield call(apis.recreateCertMockSuccess.create, {
+    const response: RecreateCertResponse = yield call(apis.recreateCert.create, {
       securityType,
       body: { reason },
     });
-    console.log('response:', response);
     yield put(recreateCertSuccess(response));
   } catch (error) {
-    console.error('Error recreating cert:', error);
     yield put(recreateCertFailure(error instanceof Error ? error.message : 'Request failed'));
   }
 }

@@ -8,6 +8,7 @@ import {
   formatDescription,
   RecreateSecurtityType,
   ConnectionStatusEnum,
+  ConnectionStateDataResponse,
 } from './helpers';
 import RecreateModal from './RecreateModal';
 import './ConnectionHealthDropdown.css';
@@ -26,9 +27,32 @@ const ConnectionHealthDropdown: React.FC = () => {
   });
 
   const dispatch = useDispatch();
-  const connectionStateData = useSelector((state: any) => state.states.data?.data);
+  // const connectionStateData = useSelector(
+  //   (state: { states: { data?: { data?: Record<string, ConnectionStateApiResponse> } } }) =>
+  //     state.states.data?.data
+  // );
+
+  // const storedConnectionStatus = useSelector(
+  //   (state: {
+  //     states: {
+  //       data?: { data?: Record<string, ConnectionStateApiResponse> };
+  //       connectionStatus: ConnectionStatusEnum;
+  //     };
+  //   }) => state.states.connectionStatus
+  // ) as ConnectionStatusEnum;
+
+  const connectionStateData = useSelector(
+    (state: { states: { data?: { data?: ConnectionStateDataResponse } } }) =>
+      state.states.data?.data
+  );
+
   const storedConnectionStatus = useSelector(
-    (state: any) => state.states.connectionStatus
+    (state: {
+      states: {
+        data?: { data?: ConnectionStateDataResponse };
+        connectionStatus: ConnectionStatusEnum;
+      };
+    }) => state.states.connectionStatus
   ) as ConnectionStatusEnum;
 
   useEffect(() => {
@@ -36,7 +60,9 @@ const ConnectionHealthDropdown: React.FC = () => {
   }, [dispatch]);
 
   const { connectionStateList, connectionStatus, errorsList } = useMemo(() => {
-    return getConnectionStateData(connectionStateData);
+    return connectionStateData
+      ? getConnectionStateData(connectionStateData)
+      : { connectionStateList: [], connectionStatus: ConnectionStatusEnum.PENDING, errorsList: [] };
   }, [connectionStateData]);
 
   useEffect(() => {
@@ -62,10 +88,9 @@ const ConnectionHealthDropdown: React.FC = () => {
     closeModal();
   };
 
-  let { color: connectionIndicatorColor, message: connectionMessage } = connectionStates[
-    connectionStatus
-  ];
+  const { color: connectionIndicatorColor, message } = connectionStates[connectionStatus];
 
+  let connectionMessage = message;
   if (connectionStatus === 'inError') {
     connectionMessage += errorsList.at(0);
   }
@@ -84,7 +109,7 @@ const ConnectionHealthDropdown: React.FC = () => {
           </span>
           {connectionMessage.includes(':') && <span>{connectionMessage.split(':')[1]}</span>}
         </div>
-        <button onClick={toggleDropdown} className="connection-status-button">
+        <button type="button" onClick={toggleDropdown} className="connection-status-button">
           <img
             src={showDropdown ? arrowDownUrl : arrowUpUrl}
             alt="Dropdown Arrow"

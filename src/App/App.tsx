@@ -11,6 +11,7 @@ import {
   ConnectionStatusEnum,
   indicatorColor,
   getNavbarConnectionStatus,
+  ConnectionStateDataResponse,
 } from './TechnicalDashboard/ConnectionHealth/helpers';
 import Layout from './Layout';
 import TechnicalDashboard from './TechnicalDashboard';
@@ -46,9 +47,18 @@ const App: FC<AppProps> = ({
   const connectionName = 'Modusbox & Mojaloop Labs';
 
   const dispatch = useDispatch();
-  const connectionStateData = useSelector((state: any) => state.states.data?.data);
+  const connectionStateData = useSelector(
+    (state: { states: { data?: { data?: ConnectionStateDataResponse } } }) =>
+      state.states.data?.data
+  );
+
   const storedConnectionStatus = useSelector(
-    (state: any) => state.states.connectionStatus
+    (state: {
+      states: {
+        data?: { data?: ConnectionStateDataResponse };
+        connectionStatus: ConnectionStatusEnum;
+      };
+    }) => state.states.connectionStatus
   ) as ConnectionStatusEnum;
 
   useEffect(() => {
