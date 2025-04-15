@@ -2,7 +2,7 @@
   "name": "mojaloop-payment-manager-ui",
   "version": "1.17.5",
   "private": true,
-  "proxy": "http://localhost:10000",
+  "proxy": "http://localhost:4010",
   "engines": {
     "node": ">=16.x"
   },
@@ -93,7 +93,7 @@
     "dep:check": "npx ncu -e 2",
     "dep:update": "npx ncu -u",
     "test:int": "jest --ci --reporters=default --reporters=jest-junit --env=node ui-tests/integration --forceExit --detectOpenHandles",
-    "test:integration": "yarn run test:int",
+    "test:integration": "./ui-tests/integration_test/integration_test.sh",
     "test:functional": "./ui-tests/scripts/test-functional.sh"
   },
   "eslintConfig": {
@@ -114,6 +114,7 @@
   "devDependencies": {
     "@types/validator": "^13.12.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "jest-junit": "^16.0.0",
     "nyc": "15.1.0",
     "redux-mock-store": "^1.5.4",
     "standard-version": "^9.5.0"
