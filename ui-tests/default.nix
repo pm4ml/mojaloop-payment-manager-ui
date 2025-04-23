@@ -33,8 +33,8 @@ let
     pkgs.stdenv.mkDerivation {
       name = "google-chrome";
       src = pkgs.fetchurl {
-        url = "https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_119.0.6045.159-1_amd64.deb";
-        sha256 = "c409bb6cfb279c90fb516353b4728cbf97a71e8deb33dc3433cd503ea65594fe";
+        url = "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb";
+        sha256 = "d58757b65118ea27323cc9e0bdfb612dd85268c19ba48d2589f16465265cd9ae";
       };
       nativeBuildInputs = [ pkgs.dpkg ];
       unpackPhase = ''
@@ -44,9 +44,6 @@ let
       installPhase = ''
         mkdir -p $out/bin
         ln -s $out/opt/google/chrome/chrome $out/bin/google-chrome
-        
-        # Fix permissions for chrome-sandbox
-        chmod 4755 $out/opt/google/chrome/chrome-sandbox
       '';
     };
 in
