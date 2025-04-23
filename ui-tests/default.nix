@@ -24,12 +24,25 @@ let
       sha256 = if pkgs.stdenv.isAarch64 then
         "c0S7tBts7WZ9OEMQdjk0c7W81HxEYHaF+YgYUAhk+AI="
       else
-        "1q8v8v8v8v8v8v8v8v8v8v8v8v8v8v8v8v8v8v8v8v8="; # @TODO: Update with correct x86_64 hash
+        "0c1e7712b8b63771d3c8c5cbd32da10bded3fd3f89240380bb08c44ff608f345";
     }} "$@"
   '';
 
   # Use Firefox for ARM64 and Chrome for other architectures
-  browser = if pkgs.stdenv.isAarch64 then pkgs.firefox else pkgs.google-chrome;
+  browser = if pkgs.stdenv.isAarch64 then pkgs.firefox else
+    pkgs.stdenv.mkDerivation {
+      name = "google-chrome";
+      src = pkgs.fetchurl {
+        url = "https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_119.0.6045.159-1_amd64.deb";
+        sha256 = "c409bb6cfb279c90fb516353b4728cbf97a71e8deb33dc3433cd503ea65594fe";
+      };
+      nativeBuildInputs = [ pkgs.dpkg ];
+      unpackPhase = "dpkg-deb -x $src $out";
+      installPhase = ''
+        mkdir -p $out/bin
+        ln -s $out/opt/google/chrome/chrome $out/bin/google-chrome
+      '';
+    };
 in
 
 [
