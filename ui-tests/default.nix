@@ -37,10 +37,16 @@ let
         sha256 = "c409bb6cfb279c90fb516353b4728cbf97a71e8deb33dc3433cd503ea65594fe";
       };
       nativeBuildInputs = [ pkgs.dpkg ];
-      unpackPhase = "dpkg-deb -x $src $out";
+      unpackPhase = ''
+        mkdir -p $out
+        dpkg-deb -x $src $out
+      '';
       installPhase = ''
         mkdir -p $out/bin
         ln -s $out/opt/google/chrome/chrome $out/bin/google-chrome
+        
+        # Fix permissions for chrome-sandbox
+        chmod 4755 $out/opt/google/chrome/chrome-sandbox
       '';
     };
 in
