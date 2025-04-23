@@ -10,23 +10,24 @@ cd ../tests
 
 npm install
 
-npm run test:headless
-
 
 # # Clone the repository
 # # git clone https://github.com/pm4ml/mojaloop-payment-manager-ui
 # # cd mojaloop-payment-manager-ui
 
 
-# # Install Nix
-# # Check if nix is already installed
-# if ! command -v nix-env &> /dev/null; then
-#     curl -L https://nixos.org/nix/install | sh
-#     source ~/.nix-profile/etc/profile.d/nix.sh
-# fi
+# Install Nix
+# Check if nix is already installed
+if ! command -v nix-env &> /dev/null; then
+    curl -L https://nixos.org/nix/install | sh
+    source ~/.nix-profile/etc/profile.d/nix.sh
+fi
 
-# # Install dependencies in environment
-# nix-env -if ../default.nix
+# Install dependencies in environment
+nix-env -if ../default.nix
+
+npm run test:headless
+
 
 # # # Validate integration test manifest
 # kustomize build ../ | kubeconform -strict -kubernetes-version 1.21.5
