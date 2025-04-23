@@ -1,84 +1,90 @@
-#!/bin/bash
+# #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status
+# # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Change to the directory containing this script
+# # Change to the directory containing this script
 cd "$(dirname "$0")"
 
+cd ../tests
 
-# Clone the repository
-# git clone https://github.com/pm4ml/mojaloop-payment-manager-ui
-# cd mojaloop-payment-manager-ui
+npm install
+
+npm run test:headless
 
 
-# Install Nix
-# Check if nix is already installed
-if ! command -v nix-env &> /dev/null; then
-    curl -L https://nixos.org/nix/install | sh
-    source ~/.nix-profile/etc/profile.d/nix.sh
-fi
+# # Clone the repository
+# # git clone https://github.com/pm4ml/mojaloop-payment-manager-ui
+# # cd mojaloop-payment-manager-ui
 
-# Install dependencies in environment
-nix-env -if ../default.nix
 
-# # Validate integration test manifest
-kustomize build ../ | kubeconform -strict -kubernetes-version 1.21.5
+# # Install Nix
+# # Check if nix is already installed
+# if ! command -v nix-env &> /dev/null; then
+#     curl -L https://nixos.org/nix/install | sh
+#     source ~/.nix-profile/etc/profile.d/nix.sh
+# fi
 
-# # Install dependencies
+# # Install dependencies in environment
 # nix-env -if ../default.nix
 
-# # Install helm
-sudo snap install helm --classic
+# # # Validate integration test manifest
+# kustomize build ../ | kubeconform -strict -kubernetes-version 1.21.5
 
-# # Start cluster
-minikube start --driver=docker --kubernetes-version=v1.21.5
+# # # Install dependencies
+# # nix-env -if ../default.nix
 
-# # Add Vault Helm Repo
-helm repo add hashicorp https://helm.releases.hashicorp.com
+# # # Install helm
+# sudo snap install helm --classic
 
-# # Install Vault on cluster
-helm install vault hashicorp/vault --values ../manifests/vault/helm-values.yaml
+# # # Start cluster
+# minikube start --driver=docker --kubernetes-version=v1.21.5
 
-# # Wait for kube api server to process and create vault
-sleep 60s
+# # # Add Vault Helm Repo
+# helm repo add hashicorp https://helm.releases.hashicorp.com
 
-# # Wait for vault to be initialized
-# timeout 900 kubectl wait --for=condition=Initialized pod vault-0 --timeout=900s
+# # # Install Vault on cluster
+# helm install vault hashicorp/vault --values ../manifests/vault/helm-values.yaml
 
-# # Bootstrap Vault
-# source scripts/bootstrap-vault.sh
+# # # Wait for kube api server to process and create vault
+# sleep 60s
 
-# # Deploy
-# skaffold run -p integration-test
+# # # Wait for vault to be initialized
+# # timeout 900 kubectl wait --for=condition=Initialized pod vault-0 --timeout=900s
 
-# # Wait for kube api server to process and create all resources
-# sleep 30s
+# # # Bootstrap Vault
+# # source scripts/bootstrap-vault.sh
 
-# # Wait for deployment readiness
-# timeout 900 kubectl wait --for=condition=Ready pod --all --timeout=900s
+# # # Deploy
+# # skaffold run -p integration-test
 
-# # Port-forward the portal frontend ingress
-# kubectl port-forward -n ingress-nginx --address 0.0.0.0 svc/ingress-nginx-controller 3000:80 &
+# # # Wait for kube api server to process and create all resources
+# # sleep 30s
 
-# # Install test dependencies
-# cd ../tests
-# npm ci
+# # # Wait for deployment readiness
+# # timeout 900 kubectl wait --for=condition=Ready pod --all --timeout=900s
 
-# # Run tests
-# PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless
+# # # Port-forward the portal frontend ingress
+# # kubectl port-forward -n ingress-nginx --address 0.0.0.0 svc/ingress-nginx-controller 3000:80 &
 
-# # Archive test report
-# cp report.html /path/to/artifacts/test-report.html
+# # # Install test dependencies
+# # cd ../tests
+# # npm ci
 
-# # Print docker containers to check any issues with the cluster
-# docker ps
+# # # Run tests
+# # PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless
 
-# # Print resources
-# kubectl get svc,deploy,sts,pv,pvc,configmap,job,pod -A
+# # # Archive test report
+# # cp report.html /path/to/artifacts/test-report.html
 
-# # Describe resources
-# kubectl describe svc,deploy,sts,pv,pvc,configmap,job,pod -A
+# # # Print docker containers to check any issues with the cluster
+# # docker ps
 
-# # Print secret values
-# kubectl get secrets -o json | jq -r '.items[] | { name: .metadata.name, data: .data | map_values(@base64d) }'
+# # # Print resources
+# # kubectl get svc,deploy,sts,pv,pvc,configmap,job,pod -A
+
+# # # Describe resources
+# # kubectl describe svc,deploy,sts,pv,pvc,configmap,job,pod -A
+
+# # # Print secret values
+# # kubectl get secrets -o json | jq -r '.items[] | { name: .metadata.name, data: .data | map_values(@base64d) }'

@@ -14,6 +14,7 @@
 }:
 
 let
+  # @TODO - If for checknig ARM64
   k3d = pkgs.writeShellScriptBin "k3d" ''
     exec ${pkgs.fetchurl {
       url = "https://github.com/k3d-io/k3d/releases/download/v5.6.0/k3d-darwin-arm64";
