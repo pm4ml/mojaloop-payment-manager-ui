@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/usr/bin/env bash
 
 # # Exit immediately if a command exits with a non-zero status
 set -e
@@ -20,7 +20,7 @@ npm install
 # Check if nix is already installed
 if ! command -v nix-env &> /dev/null; then
     curl -L https://nixos.org/nix/install | sh
-    source ~/.nix-profile/etc/profile.d/nix.sh
+    . ~/.nix-profile/etc/profile.d/nix.sh
 fi
 
 # Install dependencies in environment
