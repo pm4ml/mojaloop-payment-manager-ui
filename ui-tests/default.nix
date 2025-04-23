@@ -29,7 +29,7 @@ let
   '';
 
   # Use Firefox for ARM64 and Chromium for other architectures
-  browser = if pkgs.stdenv.isAarch64 then pkgs.firefox else pkgs.chromium;
+  browser = if pkgs.stdenv.isAarch64 then pkgs.firefox else pkgs.chrome;
 in
 
 [
