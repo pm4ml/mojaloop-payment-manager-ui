@@ -28,24 +28,8 @@ let
     }} "$@"
   '';
 
-  # Use Firefox for ARM64 and Chrome for other architectures
-  browser = if pkgs.stdenv.isAarch64 then pkgs.firefox else
-    pkgs.stdenv.mkDerivation {
-      name = "google-chrome";
-      src = pkgs.fetchurl {
-        url = "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb";
-        sha256 = "d58757b65118ea27323cc9e0bdfb612dd85268c19ba48d2589f16465265cd9ae";
-      };
-      nativeBuildInputs = [ pkgs.dpkg ];
-      unpackPhase = ''
-        mkdir -p $out
-        dpkg-deb -x $src $out
-      '';
-      installPhase = ''
-        mkdir -p $out/bin
-        ln -s $out/opt/google/chrome/chrome $out/bin/google-chrome
-      '';
-    };
+  # Use Firefox for ARM64 and Chromium for other architectures
+  browser = if pkgs.stdenv.isAarch64 then pkgs.firefox else pkgs.chromium;
 in
 
 [
