@@ -25,16 +25,18 @@ jobs:
           name: Install Dependencies
           command: |
             apk update
-            apk add --no-cache yarn bash chromium chromium-chromedriver
+            apk add --no-cache yarn bash chromium chromium-chromedriver xvfb dbus-x11 ttf-freefont font-noto
             yarn --version
-      - node/install-packages:
-          pkg-manager: yarn
       - run:
           name: Set Chrome Binary Path
           command: |
             export CHROME_BIN=/usr/bin/chromium-browser
             export CHROME_PATH=/usr/lib/chromium/
             export BROWSER_TCAFE=chromium:headless
+            export DISPLAY=:99
+            Xvfb :99 -screen 0 1024x768x16 &
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           name: Run Integration Tests
           command: |
@@ -43,6 +45,7 @@ jobs:
             CHROME_BIN: /usr/bin/chromium-browser
             CHROME_PATH: /usr/lib/chromium/
             BROWSER_TCAFE: chromium:headless
+            DISPLAY: :99
       - store_test_results:
           path: /tmp/test-results
 workflows:
