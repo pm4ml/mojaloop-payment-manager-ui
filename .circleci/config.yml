@@ -22,7 +22,8 @@ jobs:
       - checkout
       - run:
           name: Install Yarn
-          command: sudo npm install -g yarn
+          command: |
+            apk add --no-cache yarn
       - node/install-packages:
           pkg-manager: yarn
       - run:
