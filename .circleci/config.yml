@@ -24,7 +24,9 @@ jobs:
       - run:
           name: Install Yarn
           command: |
+            apk update
             apk add --no-cache yarn
+            yarn --version
       - node/install-packages:
           pkg-manager: yarn
       - run:
