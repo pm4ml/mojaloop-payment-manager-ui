@@ -20,6 +20,9 @@ jobs:
       - image: testcafe/testcafe:latest
     steps:
       - checkout
+      - run:
+          name: Install Yarn
+          command: npm install -g yarn
       - node/install-packages:
           pkg-manager: yarn
       - run:
