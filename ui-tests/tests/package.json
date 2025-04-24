@@ -35,7 +35,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "testcafe ${BROWSER_TCAFE:-chrome}",
-    "test:headless": "testcafe ${BROWSER_TCAFE:-chrome:headless} --reporter xunit:/tmp/test-results/test-results.xml --reporter html:reports/report.html"
+    "test:headless": "testcafe ${BROWSER_TCAFE:-chrome:headless}"
   },
   "author": "sridevi.miriyala@modusbox.com",
   "devDependencies": {

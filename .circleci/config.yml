@@ -41,7 +41,7 @@ jobs:
           name: Run Integration Tests
           command: |
             mkdir -p /tmp/test-results
-            yarn test:integration
+            yarn test:headless --reporter xunit:/tmp/test-results/test-results.xml --reporter html:report.html
           environment:
             CHROME_BIN: /usr/bin/chromium-browser
             CHROME_PATH: /usr/lib/chromium/
