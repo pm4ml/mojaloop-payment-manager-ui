@@ -41,7 +41,7 @@ jobs:
           name: Run Integration Tests
           command: |
             mkdir -p /tmp/test-results
-            yarn test:integration --reporter xunit:/tmp/test-results/test-results.xml
+            yarn test:integration 
           environment:
             CHROME_BIN: /usr/bin/chromium-browser
             CHROME_PATH: /usr/lib/chromium/
@@ -49,6 +49,8 @@ jobs:
             DISPLAY: :99
       - store_test_results:
           path: /tmp/test-results
+      - store_artifacts:
+          path: reports
 workflows:
   e2e-test:
     jobs:
