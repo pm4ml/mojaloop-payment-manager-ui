@@ -40,7 +40,8 @@ jobs:
       - run:
           name: Run Integration Tests
           command: |
-            yarn test:integration
+            mkdir -p /tmp/test-results
+            yarn test:integration --reporter junit:/tmp/test-results/test-results.xml
           environment:
             CHROME_BIN: /usr/bin/chromium-browser
             CHROME_PATH: /usr/lib/chromium/
