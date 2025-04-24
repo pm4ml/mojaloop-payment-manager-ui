@@ -41,7 +41,7 @@ jobs:
           name: Run Integration Tests
           command: |
             mkdir -p /tmp/test-results
-            yarn test:integration 
+            yarn test:integration
           environment:
             CHROME_BIN: /usr/bin/chromium-browser
             CHROME_PATH: /usr/lib/chromium/
@@ -50,7 +50,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
-          path: reports
+          path: ui-tests/tests/report.html
 workflows:
   e2e-test:
     jobs:
