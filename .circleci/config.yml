@@ -20,9 +20,10 @@ jobs:
       - image: testcafe/testcafe:latest
     steps:
       - checkout
-      - node/install-packages
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
-          command: npm run test:integration
+          command: yarn test:integration
       - store_test_results:
           path: /tmp/test-results
 workflows:
