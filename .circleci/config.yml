@@ -18,6 +18,7 @@ jobs:
   test:
     docker:
       - image: testcafe/testcafe:latest
+        user: root
     steps:
       - checkout
       - run:
