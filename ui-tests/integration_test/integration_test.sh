@@ -14,4 +14,4 @@ npm ci
 PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless
 
 # Archive test report
-cp report.html /path/to/artifacts/test-report.html
+cp report.html /tmp/test-results/test-report.html

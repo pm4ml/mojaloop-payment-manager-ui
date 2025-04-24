@@ -1,13 +1,33 @@
+# version: 2.1
+# setup: true
+# orbs:
+#   build: mojaloop/build@1.0.55
+# workflows:
+#   setup:
+#     jobs:
+#       - build/workflow:
+#           filters:
+#             tags:
+#               only: /v\d+(\.\d+){2}(-[a-zA-Z-][0-9a-zA-Z-]*\.\d+)?/
+#           # optionally supply the base image for the image scan
+#           base_image: node:18-alpine
 version: 2.1
-setup: true
 orbs:
-  build: mojaloop/build@1.0.55
+  node: circleci/node@4.1.0
+  browser-tools: circleci/browser-tools@1.1.0
+jobs:
+  test:
+    docker:
+      - image: cimg/node:lts-browsers
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - node/install-packages
+      - run:
+          command: npm run test:integration
+      - store_test_results:
+          path: /tmp/test-results
 workflows:
-  setup:
+  e2e-test:
     jobs:
-      - build/workflow:
-          filters:
-            tags:
-              only: /v\d+(\.\d+){2}(-[a-zA-Z-][0-9a-zA-Z-]*\.\d+)?/
-          # optionally supply the base image for the image scan
-          base_image: node:18-alpine
+      - test
