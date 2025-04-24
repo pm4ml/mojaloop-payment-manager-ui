@@ -11,7 +11,8 @@ cd ../tests
 npm ci
 
 # Run tests
-PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless --reporter xunit:/tmp/test-results/test-results.xml --reporter html:report.html
+PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless
 
 # Archive test report
+mkdir -p /tmp/test-results
 cp report.html /tmp/test-results/test-report.html

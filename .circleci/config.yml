@@ -50,7 +50,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
-          path: ui-tests/tests/report.html
+          path: /tmp/test-results/test-report.html
 workflows:
   e2e-test:
     jobs:
