@@ -34,8 +34,15 @@ jobs:
           command: |
             export CHROME_BIN=/usr/bin/chromium-browser
             export CHROME_PATH=/usr/lib/chromium/
+            export BROWSER_TCAFE=chromium:headless
       - run:
-          command: yarn test:integration
+          name: Run Integration Tests
+          command: |
+            yarn test:integration
+          environment:
+            CHROME_BIN: /usr/bin/chromium-browser
+            CHROME_PATH: /usr/lib/chromium/
+            BROWSER_TCAFE: chromium:headless
       - store_test_results:
           path: /tmp/test-results
 workflows:
