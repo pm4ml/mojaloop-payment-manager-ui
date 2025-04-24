@@ -22,10 +22,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Yarn
+          name: Install Dependencies
           command: |
             apk update
-            apk add --no-cache yarn
+            apk add --no-cache yarn bash
             yarn --version
       - node/install-packages:
           pkg-manager: yarn
