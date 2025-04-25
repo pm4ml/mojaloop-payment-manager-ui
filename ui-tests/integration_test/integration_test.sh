@@ -22,6 +22,7 @@ git checkout 74346ad
 ls -l
 cd docker-compose
 ls -l
+chmod 644 prometheus.yml
 env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
 # Start the server in the background
