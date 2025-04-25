@@ -19,13 +19,16 @@ jobs:
     docker:
       - image: testcafe/testcafe:latest
         user: root
+      - image: docker:20.10.24-dind
+        environment:
+          DOCKER_TLS_CERTDIR: ""
     steps:
       - checkout
       - run:
           name: Install Dependencies
           command: |
             apk update
-            apk add --no-cache yarn bash chromium chromium-chromedriver xvfb dbus-x11 ttf-freefont font-noto git
+            apk add --no-cache yarn bash chromium chromium-chromedriver xvfb dbus-x11 ttf-freefont font-noto git docker-cli docker-compose
             yarn --version
       - run:
           name: Set Chrome Binary Path
