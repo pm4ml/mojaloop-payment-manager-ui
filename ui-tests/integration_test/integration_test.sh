@@ -11,7 +11,7 @@ cd ../tests
 npm ci
 
 # Add on prem deploy before we run the actual integration tests
-checkout payment docker compose
+# checkout payment docker compose
 git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
 
 # checkout commit with id 74346ad
