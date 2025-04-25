@@ -25,7 +25,7 @@ jobs:
           name: Install Dependencies
           command: |
             apk update
-            apk add --no-cache yarn bash chromium chromium-chromedriver xvfb dbus-x11 ttf-freefont font-noto
+            apk add --no-cache yarn bash chromium chromium-chromedriver xvfb dbus-x11 ttf-freefont font-noto git
             yarn --version
       - run:
           name: Set Chrome Binary Path
