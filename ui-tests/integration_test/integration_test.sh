@@ -21,8 +21,7 @@ git checkout 74346ad
 # run docker compose
 ls -l
 cd docker-compose
-ls -l
-ls -la@ prometheus.yml
+
 chmod 644 prometheus.yml
 ls -l
 
