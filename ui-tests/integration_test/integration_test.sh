@@ -25,8 +25,8 @@ cd docker-compose
 chmod 644 prometheus.yml
 ls -l
 
-# Disable the prometheus service in docker-compose.yml
-sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yml
+# Disable the prometheus service in docker-compose.yaml
+sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yaml
 
 env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
