@@ -12,23 +12,6 @@ npm ci
 
 # Add on prem deploy before we run the actual integration tests
 # checkout payment docker compose
-git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
-
-# checkout commit with id 74346ad
-cd on-premise-deploy-fx
-git checkout 74346ad
-
-# run docker compose
-ls -l
-cd docker-compose
-
-chmod 644 prometheus.yml
-ls -l
-
-# Disable the prometheus service in docker-compose.yaml
-sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yaml
-
-env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
 # Start the server in the background
 npm run start &

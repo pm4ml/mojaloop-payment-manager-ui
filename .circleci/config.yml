@@ -41,6 +41,15 @@ jobs:
       - run:
           name: Run Integration Tests
           command: |
+            git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
+            cd on-premise-deploy-fx
+            git checkout 74346ad
+            ls -l
+            cd docker-compose
+            chmod 644 prometheus.yml
+            ls -l
+            sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yaml
+            env PM4ML_ENABLED=true docker-compose --profile portal up -d
             mkdir -p /tmp/test-results
             yarn test:integration
           environment:
