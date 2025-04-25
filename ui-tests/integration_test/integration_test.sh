@@ -22,7 +22,8 @@ git checkout 74346ad
 ls -l
 cd docker-compose
 ls -l
-chmod 777 prometheus.yml
+ls -la@ prometheus.yml
+chmod 644 prometheus.yml
 ls -l
 env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
