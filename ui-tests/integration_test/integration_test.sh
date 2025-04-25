@@ -25,6 +25,10 @@ ls -l
 ls -la@ prometheus.yml
 chmod 644 prometheus.yml
 ls -l
+
+# Disable the prometheus service in docker-compose.yml
+sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yml
+
 env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
 # Start the server in the background
