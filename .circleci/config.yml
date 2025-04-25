@@ -19,12 +19,9 @@ jobs:
     docker:
       - image: testcafe/testcafe:latest
         user: root
-      - image: docker:20.10.24-dind
-        environment:
-          DOCKER_TLS_CERTDIR: ""
-        privileged: true
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Install Dependencies
           command: |
