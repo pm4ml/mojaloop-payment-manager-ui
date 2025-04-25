@@ -22,7 +22,8 @@ git checkout 74346ad
 ls -l
 cd docker-compose
 ls -l
-chmod 644 prometheus.yml
+chmod 777 prometheus.yml
+ls -l
 env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
 # Start the server in the background
@@ -37,7 +38,7 @@ done
 echo "Server is up and running!"
 
 # Run tests
-PAYMENT_MANAGER_ENDPOINT="http://127.0.0.1:3000" npm run test:headless
+PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless
 
 # Clean up - kill the background server process
 kill $SERVER_PID
