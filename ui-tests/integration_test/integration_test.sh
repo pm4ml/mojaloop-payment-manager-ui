@@ -19,6 +19,9 @@ cd on-premise-deploy-fx
 git checkout 74346ad
 
 # run docker compose
+ls -l
+cd docker-compose
+ls -l
 env PM4ML_ENABLED=true docker-compose --profile portal up -d
 
 # Start the server in the background
