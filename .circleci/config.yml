@@ -74,6 +74,7 @@ jobs:
             ls -l
             cat package.json
             # run payment manager in background with logs redirected
+            export NODE_OPTIONS=--openssl-legacy-provider
             yarn start > /tmp/app.log 2>&1 &
             ps -ef | grep node
             
@@ -117,6 +118,7 @@ jobs:
             CHROME_PATH: /usr/bin/
             BROWSER_TCAFE: chrome:headless
             DISPLAY: :99
+            NODE_OPTIONS: --openssl-legacy-provider
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
