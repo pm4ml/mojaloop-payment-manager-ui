@@ -137,7 +137,7 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results/test-report.html
 workflows:
-  unit-test:
+  test:
     jobs:
       - unit-test
   integration-test:
