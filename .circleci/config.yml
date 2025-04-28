@@ -106,7 +106,10 @@ jobs:
             # stop payment manager
             # ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
             # stop all docker
-            cd ../on-premise-deploy-fx/docker-compose
+            ls -l
+            cd on-premise-deploy-fx/docker-compose
+            ls -l
+            docker-compose ps
             docker-compose --profile portal down
           environment:
             CHROME_BIN: /usr/bin/google-chrome
