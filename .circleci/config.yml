@@ -71,8 +71,16 @@ jobs:
             env PM4ML_ENABLED=true docker-compose --profile portal up -d
             # change directory to project root
             cd $CIRCLE_WORKING_DIRECTORY
-            ls -l
-            cat package.json
+            echo "Current directory: $(pwd)"
+            ls -la
+            echo "Checking package.json..."
+            if [ -f "package.json" ]; then
+              echo "package.json found"
+              cat package.json
+            else
+              echo "package.json not found in current directory"
+              exit 1
+            fi
             # run payment manager in background with logs redirected
             export NODE_OPTIONS=--openssl-legacy-provider
             yarn start > /tmp/app.log 2>&1 &
@@ -82,7 +90,7 @@ jobs:
             echo "Waiting for application to start..."
             sleep 10
             echo "Verifying API is fully responsive..."
-            if ! curl -s -f http://localhost:8083/transfers > /dev/null; then
+            if ! curl -s -f http://127.0.0.1:8083/transfers > /dev/null; then
               echo "API is not responding properly"
               tail -n 50 /tmp/app.log
               # exit 1
