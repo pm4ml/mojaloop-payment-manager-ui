@@ -22,7 +22,6 @@ executors:
       image: ubuntu-2204:2023.04.2
 jobs:
   unit-test:
-    name: test
     docker:
       - image: node:20-alpine
     steps:
@@ -37,7 +36,7 @@ jobs:
           command: |
             yarn test
 
-  test:
+  integration-test:
     executor: default-machine
     steps:
       - checkout
@@ -138,10 +137,10 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results/test-report.html
 workflows:
-  tests:
+  unit-test:
     jobs:
       - unit-test
-  e2e-test:
+  integration-test:
     jobs:
-      - test
+      - integration-test
   
