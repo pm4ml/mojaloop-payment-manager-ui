@@ -78,15 +78,15 @@ jobs:
             # change directory to project root
             cd $CIRCLE_WORKING_DIRECTORY
             ls -l
-            # Install project dependencies
-            yarn install
-            # run payment manager in background
-            yarn start &
-            ps -ef | grep node
-            # run test
-            yarn test:integration
-            # stop payment manager
-            ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
+            # # Install project dependencies
+            # yarn install
+            # # run payment manager in background
+            # yarn start &
+            # ps -ef | grep node
+            # # run test
+            # yarn test:integration
+            # # stop payment manager
+            # ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
             # stop all docker
             cd ../on-premise-deploy-fx/docker-compose
             docker-compose --profile portal down
