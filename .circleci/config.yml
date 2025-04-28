@@ -137,9 +137,10 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results/test-report.html
 workflows:
-  e2e-test:
-    jobs:
-      - test
   ui-tests:
     jobs:
       - unit-test
+  e2e-test:
+    jobs:
+      - test
+  
