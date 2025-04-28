@@ -14,11 +14,15 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
+executors:
+  default-machine:
+    working_directory: /home/circleci/project
+    shell: "/bin/bash -leo pipefail"
+    machine:
+      image: ubuntu-2204:2023.04.2
 jobs:
   test:
-    docker:
-      - image: testcafe/testcafe:latest
-        user: root
+    executor: default-machine
     steps:
       - checkout
       - setup_remote_docker
