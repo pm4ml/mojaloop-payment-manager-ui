@@ -82,11 +82,10 @@ jobs:
             # ps aux | grep "yarn start" | grep -v grep | awk '{print $2}' | xargs kill -9
             # stop all docker 
           environment:
-            export CHROME_BIN=/usr/bin/google-chrome
-              export CHROME_PATH=/usr/bin/
-              export BROWSER_TCAFE=chrome:headless
-              export DISPLAY=:99
-              Xvfb :99 -screen 0 1024x768x16 &
+            CHROME_BIN: /usr/bin/google-chrome
+            CHROME_PATH: /usr/bin/
+            BROWSER_TCAFE: chrome:headless
+            DISPLAY: :99
       # - store_test_results:
       #     path: /tmp/test-results
       # - store_artifacts:
