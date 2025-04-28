@@ -80,7 +80,7 @@ jobs:
             
             # Wait for application to be ready
             echo "Waiting for application to start..."
-            sleep 30
+            sleep 10
             echo "Verifying API is fully responsive..."
             if ! curl -s -f http://localhost:8083/transfers > /dev/null; then
               echo "API is not responding properly"
