@@ -63,33 +63,35 @@ jobs:
           pkg-manager: yarn
       - run:
           name: Run Integration Tests
-          command: |
-            git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
-            cd on-premise-deploy-fx
-            git checkout 74346ad
-            # cd docker-compose
-            # env PM4ML_ENABLED=true docker-compose --profile portal up -d
-            mkdir -p /tmp/test-results
-            # change directory to project root
-            cd $CIRCLE_WORKING_DIRECTORY
-            ls -l
-            # run payment manager in background
-            # yarn start &
-            # run test
-            # yarn test:integration
-
-            # stop payment manager
-            # ps aux | grep "yarn start" | grep -v grep | awk '{print $2}' | xargs kill -9
-            # stop all docker 
           environment:
             CHROME_BIN: /usr/bin/google-chrome
             CHROME_PATH: /usr/bin/
             BROWSER_TCAFE: chrome:headless
             DISPLAY: :99
-      # - store_test_results:
-      #     path: /tmp/test-results
-      # - store_artifacts:
-      #     path: /tmp/test-results/test-report.html
+          command: |
+            cd ..
+            git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
+            cd on-premise-deploy-fx
+            git checkout 74346ad
+            cd docker-compose
+            env PM4ML_ENABLED=true docker-compose --profile portal up -d
+            # change directory to project root
+            cd $CIRCLE_WORKING_DIRECTORY
+            ls -l
+            # run payment manager in background
+            yarn start &
+            ps -ef | grep node
+            # run test
+            yarn test:integration
+            # stop payment manager
+            ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
+            # stop all docker
+            cd ../on-premise-deploy-fx/docker-compose
+            docker-compose --profile portal down
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results/test-report.html
 workflows:
   e2e-test:
     jobs:
