@@ -63,13 +63,7 @@ jobs:
           pkg-manager: yarn
       - run:
           name: Run Integration Tests
-          environment:
-            CHROME_BIN: /usr/bin/google-chrome
-            CHROME_PATH: /usr/bin/
-            BROWSER_TCAFE: chrome:headless
-            DISPLAY: :99
           command: |
-            cd ..
             git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
             cd on-premise-deploy-fx
             git checkout 74346ad
@@ -78,18 +72,39 @@ jobs:
             # change directory to project root
             cd $CIRCLE_WORKING_DIRECTORY
             ls -l
-            # # Install project dependencies
-            # yarn install
-            # # run payment manager in background
-            # yarn start &
-            # ps -ef | grep node
-            # # run test
-            # yarn test:integration
-            # # stop payment manager
-            # ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
+            cat package.json
+            # run payment manager in background with logs redirected
+            yarn start > /tmp/app.log 2>&1 &
+            
+            # Wait for the application to start
+            echo "Waiting for application to start..."
+            for i in {1..30}; do
+              if curl -s http://localhost:3000 > /dev/null; then
+                echo "Application is up!"
+                break
+              fi
+              if [ $i -eq 30 ]; then
+                echo "Application failed to start within 30 seconds"
+                cat /tmp/app.log
+                exit 1
+              fi
+              echo "Waiting for application to start... ($i/30)"
+              sleep 1
+            done
+            
+            ps -ef | grep node
+            # run test
+            yarn test:integration
+            # stop payment manager
+            ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
             # stop all docker
             cd ../on-premise-deploy-fx/docker-compose
             docker-compose --profile portal down
+          environment:
+            CHROME_BIN: /usr/bin/google-chrome
+            CHROME_PATH: /usr/bin/
+            BROWSER_TCAFE: chrome:headless
+            DISPLAY: :99
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
