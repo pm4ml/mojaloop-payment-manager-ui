@@ -93,7 +93,7 @@ jobs:
             echo "Verifying API is fully responsive..."
             tail -n 50 /tmp/app.log
             # grep IP from the log file that 8083 is listening on
-            IP=$(grep -oP 'Listening on \K[^ ]+' /tmp/app.log)
+            IP=$(grep -oP 'Project is running at \K[^ ]+' /tmp/app.log | sed 's/\/$//')
             echo "IP: $IP"
             # Check if the API is responsive
             if ! curl -s -f http://$IP:8083/transfers > /dev/null; then
