@@ -21,6 +21,21 @@ executors:
     machine:
       image: ubuntu-2204:2023.04.2
 jobs:
+  unit-test:
+    docker:
+      - image: node:20-alpine
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            # Install required tools
+            yarn install
+      - run:
+          name: Run Unit Tests
+          command: |
+            yarn test
+
   test:
     executor: default-machine
     steps:
@@ -125,3 +140,6 @@ workflows:
   e2e-test:
     jobs:
       - test
+  ui-tests:
+    jobs:
+      - unit-test
