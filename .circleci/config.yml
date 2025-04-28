@@ -48,35 +48,45 @@ jobs:
             sudo apt-get update
             
             # Install packages
-            sudo apt-get install -y yarn chromium-browser chromium-chromedriver xvfb dbus-x11 fonts-freefont-ttf fonts-noto git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            sudo apt-get install -y yarn google-chrome-stable xvfb dbus-x11 fonts-freefont-ttf fonts-noto git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             yarn --version
-      # - run:
-      #     name: Set Chrome Binary Path
-      #     command: |
-      #       export CHROME_BIN=/usr/bin/chromium-browser
-      #       export CHROME_PATH=/usr/lib/chromium/
-      #       export BROWSER_TCAFE=chromium:headless
-      #       export DISPLAY=:99
-      #       Xvfb :99 -screen 0 1024x768x16 &
-      # - node/install-packages:
-      #     pkg-manager: yarn
-      # - run:
-      #     name: Run Integration Tests
-      #     command: |
-      #       git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
-      #       cd on-premise-deploy-fx
-      #       git checkout 74346ad
-      #       cd docker-compose
-      #       chmod 644 prometheus.yml
-      #       sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yaml
-      #       env PM4ML_ENABLED=true docker-compose --profile portal up -d
-      #       mkdir -p /tmp/test-results
-      #       yarn test:integration
-      #     environment:
-      #       CHROME_BIN: /usr/bin/chromium-browser
-      #       CHROME_PATH: /usr/lib/chromium/
-      #       BROWSER_TCAFE: chromium:headless
-      #       DISPLAY: :99
+            docker-compose --version
+      - run:
+          name: Set Chrome Binary Path
+          command: |
+            export CHROME_BIN=/usr/bin/google-chrome
+            export CHROME_PATH=/usr/bin/
+            export BROWSER_TCAFE=chrome:headless
+            export DISPLAY=:99
+            Xvfb :99 -screen 0 1024x768x16 &
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Run Integration Tests
+          command: |
+            git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
+            cd on-premise-deploy-fx
+            git checkout 74346ad
+            # cd docker-compose
+            # env PM4ML_ENABLED=true docker-compose --profile portal up -d
+            mkdir -p /tmp/test-results
+            # change directory to project root
+            cd $CIRCLE_WORKING_DIRECTORY
+            ls -l
+            # run payment manager in background
+            # yarn start &
+            # run test
+            # yarn test:integration
+
+            # stop payment manager
+            # ps aux | grep "yarn start" | grep -v grep | awk '{print $2}' | xargs kill -9
+            # stop all docker 
+          environment:
+            export CHROME_BIN=/usr/bin/google-chrome
+              export CHROME_PATH=/usr/bin/
+              export BROWSER_TCAFE=chrome:headless
+              export DISPLAY=:99
+              Xvfb :99 -screen 0 1024x768x16 &
       # - store_test_results:
       #     path: /tmp/test-results
       # - store_artifacts:
