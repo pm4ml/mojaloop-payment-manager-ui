@@ -79,7 +79,7 @@ jobs:
             # Wait for the application to start
             echo "Waiting for application to start..."
             for i in {1..30}; do
-              if curl -s http://localhost:3000 > /dev/null; then
+              if curl -s http://localhost:8083 > /dev/null; then
                 echo "Application is up!"
                 break
               fi
