@@ -22,6 +22,7 @@ executors:
       image: ubuntu-2204:2023.04.2
 jobs:
   unit-test:
+    name: test
     docker:
       - image: node:20-alpine
     steps:
@@ -137,7 +138,7 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results/test-report.html
 workflows:
-  ui-tests:
+  tests:
     jobs:
       - unit-test
   e2e-test:
