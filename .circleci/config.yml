@@ -71,6 +71,7 @@ jobs:
             env PM4ML_ENABLED=true docker-compose --profile portal up -d
             # change directory to project root
             cd $CIRCLE_WORKING_DIRECTORY
+            yarn install
             echo "Current directory: $(pwd)"
             ls -la
             echo "Checking package.json..."
