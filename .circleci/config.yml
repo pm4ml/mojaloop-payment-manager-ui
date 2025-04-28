@@ -75,25 +75,9 @@ jobs:
             cat package.json
             # run payment manager in background with logs redirected
             yarn start > /tmp/app.log 2>&1 &
-            
-            # Wait for the application to start
-            echo "Waiting for application to start..."
-            for i in {1..30}; do
-              if curl -s http://localhost:8083 > /dev/null; then
-                echo "Application is up!"
-                break
-              fi
-              if [ $i -eq 30 ]; then
-                echo "Application failed to start within 30 seconds"
-                cat /tmp/app.log
-                exit 1
-              fi
-              echo "Waiting for application to start... ($i/30)"
-              sleep 1
-            done
-            
             ps -ef | grep node
-            # run test
+            # sleep 30 seconds and run test
+            sleep 30
             yarn test:integration
             # stop payment manager
             ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
