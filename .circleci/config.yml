@@ -25,12 +25,11 @@ jobs:
     executor: default-machine
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Install Dependencies
           command: |
-            apk update
-            apk add --no-cache yarn bash chromium chromium-chromedriver xvfb dbus-x11 ttf-freefont font-noto git docker-cli docker-compose
+            sudo apt-get update
+            sudo apt-get install -y yarn chromium-browser chromium-chromedriver xvfb dbus-x11 ttf-freefont fonts-noto git docker.io docker-compose
             yarn --version
       - run:
           name: Set Chrome Binary Path
@@ -48,10 +47,8 @@ jobs:
             git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
             cd on-premise-deploy-fx
             git checkout 74346ad
-            ls -l
             cd docker-compose
             chmod 644 prometheus.yml
-            ls -l
             sed -i '/prometheus:/,/^[[:space:]]*$/d' docker-compose.yaml
             env PM4ML_ENABLED=true docker-compose --profile portal up -d
             mkdir -p /tmp/test-results
