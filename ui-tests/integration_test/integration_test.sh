@@ -36,7 +36,6 @@ sudo apt-get install -y yarn google-chrome-stable xvfb dbus-x11 fonts-freefont-t
 yarn --version
 docker-compose --version
 
-npm ci
 mkdir -p /tmp/test-results
 
 git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
