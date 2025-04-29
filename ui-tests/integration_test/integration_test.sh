@@ -5,14 +5,6 @@ set -e
 
 # Change to the directory containing this script
 cd "$(dirname "$0")"
-
-yarn install
-yarn test
-
-
-# Install test dependencies
-cd ui-tests/tests
-
 # Set Chrome Binary Path
 export CHROME_BIN=/usr/bin/google-chrome
 export CHROME_PATH=/usr/bin/
@@ -85,6 +77,14 @@ if ! curl -s -f http://$IP:8083/transfers > /dev/null; then
     tail -n 50 /tmp/app.log
     # exit 1
 fi
+
+
+# Install test dependencies
+ls -l
+cd ui-tests/tests
+ls -l
+yarn install
+cd $CIRCLE_WORKING_DIRECTORY
 
 yarn test:integration
 # stop payment manager
