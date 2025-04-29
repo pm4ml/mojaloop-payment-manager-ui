@@ -58,7 +58,6 @@ else
     exit 1
 fi
 # run payment manager in background with logs redirected
-export NODE_OPTIONS=--openssl-legacy-provider
 yarn start > /tmp/app.log 2>&1 &
 ps -ef | grep node
 
