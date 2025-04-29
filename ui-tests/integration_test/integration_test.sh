@@ -111,14 +111,36 @@ cp report.html /tmp/test-results/test-report.html || true
 # ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
 # stop all docker
 ls -l
-cd on-premise-deploy-fx/docker-compose
+cd tmp-deploy-fx/on-premise-deploy-fx/docker-compose
 ls -l
 docker-compose ps
-docker-compose --profile portal down
 
-# Remove temporary directory
+# Try to stop containers gracefully
+echo "Stopping Docker containers..."
+if ! docker-compose --profile portal down; then
+    echo "Warning: docker-compose down failed, trying force stop..."
+    # Force stop all containers in the project
+    docker-compose --profile portal stop
+    # Remove containers
+    docker-compose --profile portal rm -f
+fi
+
+# Wait for containers to stop and verify they're down
+echo "Waiting for containers to stop..."
+sleep 10
+if docker-compose ps | grep -q "Up"; then
+    echo "Warning: Some containers are still running, forcing cleanup..."
+    # Force stop all containers
+    docker-compose --profile portal stop
+    # Remove containers
+    docker-compose --profile portal rm -f
+    # Remove volumes
+    docker-compose --profile portal down -v
+fi
+
+# Remove temporary directory with sudo
 cd $CIRCLE_WORKING_DIRECTORY
-rm -rf tmp-deploy-fx
+sudo rm -rf tmp-deploy-fx
 
 # # Run tests
 # PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
