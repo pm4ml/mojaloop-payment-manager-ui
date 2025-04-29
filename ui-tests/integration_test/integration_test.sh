@@ -99,14 +99,14 @@ fi
 ls -l
 cd ui-tests/tests
 ls -l
-yarn install
+npm ci
 # # Run tests
 PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
 # Archive test report
 cp report.html /tmp/test-results/test-report.html || true
 
 # stop payment manager
-# ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
+ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
 # stop all docker
 ls -l
 cd tmp-deploy-fx/on-premise-deploy-fx/docker-compose
