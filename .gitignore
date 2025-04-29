@@ -32,3 +32,7 @@ on-premise-deploy/docker-compose/vault/tmp/secret-id
 .vscode/
 
 .nyc_output
+
+
+ui-tests/tests/report.*
+ui-tests/tests/screenshots/*
