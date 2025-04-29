@@ -40,6 +40,12 @@ docker-compose --version
 
 mkdir -p /tmp/test-results
 
+# Remove existing directory if it exists
+if [ -d "on-premise-deploy-fx" ]; then
+    echo "Removing existing on-premise-deploy-fx directory..."
+    rm -rf on-premise-deploy-fx
+fi
+
 git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
 cd on-premise-deploy-fx
 git checkout 74346ad
