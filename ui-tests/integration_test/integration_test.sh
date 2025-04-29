@@ -43,12 +43,12 @@ mkdir -p /tmp/test-results
 # Remove existing directories if they exist
 if [ -d "on-premise-deploy-fx" ]; then
     echo "Removing existing on-premise-deploy-fx directory..."
-    rm -rf on-premise-deploy-fx
+    sudo rm -rf on-premise-deploy-fx
 fi
 
 if [ -d "tmp-deploy-fx" ]; then
     echo "Removing existing tmp-deploy-fx directory..."
-    rm -rf tmp-deploy-fx
+    sudo rm -rf tmp-deploy-fx
 fi
 
 ls -l
@@ -140,7 +140,19 @@ fi
 
 # Remove temporary directory with sudo
 cd $CIRCLE_WORKING_DIRECTORY
-sudo rm -rf tmp-deploy-fx
+
+# Try to fix permissions and remove files
+if [ -d "tmp-deploy-fx" ]; then
+    echo "Fixing permissions and removing files..."
+    # Change to the problematic directory
+    cd tmp-deploy-fx/on-premise-deploy-fx/docker-compose/vault/tmp
+    # Change permissions of problematic files
+    sudo chmod -R 777 role-id secret-id 2>/dev/null || true
+    # Go back to working directory
+    cd $CIRCLE_WORKING_DIRECTORY
+    # Now try to remove the directory
+    sudo rm -rf tmp-deploy-fx
+fi
 
 # # Run tests
 # PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
