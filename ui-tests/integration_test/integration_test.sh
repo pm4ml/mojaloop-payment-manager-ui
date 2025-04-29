@@ -46,6 +46,8 @@ if [ -d "on-premise-deploy-fx" ]; then
     rm -rf on-premise-deploy-fx
 fi
 
+mkdir tmp-deploy-fx
+cd tmp-deploy-fx
 git clone https://github.com/Ujjwal-Izyane/on-premise-deploy-fx
 cd on-premise-deploy-fx
 git checkout 74346ad
@@ -93,6 +95,10 @@ yarn install
 cd $CIRCLE_WORKING_DIRECTORY
 
 yarn test:integration
+
+# Archive test report
+cp report.html /tmp/test-results/test-report.html || true
+
 # stop payment manager
 # ps aux | grep "node" | grep -v grep | awk '{print $2}' | xargs kill -9
 # stop all docker
@@ -102,8 +108,9 @@ ls -l
 docker-compose ps
 docker-compose --profile portal down
 
-# Run tests
-PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
+# Remove temporary directory
+cd $CIRCLE_WORKING_DIRECTORY
+rm -rf tmp-deploy-fx
 
-# Archive test report
-cp report.html /tmp/test-results/test-report.html || true
+# # Run tests
+# PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
