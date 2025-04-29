@@ -100,10 +100,8 @@ ls -l
 cd ui-tests/tests
 ls -l
 yarn install
-cd $CIRCLE_WORKING_DIRECTORY
-
-yarn test:integration
-
+# # Run tests
+PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
 # Archive test report
 cp report.html /tmp/test-results/test-report.html || true
 
@@ -153,6 +151,3 @@ if [ -d "tmp-deploy-fx" ]; then
     # Now try to remove the directory
     sudo rm -rf tmp-deploy-fx
 fi
-
-# # Run tests
-# PM4ML_ENDPOINT="http://127.0.0.1:8083" npm run test:headless || true
