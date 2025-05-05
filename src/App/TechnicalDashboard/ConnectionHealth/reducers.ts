@@ -14,6 +14,7 @@ export type State = {
   status: 'pending' | 'inProgress' | 'completed' | 'inError';
   stateDescription: string;
   errorDescription: string;
+  lastUpdated: string;
 };
 
 type StatesState = {

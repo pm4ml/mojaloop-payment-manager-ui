@@ -87,6 +87,7 @@ export type ConnectionStateApiResponse = {
   status: ConnectionStatusEnum;
   errorDescription: string;
   stateDescription: string;
+  lastUpdated: string;
 };
 
 export type ConnectionStateDataResponse = {
@@ -126,7 +127,9 @@ export function getConnectionStateData(
         color: indicatorColor[stateData.status],
         description: stateData.errorDescription
           ? `${stateData.stateDescription} : ${stateData.errorDescription}`
-          : stateData.stateDescription,
+          : `${stateData.stateDescription} (Last Updated: ${new Date(
+              stateData.lastUpdated
+            ).toLocaleString()})`,
       });
     }
 
