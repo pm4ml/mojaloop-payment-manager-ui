@@ -7,6 +7,10 @@ import { reducer as dashboardReducer } from 'App/Dashboard';
 import { reducer as technicalDashboardReducer } from 'App/TechnicalDashboard';
 import { reducer as transfersReducer } from 'App/Transfers';
 import { reducer as wizardReducer } from 'App/ConnectionWizard';
+import {
+  statesReducer,
+  recreateCertReducer,
+} from 'App/TechnicalDashboard/ConnectionHealth/reducers';
 import fxpConversionsReducer from '../App/FxpConversions/reducers';
 
 const getReducer = (history: History): Reducer =>
@@ -19,6 +23,8 @@ const getReducer = (history: History): Reducer =>
     transfers: transfersReducer,
     wizard: wizardReducer,
     fxpConversions: fxpConversionsReducer,
+    states: statesReducer,
+    recreateCert: recreateCertReducer,
   });
 
 export default getReducer;
