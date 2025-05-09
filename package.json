@@ -2,9 +2,9 @@
   "name": "mojaloop-payment-manager-ui",
   "version": "1.17.5",
   "private": true,
-  "proxy": "http://localhost:10000",
+  "proxy": "http://localhost:4010",
   "engines": {
-    "node": "=16.x"
+    "node": ">=16.x"
   },
   "dependencies": {
     "@modusbox/modusbox-ui-components": "^1.23.0",
@@ -27,7 +27,6 @@
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "apexcharts": "^3.22.0",
-    "axe-core": "^4.0.2",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "color-scheme": "^1.0.1",
@@ -42,7 +41,6 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-flowtype": "^5.1.3",
     "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
@@ -87,7 +85,16 @@
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,scss,css,json}'",
     "proxy": "npm start --prefix proxy",
     "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
-    "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
+    "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
+    "test:xunit": "react-app-rewired test --watchAll=false",
+    "test:coverage": "CI=true npx nyc --reporter=lcov --reporter=text  --reporter=text-summary yarn test -- --coverage --watchAll=false",
+    "test:coverage-check": "yarn test:coverage && npx nyc check-coverage",
+    "audit:check": "npx audit-ci --config ./audit-ci.jsonc",
+    "dep:check": "npx ncu -e 2",
+    "dep:update": "npx ncu -u",
+    "test:int": "jest --ci --reporters=default --reporters=jest-junit --env=node ui-tests/integration --forceExit --detectOpenHandles",
+    "test:integration": "./ui-tests/integration_test/integration_test.sh",
+    "test:functional": "./ui-tests/scripts/test-functional.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -106,6 +113,9 @@
   },
   "devDependencies": {
     "@types/validator": "^13.12.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "jest-junit": "^16.0.0",
+    "nyc": "15.1.0",
     "redux-mock-store": "^1.5.4",
     "standard-version": "^9.5.0"
   },

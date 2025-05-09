@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: mojaloop-payment-manager-ui
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /()(.*)
+        backend:
+          serviceName: mojaloop-payment-manager-ui
+          servicePort: http
+      - path: /api(/|$)(.*)
+        backend:
+          serviceName: experience-api
+          servicePort: 4010

@@ -30,3 +30,9 @@ on-premise-deploy/docker-compose/vault/tmp/secret-id
 
 # Ignore entire VSCode settings directory
 .vscode/
+
+.nyc_output
+
+
+ui-tests/tests/report.*
+ui-tests/tests/screenshots/*
