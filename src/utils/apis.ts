@@ -8,11 +8,29 @@ const services = {
   },
 };
 
+// mockService
 // const mockServices = {
 //   localNode: {
 //     baseUrl: 'http://localhost:4040/exp',
 //   },
 // };
+
+const managementServices = {
+  localNode: {
+    baseUrl: 'http://localhost:9000',
+  },
+};
+
+const getStates: Config<Todo, State> = {
+  service: managementServices.localNode,
+  url: () => '/states',
+};
+
+const recreateCert: Config<Todo, State> = {
+  service: managementServices.localNode,
+  url: (_, data) => `/recreate/${data.securityType}`,
+};
+
 interface Todo {
   title: string;
 }
@@ -232,8 +250,9 @@ const metric: Config<Todo, State> = {
 };
 
 const endpoints = {
+  getStates,
+  recreateCert,
   dfsps,
-  // mockServices,
   environmentStatus,
   monetaryZones,
   batches,

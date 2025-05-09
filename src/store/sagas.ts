@@ -5,6 +5,7 @@ import technicalDashboardSagas from 'App/TechnicalDashboard/sagas';
 import transfersSagas from 'App/Transfers/sagas';
 import wizardSagas from 'App/ConnectionWizard/sagas';
 import fxpConversionsSagas from 'App/FxpConversions/sagas';
+import stateSagas from 'App/TechnicalDashboard/ConnectionHealth/sagas';
 
 function* rootSaga() {
   yield all([
@@ -14,6 +15,7 @@ function* rootSaga() {
     wizardSagas(),
     technicalDashboardSagas(),
     fxpConversionsSagas(),
+    stateSagas(),
   ]);
 }
 

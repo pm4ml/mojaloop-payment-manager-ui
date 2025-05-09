@@ -19,6 +19,7 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import { TechnicalDashboardFilters } from './types';
 import './Dashboard.css';
+import ConnectionHealthDropdown from './ConnectionHealth';
 
 const stateProps = (state: State) => ({
   filters: selectors.getTechnicalDashboardFilters(state),
@@ -135,10 +136,7 @@ const TechnicalDashboard: FC<TechnicalDashboardProps> = ({
       <Row style={{ marginBottom: '10px' }}>
         <div>Connection Health</div>
       </Row>
-      <Row align="left top" style={{ marginBottom: '20px', fontWeight: 'bold' }}>
-        <div className="accordion__indicator__color" style={{ background: '#12d670' }} />
-        <div>Connected</div>
-      </Row>
+      <ConnectionHealthDropdown />
       <Row style={{ marginBottom: '5px' }}>
         <div>Select Monitoring Time</div>
       </Row>

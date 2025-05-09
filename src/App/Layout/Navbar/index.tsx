@@ -5,8 +5,8 @@ import './Navbar.css';
 type NavbarProps = {
   username?: string;
   logoutUrl?: string;
-  activeConnectionName: string;
-  activeConnectionStatusColor: string;
+  connectionStatusTitle: string;
+  connectionStatusColor: string;
   kratos?: boolean;
   appTitle: string;
   appLogo: string;
@@ -15,8 +15,8 @@ type NavbarProps = {
 
 const Navbar: FC<NavbarProps> = ({
   username,
-  activeConnectionName,
-  activeConnectionStatusColor,
+  connectionStatusTitle,
+  connectionStatusColor,
   logoutUrl,
   kratos,
   appTitle,
@@ -50,10 +50,10 @@ const Navbar: FC<NavbarProps> = ({
       </div>
 
       <div id="navbar__active__connection">
-        Connected to: {activeConnectionName}
+        {connectionStatusTitle}
         <div
           className="navbar__connection-led"
-          style={{ backgroundColor: activeConnectionStatusColor }}
+          style={{ backgroundColor: connectionStatusColor }}
         />
       </div>
 
