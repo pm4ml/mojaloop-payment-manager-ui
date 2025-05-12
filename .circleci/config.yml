@@ -114,6 +114,9 @@ jobs:
 
 workflows:
   version: 2
+  test:
+    jobs:
+      - custom-integration-test
   setup:
     jobs:
       - build/workflow:
@@ -121,7 +124,5 @@ workflows:
             tags:
               only: /v\d+(\.\d+){2}(-[a-zA-Z-][0-9a-zA-Z-]*\.\d+)?/
           base_image: node:18-alpine
-  test:
-    jobs:
-      - custom-integration-test
+  
   
