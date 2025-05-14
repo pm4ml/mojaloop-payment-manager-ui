@@ -11,7 +11,7 @@
 import * as dotenv from 'dotenv';
 import * as assert from 'assert';
 
-//dotenv.config();
+dotenv.config();
 
 function ensureEnv(e: string): string {
   const result = process.env[e];
@@ -21,12 +21,13 @@ function ensureEnv(e: string): string {
 
 let tmpConfig;
 // TODO: ajv
+console.log(process.env.ENV);
 if (process.env.ENV === "local"){
   tmpConfig = {
-  //pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
+  pm4mlEndpoint: ensureEnv('PM4ML_ENDPOINT'),
   //simCoreConnectorEndpoint: ensureEnv('SIM_CORE_CONNECTOR_ENDPOINT'),
-  pm4mlEndpoint: "http://localhost:8081",
-  simCoreConnectorEndpoint: "http://localhost:3003",
+  // pm4mlEndpoint: "http://localhost:8081",
+  simCoreConnectorEndpoint: "http://localhost:4040",
   senderpartyID:"22507008181" ,
   receiverpartyID:"22556999125", 
   simcurrency: "USD",

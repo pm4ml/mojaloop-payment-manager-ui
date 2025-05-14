@@ -44,3 +44,4 @@ Example format:
 	data:image/webp;base64,<base64-encoded-image>
 	
 Use this link to generate WebP format images: [https://caniuse.com/webp](https://caniuse.com/webp)
+ 
