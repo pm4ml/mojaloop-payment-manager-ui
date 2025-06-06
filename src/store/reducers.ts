@@ -10,6 +10,7 @@ import { reducer as wizardReducer } from 'App/ConnectionWizard';
 import {
   statesReducer,
   recreateCertReducer,
+  reonboardReducer,
 } from 'App/TechnicalDashboard/ConnectionHealth/reducers';
 import fxpConversionsReducer from '../App/FxpConversions/reducers';
 
@@ -25,6 +26,7 @@ const getReducer = (history: History): Reducer =>
     fxpConversions: fxpConversionsReducer,
     states: statesReducer,
     recreateCert: recreateCertReducer,
+    reonboard: reonboardReducer,
   });
 
 export default getReducer;

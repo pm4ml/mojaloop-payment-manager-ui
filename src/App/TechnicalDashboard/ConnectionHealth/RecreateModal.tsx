@@ -24,16 +24,30 @@ const RecreateModal: FC<RecreateModalProps> = ({ isOpen, onClose, onSubmit, secu
     }
   };
 
+  const getModalTitle = () => {
+    if (securityType === RecreateSecurtityType.REONBOARD) {
+      return 'Reonboard Connection';
+    }
+    return `Recreate ${securityType} Certificates/Keys`;
+  };
+
+  const getPrimaryActionLabel = () => {
+    if (securityType === RecreateSecurtityType.REONBOARD) {
+      return 'Reonboard';
+    }
+    return `Recreate ${securityType} Certificates/Keys`;
+  };
+
   return (
     <Modal
-      title={`Recreate ${securityType} Certificates/Keys`}
+      title={getModalTitle()}
       width="1200px"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       allowSubmit
       isSubmitEnabled={!!reason?.trim()}
-      primaryAction={`Recreate ${securityType} Certificates/Keys`}
+      primaryAction={getPrimaryActionLabel()}
     >
       <FormInput
         type="text"

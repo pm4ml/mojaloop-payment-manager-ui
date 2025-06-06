@@ -9,6 +9,10 @@ import {
   recreateCertFailure,
   RecreateCertRequestAction,
   RecreateCertActionTypes,
+  REONBOARD_REQUEST,
+  reonboardSuccess,
+  reonboardFailure,
+  ReonboardActionTypes,
 } from './actions';
 import { ConnectionStateDataResponse } from './helpers';
 
@@ -52,6 +56,24 @@ export function* watchRecreateCertSaga() {
   yield takeLatest(RECREATE_CERT_REQUEST, recreateCertSaga);
 }
 
+function* reonboardSaga(action: ReonboardActionTypes) {
+  if (action.type !== REONBOARD_REQUEST) return;
+
+  const { reason } = action.payload;
+  try {
+    const response: RecreateCertResponse = yield call(apis.reonboard.create, {
+      body: { reason },
+    });
+    yield put(reonboardSuccess(response));
+  } catch (error) {
+    yield put(reonboardFailure(error instanceof Error ? error.message : 'Reonboard failed'));
+  }
+}
+
+export function* watchReonboardSaga() {
+  yield takeLatest(REONBOARD_REQUEST, reonboardSaga);
+}
+
 export default function* rootSaga() {
-  yield all([watchFetchStatesSaga(), watchRecreateCertSaga()]);
+  yield all([watchFetchStatesSaga(), watchRecreateCertSaga(), watchReonboardSaga()]);
 }

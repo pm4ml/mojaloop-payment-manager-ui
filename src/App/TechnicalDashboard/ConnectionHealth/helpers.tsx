@@ -9,6 +9,7 @@ export enum ConnectionStatusEnum {
 export enum RecreateSecurtityType {
   JWS = 'JWS',
   OUTBOUND_TLS = 'outboundTLS',
+  REONBOARD = 'reonboard',
 }
 
 export const indicatorColor: Record<ConnectionStatusEnum, string> = {
