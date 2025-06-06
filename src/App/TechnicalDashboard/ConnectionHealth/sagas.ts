@@ -17,6 +17,7 @@ import {
 import { ConnectionStateDataResponse } from './helpers';
 
 type RecreateCertResponse = { status: string };
+type ReonboardResponse = { status: string };
 
 function* fetchStatesSaga() {
   try {
@@ -61,7 +62,7 @@ function* reonboardSaga(action: ReonboardActionTypes) {
 
   const { reason } = action.payload;
   try {
-    const response: RecreateCertResponse = yield call(apis.reonboard.create, {
+    const response: ReonboardResponse = yield call(apis.reonboard.create, {
       body: { reason },
     });
     yield put(reonboardSuccess(response));
