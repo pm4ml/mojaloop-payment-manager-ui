@@ -31,6 +31,11 @@ const recreateCert: Config<Todo, State> = {
   url: (_, data) => `/recreate/${data.securityType}`,
 };
 
+const reonboard: Config<Todo, State> = {
+  service: managementServices.localNode,
+  url: () => '/reonboard',
+};
+
 interface Todo {
   title: string;
 }
@@ -252,6 +257,7 @@ const metric: Config<Todo, State> = {
 const endpoints = {
   getStates,
   recreateCert,
+  reonboard,
   dfsps,
   environmentStatus,
   monetaryZones,

@@ -43,7 +43,11 @@ export const RECREATE_CERT_REQUEST = 'RECREATE_CERT_REQUEST';
 export const RECREATE_CERT_SUCCESS = 'RECREATE_CERT_SUCCESS';
 export const RECREATE_CERT_FAILURE = 'RECREATE_CERT_FAILURE';
 
-type SecurityType = 'outboundTLS' | 'JWS';
+export const REONBOARD_REQUEST = 'REONBOARD_REQUEST';
+export const REONBOARD_SUCCESS = 'REONBOARD_SUCCESS';
+export const REONBOARD_FAILURE = 'REONBOARD_FAILURE';
+
+type SecurityType = 'outboundTLS' | 'JWS' | 'reonboard';
 
 export interface RecreateCertRequestAction {
   type: typeof RECREATE_CERT_REQUEST;
@@ -80,6 +84,43 @@ export const recreateCertSuccess = (response: { status: string }): RecreateCertS
 
 export const recreateCertFailure = (error: string): RecreateCertFailureAction => ({
   type: RECREATE_CERT_FAILURE,
+  payload: { error: error || 'Unknown error' },
+});
+
+// Reonboard Action Interfaces
+interface ReonboardRequestAction {
+  type: typeof REONBOARD_REQUEST;
+  payload: { reason: string };
+}
+
+interface ReonboardSuccessAction {
+  type: typeof REONBOARD_SUCCESS;
+  payload: { response: { status: string } };
+}
+
+interface ReonboardFailureAction {
+  type: typeof REONBOARD_FAILURE;
+  payload: { error: string };
+}
+
+export type ReonboardActionTypes =
+  | ReonboardRequestAction
+  | ReonboardSuccessAction
+  | ReonboardFailureAction;
+
+// Reonboard Action Creators
+export const reonboardRequest = (reason: string): ReonboardRequestAction => ({
+  type: REONBOARD_REQUEST,
+  payload: { reason },
+});
+
+export const reonboardSuccess = (response: { status: string }): ReonboardSuccessAction => ({
+  type: REONBOARD_SUCCESS,
+  payload: { response },
+});
+
+export const reonboardFailure = (error: string): ReonboardFailureAction => ({
+  type: REONBOARD_FAILURE,
   payload: { error: error || 'Unknown error' },
 });
 
