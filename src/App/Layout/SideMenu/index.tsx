@@ -34,7 +34,7 @@ const SideMenu: FC<SideMenuProps> = ({ pathname }) => {
         </MenuSection>
         <MenuSection label="TECHNICAL OPS">
           <MenuItem path="/techdashboard" label="Overview" />
-          <MenuItem path="/fxptechdashboard" label="FXP Overview" />
+          {/* <MenuItem path="/fxptechdashboard" label="FXP Overview" /> */}
         </MenuSection>
       </Menu>
     </div>

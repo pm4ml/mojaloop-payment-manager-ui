@@ -15,24 +15,18 @@ const services = {
 //   },
 // };
 
-const managementServices = {
-  localNode: {
-    baseUrl: 'http://localhost:9000',
-  },
-};
-
 const getStates: Config<Todo, State> = {
-  service: managementServices.localNode,
+  service: services.localNode,
   url: () => '/states',
 };
 
 const recreateCert: Config<Todo, State> = {
-  service: managementServices.localNode,
+  service: services.localNode,
   url: (_, data) => `/recreate/${data.securityType}`,
 };
 
 const reonboard: Config<Todo, State> = {
-  service: managementServices.localNode,
+  service: services.localNode,
   url: () => '/reonboard',
 };
 
