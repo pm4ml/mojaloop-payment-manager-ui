@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Row, Button } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStatesRequest, recreateCertRequest, setConnectionStatus } from './actions';
+import {
+  fetchStatesRequest,
+  recreateCertRequest,
+  setConnectionStatus,
+  reonboardRequest,
+} from './actions';
 import {
   getConnectionStateData,
   connectionStates,
@@ -83,8 +88,12 @@ const ConnectionHealthDropdown: React.FC = () => {
     setModalState({ isOpen: false, securityType: null });
   };
 
-  const handleRecreate = (securityType: 'JWS' | 'outboundTLS', reason: string) => {
-    dispatch(recreateCertRequest(securityType, reason));
+  const handleRecreate = (securityType: RecreateSecurtityType, reason: string) => {
+    if (securityType === RecreateSecurtityType.REONBOARD) {
+      dispatch(reonboardRequest(reason));
+    } else {
+      dispatch(recreateCertRequest(securityType as 'JWS' | 'outboundTLS', reason));
+    }
     closeModal();
   };
 
@@ -133,6 +142,11 @@ const ConnectionHealthDropdown: React.FC = () => {
             <Button
               onClick={() => openModal(RecreateSecurtityType.JWS)}
               label="Recreate JWS"
+              kind="secondary"
+            />
+            <Button
+              onClick={() => openModal(RecreateSecurtityType.REONBOARD)}
+              label="Reonboard"
               kind="secondary"
             />
           </Row>

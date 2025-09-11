@@ -44,7 +44,7 @@ const App: FC<AppProps> = ({
 }) => {
   const uiConfig = useSelector(getUiConfig);
   const { appTitle, countryLogo, appLogo } = uiConfig;
-  const connectionName = 'Modusbox & Mojaloop Labs';
+  const connectionName = 'Switch';
 
   const dispatch = useDispatch();
   const connectionStateData = useSelector(

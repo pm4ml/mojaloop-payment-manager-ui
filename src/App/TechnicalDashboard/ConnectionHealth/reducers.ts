@@ -8,6 +8,9 @@ import {
   RECREATE_CERT_SUCCESS,
   RECREATE_CERT_FAILURE,
   SET_CONNECTION_STATUS,
+  REONBOARD_REQUEST,
+  REONBOARD_SUCCESS,
+  REONBOARD_FAILURE,
 } from './actions';
 
 export type State = {
@@ -141,6 +144,65 @@ export const recreateCertReducer: Reducer<CertState, CertAction> = (
         isLoading: false,
         data: null,
         errorMessage: action.payload.error || 'Certificate recreation failed',
+      };
+
+    default:
+      return state;
+  }
+};
+
+// ---------------------- Reonboard Reducer ----------------------
+
+type ReonboardState = {
+  data: { status: string } | null;
+  isLoading: boolean;
+  errorMessage: string | null;
+};
+
+const initialReonboardState: ReonboardState = {
+  data: null,
+  isLoading: false,
+  errorMessage: null,
+};
+
+type ReonboardRequestAction = {
+  type: typeof REONBOARD_REQUEST;
+};
+
+type ReonboardSuccessAction = {
+  type: typeof REONBOARD_SUCCESS;
+  payload: { response: { status: string } };
+};
+
+type ReonboardFailureAction = {
+  type: typeof REONBOARD_FAILURE;
+  payload: { error: string };
+};
+
+type ReonboardAction = ReonboardRequestAction | ReonboardSuccessAction | ReonboardFailureAction;
+
+export const reonboardReducer: Reducer<ReonboardState, ReonboardAction> = (
+  state = initialReonboardState,
+  action
+) => {
+  switch (action.type) {
+    case REONBOARD_REQUEST:
+      return { ...state, isLoading: true, errorMessage: null };
+
+    case REONBOARD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload.response,
+        errorMessage: null,
+      };
+
+    case REONBOARD_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        data: null,
+        errorMessage: action.payload.error || 'Reonboard failed',
       };
 
     default:
